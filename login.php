@@ -1,5 +1,6 @@
 <?php
 
+$PUBLIC_PAGE = true;
 require_once('functions/session.php');
 require_once('private/config.php');
 
