@@ -62,7 +62,7 @@ if (isset($_SESSION['logged_in'])) {
         <div style="text-align: center">
             <img src="images/logo.png" alt="adminifier" id="logo" />
         </div>
-        <form action="funtions/login.php" method="post">
+        <form action="functions/login.php" method="post">
             <table>
                 <tr>
                     <td>Username</td>
