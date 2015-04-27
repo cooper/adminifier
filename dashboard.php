@@ -4,7 +4,7 @@ require_once('functions/session.php');
 require_once('functions/wikiclient.php');
 
 $pages = $W->page_list('a+')->pages;
-print_r($pages);
+echo "Hi {$_SESSION['username']}<br />";
 
 echo '<table>';
 foreach ($pages as $page) {

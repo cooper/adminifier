@@ -12,6 +12,6 @@ print_r($result);
 ?>
 
 <br />
-<textarea style="font-family: monospace; width: 500px; height: 500px;">
+<textarea style="font-family: monospace; width: 1000px; height: 500px;">
 <?= htmlspecialchars($result->content) ?>
 </textarea>
