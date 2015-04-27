@@ -11,7 +11,7 @@ foreach ($pages as $page) {
     echo
     '<tr><td>' .
     '<a href="edit-page.php?page="'.$page->file.'">' .
-    $page->name .
+    $page->title .
     '</td></tr>';
 }
 echo '</table>';
