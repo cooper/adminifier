@@ -1,7 +1,7 @@
 <?php
 
-require_once('wikiclient.php');
-require_once('session.php');
+require_once(__DIR__.'/wikiclient.php');
+require_once(__DIR__.'/session.php');
 
 if (!isset($_POST['content']) || !isset($_POST['page']))
     die('Missing required parameters');

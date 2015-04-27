@@ -1,8 +1,8 @@
 <?php
 
 $PUBLIC_PAGE = true;
-require_once('wikiclient.php');
-require_once('session.php');
+require_once(__DIR__.'/wikiclient.php');
+require_once(__DIR__.'/session.php');
 
 // already logged in
 if (isset($_SESSION['logged_in'])) {
