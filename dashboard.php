@@ -9,8 +9,8 @@ echo '<table>';
 foreach ($pages as $page) {
     echo
     '<tr><td>' .
-    '<a href="edit-page.php?page="'.$page->file.'">' .
-    $page->name .
+    '<a href="edit-page.php?page="'.$page['file'].'">' .
+    $page['name'] .
     '</td></tr>';
 }
 echo '</table>';
