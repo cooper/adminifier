@@ -8,7 +8,7 @@ $W = new Wikiclient($config->wiki_sock, $config->wiki_name, $config->wiki_pass, 
 
 // login again: redirect to login
 $W->login_again_cb = function () {
-    header('Location: /login.php'); // TODO: relative
+    header('Location: /logout.php'); // TODO: relative
     die();
 };
 
