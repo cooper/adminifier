@@ -7,7 +7,6 @@ if (!isset($_GET['page']))
     die('No page requested');
 
 $result = $W->page_code($_GET['page']);
-print_r($result);
 
 ?>
 
