@@ -12,6 +12,11 @@ print_r($result);
 ?>
 
 <br />
-<textarea style="font-family: monospace; width: 1000px; height: 500px;">
+
+<form action="functions/write_page.php" method="post">
+    <input type="hidden" value="<?= htmlspecialchars($_GET['page']) ?>" name="page" />
+    <textarea name="content" style="font-family: monospace; width: 1000px; height: 500px;">
 <?= htmlspecialchars($result->content) ?>
-</textarea>
+    </textarea>
+    <input type="submit" name="submit" />
+</form>
