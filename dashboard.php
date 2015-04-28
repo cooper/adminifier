@@ -6,6 +6,7 @@ require_once(__DIR__.'/functions/wikiclient.php');
 $pages = $W->page_list('a+')->pages;
 echo "Hi {$_SESSION['username']}<br />";
 echo '<a href="logout.php">Logout</a><br />';
+echo '<a href="create-page.php">New page</a><br />';
 
 echo '<table>';
 foreach ($pages as $page) {
