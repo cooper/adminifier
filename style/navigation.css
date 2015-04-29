@@ -50,6 +50,10 @@ ul, li {
     background-color: #2096ce;
 }
 
+#navigation li.space {
+    height: 40px;
+}
+
 #content {
     margin-left: 160px;
     padding: 20px;
