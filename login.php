@@ -36,6 +36,7 @@ if (isset($_SESSION['logged_in'])) {
             height: 25px;
             margin-left: 20px;
             border: 1px solid #999;
+            width: 100%;
         }
         input[type=submit] {
             width: 50px;
@@ -59,6 +60,10 @@ if (isset($_SESSION['logged_in'])) {
             border-collapse: collapse;
             width: 100%;
         }
+        td.left {
+            width: 100px;
+            color: #111;
+        }
     </style>
 </head>
 <body>
@@ -74,11 +79,11 @@ if (isset($_SESSION['logged_in'])) {
         <form action="functions/login.php" method="post">
             <table>
                 <tr>
-                    <td style="width: 100px;">Username</td>
+                    <td class="left">Username</td>
                     <td><input type="text" name="username" /></td>
                 </tr>
                 <tr>
-                    <td style="width: 100px;">Password</td>
+                    <td class="left">Password</td>
                     <td><input type="password" name="password" /></td>
                 </tr>
                 <tr>
