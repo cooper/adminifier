@@ -32,6 +32,9 @@ if (isset($_SESSION['logged_in'])) {
             text-align: left;
             font-size: larger;
         }
+        input {
+            font-family: 'Open Sans', sans-serif;
+        }
         input[type=text], input[type=password] {
             width: 200px;
             height: 25px;
