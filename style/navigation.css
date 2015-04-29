@@ -40,13 +40,14 @@ ul, li {
 }
 
 #top-bar {
-    height: 30px;
+    height: 40px;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     background-color: #555;
     z-index: 200;
+    font-family: 'Open Sans', sans-serif;
 }
 
 #top-bar span.wiki-title {
@@ -64,6 +65,7 @@ ul, li {
 }
 
 #content {
+    margin-top: 40px;
     margin-left: 160px;
     padding: 20px;
 }
