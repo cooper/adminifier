@@ -57,13 +57,13 @@ if (isset($_SESSION['logged_in'])) {
         }
         table {
             table-layout: fixed;
-            border-collapse: collapse;
+            border-collapse: separate;
+            border-spacing: 0 5px;
             width: 100%;
         }
         td.left {
             width: 100px;
             color: #111;
-            padding-bottom: 5px;
         }
     </style>
 </head>
