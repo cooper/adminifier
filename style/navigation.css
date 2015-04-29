@@ -43,15 +43,12 @@ ul, li {
     padding-left: 8px;
     line-height: 40px;
     margin-top: 0;
+    margin-bottom: 20px;
     line-height: 40px;
 }
 
 #navigation li.active {
     background-color: #2096ce;
-}
-
-#navigation li.space {
-    height: 20px;
 }
 
 #content {
