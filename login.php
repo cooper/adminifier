@@ -32,12 +32,11 @@ if (isset($_SESSION['logged_in'])) {
             font-size: larger;
         }
         input[type=text], input[type=password] {
-            width: 150px;
+            width: 200px;
             height: 25px;
             font-size: 20px;
             margin-left: 20px;
             border: 1px solid #999;
-            width: 90%;
         }
         input[type=submit] {
             width: 50px;
@@ -64,9 +63,7 @@ if (isset($_SESSION['logged_in'])) {
         td.left {
             width: 100px;
             color: #111;
-        }
-        tr {
-            margin-top: 5px;
+            padding-bottom: 5px;
         }
     </style>
 </head>
