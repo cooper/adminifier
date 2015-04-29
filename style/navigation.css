@@ -46,6 +46,10 @@ ul, li {
     line-height: 40px;
 }
 
+#navigation li.active {
+    color: #2096ce;
+}
+
 #content {
     margin-left: 160px;
     padding: 20px;

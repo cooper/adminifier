@@ -8,7 +8,7 @@
 <div id="navigation-sidebar">
     <ul id="navigation">
         <li class="wiki-title"><?= $config->wiki_name ?></li>
-        <li><a href="pages.php">Dashboard</a></li>
+        <li class="active"><a href="pages.php">Dashboard</a></li>
         <li><a href="pages.php">Pages</a></li>
         <li><a href="categories.php">Categories</a></li>
         <li><a href="images.php">Images</a></li>
