@@ -21,6 +21,7 @@ if (isset($_SESSION['logged_in'])) {
         body {
             background-color: #333;
             font-family: sans-serif;
+            text-align: center;
         }
         #logo {
             width: 300px;
