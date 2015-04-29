@@ -1,3 +1,7 @@
+<link type="text/css" rel="stylesheet" href="style/navigation.css" />
+
+<div id="navigation-sidebar"></div>
+
 <?
 
 require_once(__DIR__.'/functions/session.php');

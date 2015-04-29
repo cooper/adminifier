@@ -62,7 +62,7 @@ if (isset($_SESSION['logged_in'])) {
         table {
             table-layout: fixed;
             border-collapse: separate;
-            border-spacing: 0 5px;
+            border-spacing: 0 8px;
             width: 90%;
             margin: auto;
         }
