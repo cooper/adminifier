@@ -50,16 +50,22 @@ ul, li {
     font-family: 'Open Sans', sans-serif;
 }
 
-#top-bar span.wiki-title {
+#top-bar span.wiki-title, #top-bar span.page-title {
     display: inline-block;
     height: 40px;
     font-size: 18px;
-    font-weight: bold;
     color: #fff;
-    background-color: #555;
     padding-left: 8px;
     line-height: 40px;
-    margin-top: 0;
+}
+
+#top-bar span.wiki-title {
+    width: 152px; /* sidebar width minus left padding */
+    font-weight: 600;
+}
+
+#top-bar span.page-title {
+    font-weight: 300;
 }
 
 #content {

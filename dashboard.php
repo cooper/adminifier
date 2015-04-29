@@ -4,9 +4,11 @@
 ?>
 
 <link type="text/css" rel="stylesheet" href="style/navigation.css" />
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet' type='text/css' />
 
 <div id="top-bar">
     <span class="wiki-title"><?= $config->wiki_name ?></span>
+    <span class="page-title">Dashboard</span>
 </div>
 
 <div id="navigation-sidebar">
