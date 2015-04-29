@@ -60,7 +60,12 @@ if (isset($_SESSION['logged_in'])) {
 <body>
     <div id="box">
         <div style="text-align: center">
-            <img src="images/logo.png" alt="adminifier" id="logo" />
+            <?
+                if file_exists(__DIR__.'/images/logo.png')
+                    echo '<img src="images/logo.png" alt="adminifier" id="logo" />';
+                else
+                    echo '<h1>adminifier</h1>';
+            ?>
         </div>
         <form action="functions/login.php" method="post">
             <table>
