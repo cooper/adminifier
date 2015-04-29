@@ -4,7 +4,7 @@
     left: 0;
     top: 0;
     height: 100%;
-    width: 160px;
+    width: 170px;
     background-color: #333;
     color: #fff;
     font-family: 'Open Sans', sans-serif;
@@ -27,7 +27,7 @@ ul, li {
     font-size: 16px;
     color: #fff;
     text-decoration: none;
-    padding-left: 8px;
+    padding-left: 16px;
     line-height: 30px;
 }
 
@@ -63,13 +63,13 @@ ul, li {
 #top-bar span.wiki-title {
     width: 152px; /* sidebar width minus left padding */
     font-weight: 600;
-    padding-left: 8px;
+    padding-left: 16px;
 }
 
 #top-bar span.page-title {
     font-weight: 300;
     font-size: 120%;
-    padding-left: 8px;
+    padding-left: 16px;
 }
 
 #top-bar span.account-title {
@@ -81,7 +81,7 @@ ul, li {
 
 #content {
     margin-top: 40px;
-    margin-left: 160px;
+    margin-left: 170px;
     padding: 20px;
 }
 
