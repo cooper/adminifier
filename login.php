@@ -33,17 +33,16 @@ if (isset($_SESSION['logged_in'])) {
         }
         input[type=text], input[type=password] {
             width: 150px;
-            padding: 5px;
             height: 25px;
             margin-left: 20px;
-            border: 1px solid #111;
+            border: 1px solid #999;
         }
         input[type=submit] {
             width: 50px;
             margin-top: 10px;
             height: 25px;
             background-color: #fff;
-            border: 1px solid #333;
+            border: 1px solid #999;
         }
         input[type=submit]:hover {
             background-color: #eee;
@@ -51,7 +50,7 @@ if (isset($_SESSION['logged_in'])) {
         #box {
             width: 400px;
             padding: 30px;
-            border: 1px solid #111;
+            border: 1px solid #999;
             background-color: white;
             margin: 50px auto;
         }
@@ -75,11 +74,11 @@ if (isset($_SESSION['logged_in'])) {
         <form action="functions/login.php" method="post">
             <table>
                 <tr>
-                    <td>Username</td>
+                    <td style="width: 100px;">Username</td>
                     <td><input type="text" name="username" /></td>
                 </tr>
                 <tr>
-                    <td>Password</td>
+                    <td style="width: 100px;">Password</td>
                     <td><input type="password" name="password" /></td>
                 </tr>
                 <tr>
