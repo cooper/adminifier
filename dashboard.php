@@ -9,7 +9,7 @@
 
 <div id="top-bar">
     <span class="wiki-title"><?= $config->wiki_name ?></span>
-    <span class="page-title">Dashboard</span>
+    <span class="page-title"><i class="fa fa-home"></i> Dashboard</span>
 </div>
 
 <div id="navigation-sidebar">
