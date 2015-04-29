@@ -27,6 +27,7 @@ ul, li {
     color: #fff;
     text-decoration: none;
     padding-left: 5px;
+    line-height: 30px;
 }
 
 #navigation li {
@@ -42,6 +43,7 @@ ul, li {
     padding-left: 5px;
     line-height: 40px;
     margin-top: 0;
+    line-height: 40px;
 }
 
 #content {
