@@ -74,15 +74,17 @@ ul, li {
 }
 
 #top-bar span.account-title {
+    font-size: 90%;
     font-weight: 400;
     float: right;
     padding-right: 16px;
 }
 
 #top-bar span.create-title {
+    font-size: 90%;
     font-weight: 400;
     float: right;
-    padding-right: 16px;
+    padding-right: 24px;
 }
 
 #top-bar span.create-title a {
