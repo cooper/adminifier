@@ -60,7 +60,8 @@ if (isset($_SESSION['logged_in'])) {
             table-layout: fixed;
             border-collapse: separate;
             border-spacing: 0 5px;
-            width: 100%;
+            width: 90%;
+            margin: auto;
         }
         td.left {
             width: 100px;
