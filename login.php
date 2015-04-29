@@ -61,7 +61,7 @@ if (isset($_SESSION['logged_in'])) {
     <div id="box">
         <div style="text-align: center">
             <?
-                if file_exists(__DIR__.'/images/logo.png')
+                if (file_exists(__DIR__.'/images/logo.png'))
                     echo '<img src="images/logo.png" alt="adminifier" id="logo" />';
                 else
                     echo '<h1>adminifier</h1>';
