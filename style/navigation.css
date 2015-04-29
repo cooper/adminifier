@@ -8,3 +8,8 @@
     width: 160px;
     background-color: #222;
 }
+
+#content {
+    margin-left: 160px;
+    padding: 20px;
+}

@@ -1,7 +1,8 @@
 <link type="text/css" rel="stylesheet" href="style/navigation.css" />
 
 <div id="navigation-sidebar"></div>
-
+<div id="content">
+    
 <?
 
 require_once(__DIR__.'/functions/session.php');
@@ -23,3 +24,4 @@ foreach ($pages as $page) {
 echo '</table>';
 
 ?>
+</div>
