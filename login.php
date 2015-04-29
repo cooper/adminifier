@@ -46,10 +46,6 @@ if (isset($_SESSION['logged_in'])) {
         input[type=submit]:hover {
             background-color: #eee;
         }
-        form {
-            margin-top: 20px;
-            text-align: center;
-        }
         #box {
             width: 400px;
             padding: 30px;
@@ -65,7 +61,7 @@ if (isset($_SESSION['logged_in'])) {
 </head>
 <body>
     <div id="box">
-        <div style="text-align: center">
+        <div style="text-align: center; margin-bottom: 20px;">
             <?
                 if (file_exists(__DIR__.'/images/logo.png'))
                     echo '<img src="images/logo.png" alt="adminifier" id="logo" />';
