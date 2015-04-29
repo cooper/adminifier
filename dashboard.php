@@ -1,12 +1,23 @@
+<?
+    require_once(__DIR__.'/functions/session.php');
+    require_once(__DIR__.'/functions/wikiclient.php');
+?>
+
 <link type="text/css" rel="stylesheet" href="style/navigation.css" />
 
-<div id="navigation-sidebar"></div>
+<div id="navigation-sidebar">
+    <ul id="navigation">
+        <li class="wiki-title"><?= $config->wiki_name ?></li>
+        <li><a href="pages.php">Pages</a></li>
+        <li><a href="categories.php">Categories</a></li>
+        <li><a href="images.php">Images</a></li>
+        <li><a href="settings.php">Settings</a></li>
+    </ul>
+</div>
+
 <div id="content">
     
 <?
-
-require_once(__DIR__.'/functions/session.php');
-require_once(__DIR__.'/functions/wikiclient.php');
 
 $pages = $W->page_list('a+')->pages;
 echo "Hi {$_SESSION['username']}<br />";
