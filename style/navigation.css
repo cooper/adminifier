@@ -52,7 +52,8 @@ ul, li {
 
 #top-bar span.wiki-title,
 #top-bar span.page-title,
-#top-bar span.account-title {
+#top-bar span.account-title,
+#top-bar span.create-title {
     display: inline-block;
     height: 40px;
     font-size: 18px;
@@ -73,10 +74,21 @@ ul, li {
 }
 
 #top-bar span.account-title {
-    font-size: 90%;
     font-weight: 400;
     float: right;
     padding-right: 16px;
+}
+
+#top-bar span.create-title {
+    font-weight: 400;
+    float: right;
+    padding-right: 16px;
+}
+
+#top-bar span.create-title a {
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
 }
 
 #content {
