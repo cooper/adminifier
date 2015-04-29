@@ -8,6 +8,7 @@
     width: 160px;
     background-color: #333;
     color: #fff;
+    font-family: 'Open Sans', sans-serif;
 }
 
 ul, li {
@@ -29,6 +30,9 @@ ul, li {
 
 #navigation li {
     margin-bottom: 10px;
+}
+
+#navigation li.wiki-title a {
 }
 
 #content {
