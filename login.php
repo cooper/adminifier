@@ -56,6 +56,7 @@ if (isset($_SESSION['logged_in'])) {
         table {
             table-layout: fixed;
             border-collapse: collapse;
+            width: 100%;
         }
     </style>
 </head>
