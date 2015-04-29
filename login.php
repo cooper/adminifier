@@ -36,7 +36,7 @@ if (isset($_SESSION['logged_in'])) {
             height: 25px;
             margin-left: 20px;
             border: 1px solid #999;
-            width: 100%;
+            width: 90%;
         }
         input[type=submit] {
             width: 50px;
