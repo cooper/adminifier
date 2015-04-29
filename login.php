@@ -57,6 +57,10 @@ if (isset($_SESSION['logged_in'])) {
             background-color: white;
             margin: 50px auto;
         }
+        table {
+            table-layout: fixed;
+            border-collapse: collapse;
+        }
     </style>
 </head>
 <body>
