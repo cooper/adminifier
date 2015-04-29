@@ -19,7 +19,7 @@ if (isset($_SESSION['logged_in'])) {
     <link rel="icon" type="image/png" href="images/favicon.png" />
     <style type="text/css">
         body {
-            background-color: rgb(240, 250, 255);
+            background-color: #333;
             font-family: sans-serif;
         }
         #logo {
@@ -33,14 +33,14 @@ if (isset($_SESSION['logged_in'])) {
             width: 150px;
             padding: 3px;
             margin-left: 20px;
-            border: 1px solid #333;
+            border: 1px solid #111;
         }
         input[type=submit] {
             width: 50px;
             margin-top: 10px;
             height: 25px;
             background-color: #fff;
-            border: 1px solid rgb(190, 210, 220);
+            border: 1px solid #333;
         }
         input[type=submit]:hover {
             background-color: #eee;
@@ -52,7 +52,7 @@ if (isset($_SESSION['logged_in'])) {
         #box {
             width: 400px;
             padding: 30px;
-            border: 1px solid #333;
+            border: 1px solid #111;
             background-color: white;
             margin: 50px auto;
         }
