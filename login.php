@@ -17,10 +17,11 @@ if (isset($_SESSION['logged_in'])) {
     <meta charset="utf-8" />
     <title><?= $config->wiki_name ?> login</title>
     <link rel="icon" type="image/png" href="images/favicon.png" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
     <style type="text/css">
         body {
             background-color: #333;
-            font-family: sans-serif;
+            font-family: 'Open Sans', sans-serif;
             text-align: center;
         }
         #logo {
