@@ -3,7 +3,6 @@
     position: fixed;
     left: 0;
     top: 0;
-    bottom: 0;
     height: 100%;
     width: 160px;
     background-color: #333;
@@ -18,6 +17,8 @@ ul, li {
 
 #navigation {
     list-style-type: none;
+    margin-top: 30px;
+    z-index: 100;
 }
 
 #navigation li a {
@@ -34,7 +35,22 @@ ul, li {
     margin-top: 8px;
 }
 
-#navigation li.wiki-title {
+#navigation li.active {
+    background-color: #2096ce;
+}
+
+#top-bar {
+    height: 30px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #555;
+    z-index: 200;
+}
+
+#top-bar span.wiki-title {
+    display: inline-block;
     height: 40px;
     font-size: 18px;
     font-weight: bold;
@@ -43,12 +59,8 @@ ul, li {
     padding-left: 8px;
     line-height: 40px;
     margin-top: 0;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     line-height: 40px;
-}
-
-#navigation li.active {
-    background-color: #2096ce;
 }
 
 #content {

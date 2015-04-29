@@ -5,9 +5,12 @@
 
 <link type="text/css" rel="stylesheet" href="style/navigation.css" />
 
+<div id="top-bar">
+    <span class="wiki-title"><?= $config->wiki_name ?></span>
+</div>
+
 <div id="navigation-sidebar">
     <ul id="navigation">
-        <li class="wiki-title"><?= $config->wiki_name ?></li>
         <li class="active"><a href="pages.php">Dashboard</a></li>
         <li><a href="pages.php">Pages</a></li>
         <li><a href="categories.php">Categories</a></li>
