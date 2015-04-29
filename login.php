@@ -29,10 +29,12 @@ if (isset($_SESSION['logged_in'])) {
         }
         td {
             text-align: left;
+            font-size: larger;
         }
         input[type=text], input[type=password] {
             width: 150px;
-            padding: 3px;
+            padding: 5px;
+            height: 25px;
             margin-left: 20px;
             border: 1px solid #111;
         }
