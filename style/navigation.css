@@ -74,3 +74,8 @@ ul, li {
     margin-left: 160px;
     padding: 20px;
 }
+
+i.fa {
+    text-align: left;
+    width: 18px;
+}
