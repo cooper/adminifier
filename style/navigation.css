@@ -7,12 +7,6 @@
     width: 170px;
     background-color: #333;
     color: #fff;
-    font-family: 'Open Sans', sans-serif;
-}
-
-ul, li {
-    padding: 0;
-    margin: 0;
 }
 
 #navigation {
@@ -47,7 +41,6 @@ ul, li {
     width: 100%;
     background-color: #555;
     z-index: 200;
-    font-family: 'Open Sans', sans-serif;
 }
 
 #top-bar span.wiki-title,

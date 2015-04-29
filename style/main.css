@@ -1,0 +1,13 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+a {
+    color: rgb(70, 105, 140);
+    text-decoration: none;
+}
+
+ul, li {
+    padding: 0;
+    margin: 0;
+}
