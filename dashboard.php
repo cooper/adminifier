@@ -5,6 +5,7 @@
 
 <link type="text/css" rel="stylesheet" href="style/navigation.css" />
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
 
 <div id="top-bar">
     <span class="wiki-title"><?= $config->wiki_name ?></span>
@@ -13,12 +14,12 @@
 
 <div id="navigation-sidebar">
     <ul id="navigation">
-        <li class="active"><a href="pages.php">Dashboard</a></li>
-        <li><a href="pages.php">Pages</a></li>
-        <li><a href="categories.php">Categories</a></li>
-        <li><a href="images.php">Images</a></li>
-        <li><a href="settings.php">Settings</a></li>
-        <li><a href="logout.php">Logout</a></li>
+        <li class="active"><a href="pages.php"><i class="fa fa-home"></i> Dashboard</a></li>
+        <li><a href="pages.php"><i class="fa fa-file-text"></i> Pages</a></li>
+        <li><a href="categories.php"><i class="fa fa-list"></i> Categories</a></li>
+        <li><a href="images.php"><i class="fa fa-picture-o"></i> Images</a></li>
+        <li><a href="settings.php"><i class="fa fa-cog"></i> Settings</a></li>
+        <li><a href="logout.php"><i class="fa fa-arrow-circle-left"></i> Logout</a></li>
     </ul>
 </div>
 
