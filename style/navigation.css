@@ -47,7 +47,7 @@ ul, li {
 }
 
 #navigation li.active {
-    color: #2096ce;
+    background-color: #2096ce;
 }
 
 #content {
