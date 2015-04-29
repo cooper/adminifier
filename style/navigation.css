@@ -50,23 +50,33 @@ ul, li {
     font-family: 'Open Sans', sans-serif;
 }
 
-#top-bar span.wiki-title, #top-bar span.page-title {
+#top-bar span.wiki-title,
+#top-bar span.page-title,
+#top-bar span.account-title {
     display: inline-block;
     height: 40px;
     font-size: 18px;
     color: #fff;
-    padding-left: 8px;
     line-height: 40px;
 }
 
 #top-bar span.wiki-title {
     width: 152px; /* sidebar width minus left padding */
     font-weight: 600;
+    padding-left: 8px;
 }
 
 #top-bar span.page-title {
     font-weight: 300;
     font-size: 120%;
+    padding-left: 8px;
+}
+
+#top-bar span.account-title {
+    font-size: 80%;
+    font-weight: 400;
+    float: right;
+    padding-right: 8px;
 }
 
 #content {
@@ -77,5 +87,5 @@ ul, li {
 
 i.fa {
     text-align: left;
-    width: 20px;
+    width: 1.35em;
 }

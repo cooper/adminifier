@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
 
 <div id="top-bar">
+    <span class="account-title"><?= $_SESSION['username'] ?></span>
     <span class="wiki-title"><?= $config->wiki_name ?></span>
     <span class="page-title"><i class="fa fa-home"></i> Dashboard</span>
 </div>
