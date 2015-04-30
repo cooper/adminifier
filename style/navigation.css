@@ -43,10 +43,7 @@
     z-index: 200;
 }
 
-#top-bar span.wiki-title,
-#top-bar span.page-title,
-#top-bar span.account-title,
-#top-bar span.create-title {
+#top-bar span.top-title {
     display: inline-block;
     height: 40px;
     font-size: 18px;
@@ -86,10 +83,11 @@
     color: inherit;
 }
 
-#top-bar span.wiki-title    a:hover,
-#top-bar span.page-title    a:hover,
-#top-bar span.account-title a:hover,
-#top-bar span.create-title  a:hover {
+#top-bar span.top-title a {
+    height: 100%;
+}
+
+#top-bar span.top-title a:hover {
     background-color: #666;
 }
 

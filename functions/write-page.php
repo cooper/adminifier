@@ -9,6 +9,6 @@ if (!isset($_POST['content']) || !isset($_POST['page']))
 if (!$W->page_save($_POST['page'], $_POST['content'])->saved)
     die('Save failed');
 
-header('Location: ../dashboard.php');
+header('Location: ..'.$config->admin_root.'/');
 
 ?>

@@ -6,7 +6,7 @@ require_once(__DIR__.'/private/config.php');
 
 // already logged in
 if (isset($_SESSION['logged_in'])) {
-    header('Location: dashboard.php');
+    header('Location: '.$config->admin_root.'/');
     die();
 }
 

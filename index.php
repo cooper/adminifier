@@ -18,10 +18,10 @@
 <body>
     
 <div id="top-bar">
-    <span class="account-title"><i class="fa fa-user"></i> <?= $_SESSION['username'] ?></span>
-    <span class="create-title"><i class="fa fa-plus-circle"></i> <a href="create-page.php">New page</a><br /></span>
-    <span class="wiki-title"><?= $config->wiki_name ?></span>
-    <span class="page-title"><i class="fa fa-home"></i> Dashboard</span>
+    <span class="top-title account-title"><a href="#"><i class="fa fa-user"></i> <?= $_SESSION['username'] ?></a></span>
+    <span class="top-title create-title"><a href="create-page.php"><i class="fa fa-plus-circle"></i> New page</a><br /></span>
+    <span class="top-title wiki-title"><?= $config->wiki_name ?></span>
+    <span class="top-title page-title"><i class="fa fa-home"></i> Dashboard</span>
 </div>
 
 <div id="navigation-sidebar">

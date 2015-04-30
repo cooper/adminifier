@@ -9,6 +9,6 @@ if (!isset($_POST['page']) || !isset($_POST['new_name']))
 if (!$W->page_move($_POST['page'], $_POST['new_name'])->moved)
     die('Move failed');
 
-header('Location: ../dashboard.php');
+header('Location: ..'.$config->admin_root.'/');
 
 ?>
