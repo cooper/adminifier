@@ -79,12 +79,14 @@
 
 #top-bar span.create-title a {
     height: 100%;
+    display: inline-block;
     text-decoration: none;
     color: inherit;
 }
 
 #top-bar span.top-title a {
     height: 100%;
+    color: #fff;
 }
 
 #top-bar span.top-title a:hover {
