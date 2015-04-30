@@ -9,6 +9,6 @@ if (!isset($_GET['page']))
 if (!$W->page_del($_GET['page'])->deleted)
     die('Delete failed');
 
-header('Location: ../dashboard.php');
+header('Location: ..'.$config->admin_root.'/');
 
 ?>
