@@ -33,6 +33,10 @@
     background-color: #2096ce;
 }
 
+#navigation li:hover {
+    background-color: #444;
+}
+
 #top-bar {
     height: 40px;
     position: fixed;
