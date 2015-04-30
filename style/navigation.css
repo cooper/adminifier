@@ -11,7 +11,7 @@
 
 #navigation {
     list-style-type: none;
-    margin-top: 80px;
+    margin-top: 60px;
     z-index: 100;
 }
 
@@ -84,6 +84,13 @@
     height: 100%;
     text-decoration: none;
     color: inherit;
+}
+
+#top-bar span.wiki-title    a:hover,
+#top-bar span.page-title    a:hover,
+#top-bar span.account-title a:hover,
+#top-bar span.create-title  a:hover {
+    background-color: #666;
 }
 
 #content {
