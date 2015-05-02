@@ -27,7 +27,10 @@ function frameLoad(page) {
             $('content').innerHTML = html;
             var meta = $('content').getElementsByTagName('meta')[0];
             if (meta) {
-                var attrs = meta.getProperties('data-nav', 'data-title', 'data-icon');
+                var attrs = meta.getProperties(
+                    'data-nav', 'data-title', 'data-icon',
+                    'data-scripts'
+                );
                 handlePageData(attrs);
             }
             setupFrameLinks($('content'));
@@ -63,9 +66,10 @@ function handlePageData(data) {
     }
     
     // inject scripts
-    var srcs = data['data-scripts'] ? data['data-scripts'].split(' ') : [];
+    var srcs = (data['data-scripts'] || '').split(' ');
     srcs.each(function (src) {
-        var script = new Element('script', { src: src });
+        if (!src.length) return;
+        var script = new Element('script', { src: 'script/' + src + '.js' });
         document.head.appendChild(script);
     });
     
