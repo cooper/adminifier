@@ -15,8 +15,13 @@ function frameLoad(page) {
     console.log("Loading "+page);
     var request = new Request({
         url: 'frames/' + page + '.php',
-        onSuccess: function (data) {
-            $('content').innerHTML = data;
+        onSuccess: function (html) {
+            $('content').innerHTML = html;
+            var dataScript = $('content').getElementById('metadata');
+            if (dataScript) {
+                var data = JSON.parse(dataScript.innerText);
+                if (data) handlePageData(data);
+            }
         }
     });
     request.get();
@@ -29,4 +34,8 @@ function hashLoad() {
     else
         return;
     frameLoad(hash);
+}
+
+function handlePageData(data) {
+    console.log(data);
 }

@@ -11,6 +11,9 @@ require_once(__DIR__.'/../functions/wikiclient.php');
 ?>
 
 <br />
+<script type="application/json" id="metadata">
+{"nav":"pages"}
+</script>
 
 <form action="functions/write-page.php" method="post">
     <input type="text" name="page" />
