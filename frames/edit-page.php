@@ -14,7 +14,7 @@ echo '<a href="functions/delete-page.php?page='.urlencode($_GET['page']).'">Dele
 
 ?>
 
-<meta data-nav="" data-title="Page editor: <?= htmlspecialchars($_GET['page']) ?>" data-icon="edit" />
+<meta data-nav="" data-title="Page editor &mdash; <?= htmlspecialchars($_GET['page']) ?>" data-icon="edit" />
 
 <br />
 
