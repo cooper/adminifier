@@ -68,7 +68,7 @@ function handlePageData(data) {
     // don't show the content until all scripts have loaded
     var scriptsToLoad = 0, scriptsLoaded = 0;
     var scriptLoaded = function () {
-        scriptLoaded++;
+        scriptsLoaded++;
         if (scriptsToLoad > scriptsLoaded) return;
         $('content').setStyle('display', 'block');
     };
@@ -79,6 +79,7 @@ function handlePageData(data) {
         if (!src.length) return;
         scriptsToLoad++;
         var script = new Element('script', { src: 'script/' + src + '.js' });
+        script.addEvent('load', scriptLoaded);
         document.head.appendChild(script);
     });
     
