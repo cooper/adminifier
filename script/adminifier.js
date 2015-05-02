@@ -19,7 +19,7 @@ function frameLoad(page) {
             $('content').innerHTML = html;
             var meta = $('content').getElementsByTagName('meta')[0];
             if (meta) {
-                var attrs = meta.getProperties('nav'); // etc
+                var attrs = meta.getProperties('data-nav', 'data-title', 'data-icon');
                 handlePageData(attrs);
             }
         }
@@ -38,4 +38,5 @@ function hashLoad() {
 
 function handlePageData(data) {
     console.log(data);
+    $('page-title').innerHTML = '<i class="fa fa-' + data['data-icon'] + '"></i> ' + data['data-title'];
 }

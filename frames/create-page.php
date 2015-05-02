@@ -10,7 +10,7 @@ require_once(__DIR__.'/../functions/wikiclient.php');
 
 ?>
 
-<meta data-nav="pages" />
+<meta data-nav="pages" data-title="Page creator" data-icon="plus" />
 
 <br />
 <form action="functions/write-page.php" method="post">

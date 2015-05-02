@@ -22,7 +22,7 @@
     <span class="top-title account-title"><a href="#"><i class="fa fa-user"></i> <?= $_SESSION['username'] ?></a></span>
     <span class="top-title create-title"><a class="frame-click" href="#!/create-page"><i class="fa fa-plus-circle"></i> New page</a><br /></span>
     <span class="top-title wiki-title"><?= $config->wiki_name ?></span>
-    <span class="top-title page-title"><i class="fa fa-home"></i> Dashboard</span>
+    <span id="page-title" class="top-title page-title"><i class="fa fa-home"></i> Dashboard</span>
 </div>
 
 <div id="navigation-sidebar">
