@@ -52,7 +52,7 @@ function hashLoad() {
 
 function handlePageData(data) {
     console.log(data);
-    $('content').setStyle('opacity', 0);
+    $('content').setStyle('display', 'none');
 
     // page title and icon
     $('page-title').innerHTML = '<i class="fa fa-' + data['data-icon'] + '"></i> ' + data['data-title'];
@@ -65,13 +65,21 @@ function handlePageData(data) {
         li.addClass('active');
     }
     
+    // don't show the content until all scripts have loaded
+    var scriptsToLoad = 0, scriptsLoaded = 0;
+    var scriptLoaded = function () {
+        scriptLoaded++;
+        if (scriptsToLoad > scriptsToLoad) return;
+        $('content').setStyle('display', 'block');
+    };
+    
     // inject scripts
     var srcs = (data['data-scripts'] || '').split(' ');
     srcs.each(function (src) {
         if (!src.length) return;
+        scriptsToLoad++;
         var script = new Element('script', { src: 'script/' + src + '.js' });
         document.head.appendChild(script);
     });
     
-    $('content').setStyle('opacity', 1);
 }
