@@ -51,8 +51,10 @@ function handlePageData(data) {
     console.log(data);
     
     // page title and icon
+    $('content').setStyle('opacity', 0);
     $('page-title').innerHTML = '<i class="fa fa-' + data['data-icon'] + '"></i> ' + data['data-title'];
     window.scrollTo(0, 0);
+    $('content').setStyle('opacity', 1);
     
     // highlight navigation item
     var li = $$('li[data-nav="' + data['data-nav'] + '"]')[0];
