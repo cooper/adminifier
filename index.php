@@ -28,7 +28,7 @@
 
 <div id="navigation-sidebar">
     <ul id="navigation">
-        <li data-nav="dashboard" class="active"><a href="<?= $config->admin_root ?>/"><i class="fa fa-home"></i> Dashboard</a></li>
+        <li data-nav="dashboard" class="active"><a class="frame-click" href="#!/dashboard"><i class="fa fa-home"></i> Dashboard</a></li>
         <li data-nav="pages"><a class="frame-click" href="#!/pages"><i class="fa fa-file-text"></i> Pages</a></li>
         <li data-nav="categories"><a class="frame-click" href="#!/categories"><i class="fa fa-list"></i> Categories</a></li>
         <li data-nav="images"><a class="frame-click" href="#!/images"><i class="fa fa-picture-o"></i> Images</a></li>
