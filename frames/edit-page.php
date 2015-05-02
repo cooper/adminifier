@@ -38,8 +38,6 @@ echo '<a href="functions/delete-page.php?page='.urlencode($_GET['page']).'">Dele
 
 <form action="functions/write-page.php" method="post">
     <input type="hidden" value="<?= htmlspecialchars($_GET['page']) ?>" name="page" />
-    <textarea name="content" style="font-family: monospace; width: 1000px; height: 500px;">
-<?= htmlspecialchars($result->content) ?>
-    </textarea>
+    <textarea name="content" style="font-family: monospace; width: 1000px; height: 500px;"><?= htmlspecialchars($result->content) ?></textarea>
     <input type="submit" name="submit" value="Save" />
 </form>
