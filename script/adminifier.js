@@ -12,7 +12,10 @@ function setupFrameLinks(parent) {
     });
 }
 
+var currentPage;
 function frameLoad(page) {
+    if (currentPage == page) return;
+    currentPage = page;
     console.log("Loading "+page);
     
     // add .php extension, respecting GET arguments
