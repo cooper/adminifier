@@ -24,8 +24,8 @@ function frameLoad(page) {
 
 function hashLoad() {
     var hash = window.location.hash;
-    if (hash.lastIndexOf('!/', 0) === 0)
-        hash = hash.substring(1);
+    if (hash.lastIndexOf('#!/', 0) === 0)
+        hash = hash.substring(3);
     else
         return;
     frameLoad(hash);
