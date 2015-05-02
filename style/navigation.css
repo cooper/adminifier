@@ -74,7 +74,6 @@
     font-size: 90%;
     font-weight: 400;
     float: right;
-    padding-right: 24px;
 }
 
 #top-bar span.top-title a {
@@ -82,7 +81,7 @@
     display: inline-block;
     text-decoration: none;
     color: inherit;
-    padding: 0 6px;
+    padding: 0 10px;
 }
 
 #top-bar span.top-title a:hover {
