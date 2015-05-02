@@ -38,5 +38,15 @@ function hashLoad() {
 
 function handlePageData(data) {
     console.log(data);
+    
+    // page title and icon
     $('page-title').innerHTML = '<i class="fa fa-' + data['data-icon'] + '"></i> ' + data['data-title'];
+    
+    // highlight navigation item
+    var li = $$('li[data-nav="' + data['data-nav'] + '"]')[0];
+    if (li) {
+        $$('li.active').each(function (li) { li.removeClass('active') });
+        li.addClass('active');
+    }
+    
 }
