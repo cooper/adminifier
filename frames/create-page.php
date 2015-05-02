@@ -1,7 +1,12 @@
 <?
 
-require_once(__DIR__.'/functions/session.php');
-require_once(__DIR__.'/functions/wikiclient.php');
+/*
+    these links are relative to frames directory,
+    but the links in HTML are relative to index.php
+*/
+
+require_once(__DIR__.'/../functions/session.php');
+require_once(__DIR__.'/../functions/wikiclient.php');
 
 ?>
 

@@ -12,4 +12,11 @@ function setupFrameLinks() {
 
 function frameLoad(page) {
     console.log("Loading "+page);
+    var request = new Request(
+        url: 'frames/' + page + '.php',
+        onSuccess: function (data) {
+            $('content').innerHTML = data;
+        }
+    );
+    request.get();
 }
