@@ -69,7 +69,7 @@ function handlePageData(data) {
     var scriptsToLoad = 0, scriptsLoaded = 0;
     var scriptLoaded = function () {
         scriptLoaded++;
-        if (scriptsToLoad > scriptsToLoad) return;
+        if (scriptsToLoad > scriptsLoaded) return;
         $('content').setStyle('display', 'block');
     };
     
