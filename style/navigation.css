@@ -15,14 +15,18 @@
     z-index: 100;
 }
 
+#navigation li {
+    padding-left: 16px;
+}
+
 #navigation li a {
     display: inline-block;
     font-size: 16px;
     color: #fff;
     text-decoration: none;
-    padding-left: 16px;
     height: 38px;
     line-height: 38px;
+    width: 100%;
 }
 
 #navigation li:hover {
