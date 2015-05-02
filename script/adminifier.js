@@ -13,8 +13,15 @@ function setupFrameLinks() {
 
 function frameLoad(page) {
     console.log("Loading "+page);
+    
+    // add .php extension, respecting GET arguments
+    var parts = page.split('?', 2);
+    page = parts[0] + '.php';
+    if (typeof parts[1] != 'undefined')
+        page += '?' + parts[1];
+    
     var request = new Request({
-        url: 'frames/' + page + '.php',
+        url: 'frames/' + page,
         onSuccess: function (html) {
             $('content').innerHTML = html;
             var meta = $('content').getElementsByTagName('meta')[0];
