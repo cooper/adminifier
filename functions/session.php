@@ -1,7 +1,9 @@
 <?php
     session_start();
     if (!isset($PUBLIC_PAGE) && !isset($_SESSION['logged_in'])) {
-    header('Location: '.$config->admin_root.'/logout.php');
+    header('Location: '.$config->admin_root.'/login.php');
+        // this must go to login.php because at this point if
+        // logged_in is not set, they have been logged out already
         die();
     }
 ?>
