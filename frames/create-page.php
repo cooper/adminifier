@@ -5,9 +5,7 @@
     but the links in HTML are relative to index.php
 */
 
-require_once(__DIR__.'/../functions/session.php');
-require_once(__DIR__.'/../private/config.php');
-require_once(__DIR__.'/../functions/wikiclient.php');
+require_once(__DIR__.'/../functions/utils.php');
 
 ?>
 

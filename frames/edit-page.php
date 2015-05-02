@@ -1,7 +1,6 @@
 <?
 
-require_once(__DIR__.'/../functions/session.php');
-require_once(__DIR__.'/../functions/wikiclient.php');
+require_once(__DIR__.'/../functions/utils.php');
 
 if (!isset($_GET['page']))
     die('No page requested');
