@@ -23,13 +23,14 @@
     padding-left: 16px;
     height: 38px;
     line-height: 38px;
+    width: 154; /* 170 width - 16 padding */
 }
 
 #navigation li.active a {
     background-color: #2096ce;
 }
 
-#navigation li:hover {
+#navigation li:hover a {
     background-color: #444;
 }
 
