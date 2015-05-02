@@ -1,3 +1,4 @@
+window.addEvent('hashchange', hashLoad);
 document.addEvent('domready', function () {
     setupFrameLinks(document.body);
     hashLoad();
