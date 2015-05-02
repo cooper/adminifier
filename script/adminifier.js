@@ -77,11 +77,15 @@ function handlePageData(data) {
     };
     
     // inject scripts
+    $$('script.dynamic').each(function (script) { script.destroy(); });
     var srcs = (data['data-scripts'] || '').split(' ');
     srcs.each(function (src) {
         if (!src.length) return;
         scriptsToLoad++;
-        var script = new Element('script', { src: 'script/' + src + '.js' });
+        var script = new Element('script', {
+            src:   'script/' + src + '.js',
+            class: 'dynamic'
+        });
         script.addEvent('load', scriptLoaded);
         document.head.appendChild(script);
     });
