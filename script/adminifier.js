@@ -66,7 +66,7 @@ function handlePageData(data) {
     }
     
     // don't show the content until all scripts have loaded
-    var scriptsToLoad = 0, scriptsLoaded = 0;
+    var scriptsToLoad = 0, scriptsLoaded = -1;
     var scriptLoaded = function () {
         scriptsLoaded++;
         if (scriptsToLoad > scriptsLoaded) return;
@@ -83,4 +83,5 @@ function handlePageData(data) {
         document.head.appendChild(script);
     });
     
+    scriptLoaded();
 }
