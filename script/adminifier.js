@@ -49,12 +49,11 @@ function hashLoad() {
 
 function handlePageData(data) {
     console.log(data);
-    
-    // page title and icon
     $('content').setStyle('opacity', 0);
+
+    // page title and icon
     $('page-title').innerHTML = '<i class="fa fa-' + data['data-icon'] + '"></i> ' + data['data-title'];
     window.scrollTo(0, 0);
-    $('content').setStyle('opacity', 1);
     
     // highlight navigation item
     var li = $$('li[data-nav="' + data['data-nav'] + '"]')[0];
@@ -63,4 +62,12 @@ function handlePageData(data) {
         li.addClass('active');
     }
     
+    // inject scripts
+    var srcs = data['data-scripts'] ? data['data-scripts'].split(' ') : [];
+    srcs.each(function (src) {
+        var script = new Element('script', { src: src });
+        document.head.appendChild(script);
+    });
+    
+    $('content').setStyle('opacity', 1);
 }

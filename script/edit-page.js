@@ -1,0 +1,1 @@
+console.log('Edit page script loaded');
