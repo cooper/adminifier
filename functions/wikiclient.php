@@ -6,9 +6,9 @@ require_once($config->wikiclient_path);
 // create wikiclient. use session ID if logged in.
 $W = new Wikiclient($config->wiki_sock, $config->wiki_name, $config->wiki_pass, isset($_SESSION['logged_in']) ? session_id() : null);
 
-// login again: redirect to login
+// login again
 $W->login_again_cb = function () {
-    header('Location: /logout.php'); // TODO: relative
+    header('Location: '.$config->admin_root.'/logout.php');
     die();
 };
 
