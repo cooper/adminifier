@@ -10,7 +10,8 @@ require_once(__DIR__.'/../functions/wikiclient.php');
 
 ?>
 
-<script type="application/json" id="metadata">{"nav":"pages"}</script>
+<meta data-nav="pages" />
+
 <br />
 <form action="functions/write-page.php" method="post">
     <input type="text" name="page" />

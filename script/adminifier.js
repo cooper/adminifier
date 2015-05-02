@@ -17,10 +17,10 @@ function frameLoad(page) {
         url: 'frames/' + page + '.php',
         onSuccess: function (html) {
             $('content').innerHTML = html;
-            var dataScript = $('content').getElementById('metadata');
-            if (dataScript) {
-                var data = JSON.parse(dataScript.innerText);
-                if (data) handlePageData(data);
+            var meta = $('content').getElementsByTagName('meta')[0];
+            if (meta) {
+                var attrs = meta.getProperties('nav'); // etc
+                handlePageData(attrs);
             }
         }
     });
