@@ -1,5 +1,6 @@
 document.addEvent('domready', function () {
     setupFrameLinks();
+    hashLoad();
 });
 
 function setupFrameLinks() {
@@ -19,4 +20,13 @@ function frameLoad(page) {
         }
     });
     request.get();
+}
+
+function hashLoad() {
+    var hash = window.location.hash;
+    if (hash.lastIndexOf('!/', 0) === 0)
+        hash = hash.substring(1);
+    else
+        return;
+    frameLoad(hash);
 }
