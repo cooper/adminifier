@@ -22,6 +22,8 @@ function frameLoad(page) {
                 var attrs = meta.getProperties('data-nav', 'data-title', 'data-icon');
                 handlePageData(attrs);
             }
+        },
+        onFail: function (html) {
         }
     });
     request.get();
