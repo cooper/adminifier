@@ -51,6 +51,7 @@ function handlePageData(data) {
     
     // page title and icon
     $('page-title').innerHTML = '<i class="fa fa-' + data['data-icon'] + '"></i> ' + data['data-title'];
+    window.scrollTo(0, 0);
     
     // highlight navigation item
     var li = $$('li[data-nav="' + data['data-nav'] + '"]')[0];
