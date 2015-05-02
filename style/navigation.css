@@ -25,7 +25,7 @@
     line-height: 38px;
 }
 
-#navigation li.active {
+#navigation li.active a {
     background-color: #2096ce;
 }
 
