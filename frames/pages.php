@@ -18,7 +18,7 @@ $pages = $W->page_list($sort.$order)->pages;
 // if the sort method is different, it returns descending.
 function sort_method ($type) {
     global $sort, $order;
-    echo "$type == $sort?";
+    echo "order=$order";
     if ($type == $sort)
         return $order == '-' ? $type.'+' : $type.'-';
     return $type.'-';
