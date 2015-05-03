@@ -1,10 +1,12 @@
 #page-list {
     table-layout: fixed;
     border-collapse: collapse;
+    width: 100%;
 }
 
 #page-list td {
-    border: 1px solid #ddd;
+    border: 1px solid #ccc;
+    padding: 8px;
 }
 
 #page-list tr {
@@ -12,5 +14,5 @@
 }
 
 #page-list tr:nth-child(even) {
-    background-color: #ededed;
+    background-color: #ddd;
 }
