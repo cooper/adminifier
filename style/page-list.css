@@ -1,5 +1,5 @@
 #page-list {
-    table-layout: fixed;
+    /*table-layout: fixed;*/
     border-collapse: collapse;
     width: 100%;
 }
@@ -22,6 +22,7 @@
 #page-list td.info,
 #page-list th.info {
     text-align: right;
+    max-width: 200px;
 }
 
 #page-list td.info {
