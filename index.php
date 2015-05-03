@@ -10,6 +10,7 @@
 <title><?= $config->wiki_name ?> admin</title>
 <link type="text/css" rel="stylesheet" href="style/main.css" />
 <link type="text/css" rel="stylesheet" href="style/navigation.css" />
+<link type="text/css" rel="stylesheet" href="style/page-list.css" />
 <link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
 <script type="text/javascript" src="script/mootools.js"></script>
