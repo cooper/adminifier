@@ -5,7 +5,7 @@ $valid_types = array('a', 'c'); // TODO: the rest
 $sort  = 'a';
 $order = '+';
 if (isset($_GET['sort'])) {
-    $parts = explode('', $_GET['sort']);
+    $parts = str_split($_GET['sort']);
     $sort  = in_array($parts[0], $valid_types) ? $parts[0] : 'a';
     $order = $parts[1] == '+' ? '+' : '-';
 }
