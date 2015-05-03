@@ -18,6 +18,12 @@
     text-align: center;
 }
 
+#page-list td.info,
+#page-list th.info {
+    width: 100px;
+    font-size: 90%;
+}
+
 /* head cells */
 
 #page-list thead th {
@@ -27,9 +33,9 @@
 /* body cells */
 
 #page-list tbody tr {
-    background-color: #eee;
+    background-color: #ddd;
 }
 
 #page-list tbody tr:nth-child(even) {
-    background-color: #ddd;
+    background-color: #eee;
 }
