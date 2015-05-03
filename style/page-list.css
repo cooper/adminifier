@@ -12,8 +12,8 @@
     text-align: left;
 }
 
-#page-list tbody td.checkbox,
-#page-list tbody th.checkbox {
+#page-list td.checkbox,
+#page-list th.checkbox {
     width: 20px;
     text-align: center;
 }
