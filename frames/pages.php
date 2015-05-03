@@ -19,7 +19,7 @@ $pages = $W->page_list($sort.$order)->pages;
 function sort_method ($type) {
     global $sort, $order;
     if ($type == $sort)
-        return $order == '-' ? $type.'+' : $type.'-';
+        return $order == '-' ? $type.'%2B' : $type.'-';
     return $type.'-';
 }
 
