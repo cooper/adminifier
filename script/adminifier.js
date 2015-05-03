@@ -59,8 +59,10 @@ function hashLoad() {
     frameLoad(hash);
 }
 
+var currentData;
 function handlePageData(data) {
     console.log(data);
+    currentData = data;
     $('content').setStyle('display', 'none');
 
     // page title and icon
