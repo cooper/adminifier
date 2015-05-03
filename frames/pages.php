@@ -24,7 +24,7 @@ function sort_method ($type) {
 
 ?>
 
-<meta data-nav="pages" data-title="Pages" data-icon="file-text" data-scripts="page-list" data-sort="a+" />
+<meta data-nav="pages" data-title="Pages" data-icon="file-text" data-scripts="page-list" data-sort="<?= $sort.$order ?>" />
 
 <table id="page-list">
 <thead>
