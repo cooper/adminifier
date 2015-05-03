@@ -6,15 +6,21 @@
 
 /* all cells */
 
-#page-list td {
+#page-list td, #page-list th {
     border: 1px solid #ccc;
     padding: 8px;
+}
+
+#page-list tbody td.checkbox,
+#page-list tbody th.checkbox {
+    width: 20px;
+    text-align: center;
 }
 
 /* head cells */
 
 #page-list thead th {
-    background-color: #cbcbcb;
+    background-color: #d4d4d4;
 }
 
 /* body cells */
@@ -23,11 +29,6 @@
     background-color: #eee;
 }
 
-#page-list tobdy tr:nth-child(even) {
+#page-list tbody tr:nth-child(even) {
     background-color: #ddd;
-}
-
-#page-list tbody td.checkbox {
-    width: 20px;
-    text-align: center;
 }
