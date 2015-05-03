@@ -9,6 +9,7 @@
 #page-list td, #page-list th {
     border: 1px solid #ccc;
     padding: 8px;
+    text-align: left;
 }
 
 #page-list tbody td.checkbox,
@@ -20,7 +21,7 @@
 /* head cells */
 
 #page-list thead th {
-    background-color: #d4d4d4;
+    background-color: #fff;
 }
 
 /* body cells */

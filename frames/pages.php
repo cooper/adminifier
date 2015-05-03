@@ -8,7 +8,7 @@ $pages = $W->page_list('a+')->pages;
 
 <table id="page-list">
 <thead>
-    <th><input type="checkbox" value="0" /></th>
+    <th class="checkbox"><input type="checkbox" value="0" /></th>
     <th><a href="#">Title</a></th>
 </thead>
 <tbody>
