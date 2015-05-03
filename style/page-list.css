@@ -21,7 +21,6 @@
 
 #page-list td.info,
 #page-list th.info {
-    white-space: normal;
     text-align: right;
 }
 
@@ -32,6 +31,7 @@
 #page-list th.title,
 #page-list td.title {
     width: 99%;
+    white-space: normal;
 }
 
 /* head cells */
