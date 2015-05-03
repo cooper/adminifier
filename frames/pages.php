@@ -5,7 +5,7 @@ require_once(__DIR__.'/../functions/utils.php');
 
 $pages = $W->page_list('a+')->pages;
 
-echo '<table>';
+echo '<table id="page-list">';
 foreach ($pages as $page) {
     echo
     '<tr><td>' .

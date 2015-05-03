@@ -1,0 +1,16 @@
+#page-list {
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+#page-list td {
+    border: 1px solid #ddd;
+}
+
+#page-list tr {
+    background-color: #eee;
+}
+
+#page-list tr:nth-child(even) {
+    background-color: #ededed;
+}
