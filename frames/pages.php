@@ -9,7 +9,7 @@ $pages = $W->page_list('a+')->pages;
 <table id="page-list">
 <thead>
     <th class="checkbox"><input type="checkbox" value="0" /></th>
-    <th><a href="#">Title</a></th>
+    <th class="title"><a href="#">Title</a></th>
     <th class="author info"><a href="#">Author</a></th>
     <th class="created info"><a href="#">Created</a></th>
 </thead>
@@ -19,7 +19,7 @@ $pages = $W->page_list('a+')->pages;
         <td class="checkbox">
             <input type="checkbox" value="0" />
         </td>
-        <td>
+        <td class="title">
             <a class="frame-click" href="#!/edit-page?page=<?= urlencode($page->file) ?>">
                 <?= htmlspecialchars($page->title) ?>
             </a>

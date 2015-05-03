@@ -10,6 +10,7 @@
     border: 1px solid #ccc;
     padding: 8px;
     text-align: left;
+    white-space: nowrap;
 }
 
 #page-list td.checkbox,
@@ -20,11 +21,17 @@
 
 #page-list td.info,
 #page-list th.info {
-    width: 120px;
+    white-space: normal;
+    text-align: right;
 }
 
 #page-list td.info {
     font-size: 85%;
+}
+
+#page-list th.title,
+#page-list td.title {
+    width: 99%;
 }
 
 /* head cells */
