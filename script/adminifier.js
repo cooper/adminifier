@@ -46,10 +46,16 @@ function frameLoad(page) {
 
 function hashLoad() {
     var hash = window.location.hash;
-    if (hash.lastIndexOf('#!/', 0) === 0)
+    if (hash.lastIndexOf('#!/', 0) === 0) {
         hash = hash.substring(3);
-    else
-        return;
+    }
+    
+    // fall back to dashboard
+    else {
+        window.location.hash = '#!/dashboard';
+        return hashLoad();
+    }
+    
     frameLoad(hash);
 }
 
@@ -60,6 +66,7 @@ function handlePageData(data) {
     // page title and icon
     $('page-title').innerHTML = '<i class="fa fa-' + data['data-icon'] + '"></i> ' + data['data-title'];
     window.scrollTo(0, 0);
+    // ^ not sure if scrolling necessary when setting display: none
     
     // highlight navigation item
     var li = $$('li[data-nav="' + data['data-nav'] + '"]')[0];
@@ -89,6 +96,6 @@ function handlePageData(data) {
         script.addEvent('load', scriptLoaded);
         document.head.appendChild(script);
     });
+    scriptLoaded(); // call once in case there are no scripts
     
-    scriptLoaded();
 }
