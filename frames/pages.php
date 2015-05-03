@@ -28,7 +28,7 @@ $pages = $W->page_list('a+')->pages;
             <?= htmlspecialchars($page->author) ?>
         </td>
         <td class="created info">
-            <?= date('M j Y g:i a', $page->created) ?>
+            <?= date('M j Y'/*g:i a'*/, $page->created) ?>
         </td>
     </tr>
 <? endforeach; ?>
