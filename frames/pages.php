@@ -1,7 +1,7 @@
 <?
 
 // find the sort method
-$valid_types = array('a', 'c'); // TODO: the rest
+$valid_types = array('a', 'c', 'u'); // TODO: the rest
 $sort  = 'a';
 $order = '+';
 if (isset($_GET['sort'])) {
