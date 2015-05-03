@@ -63,7 +63,7 @@ var currentData;
 function handlePageData(data) {
     console.log(data);
     currentData = data;
-    $('content').setStyle('display', 'none');
+    $('content').setStyle('user-select', 'none');
 
     // page title and icon
     $('page-title').innerHTML = '<i class="fa fa-' + data['data-icon'] + '"></i> ' + data['data-title'];
@@ -82,7 +82,7 @@ function handlePageData(data) {
     var scriptLoaded = function () {
         scriptsLoaded++;
         if (scriptsToLoad > scriptsLoaded) return;
-        $('content').setStyle('display', 'block');
+        $('content').setStyle('user-select', 'all');
     };
     
     // inject scripts
