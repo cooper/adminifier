@@ -8,7 +8,7 @@ $pages = $W->page_list('a+')->pages;
 echo '<table id="page-list">';
 foreach ($pages as $page) {
     echo
-    '<tr><td>' .
+    '<tr><td class="checkbox"><input type="checkbox" value="0" /></td><td>' .
     '<a class="frame-click" href="#!/edit-page?page='.urlencode($page->file).'">' .
     $page->title .
     '</td></tr>';

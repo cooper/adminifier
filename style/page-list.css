@@ -9,6 +9,11 @@
     padding: 8px;
 }
 
+#page-list td.checkbox {
+    width: 50px;
+    text-align: center;
+}
+
 #page-list tr {
     background-color: #eee;
 }
