@@ -32,7 +32,7 @@ function frameLoad(page) {
             if (meta) {
                 var attrs = meta.getProperties(
                     'data-nav', 'data-title', 'data-icon',
-                    'data-scripts'
+                    'data-scripts', 'data-sort'
                 );
                 handlePageData(attrs);
             }
