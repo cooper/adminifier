@@ -4,5 +4,5 @@
     var sort = split[0], order = split[1];
     var char = order == '+' ? 'caret-up' : 'caret-down';
     var th = $$('th[data-sort="' + sort + '"] a')[0];
-    if (th) th.innerText += ' ' + char;
+    if (th) th.innerHTML += ' <i class="fa fa-' + char + '"></i>';
 })(currentData);
