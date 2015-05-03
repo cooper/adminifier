@@ -17,7 +17,8 @@ $pages = $W->page_list($sort.$order)->pages;
 // this returns the opposite direction for the same method.
 // if the sort method is different, it returns descending.
 function sort_method ($type) {
-    global $order, $sort;
+    global $sort, $order;
+    echo "$type == $sort?";
     if ($type == $sort)
         return $order == '-' ? $type.'+' : $type.'-';
     return $type.'-';
@@ -52,10 +53,16 @@ function sort_method ($type) {
             </a>
         </td>
         <td class="author info">
-            <?= htmlspecialchars($page->author) ?>
+            <?=
+                isset($page->author) ?
+                htmlspecialchars($page->author) : ''
+            ?>
         </td>
         <td class="created info">
-            <?= date('M j Y'/*g:i a'*/, $page->created) ?>
+            <?=
+                isset($page->created) ?
+                date('M j Y'/*g:i a'*/, $page->created) : ''
+            ?>
         </td>
     </tr>
 <? endforeach; ?>
