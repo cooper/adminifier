@@ -13,7 +13,7 @@ $pages = $W->page_list('a+')->pages;
     <th class="info"><a href="#">Author</a></th>
 </thead>
 <tbody>
-<? foreach ($pages as $page) { ?>
+<? foreach ($pages as $page): ?>
     <tr>
         <td class="checkbox">
             <input type="checkbox" value="0" />
@@ -27,8 +27,7 @@ $pages = $W->page_list('a+')->pages;
             <?= htmlspecialchars($page->author) ?>
         </td>
     </tr>
-<? } ?>
+<? endforeach; ?>
 
-?>
 </tbody>
 </table>

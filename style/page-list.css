@@ -20,8 +20,11 @@
 
 #page-list td.info,
 #page-list th.info {
-    width: 100px;
-    font-size: 90%;
+    width: 150px;
+}
+
+#page-list td.info {
+    font-size: 85px;
 }
 
 /* head cells */
