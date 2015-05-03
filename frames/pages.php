@@ -1,4 +1,3 @@
-<meta data-nav="pages" data-title="Pages" data-icon="file-text" />
 <?
 
 require_once(__DIR__.'/../functions/utils.php');
@@ -6,12 +5,14 @@ $pages = $W->page_list('a+')->pages;
 
 ?>
 
+<meta data-nav="pages" data-title="Pages" data-icon="file-text" data-scripts="page-list" data-sort="a+" />
+
 <table id="page-list">
 <thead>
     <th class="checkbox"><input type="checkbox" value="0" /></th>
-    <th class="title"><a href="#">Title</a></th>
+    <th class="title" data-sort="a"><a href="#">Title</a></th>
     <th class="author info"><a href="#">Author</a></th>
-    <th class="created info"><a href="#">Created</a></th>
+    <th class="created info" data-sort="c"><a href="#">Created</a></th>
 </thead>
 <tbody>
 <? foreach ($pages as $page): ?>
