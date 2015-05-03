@@ -1,5 +1,5 @@
 <?
-
+print_r($_GET);
 // find the sort method
 $valid_types = array('a', 'c'); // TODO: the rest
 $sort  = 'a';
