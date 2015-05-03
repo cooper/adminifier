@@ -38,13 +38,13 @@
 /* head cells */
 
 #page-list thead th {
-    background-color: #fff;
+    background-color: #ddd;
 }
 
 /* body cells */
 
 #page-list tbody tr {
-    background-color: #ddd;
+    background-color: #fff;
 }
 
 #page-list tbody tr:nth-child(even) {
