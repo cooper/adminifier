@@ -2,10 +2,18 @@
 <?
 
 require_once(__DIR__.'/../functions/utils.php');
-
 $pages = $W->page_list('a+')->pages;
 
-echo '<table id="page-list">';
+?>
+
+<table id="page-list">
+<thead>
+    <th><input type="checkbox" value="0" /></th>
+    <th><a href="#">Title</a></th>
+</thead>
+<tbody>
+<?
+
 foreach ($pages as $page) {
     echo
     '<tr><td class="checkbox"><input type="checkbox" value="0" /></td><td>' .
@@ -13,6 +21,7 @@ foreach ($pages as $page) {
     $page->title .
     '</td></tr>';
 }
-echo '</table>';
 
 ?>
+</tbody>
+</table>

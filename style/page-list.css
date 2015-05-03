@@ -4,20 +4,30 @@
     width: 100%;
 }
 
+/* all cells */
+
 #page-list td {
     border: 1px solid #ccc;
     padding: 8px;
 }
 
-#page-list td.checkbox {
-    width: 30px;
-    text-align: center;
+/* head cells */
+
+#page-list thead th {
+    background-color: #cbcbcb;
 }
 
-#page-list tr {
+/* body cells */
+
+#page-list tbody tr {
     background-color: #eee;
 }
 
-#page-list tr:nth-child(even) {
+#page-list tobdy tr:nth-child(even) {
     background-color: #ddd;
+}
+
+#page-list tbody td.checkbox {
+    width: 20px;
+    text-align: center;
 }

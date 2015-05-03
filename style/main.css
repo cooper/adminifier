@@ -17,8 +17,3 @@ i.fa {
     text-align: left;
     width: 1.35em;
 }
-
-input[type=checkbox] {
-    transform: scale(1.5);
-    -webkit-transform: scale(1.5);
-}
