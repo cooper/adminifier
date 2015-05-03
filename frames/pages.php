@@ -10,7 +10,8 @@ $pages = $W->page_list('a+')->pages;
 <thead>
     <th class="checkbox"><input type="checkbox" value="0" /></th>
     <th><a href="#">Title</a></th>
-    <th class="info"><a href="#">Author</a></th>
+    <th class="author info"><a href="#">Author</a></th>
+    <th class="created info"><a href="#">Created</a></th>
 </thead>
 <tbody>
 <? foreach ($pages as $page): ?>
@@ -23,8 +24,11 @@ $pages = $W->page_list('a+')->pages;
                 <?= htmlspecialchars($page->title) ?>
             </a>
         </td>
-        <td>
+        <td class="author info">
             <?= htmlspecialchars($page->author) ?>
+        </td>
+        <td class="created info">
+            <?= date('D M j Y g:i a', $page->created) ?>
         </td>
     </tr>
 <? endforeach; ?>
