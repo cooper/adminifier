@@ -6,7 +6,7 @@ $sort  = 'a';
 $order = '+';
 if (isset($_GET['sort'])) {
     $parts = explode('', $_GET['sort']);
-    $sort  = in_array($parts[0], $valid_types);
+    $sort  = in_array($parts[0], $valid_types) ? $parts[0] : 'a';
     $order = $parts[1] == '+' ? '+' : '-';
 }
 
