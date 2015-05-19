@@ -48,7 +48,12 @@ function sort_method ($type) {
         </td>
         <td class="title">
             <a class="frame-click" href="#!/edit-page?page=<?= urlencode($page->file) ?>">
-                <?= $page->title ?>
+                <?=
+                    isset($page->title)
+                        && strlen($page->title) ?
+                    $page->title    :
+                    $page->file
+                ?>
             </a>
         </td>
         <td class="author info">
