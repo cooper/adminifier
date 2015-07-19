@@ -91,8 +91,14 @@ function handlePageData(data) {
     srcs.each(function (src) {
         if (!src.length) return;
         scriptsToLoad++;
+        
+        if (src == 'ace')
+            src = 'ace/ace.js';
+        else
+            src = 'script/' + src + '.js';
+        
         var script = new Element('script', {
-            src:   'script/' + src + '.js',
+            src:   src,
             class: 'dynamic'
         });
         script.addEvent('load', scriptLoaded);

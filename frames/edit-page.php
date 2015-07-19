@@ -13,7 +13,7 @@ echo '<a href="functions/delete-page.php?page='.urlencode($_GET['page']).'">Dele
 
 ?>
 
-<meta data-nav="pages" data-title="Page editor &ndash; <?= htmlspecialchars($_GET['page']) ?>" data-icon="edit" data-scripts="edit-page" />
+<meta data-nav="pages" data-title="Page editor &ndash; <?= htmlspecialchars($_GET['page']) ?>" data-icon="edit" data-scripts="edit-page ace" />
 
 <br />
 
@@ -37,8 +37,7 @@ echo '<a href="functions/delete-page.php?page='.urlencode($_GET['page']).'">Dele
 
 <div id="editor"><?= htmlspecialchars($result->content) ?></div>
 
-<script class="dynamic" src="ace/ace.js" type="text/javascript" charset="utf-8"></script>
-<script class="dynamic" type="text/javascript">
+<script type="text/javascript">
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/monokai");
     editor.getSession().setMode("ace/mode/plain_text");
