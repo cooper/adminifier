@@ -42,7 +42,3 @@ ul.editor-toolbar li a {
     height: 30px;
     overflow: hidden;
 }
-
-ul.editor-toolbar li:hover {
-    background-color: #2096ce;/*#444;*/
-}

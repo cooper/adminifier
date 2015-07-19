@@ -67,10 +67,16 @@ function selectPageTitle () {
 function setupToolbar () {
     $$('ul.editor-toolbar li').each(function (li) {
         li.addEvent('mouseenter', function () {
-            li.tween('width', '100px');
+            li.morph({
+                width: '100px',
+                backgroundColor: '#2096ce'
+            });
         });
         li.addEvent('mouseleave', function () {
-            li.tween('width', '12px');
+            li.morph({
+                width: '12px',
+                backgroundColor: '#232323'
+            });
         });
     });
 }
