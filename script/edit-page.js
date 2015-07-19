@@ -10,7 +10,7 @@ editor.resize();
 function dummyFunc () { }
 
 function selectPageTitle () {
-    var found = editor.find('^@page\.title:(.*)$', { regExp: true });
+    var found = editor.find('^@page\.title:(.*)$', { regExp: true, wrap: true });
     if (!found) return false;
     var string = editor.getSelectedText();
     
@@ -35,7 +35,7 @@ function selectPageTitle () {
             break;
         }
     }
-
+    console.log('startIndex: ' + startIndex + ', endIndex: ' + endIndex);
     editor.selection.setSelectionRange(new Range(found.row, startIndex, found.row, endIndex));
     return true;
 }
