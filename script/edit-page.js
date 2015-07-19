@@ -76,7 +76,7 @@ function setupToolbar () {
         li.addEvent('mouseleave', function () {
             li.morph({
                 width: '15px',
-                backgroundColor: '#006595'
+                backgroundColor: '#232323'
             });
         });
     });
