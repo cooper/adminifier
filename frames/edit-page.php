@@ -44,7 +44,11 @@ echo '<a href="functions/delete-page.php?page='.urlencode($_GET['page']).'">Dele
 <br />
 */ ?>
 
-<div class="editor-toolbar"></div>
+<ul class="editor-toolbar">
+    <li><i class="fa fa-bold"></i> Bold</li>
+    <li><i class="fa fa-italic"></i> Italic</li>
+    <li><i class="fa fa-link"></i> Link</li>
+</ul>
 <div id="editor"><?= htmlspecialchars($result->content) ?></div>
 
 <? /*

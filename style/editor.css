@@ -3,15 +3,36 @@
     min-height: 500px;
     position: fixed;
     left: 170px;
-    top: 81px; /* 81 px with toolbar */
+    top: 71px; /* 71 px with toolbar */
     right: 0;
     bottom: 0;
 }
 
-div.editor-toolbar {
-    height: 40px;
+/* toolbar */
+
+ul.editor-toolbar {
+    height: 30px;
+    line-height: 30px;
     width: 100%;
     border-bottom: 1px solid #222;
     background-color: #232323;
-    color: #E2E2E2
+    color: #E2E2E2;
+    list-style-type: none;
+    z-index: 100;
 }
+
+ul.editor-toolbar li {
+    padding-left: 5px;
+}
+
+ul.editor-toolbar li a {
+    display: inline-block;
+    font-size: 12px;
+    color: #E2E2E2;
+    text-decoration: none;
+    height: 100%;
+}
+
+ul.editor-toolbar li:hover {
+    background-color: #2096ce;/*#444;*/
+}9
