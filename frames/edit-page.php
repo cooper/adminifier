@@ -51,9 +51,12 @@ echo '<a href="functions/delete-page.php?page='.urlencode($_GET['page']).'">Dele
         <li style="float: right;"><i class="fa fa-trash"></i> Delete</li>
         <li style="float: right;"><i class="fa fa-repeat"></i> Redo</li>
         <li style="float: right;"><i class="fa fa-undo"></i> Undo</li>
-        <li style="float: right;"><i class="fa fa-paste"></i> Paste</li>
-        <li style="float: right;"><i class="fa fa-copy"></i> Copy</li>
-        <li style="float: right;"><i class="fa fa-cut"></i> Cut</li>
+        
+        <!--
+            <li style="float: right;"><i class="fa fa-paste"></i> Paste</li>
+            <li style="float: right;"><i class="fa fa-copy"></i> Copy</li>
+            <li style="float: right;"><i class="fa fa-cut"></i> Cut</li>
+        -->
 
         <li><i class="fa fa-bold"></i> Bold</li>
         <li><i class="fa fa-italic"></i> Italic</li>
