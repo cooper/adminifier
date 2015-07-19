@@ -59,6 +59,18 @@ function hashLoad() {
     frameLoad(hash);
 }
 
+var currentFlags = [];
+var flagOptions = {
+    'no-margin': {
+        init: function () {
+            $('content').addClass('no-margin');
+        },
+        destroy: function () {
+            $('content').removeClass('no-margin');
+        }
+    }
+};
+
 var currentData;
 function handlePageData(data) {
     console.log(data);
@@ -118,6 +130,17 @@ function handlePageData(data) {
             rel:   'stylesheet'
         });
         document.head.appendChild(link);
+    });
+    
+    // handle page flags
+    currentFlags.each(function (flag) { flag.destroy(); });
+    currentFlags = [];
+    var flags = (data['data-flags'] || '').split(' ');
+    flags.each(function (flagName) {
+        var flag = flagOptions[flagName];
+        if (!flag) return;
+        currentFlags.append(flag);
+        flag.init();
     });
     
 }

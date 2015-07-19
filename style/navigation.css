@@ -97,3 +97,7 @@
     margin-left: 170px;
     padding: 20px;
 }
+
+#content.no-margin {
+    padding: 0 !important;
+}

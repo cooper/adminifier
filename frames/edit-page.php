@@ -19,6 +19,7 @@ echo '<a href="functions/delete-page.php?page='.urlencode($_GET['page']).'">Dele
       data-icon="edit"
       data-scripts="ace edit-page"
       data-styles="editor"
+      data-flags="no-margin"
 />
 
 <br />
