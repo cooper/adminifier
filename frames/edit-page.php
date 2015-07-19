@@ -24,8 +24,6 @@ echo '<a href="functions/delete-page.php?page='.urlencode($_GET['page']).'">Dele
       data-flags="no-margin"
 />
 
-<br />
-
 <? /*
     $short_page = substr_compare(
         $_GET['page'],
