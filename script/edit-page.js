@@ -47,7 +47,9 @@ function selectPageTitle () {
             break;
         }
         
-        foundText = true;
+        if (inTitle)
+            foundText = true;
+        
     }
     
     // offset on the line
