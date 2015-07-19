@@ -37,7 +37,6 @@ ul.editor-toolbar li {
     float: left;
     padding: 0 10px;
     display: inline-block;
-    width: 15px;
     height: 30px;
     overflow: hidden;
 }
@@ -49,4 +48,6 @@ ul.editor-toolbar li a {
     text-decoration: none;
     height: 30px;
     overflow: hidden;
+    cursor: pointer;
+    width: 15px;
 }
