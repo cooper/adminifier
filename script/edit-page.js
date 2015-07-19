@@ -1,4 +1,5 @@
 console.log('Edit page script loaded');
+document.addEvent('domready', setupToolbar);
 
 var Range = ace.require('ace/range').Range;
 
@@ -61,4 +62,15 @@ function selectPageTitle () {
     console.log('startIndex: ' + startIndex + ', endIndex: ' + endIndex);
     editor.selection.setSelectionRange(new Range(found.start.row, startIndex, found.end.row, endIndex));
     return true;
+}
+
+function setupToolbar () {
+    $$('ul.editor-toolbar li').each(function (li) {
+        li.addEvent('mouseenter', function () {
+            li.tween('width', '30px');
+        });
+        li.addEvent('mouseleave', function () {
+            li.tween('width', '12px');
+        });
+    });
 }

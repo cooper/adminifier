@@ -21,9 +21,15 @@ ul.editor-toolbar {
     z-index: 100;
 }
 
+ul.editor-toolbar:first-child {
+    margin-left: 30px;
+}
+
 ul.editor-toolbar li {
-    padding: 0 3px;
+    padding: 0 5px;
     display: inline-block;
+    width: 12px;
+    overflow: hidden;
 }
 
 ul.editor-toolbar li a {
