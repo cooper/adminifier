@@ -65,16 +65,16 @@ function selectPageTitle () {
 }
 
 function setupToolbar () {
-    $$('ul.editor-toolbar li a').each(function (a) {
-        a.set('morph', { duration: 'short' });
-        a.addEvent('mouseenter', function () {
-            a.morph({
+    $$('ul.editor-toolbar li').each(function (li) {
+        li.set('morph', { duration: 'short' });
+        li.addEvent('mouseenter', function () {
+            li.morph({
                 width: '100px',
                 backgroundColor: '#2096ce'
             });
         });
-        a.addEvent('mouseleave', function () {
-            a.morph({
+        li.addEvent('mouseleave', function () {
+            li.morph({
                 width: '15px',
                 backgroundColor: '#232323'
             });
