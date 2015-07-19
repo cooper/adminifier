@@ -43,11 +43,10 @@ ul.editor-toolbar li {
 
 ul.editor-toolbar li a {
     display: inline-block;
-    font-size: 10px;
+    font-size: 14px;
     color: #E2E2E2;
     text-decoration: none;
     height: 30px;
     overflow: hidden;
-    cursor: pointer;
     width: 15px;
 }
