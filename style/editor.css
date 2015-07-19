@@ -26,7 +26,7 @@ ul.editor-toolbar {
 }
 
 ul.editor-toolbar:first-child {
-    margin-left: 30px;
+    margin-left: 50px; /* the line bar is actually 48px */
 }
 
 ul.editor-toolbar li {
