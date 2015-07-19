@@ -46,11 +46,15 @@ echo '<a href="functions/delete-page.php?page='.urlencode($_GET['page']).'">Dele
 
 <div class="editor-toolbar-wrapper">
     <ul class="editor-toolbar">
+        
         <li style="float: right;"><i class="fa fa-save"></i> Save</li>
         <li style="float: right;"><i class="fa fa-trash"></i> Delete</li>
         <li style="float: right;"><i class="fa fa-repeat"></i> Redo</li>
         <li style="float: right;"><i class="fa fa-undo"></i> Undo</li>
-        
+        <li><i class="fa fa-paste"></i> Paste</li>
+        <li><i class="fa fa-copy"></i> Copy</li>
+        <li><i class="fa fa-cut"></i> Cut</li>
+
         <li><i class="fa fa-bold"></i> Bold</li>
         <li><i class="fa fa-italic"></i> Italic</li>
         <li><i class="fa fa-underline"></i> Underline</li>
@@ -65,10 +69,7 @@ echo '<a href="functions/delete-page.php?page='.urlencode($_GET['page']).'">Dele
         <li><i class="fa fa-history"></i> History</li>
         <li><i class="fa fa-code"></i> Code</li>
         <li><i class="fa fa-copyright"></i> Citation</li>
-
-        <li><i class="fa fa-cut"></i> Cut</li>
-        <li><i class="fa fa-copy"></i> Copy</li>
-        <li><i class="fa fa-paste"></i> Paste</li>
+        
     </ul>
 </div>
 <div id="editor"><?= htmlspecialchars($result->content) ?></div>
