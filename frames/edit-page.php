@@ -24,7 +24,7 @@ echo '<a href="functions/delete-page.php?page='.urlencode($_GET['page']).'">Dele
 
 <br />
 
-<?
+<? /*
     $short_page = substr_compare(
         $_GET['page'],
         '.page',
@@ -33,7 +33,8 @@ echo '<a href="functions/delete-page.php?page='.urlencode($_GET['page']).'">Dele
     ) == 0 ?
         substr($_GET['page'], 0, -strlen('.page')) :
     $_GET['page']
-?>
+*/ ?>
+<? /*
 <form action="functions/move-page.php" method="post">
     <input type="hidden" value="<?= htmlspecialchars($_GET['page']) ?>" name="page" />
     <input type="text" value="<?= htmlspecialchars($short_page) ?>" name="new_name" />
@@ -41,6 +42,7 @@ echo '<a href="functions/delete-page.php?page='.urlencode($_GET['page']).'">Dele
 </form>
 
 <br />
+*/ ?>
 
 <div id="editor"><?= htmlspecialchars($result->content) ?></div>
 
