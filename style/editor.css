@@ -38,7 +38,8 @@ ul.editor-toolbar li a {
     font-size: 10px;
     color: #E2E2E2;
     text-decoration: none;
-    height: 100%;
+    height: 30px;
+    overflow: hidden;
 }
 
 ul.editor-toolbar li:hover {
