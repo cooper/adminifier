@@ -9,7 +9,9 @@ $result = $W->page_code($_GET['page']);
 if ($result->type != 'page_code')
     die('Page does not exist.');
 
+/*
 echo '<a href="functions/delete-page.php?page='.urlencode($_GET['page']).'">Delete</a>';
+*/
 
 ?>
 
