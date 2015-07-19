@@ -24,8 +24,10 @@ function selectPageTitle () {
         var char = string[i];
         
         // made it to the end without finding semicolon
-        if (typeof char == 'undefined')
-            return false;
+        if (typeof char == 'undefined') {
+            endIndex = i;
+            break;
+        }
         
         // now we're in the title
         if (!inTitle && char == ':') {
