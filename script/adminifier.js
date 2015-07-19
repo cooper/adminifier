@@ -87,9 +87,11 @@ var flagOptions = {
     'compact-sidebar': {
         init: function () {
             $('navigation-sidebar').tween('width', '50px');
+            $('content').tween('margin-left', '50px');
         },
         destroy: function () {
             $('navigation-sidebar').tween('width', '170px');
+            $('content').tween('margin-left', '170px');
         }
     }
 };
