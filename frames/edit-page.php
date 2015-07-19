@@ -37,8 +37,8 @@ echo '<a href="functions/delete-page.php?page='.urlencode($_GET['page']).'">Dele
 
 <div id="editor"><?= htmlspecialchars($result->content) ?></div>
 
-<script src="ace/ace.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript">
+<script class="dynamic" src="ace/ace.js" type="text/javascript" charset="utf-8"></script>
+<script class="dynamic" type="text/javascript">
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/monokai");
     editor.getSession().setMode("ace/mode/plain_text");
