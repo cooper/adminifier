@@ -83,6 +83,14 @@ var flagOptions = {
         destroy: function () {
             $('content').removeClass('no-margin');
         }
+    },
+    'compact-sidebar': {
+        init: function () {
+            $('navigation-sidebar').tween('width', '50px');
+        },
+        destroy: function () {
+            $('navigation-sidebar').tween('width', '170px');
+        }
     }
 };
 
