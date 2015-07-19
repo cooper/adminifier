@@ -1,4 +1,9 @@
 #editor {
     width: 100%;
     min-height: 500px;
+    position: fixed;
+    left: 170px;
+    top: 40px;
+    right: 0;
+    bottom: 0;
 }
