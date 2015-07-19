@@ -32,7 +32,7 @@ function frameLoad(page) {
             if (meta) {
                 var attrs = meta.getProperties(
                     'data-nav', 'data-title', 'data-icon',
-                    'data-scripts', 'data-sort'
+                    'data-scripts', 'data-styles', 'data-sort'
                 );
                 handlePageData(attrs);
             }
@@ -105,5 +105,19 @@ function handlePageData(data) {
         document.head.appendChild(script);
     });
     scriptLoaded(); // call once in case there are no scripts
+ 
+    // inject styles
+    $$('link.dynamic').each(function (link) { link.destroy(); });
+    var links = (data['data-styles'] || '').split(' ');
+    links.each(function (style) {
+        if (!style.length) return;
+        var link = new Element('link', {
+            href:  'style/' + style + '.css',
+            class: 'dynamic',
+            type:  'text/css',
+            rel:   'stylesheet'
+        });
+        document.head.appendChild(link);
+    });
     
 }
