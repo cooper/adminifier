@@ -46,7 +46,7 @@ function frameLoad(page) {
                 
                 // Used by specific pages
                     
-                'data-sort',        // page-list.php
+                'data-sort'         // page-list.php
                     
                 );
                 handlePageData(attrs);
