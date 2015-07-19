@@ -17,7 +17,7 @@ echo '<a href="functions/delete-page.php?page='.urlencode($_GET['page']).'">Dele
 
 <meta
       data-nav="pages"
-      data-title="<?= htmlspecialchars($result->title) ?>" 
+      data-title="Editing <?= htmlspecialchars($_GET['page']) ?>" 
       data-icon="edit"
       data-scripts="ace edit-page"
       data-styles="editor"
