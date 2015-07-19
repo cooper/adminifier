@@ -70,13 +70,13 @@ function setupToolbar () {
         li.addEvent('mouseenter', function () {
             li.morph({
                 width: '100px',
-                backgroundColor: '#2096ce'
+                backgroundColor: '#232323'
             });
         });
         li.addEvent('mouseleave', function () {
             li.morph({
                 width: '15px',
-                backgroundColor: '#232323'
+                backgroundColor: '#2096ce'
             });
         });
     });
