@@ -3,7 +3,7 @@
     min-height: 500px;
     position: fixed;
     left: 170px;
-    top: 80px;
+    top: 81px;
     right: 0;
     bottom: 0;
 }
@@ -11,5 +11,6 @@
 div.editor-toolbar {
     height: 40px;
     width: 100%;
-    background-color: #333;
+    background-color: #ebebeb;
+    border-bottom: 1px solid #9f9f9f;
 }
