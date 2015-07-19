@@ -3,7 +3,13 @@
     min-height: 500px;
     position: fixed;
     left: 170px;
-    top: 40px;
+    top: 80px;
     right: 0;
     bottom: 0;
+}
+
+div.editor-toolbar {
+    height: 40px;
+    width: 100%;
+    background-color: #333;
 }
