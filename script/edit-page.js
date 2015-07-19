@@ -36,6 +36,6 @@ function selectPageTitle () {
         }
     }
 
-    editor.selection.setSelectionRange(new Range(found.row, startIndex, found.row, endIndex);
+    editor.selection.setSelectionRange(new Range(found.row, startIndex, found.row, endIndex));
     return true;
 }
