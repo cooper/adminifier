@@ -66,6 +66,7 @@ function selectPageTitle () {
 
 function setupToolbar () {
     $$('ul.editor-toolbar li').each(function (li) {
+        li.set('morph', { duration: 'short' });
         li.addEvent('mouseenter', function () {
             li.morph({
                 width: '100px',

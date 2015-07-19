@@ -10,15 +10,19 @@
 
 /* toolbar */
 
+div.editor-toolbar-wrapper {
+    width: 100%;
+    height: 30px;
+    border-bottom: 1px solid #222;
+    background-color: #232323;
+    z-index: 100;
+}
+
 ul.editor-toolbar {
     height: 30px;
     line-height: 30px;
-    width: 100%;
-    border-bottom: 1px solid #222;
-    background-color: #232323;
     color: #E2E2E2;
     list-style-type: none;
-    z-index: 100;
 }
 
 ul.editor-toolbar:first-child {
