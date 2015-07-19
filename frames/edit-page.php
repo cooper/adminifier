@@ -35,8 +35,19 @@ echo '<a href="functions/delete-page.php?page='.urlencode($_GET['page']).'">Dele
 
 <br />
 
+<div id="editor"><?= htmlspecialchars($result->content) ?></div>
+
+<script src="ace/ace.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/monokai");
+    editor.getSession().setMode("ace/mode/plain_text");
+</script>
+
+<? /*
 <form action="functions/write-page.php" method="post">
     <input type="hidden" value="<?= htmlspecialchars($_GET['page']) ?>" name="page" />
     <textarea name="content" style="font-family: monospace; width: 1000px; height: 500px;"><?= htmlspecialchars($result->content) ?></textarea>
     <input type="submit" name="submit" value="Save" />
 </form>
+*/ ?>
