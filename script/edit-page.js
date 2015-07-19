@@ -67,7 +67,7 @@ function selectPageTitle () {
 function setupToolbar () {
     $$('ul.editor-toolbar li').each(function (li) {
         li.addEvent('mouseenter', function () {
-            li.tween('width', '60px');
+            li.tween('width', '100px');
         });
         li.addEvent('mouseleave', function () {
             li.tween('width', '12px');
