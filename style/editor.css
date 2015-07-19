@@ -41,4 +41,6 @@ ul.editor-toolbar li {
     height: 30px;
     overflow: hidden;
     cursor: pointer;
+    word-break: break-all;
+    word-wrap: break-word;
 }
