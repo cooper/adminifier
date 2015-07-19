@@ -31,8 +31,23 @@ function frameLoad(page) {
             var meta = $('content').getElementsByTagName('meta')[0];
             if (meta) {
                 var attrs = meta.getProperties(
-                    'data-nav', 'data-title', 'data-icon',
-                    'data-scripts', 'data-styles', 'data-sort'
+                    
+                // SSV = space-separated values
+                    
+                    
+                // Tools for all pages
+                    
+                'data-nav',         // navigation item identifier to highlight
+                'data-title',       // page title for top bar
+                'data-icon',        // page icon name for top bar
+                'data-scripts',     // SSV script names w/o extensions
+                'data-styles',      // SSV css names w/o extensions
+                'data-flags',       // SSV page flags
+                
+                // Used by specific pages
+                    
+                'data-sort',        // page-list.php
+                    
                 );
                 handlePageData(attrs);
             }
