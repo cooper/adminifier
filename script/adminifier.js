@@ -148,13 +148,15 @@ function handlePageData(data) {
     });
     
     // handle page flags
-    currentFlags.each(function (flag) { flag.destroy(); });
+    currentFlags.each(function (flag) {
+        if (flag.destroy) flag.destroy();
+    });
     currentFlags = [];
     var flags = (data['data-flags'] || '').split(' ');
     flags.each(function (flagName) {
         var flag = flagOptions[flagName];
         if (!flag) return;
-        currentFlags.append(flag);
+        currentFlags.push(flag);
         flag.init();
     });
     
