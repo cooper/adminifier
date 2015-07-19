@@ -37,16 +37,8 @@ ul.editor-toolbar li {
     float: left;
     padding: 0 10px;
     display: inline-block;
-    height: 30px;
-    overflow: hidden;
-}
-
-ul.editor-toolbar li a {
-    font-weight: bold;
-    display: inline-block;
-    color: #E2E2E2;
-    text-decoration: none;
-    height: 30px;
-    overflow: hidden;
     width: 15px;
+    height: 30px;
+    overflow: hidden;
+    cursor: pointer;
 }
