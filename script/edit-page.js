@@ -14,8 +14,13 @@ function selectPageTitle () {
     if (!found) return false;
     var string = editor.getSelectedText();
     
-    var escaped = false, inTitle = false, startIndex = 0, endIndex = 0;
-    for (var i = 0; true; i++) {
+    var escaped = false,
+        inTitle = false,
+        foundText = false,
+        startIndex = 0,
+        endIndex = 0;
+    
+    for (var i = 0; ; i++) {
         var char = string[i];
         
         // made it to the end without finding semicolon
@@ -25,17 +30,31 @@ function selectPageTitle () {
         // now we're in the title
         if (!inTitle && char == ':') {
             inTitle = true;
-            startIndex = i - 1;
+            startIndex = i + 1;
             continue;
         }
         
+        // if we're in the title but no text has been found,
+        // this is just spacing before the actual title
+        if (inTitle && !foundText && char == ' ') {
+            startIndex++;
+            continue;
+        }
+                
         // ending the title
         if (inTitle && !escaped && char == ';') {
-            endIndex = i - 1;
+            endIndex = i;
             break;
         }
+        
+        foundText = true;
     }
+    
+    // offset on the line
+    startIndex += found.start.column;
+    endIndex   += found.start.column;
+    
     console.log('startIndex: ' + startIndex + ', endIndex: ' + endIndex);
-    editor.selection.setSelectionRange(new Range(found.row, startIndex, found.row, endIndex));
+    editor.selection.setSelectionRange(new Range(found.start.row, startIndex, found.end.row, endIndex));
     return true;
 }
