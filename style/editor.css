@@ -29,6 +29,10 @@ ul.editor-toolbar:first-child {
     margin-left: 50px; /* the line bar is actually 48px */
 }
 
+ul.editor-toolbar:last-child {
+    margin-right: 20px;
+}
+
 ul.editor-toolbar li {
     float: left;
     padding: 0 10px;
