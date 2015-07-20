@@ -17,9 +17,9 @@ $_author = $_SESSION['username'];
 $_POST = array(
     'page'    => $new_page,
     'content' => <<<EOF
-@page.title:   ;
-@page.created: $_time;
-@page.atuhor:  $_author;
+@page.title:      ;
+@page.created:    $_time;
+@page.author:     $_author;
 
 EOF
 );

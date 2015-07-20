@@ -50,7 +50,7 @@ function sort_method ($type) {
             <a class="frame-click" href="#!/edit-page?page=<?= urlencode($page->file) ?>">
                 <?=
                     isset($page->title)
-                        && strlen($page->title) ?
+                        && strlen(trim($page->title)) ?
                     $page->title    :
                     $page->file
                 ?>
