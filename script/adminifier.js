@@ -107,8 +107,8 @@ var flagOptions = {
                 });
             });
             $$('div.navigation-popover').each(function (p) {
-                p.parent.eliminate('popover');
-                p.parent.removeChild(p);
+                p.parentElement.eliminate('popover');
+                p.parentElement.removeChild(p);
             });
         }
     }
