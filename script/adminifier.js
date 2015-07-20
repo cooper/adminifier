@@ -119,8 +119,8 @@ function handleCompactSidebarMouseenter (e) {
             class: 'navigation-popover'
         });
         li.appendChild(p);
-        p.innerText = li.getElementsByTagName('span')[0].innerText;
-        p.set('tween', { duration: 500 });
+        p.innerText = li.children[0].getElementsByTagName('span')[0].innerText;
+        p.set('tween', { duration: 'short' });
         li.store('popover', p);
     }
     p.tween('width', '100px');
@@ -130,7 +130,7 @@ function handleCompactSidebarMouseleave (e) {
     var li = e.target;
     var p = li.retrieve('popover');
     if (!p) return;
-    p.tween('width', '50px');
+    p.tween('width', '0px');
 }
 
 var currentData;
