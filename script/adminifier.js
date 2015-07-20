@@ -134,7 +134,7 @@ function handleCompactSidebarMouseleave (e) {
     var a = e.target;
     var p = a.retrieve('popover');
     if (!p) return;
-    p.setStyle('background-color', 'transparent');
+    p.setStyle('background-color', '#333');
     p.tween('width', '0px');
 }
 
