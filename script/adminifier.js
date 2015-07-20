@@ -123,13 +123,13 @@ function handleCompactSidebarMouseenter (e) {
         });
         p.innerHTML = a.getElementsByTagName('span')[0].innerHTML;
         a.appendChild(p);
-        p.set('tween', { duration: 'short' });
+        p.set('morph', { duration: 'short' });
         a.store('popover', p);
     }
     p.setStyle('background-color', '#444');
     p.morph({ 
         width: '90px',
-        padding: '10px'
+        paddingLeft: '10px'
     });}
 
 function handleCompactSidebarMouseleave (e) {
@@ -139,7 +139,7 @@ function handleCompactSidebarMouseleave (e) {
     p.setStyle('background-color', '#333');
     p.morph({ 
         width: '0px',
-        padding: '0px'
+        paddingLeft: '0px'
     });
 }
 
