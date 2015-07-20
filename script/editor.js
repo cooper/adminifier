@@ -40,8 +40,11 @@ editor.on('input', function () {
     // we're changing the title.
     // this shouldn't be too expensive, since
     // editor.find() starts with the current line
-    if (lineText.match(editorExpressions.pageTitle))
+    if (lineText.match(editorExpressions.pageTitle)) {
+        var pos = editor.getCursorPosition();
         updateEditorTitle();
+        editor.moveCursorToPosition(pos);
+    }
         
 });
 
