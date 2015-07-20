@@ -112,23 +112,23 @@ var flagOptions = {
 };
 
 function handleCompactSidebarMouseenter (e) {
-    var li = e.target;
-    var p = li.retrieve('popover');
+    var a = e.target;
+    var p = a.retrieve('popover');
     if (!p) {
         p = new Element('div', {
             class: 'navigation-popover'
         });
-        p.innerHTML = li.children[0].getElementsByTagName('span')[0].innerHTML;
-        li.appendChild(p);
+        p.innerHTML = a.getElementsByTagName('span')[0].innerHTML;
+        a.appendChild(p);
         p.set('tween', { duration: 'short' });
-        li.store('popover', p);
+        a.store('popover', p);
     }
     p.tween('width', '100px');
 }
 
 function handleCompactSidebarMouseleave (e) {
-    var li = e.target;
-    var p = li.retrieve('popover');
+    var a = e.target;
+    var p = a.retrieve('popover');
     if (!p) return;
     p.tween('width', '0px');
 }
