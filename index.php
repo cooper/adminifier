@@ -29,12 +29,12 @@
 
 <div id="navigation-sidebar">
     <ul id="navigation">
-        <li data-nav="dashboard" class="active"><a class="frame-click" href="#!/dashboard"><i class="fa fa-home"></i> Dashboard</a></li>
-        <li data-nav="pages"><a class="frame-click" href="#!/pages"><i class="fa fa-file-text"></i> Pages</a></li>
-        <li data-nav="categories"><a class="frame-click" href="#!/categories"><i class="fa fa-list"></i> Categories</a></li>
-        <li data-nav="images"><a class="frame-click" href="#!/images"><i class="fa fa-picture-o"></i> Images</a></li>
-        <li data-nav="settings"><a class="frame-click" href="#!/settings"><i class="fa fa-cog"></i> Settings</a></li>
-        <li><a href="logout.php"><i class="fa fa-arrow-circle-left"></i> Logout</a></li>
+        <li data-nav="dashboard" class="active"><a class="frame-click" href="#!/dashboard"><i class="fa fa-home"></i> <span>Dashboard</span></a></li>
+        <li data-nav="pages"><a class="frame-click" href="#!/pages"><i class="fa fa-file-text"></i> <span>Pages</span></a></li>
+        <li data-nav="categories"><a class="frame-click" href="#!/categories"><i class="fa fa-list"></i> <span>Categories</span></a></li>
+        <li data-nav="images"><a class="frame-click" href="#!/images"><i class="fa fa-picture-o"></i> <span>Images</span></a></li>
+        <li data-nav="settings"><a class="frame-click" href="#!/settings"><i class="fa fa-cog"></i> <span>Settings</a></li>
+        <li><a href="logout.php"><i class="fa fa-arrow-circle-left"></i> <span>Logout</span></a></li>
     </ul>
 </div>
 

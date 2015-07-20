@@ -88,10 +88,12 @@ var flagOptions = {
         init: function () {
             $('navigation-sidebar').tween('width', '50px');
             $('content').tween('margin-left', '50px');
+            $$('#navigation-sidebar li a span').each(function (a) { a.fade('out'); });
         },
         destroy: function () {
             $('navigation-sidebar').tween('width', '170px');
             $('content').tween('margin-left', '170px');
+            $$('#navigation-sidebar li a span').each(function (a) { a.fade('in'); });
         }
     }
 };

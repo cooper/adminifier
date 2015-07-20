@@ -44,3 +44,8 @@ ul.editor-toolbar li {
     cursor: pointer;
     white-space: nowrap;
 }
+
+ul.editor-toolbar li.right {
+    float: right;
+    text-align: right;
+}
