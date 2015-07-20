@@ -50,3 +50,8 @@ ul.editor-toolbar li.right {
     text-align: right;
     direction: rtl;
 }
+
+ul.editor-toolbar li.disabled {
+    color: #cecece;
+    cursor: not-allowed;
+}

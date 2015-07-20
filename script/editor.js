@@ -8,10 +8,10 @@ editor.setTheme("ace/theme/twilight"); /* eclipse is good light one */
 editor.getSession().setMode("ace/mode/plain_text");
 setTimeout(function () { editor.resize(); }, 500);
 
-function dummyFunc () { }
+function dummyFunc () { console.log('button pressed'); }
 
 function selectPageTitle () {
-    var found = editor.find('^@page\.title:(.*)$', { regExp: true, wrap: true });
+    var found = editor.find(/^@page\.title:(.*)$/, { regExp: true, wrap: true });
     if (!found) return false;
     var string = editor.getSelectedText();
     
@@ -64,11 +64,18 @@ function selectPageTitle () {
     return true;
 }
 
+var toolbarFunctions = {
+    undo: dummyFunc,
+    redo: dummyFunc
+};
+
 function setupToolbar () {
     var currentLi;
 
     // switch between buttons
     $$('ul.editor-toolbar li').each(function (li) {
+        
+        // hover animation
         li.set('morph', { duration: 150 });
         li.addEvent('mouseenter', function () {
 
@@ -89,6 +96,17 @@ function setupToolbar () {
             
             currentLi = li;
         });
+        
+        // clicked
+        li.addEvent('click', function () {
+            if (li.hasClass('disabled')) return;
+            var action = li.getAttribute('data-action');
+            if (!action) return;
+            var func = toolbarFunctions[action];
+            if (!func) return;
+            func();
+        });
+        
     });
     
     // leaving the toolbar, close it

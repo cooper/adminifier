@@ -19,7 +19,7 @@ echo '<a href="functions/delete-page.php?page='.urlencode($_GET['page']).'">Dele
       data-nav="pages"
       data-title="<?= htmlspecialchars($_GET['page']) ?>" 
       data-icon="edit"
-      data-scripts="ace edit-page"
+      data-scripts="ace editor"
       data-styles="editor"
       data-flags="no-margin compact-sidebar"
 />
@@ -49,8 +49,8 @@ echo '<a href="functions/delete-page.php?page='.urlencode($_GET['page']).'">Dele
         
         <li class="right"><i class="fa right fa-save"></i> Save</li>
         <li class="right"><i class="fa right fa-trash"></i> Delete</li>
-        <li class="right"><i class="fa right fa-repeat"></i> Redo</li>
-        <li class="right"><i class="fa right fa-undo"></i> Undo</li>
+        <li class="right disabled"><i class="fa right fa-repeat"></i> Redo</li>
+        <li class="right disabled"><i class="fa right fa-undo"></i> Undo</li>
         
         <!--
             <li style="float: right;"><i class="fa fa-paste"></i> Paste</li>
