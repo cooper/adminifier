@@ -88,15 +88,50 @@ var flagOptions = {
         init: function () {
             $('navigation-sidebar').tween('width', '50px');
             $('content').tween('margin-left', '50px');
-            $$('#navigation-sidebar li a span').each(function (a) { a.fade('out'); });
+            $$('#navigation-sidebar li a span').each(function (span) { span.fade('out'); });
+            $$('#navigation-sidebar li a').each(function (a) {
+                a.addEvents({
+                    mouseenter: handleCompactSidebarMouseenter,
+                    mouseleave: handleCompactSidebarMouseleave
+                });
+            });
         },
         destroy: function () {
             $('navigation-sidebar').tween('width', '170px');
             $('content').tween('margin-left', '170px');
-            $$('#navigation-sidebar li a span').each(function (a) { a.fade('in'); });
+            $$('#navigation-sidebar li a span').each(function (span) { span.fade('in'); });
+            $$('#navigation-sidebar li a').each(function (a) {
+                a.removeEvents({
+                    mouseenter: handleCompactSidebarMouseenter,
+                    mouseleave: handleCompactSidebarMouseleave
+                });
+            });
         }
     }
 };
+
+function handleCompactSidebarMouseenter (e) {
+    var li = e.target;
+    var p = new Element('div', {
+        class: 'navigation-popover'
+    });
+    li.appendChild(p);
+    p.innerText = li.getElementsByTagName('span')[0].innerText;
+    p.set('tween', { duration: 'short' });
+    p.tween('width', '100px');
+    li.store('popover', p);
+}
+
+function handleCompactSidebarMouseleave (e) {
+    var li = e.target;
+    var p = li.retrieve('popover');
+    if (!p) return;
+    p.tween('width', '50px');
+    setTimeout(function () {
+        li.eliminate('popover');
+        p.destroy();
+    }, 500);
+}
 
 var currentData;
 function handlePageData(data) {

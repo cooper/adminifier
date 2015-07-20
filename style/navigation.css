@@ -19,6 +19,7 @@
     padding-left: 16px;
     height: 38px;
     white-space: nowrap;
+    position: relative;
 }
 
 #navigation li a {
@@ -38,6 +39,17 @@
 
 #navigation li.active {
     background-color: #2096ce;
+}
+
+div.navigation-popover {
+    position: absolute;
+    width: 0px;
+    height: 38px;
+    top: 0px;
+    left: 50px;
+    background-color: yellow;
+    z-index: 300;
+    overflow: hidden;
 }
 
 #top-bar {
