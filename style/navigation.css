@@ -21,8 +21,7 @@
     padding-left: 16px;
     height: 38px;
     overflow: hidden;
-    word-break: break-all;
-    word-wrap: break-word;
+    white-space: nowrap;
 }
 
 #navigation li a {
@@ -34,6 +33,7 @@
     height: 38px;
     line-height: 38px;
     width: 100%;
+    white-space: nowrap;
 }
 
 #navigation li:hover {
