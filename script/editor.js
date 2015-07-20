@@ -9,6 +9,7 @@ editor.getSession().setMode("ace/mode/plain_text");
 setTimeout(function () { editor.resize(); }, 500);
 
 updateEditorTitle();
+editor.focus();
 
 editor.on('input', function () {
     var um = editor.getSession().getUndoManager();
