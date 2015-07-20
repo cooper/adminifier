@@ -152,7 +152,7 @@ function handlePageData(data) {
     $('content').setStyle('user-select', 'none');
 
     // page title and icon
-    $('page-title').innerHTML = '<i class="fa fa-' + data['data-icon'] + '"></i> ' + data['data-title'];
+    $('page-title').innerHTML = '<i class="fa fa-' + data['data-icon'] + '"></i> <span>' + data['data-title'] + '</span>';
     window.scrollTo(0, 0);
     // ^ not sure if scrolling necessary when setting display: none
     
@@ -219,4 +219,8 @@ function handlePageData(data) {
         flag.init();
     });
     
+}
+
+function updatePageTitle(title) {
+    $$('page-title span')[0].innerText = title;
 }

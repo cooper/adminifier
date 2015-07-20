@@ -2,11 +2,13 @@ console.log('Edit page script loaded');
 document.addEvent('domready', setupToolbar);
 
 var Range = ace.require('ace/range').Range;
-
 var editor = ace.edit("editor");
+
 editor.setTheme("ace/theme/twilight"); /* eclipse is good light one */
 editor.getSession().setMode("ace/mode/plain_text");
 setTimeout(function () { editor.resize(); }, 500);
+
+updateEditorTitle();
 
 editor.on('input', function () {
     var um = editor.getSession().getUndoManager();
@@ -74,6 +76,15 @@ function selectPageTitle () {
     console.log('startIndex: ' + startIndex + ', endIndex: ' + endIndex);
     editor.selection.setSelectionRange(new Range(found.start.row, startIndex, found.end.row, endIndex));
     return true;
+}
+
+// find the page title
+function updateEditorTitle() {
+    selectPageTitle()
+    var title = editor.getSelectedText();
+    if (title.length)
+        updatePageTitle(title);
+    editor.selection.setSelectionRange(new Range(0, 0, 0, 0));
 }
 
 var toolbarFunctions = {
