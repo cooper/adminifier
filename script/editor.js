@@ -8,6 +8,18 @@ editor.setTheme("ace/theme/twilight"); /* eclipse is good light one */
 editor.getSession().setMode("ace/mode/plain_text");
 setTimeout(function () { editor.resize(); }, 500);
 
+editor.on('input', function () {
+    var um = editor.getSession().getUndoManager();
+    if (um.hasUndo())
+        $('toolbar-undo').removeClass('disabled')
+    else
+        $('toolbar-redo').addClass('disabled');
+    if (um.hasRedo())
+        $('toolbar-redo').removeClass('disabled');
+    else
+        $('toolbar-redo').addClass('disabled');
+});
+
 function dummyFunc () { console.log('button pressed'); }
 
 function selectPageTitle () {
