@@ -123,9 +123,10 @@ function handleCompactSidebarMouseenter (e) {
         });
         p.innerHTML = a.getElementsByTagName('span')[0].innerHTML;
         a.appendChild(p);
-        p.set('morph', { duration: 200 });
+        p.set('morph', { duration: 150 });
         a.store('popover', p);
     }
+    a.setStyle('overflow', 'visible');
     p.setStyle('background-color', '#444');
     p.morph({ 
         width: '90px',
@@ -141,6 +142,7 @@ function handleCompactSidebarMouseleave (e) {
         width: '0px',
         paddingLeft: '0px'
     });
+    setTimeout(function () { a.setStyle('overflow', 'hidden'); }, 200);
 }
 
 var currentData;
