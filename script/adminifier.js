@@ -222,5 +222,5 @@ function handlePageData(data) {
 }
 
 function updatePageTitle(title) {
-    $$('page-title span')[0].innerText = title;
+    $$('#page-title span')[0].innerText = title;
 }
