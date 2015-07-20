@@ -42,8 +42,9 @@ editor.on('input', function () {
     // editor.find() starts with the current line
     if (lineText.match(editorExpressions.pageTitle)) {
         var pos = editor.getCursorPosition();
+        var rng = new Range(pos.row, pos.column, pos.row, pos.column);
         updateEditorTitle();
-        editor.moveCursorToPosition(pos);
+        editor.setSelectionRange(rng);
     }
         
 });
