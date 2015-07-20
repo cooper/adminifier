@@ -50,6 +50,7 @@ div.navigation-popover {
     background-color: #444;
     z-index: 300;
     overflow: hidden;
+    padding-left: 10px;
 }
 
 #top-bar {

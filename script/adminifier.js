@@ -126,13 +126,15 @@ function handleCompactSidebarMouseenter (e) {
         p.set('tween', { duration: 'short' });
         a.store('popover', p);
     }
-    p.tween('width', '100px');
+    p.setStyle('background-color', '#444');
+    p.tween('width', '90px');
 }
 
 function handleCompactSidebarMouseleave (e) {
     var a = e.target;
     var p = a.retrieve('popover');
     if (!p) return;
+    p.setStyle('background-color', 'transparent');
     p.tween('width', '0px');
 }
 
