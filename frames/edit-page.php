@@ -47,10 +47,10 @@ echo '<a href="functions/delete-page.php?page='.urlencode($_GET['page']).'">Dele
 <div class="editor-toolbar-wrapper">
     <ul class="editor-toolbar">
         
-        <li class="right"><i class="fa fa-save"></i> Save</li>
-        <li class="right"><i class="fa fa-trash"></i> Delete</li>
-        <li class="right"><i class="fa fa-repeat"></i> Redo</li>
-        <li class="right"><i class="fa fa-undo"></i> Undo</li>
+        <li class="right">Save <i class="fa fa-save"></i></li>
+        <li class="right">Delete <i class="fa fa-trash"></i></li>
+        <li class="right">Redo <i class="fa fa-repeat"></i></li>
+        <li class="right">Undo <i class="fa fa-undo"></i></li>
         
         <!--
             <li style="float: right;"><i class="fa fa-paste"></i> Paste</li>

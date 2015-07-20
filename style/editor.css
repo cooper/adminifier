@@ -48,4 +48,5 @@ ul.editor-toolbar li {
 ul.editor-toolbar li.right {
     float: right;
     text-align: right;
+    direction: rtl;
 }
