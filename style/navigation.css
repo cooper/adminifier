@@ -47,7 +47,7 @@ div.navigation-popover {
     height: 38px;
     top: 0px;
     left: 50px;
-    background-color: yellow;
+    background-color: #444;
     z-index: 300;
     overflow: hidden;
 }

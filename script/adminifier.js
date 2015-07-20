@@ -106,7 +106,10 @@ var flagOptions = {
                     mouseleave: handleCompactSidebarMouseleave
                 });
             });
-            $$('div.navigation-popover').each(function (p) { p.destroy(); });
+            $$('div.navigation-popover').each(function (p) {
+                p.parent.eliminate('popover');
+                p.parent.removeChild(p);
+            });
         }
     }
 };
