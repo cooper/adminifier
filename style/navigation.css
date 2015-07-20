@@ -7,25 +7,21 @@
     width: 170px;
     background-color: #333;
     color: #fff;
-    overflow: hidden;
     z-index: 200;
 }
 
 #navigation {
     list-style-type: none;
     margin-top: 60px;
-    overflow: hidden;
 }
 
 #navigation li {
     padding-left: 16px;
     height: 38px;
-    overflow: hidden;
     white-space: nowrap;
 }
 
 #navigation li a {
-    overflow: hidden;
     display: inline-block;
     font-size: 16px;
     color: #fff;
