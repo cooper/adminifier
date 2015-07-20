@@ -8,12 +8,12 @@
     background-color: #333;
     color: #fff;
     overflow: hidden;
+    z-index: 200;
 }
 
 #navigation {
     list-style-type: none;
     margin-top: 60px;
-    z-index: 100;
     overflow: hidden;
 }
 
@@ -51,7 +51,7 @@
     left: 0;
     width: 100%;
     background-color: #555;
-    z-index: 200;
+    z-index: 300;
 }
 
 #top-bar span.top-title {

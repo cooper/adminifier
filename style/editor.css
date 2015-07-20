@@ -6,6 +6,7 @@
     top: 71px; /* 71 px with toolbar */
     right: 0;
     bottom: 0;
+    z-index: 150;
 }
 
 /* toolbar */
@@ -15,7 +16,7 @@ div.editor-toolbar-wrapper {
     height: 30px;
     border-bottom: 1px solid #222;
     background-color: #2096ce;
-    z-index: 100;
+    z-index: 160;
 }
 
 ul.editor-toolbar {
