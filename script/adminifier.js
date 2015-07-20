@@ -123,7 +123,7 @@ function handleCompactSidebarMouseenter (e) {
         });
         p.innerHTML = a.getElementsByTagName('span')[0].innerHTML;
         a.appendChild(p);
-        p.set('morph', { duration: 'short' });
+        p.set('morph', { duration: 200 });
         a.store('popover', p);
     }
     p.setStyle('background-color', '#444');
