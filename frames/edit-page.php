@@ -47,10 +47,10 @@ echo '<a href="functions/delete-page.php?page='.urlencode($_GET['page']).'">Dele
 <div class="editor-toolbar-wrapper">
     <ul class="editor-toolbar">
         
-        <li class="right"><i class="fa right fa-save"></i> Save</li>
-        <li class="right"><i class="fa right fa-trash"></i> Delete</li>
-        <li class="right disabled"><i class="fa right fa-repeat"></i> Redo</li>
-        <li class="right disabled"><i class="fa right fa-undo"></i> Undo</li>
+        <li data-action="save" class="right"><i class="fa right fa-save"></i> Save</li>
+        <li data-action="delete" class="right"><i class="fa right fa-trash"></i> Delete</li>
+        <li data-action="redo" class="right disabled"><i class="fa right fa-repeat"></i> Redo</li>
+        <li data-action="undo" class="right disabled"><i class="fa right fa-undo"></i> Undo</li>
         
         <!--
             <li style="float: right;"><i class="fa fa-paste"></i> Paste</li>
@@ -58,20 +58,20 @@ echo '<a href="functions/delete-page.php?page='.urlencode($_GET['page']).'">Dele
             <li style="float: right;"><i class="fa fa-cut"></i> Cut</li>
         -->
 
-        <li><i class="fa fa-bold"></i> Bold</li>
-        <li><i class="fa fa-italic"></i> Italic</li>
-        <li><i class="fa fa-underline"></i> Underline</li>
-        <li><i class="fa fa-strikethrough"></i> Strike</li>
-        <li><i class="fa fa-font"></i> Font</li>
-        <li><i class="fa fa-header"></i> Header</li>
-        <li><i class="fa fa-picture-o"></i> Image</li>
-        <li><i class="fa fa-link"></i> Link</li>
-        <li><i class="fa fa-paperclip"></i> File</li>
-        <li><i class="fa fa-list-ul"></i> List</li>
-        <li><i class="fa fa-info-circle"></i> Infobox</li>
-        <li><i class="fa fa-history"></i> History</li>
-        <li><i class="fa fa-code"></i> Code</li>
-        <li><i class="fa fa-copyright"></i> Citation</li>
+        <li data-action="bold"><i class="fa fa-bold"></i> Bold</li>
+        <li data-action="italic"><i class="fa fa-italic"></i> Italic</li>
+        <li data-action="underline"><i class="fa fa-underline"></i> Underline</li>
+        <li data-action="strike"><i class="fa fa-strikethrough"></i> Strike</li>
+        <li data-action="font"><i class="fa fa-font"></i> Font</li>
+        <li data-action="header"><i class="fa fa-header"></i> Header</li>
+        <li data-action="image"><i class="fa fa-picture-o"></i> Image</li>
+        <li data-action="link"><i class="fa fa-link"></i> Link</li>
+        <li data-action="file"><i class="fa fa-paperclip"></i> File</li>
+        <li data-action="list"><i class="fa fa-list-ul"></i> List</li>
+        <li data-action="infobox"><i class="fa fa-info-circle"></i> Infobox</li>
+        <li data-action="history"><i class="fa fa-history"></i> History</li>
+        <li data-action="code"><i class="fa fa-code"></i> Code</li>
+        <li data-action="cite"><i class="fa fa-copyright"></i> Citation</li>
         
     </ul>
 </div>

@@ -65,8 +65,9 @@ function selectPageTitle () {
 }
 
 var toolbarFunctions = {
-    undo: dummyFunc,
-    redo: dummyFunc
+    undo:       dummyFunc,
+    redo:       dummyFunc,
+    'delete':   dummyFunc
 };
 
 function setupToolbar () {
