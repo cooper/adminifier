@@ -12,6 +12,7 @@ updateEditorTitle();
 editor.focus();
 
 var editorExpressions = {
+    version:        1.0,
     pageTitle:      new RegExp('^@page\\.title:(.*)$'),
     pageAuthor:     new RegExp('^@page\\.author:(.*)$'),
     pageCreated:    new RegExp('^@page\\.created:(.*)$')
