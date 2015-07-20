@@ -7,13 +7,18 @@
 
 require_once(__DIR__.'/../functions/utils.php');
 
+// create a random page name
+$new_page = 'untitled_'.uniqid().'.page';
+
+// set fake post variables
+$_POST = array();
+$_POST['page'] = $new_page;
+$_POST['content'] = '';
+
+// write the blank page
+require_once(__DIR__.'/../functions/write-page.php');
+
+// redirect to edit the new page
+header('Location: edit-page.php?page='.$new_page);
+
 ?>
-
-<meta data-nav="pages" data-title="Page creator" data-icon="plus-circle" />
-
-<br />
-<form action="functions/write-page.php" method="post">
-    <input type="text" name="page" />
-    <textarea name="content" style="font-family: monospace; width: 1000px; height: 500px;"></textarea>
-    <input type="submit" name="submit" />
-</form>
