@@ -44,7 +44,7 @@ editor.on('input', function () {
         var pos = editor.getCursorPosition();
         var rng = new Range(pos.row, pos.column, pos.row, pos.column);
         updateEditorTitle();
-        editor.setSelectionRange(rng);
+        editor.getSelection().setSelectionRange(rng);
     }
         
 });
