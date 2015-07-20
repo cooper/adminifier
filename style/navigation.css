@@ -30,6 +30,7 @@
     height: 38px;
     line-height: 38px;
     width: 100%;
+    width: calc(100% - 16px);
     white-space: nowrap;
 }
 
