@@ -117,7 +117,7 @@ function handleCompactSidebarMouseenter (e) {
     });
     li.appendChild(p);
     p.innerText = li.getElementsByTagName('span')[0].innerText;
-    p.set('tween', { duration: 'short' });
+    p.set('tween', { duration: 500 });
     p.tween('width', '100px');
     li.store('popover', p);
 }
@@ -130,7 +130,7 @@ function handleCompactSidebarMouseleave (e) {
     setTimeout(function () {
         li.eliminate('popover');
         p.destroy();
-    }, 500);
+    }, 510);
 }
 
 var currentData;
