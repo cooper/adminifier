@@ -6,7 +6,7 @@ var Range = ace.require('ace/range').Range;
 var editor = ace.edit("editor");
 editor.setTheme("ace/theme/twilight"); /* eclipse is good light one */
 editor.getSession().setMode("ace/mode/plain_text");
-editor.resize();
+setTimeout(function () { editor.resize(); }, 500);
 
 function dummyFunc () { }
 
