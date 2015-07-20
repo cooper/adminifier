@@ -4,19 +4,19 @@ document.addEvent('domready', setupToolbar);
 var Range = ace.require('ace/range').Range;
 var editor = ace.edit("editor");
 
-editor.setTheme("ace/theme/twilight"); /* eclipse is good light one */
-editor.getSession().setMode("ace/mode/plain_text");
-setTimeout(function () { editor.resize(); }, 500);
-
-updateEditorTitle();
-editor.focus();
-
 var editorExpressions = {
     version:        1.0,
     pageTitle:      new RegExp('^@page\\.title:(.*)$'),
     pageAuthor:     new RegExp('^@page\\.author:(.*)$'),
     pageCreated:    new RegExp('^@page\\.created:(.*)$')
 };
+
+editor.setTheme("ace/theme/twilight"); /* eclipse is good light one */
+editor.getSession().setMode("ace/mode/plain_text");
+setTimeout(function () { editor.resize(); }, 500);
+
+updateEditorTitle();
+editor.focus();
 
 editor.on('input', function () {
     
