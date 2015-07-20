@@ -66,18 +66,33 @@ function selectPageTitle () {
 
 function setupToolbar () {
     $$('ul.editor-toolbar li').each(function (li) {
+        var currentLi;
         li.set('morph', { duration: 150 });
         li.addEvent('mouseenter', function () {
+
+            // if another one is animating, force it to instantly finish
+            if (currentLi) {
+                currentLi.setStyles({
+                    width: '15px',
+                    backgroundColor: '#696969'
+                });
+                currentLi = undefined;
+            }
+            
+            // animate this one
             li.morph({
                 width: '100px',
                 backgroundColor: '#2096ce'
             });
+            
+            
         });
         li.addEvent('mouseleave', function () {
             li.morph({
                 width: '15px',
                 backgroundColor: '#696969'
             });
+            currentLi = li;
         });
     });
 }
