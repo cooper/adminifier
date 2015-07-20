@@ -11,23 +11,54 @@ setTimeout(function () { editor.resize(); }, 500);
 updateEditorTitle();
 editor.focus();
 
+var editorExpressions = {
+    pageTitle:      /^@page\.title:(.*)$/
+};
+
 editor.on('input', function () {
+    
+    // update undo
     var um = editor.getSession().getUndoManager();
     if (um.hasUndo())
         $('toolbar-undo').removeClass('disabled')
     else
-        $('toolbar-redo').addClass('disabled');
+        $('toolbar-undo').addClass('disabled');
+
+    // update redo
     if (um.hasRedo())
         $('toolbar-redo').removeClass('disabled');
     else
         $('toolbar-redo').addClass('disabled');
+    
+    
+    // current line
+    var lineText = editor.session.getLine(editor.getSelectionRange().start.row);
+    
+    // we're changing the title.
+    // this shouldn't be too expensive, since
+    // editor.find() starts with the current line
+    if (lineText.match(editorExpressions.pageTitle))
+        updateEditorTitle();
+        
 });
 
 function dummyFunc () { console.log('button pressed'); }
 
 function selectPageTitle () {
-    var found = editor.find(/^@page\.title:(.*)$/, { regExp: true, wrap: true });
-    if (!found) return false;
+    var range = getPageTitleRange();
+    if (range) editor.selection.setSelectionRange(range);
+}
+
+function getPageTitle () {
+    var range = getPageTitleRange();
+    if (range) return editor.getSession().getTextRange(range);
+    return;
+}
+
+// TODO: this doesn't yet handle escaped semicolons
+function getPageTitleRange () {
+    var found = editor.find(editorExpressions.pageTitle, { regExp: true, wrap: true });
+    if (!found) return;
     var string = editor.getSelectedText();
     
     var escaped = false,
@@ -75,17 +106,14 @@ function selectPageTitle () {
     endIndex   += found.start.column;
     
     console.log('startIndex: ' + startIndex + ', endIndex: ' + endIndex);
-    editor.selection.setSelectionRange(new Range(found.start.row, startIndex, found.end.row, endIndex));
-    return true;
+    return new Range(found.start.row, startIndex, found.end.row, endIndex);
 }
 
 // find the page title
 function updateEditorTitle() {
-    selectPageTitle()
-    var title = editor.getSelectedText();
-    if (title.length)
+    var title = getPageTitle();
+    if (typeof title != 'undefined' && title.length)
         updatePageTitle(title);
-    editor.selection.setSelectionRange(new Range(0, 0, 0, 0));
 }
 
 var toolbarFunctions = {
