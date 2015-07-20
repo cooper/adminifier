@@ -16,6 +16,7 @@ editor.getSession().setMode("ace/mode/plain_text");
 setTimeout(function () { editor.resize(); }, 500);
 
 updateEditorTitle();
+editor.getSelection().setSelectionRange(new Range(0, 0, 0, 0));
 editor.focus();
 
 editor.on('input', function () {
