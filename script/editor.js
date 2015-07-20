@@ -77,8 +77,8 @@ function selectPageTitle () {
 }
 
 var toolbarFunctions = {
-    undo:       dummyFunc,
-    redo:       dummyFunc,
+    undo:       function () { editor.undo(); },
+    redo:       function () { editor.redo(); },
     'delete':   dummyFunc
 };
 
