@@ -21,7 +21,7 @@ $_POST = array(
 @page.created: $_time;
 @page.atuhor:  $_author;
 
-EOF;
+EOF
 );
 
 // write the blank page
