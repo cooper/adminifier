@@ -70,7 +70,7 @@ function setupToolbar () {
         li.addEvent('mouseenter', function () {
             li.morph({
                 width: '100px',
-                backgroundColor: '#232323'
+                backgroundColor: '#2096ce'
             });
         });
         li.addEvent('mouseleave', function () {
