@@ -118,8 +118,8 @@ function handleCompactSidebarMouseenter (e) {
         p = new Element('div', {
             class: 'navigation-popover'
         });
+        p.innerHTML = li.children[0].getElementsByTagName('span')[0].innerHTML;
         li.appendChild(p);
-        p.innerText = li.children[0].getElementsByTagName('span')[0].innerText;
         p.set('tween', { duration: 'short' });
         li.store('popover', p);
     }
