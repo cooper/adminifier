@@ -2,13 +2,13 @@ var Range, editor, currentLi, currentPopup;
 
 document.addEvent('pageScriptsLoaded', editorPageScriptsLoadedHandler);
 document.addEvent('pageUnloaded', editorPageUnloadedHandler);
-document.addEvent('keyup', editorKeyPressedHandler);
+document.addEvent('keyup:keys(esc)', handleEditorEscapeKey);
 
 function editorPageUnloadedHandler () {
     console.log('Unloading editor script');
     document.removeEvent('pageScriptsLoaded', editorPageScriptsLoadedHandler);
     document.removeEvent('pageUnloaded', editorPageUnloadedHandler);
-    document.removeEvent('keyup', editorKeyPressedHandler);
+    document.removeEvent('keyup:keys(esc)', handleEditorEscapeKey);
 }
                   
 function editorPageScriptsLoadedHandler () {
@@ -40,12 +40,9 @@ function resetSelectionAtTopLeft () {
     editor.focus();
 }
 
-function editorKeyPressedHandler (e) {
-    if (e.keyCode == 27) handleEditorEscapeKey();
-}
-
 // escape key pressed
 function handleEditorEscapeKey() {
+    console.log('handle escape');
     
     // if there's a popup, exit it maybe
     if (currentPopup)
