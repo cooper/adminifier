@@ -195,9 +195,9 @@ function displayLinkHelper () {
 <div style="clear: both;"></div>                        \
 <div id="editor-link-wrapper">                       \
 <span id="editor-link-title2">Display text</span><br /> \
-<input id="editor-link-display" type="text" /><br/>     \
+<input id="editor-link-display" type="text" placeholder="Click here" /><br/>  \
 <span id="editor-link-title1">Page target</span><br />  \
-<input id="editor-link-target" type="text" />           \
+<input id="editor-link-target" type="text" placeholder="My Page" />           \
 </div>                                                  \
 <div id="editor-link-insert">Insert page link</div>  \
 ';
@@ -237,8 +237,8 @@ function displayLinkHelper () {
             
             // update the text
             var info = type.retrieve('linkInfo');
-            $('editor-link-title1').innerHTML = info[0];
-            $('editor-link-title2').innerHTML = info[1];
+            $('editor-link-title1').innerHTML = info[1];
+            $('editor-link-title2').innerHTML = info[0];
             $('editor-link-insert').innerHTML = info[2];
             $('editor-link-target').setProperty('placeholder', info[3]);
             
