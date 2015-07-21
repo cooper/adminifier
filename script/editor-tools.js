@@ -284,7 +284,7 @@ Edit summary<br /> \
             btn.innerHTML = 'Saved bb4504b';
             
             setTimeout(function () { closeCurrentPopup(); }, 1500);
-        }, 1000);
+        }, 1500);
     });
     
     displayPopupBox(box, 120, li);
