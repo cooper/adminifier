@@ -146,7 +146,7 @@ function displayFontSelector () {
                 backgroundColor: colorName,
                 color: '#fff',
                 lineHeight: '30px',
-                textShadow: '-2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000',
+                textShadow: '-1px -1px 1px #000, 1px -1px 1px #000, -1px 1px 1px #000, 1px 1px 1px #000',
                 letterSpacing: '2px'
             }
         });
