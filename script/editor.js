@@ -271,7 +271,11 @@ function displayLinkHelper () {
     });
     
     // selected text = display text
-    var selected = editor.getSelectedText();
+    // choose a word if there is no actual selection
+    var r = getSelectionRanges();
+    editor.getSelection().setSelectionRange(r.select);
+    var selected = editor.getSession().getTextRange(r.select);
+
     if (selected.trim().length) {
         $('editor-link-display').setProperty('value', selected);
         $('editor-link-target').setProperty('value', selected);
@@ -347,21 +351,54 @@ function displayPopupBox (box, height, li) {
     box.store('li', li);
 }
 
+// find an appropriate range for selection
+function getSelectionRanges() {
+    
+    // find the current selection
+    var selectRange = editor.getSelection().getRange();
+    var originalRange = selectRange;
+
+    // if there is no actual selection (just a cursor position),
+    // use the word range. but only if it's in a word (check strlen).
+    if (selectRange.isEmpty()) {
+        var wordRange = editor.getSelection().getWordRange();
+        if (editor.getSession().getTextRange(wordRange).trim().length)
+            selectRange = wordRange;
+    }
+    
+    return {
+        original: originalRange,
+        select: selectRange
+    }
+}
+
+// this is useful for replacing a range of text
+// with something that surrounds it, such as [b]...[/b]
+// because it re-selects the original selection
+// after performing the operation: [b]<sel>...</sel>[/b]
+function replaceSelectionRangeAndReselect (ranges, newText) {
+    var selectRange = ranges.select,
+        originalRange = ranges.original;
+    
+    // replace the text
+    editor.getSession().replace(selectRange, newText);
+
+    // return to the original selection
+    editor.getSelection().setSelectionRange(new Range(
+        originalRange.start.row,
+        originalRange.start.column + leftSide.length,
+        originalRange.end.row,
+        originalRange.end.column + leftSide.length
+    ));
+    
+}
+
 function wrapTextFunction (type) {
     return function () {
         
-        // find the current selection
-        var selectRange = editor.getSelection().getRange();
-        var originalRange = selectRange;
-        
-        // if there is no actual selection (just a cursor position),
-        // use the word range. but only if it's in a word (check strlen).
-        if (selectRange.isEmpty()) {
-            var wordRange = editor.getSelection().getWordRange();
-            if (editor.getSession().getTextRange(wordRange).trim().length)
-                selectRange = wordRange;
-        }
-        
+        var r = getSelectionRanges();
+        var selectRange = r.select,
+            originalRange = r.original;
         editor.getSelection().setSelectionRange(selectRange);
         
         // dtermine the new text
@@ -369,16 +406,8 @@ function wrapTextFunction (type) {
         var leftSide    = '[' + type + ']';
         var newText     = leftSide + editor.getSelectedText() + '[/' + terminator + ']';
         
-        // replace the text
-        editor.getSession().replace(selectRange, newText);
-        
-        // return to the original selection
-        editor.getSelection().setSelectionRange(new Range(
-            originalRange.start.row,
-            originalRange.start.column + leftSide.length,
-            originalRange.end.row,
-            originalRange.end.column + leftSide.length
-        ));
+        // replace the text and select the original text
+        replaceSelectionRangeAndReselect(r, newText);
       
         closeCurrentPopup();
     };
