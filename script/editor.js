@@ -168,7 +168,7 @@ function displayFontSelector () {
     container.setStyle('display', 'block');
     box.appendChild(container);
     
-    displayPopupBox(box);    
+    displayPopupBox(box, 200);    
 }
 
 function displayLinkHelper () {
@@ -180,7 +180,7 @@ function displayLinkHelper () {
 <div class="editor-link-type" title="External wiki page"><i class="fa fa-globe"></i></div>      \
 <div class="editor-link-type" title="Category"><i class="fa fa-list"></i></div>                 \
 <div class="editor-link-type" title="External URL"><i class="fa fa-external-link"></i></div>    \
-<div style="margin: 10px; height: 80px; clear: both;"> \
+<div style="margin: 10px; height: 130px; clear: both;"> \
 <span id="editor-link-title2">Display text</span><br /> \
 <input type="text" /><br/>   \
 <span id="editor-link-title1">Page target</span><br /> \
@@ -188,7 +188,7 @@ function displayLinkHelper () {
 </div> \
 <div style="background-color: yellow; height: 30px;"></div> \
 ';
-    displayPopupBox(box);
+    displayPopupBox(box, 300);
 }
 
 function getContrastYIQ (hexColor) {
@@ -231,10 +231,10 @@ function createPopupBox (posX, posY) {
     return box;
 }
 
-function displayPopupBox (box) {
+function displayPopupBox (box, height) {
     document.body.appendChild(box);
     box.set('morph', { duration: 150 });
-    box.morph({ height: '150px' });
+    box.morph({ height: height + 'px' });
 }
 
 function wrapTextFunction (type) {
