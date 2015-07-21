@@ -253,6 +253,22 @@ function displayLinkHelper () {
         $('editor-link-target').setProperty('value', selected);
     }
     
+    // insert click
+    $('editor-link-insert').addEvent('click', function () {
+        var displayText = $('editor-link-display').getProperty('value'),
+            targetText  = $('editor-link-target').getProperty('value'),
+            leftDel     = activeType.retrieve('linkInfo')[4],
+            rightDel    = activeType.retrieve('linkInfo')[5];
+        
+        // one or two parts, depending on if display == target
+        var inner = displayText;
+        if (displayText.toLowerCase() != targetText.toLowerCase())
+            inner += ' | ' + targetText;
+        
+        var complete = '[' + leftDel + ' ' + inner + ' ' + rightDel + ']';
+        editor.insert(complete);
+    });
+    
     displayPopupBox(box, 215);
 }
 
