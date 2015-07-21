@@ -138,7 +138,7 @@ function fakeAdopt (child) {
 // close current popup on click outside
 document.body.addEvent('click', function (e) {
     var displayedPopup = $$('div.editor-popup-box')[0];
-    if (!displayedPopup && e.firstClick) return;
+    if (!displayedPopup || e.firstClick) return;
     if (e.target == displayedPopup || displayedPopup.contains(e.target)) return;
     closeCurrentPopup();
 });
