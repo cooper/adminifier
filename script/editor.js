@@ -133,7 +133,8 @@ function displayFontSelector () {
     var container = new Element('div', {
         styles: {
             overflowY: 'auto',
-            padding: '10px'
+            padding: '10px',
+            height: '130px' // height of box minus padding
         }
     });
     box.appendChild(container);
@@ -144,7 +145,9 @@ function displayFontSelector () {
             styles: {
                 height: '30px',
                 backgroundColor: colorName,
-                color: '#fff'
+                color: '#fff',
+                padding: '3px',
+                lineHeight: '30px'
             }
         });
         div.innerHTML = colorName
