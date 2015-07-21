@@ -124,7 +124,20 @@ function updateEditorTitle() {
         updatePageTitle(title);
 }
 
+function wrapTextFunction (type) {
+    return function () {
+        var selectRange = editor.getSelection().getRange();
+        var terminator  = type.length > 1 ? '' : type;
+        var newText     = '[' + type + ']' + editor.getSelectedText() + '[/' + terminator + ']';
+        editor.getSession().replace(selectRange, newText);
+    };
+}
+
 var toolbarFunctions = {
+    bold:       wrapTextFunction('b'),
+    italic:     wrapTextFunction('i'),
+    underline:  wrapTextFunction('u'),
+    strike:     wrapTextFunction('s'),
     undo:       function () { editor.undo(); },
     redo:       function () { editor.redo(); },
     'delete':   dummyFunc

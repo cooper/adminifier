@@ -54,4 +54,5 @@ ul.editor-toolbar li.right {
 ul.editor-toolbar li.disabled {
     color: #aaa;
     /* cursor: not-allowed; */
+    cursor: default;
 }
