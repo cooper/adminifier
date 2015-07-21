@@ -126,7 +126,17 @@ function updateEditorTitle() {
 
 function wrapTextFunction (type) {
     return function () {
+        
+        // find the current selection
         var selectRange = editor.getSelection().getRange();
+        
+        // if there is no actual selection (just a cursor position),
+        // use the word range.
+        if (selectRange.isEmpty())
+            selectRange = editor.getSelection().getWordRange();
+        
+        editor.getSelection().setSelectionRange(selectRange);
+        
         var terminator  = type.length > 1 ? '' : type;
         var newText     = '[' + type + ']' + editor.getSelectedText() + '[/' + terminator + ']';
         editor.getSession().replace(selectRange, newText);
