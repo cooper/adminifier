@@ -150,6 +150,8 @@ function displayFontSelector () {
                 letterSpacing: '1px'
             }
         });
+        var newColor = new Color(div.getStyle('backgroundColor')).invert();
+        div.setStyle('backgroundColor', newColor);
         div.innerHTML = '<span style="padding-left: 10px;">' + colorName + '</span>';
         container.appendChild(div);
     });
