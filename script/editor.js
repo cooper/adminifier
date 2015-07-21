@@ -203,10 +203,26 @@ function displayLinkHelper () {
 ';
     
     // first input, second input, button title, left delimiter, right delimiter
-    $('editor-link-type-internal').store('linkInfo', ['Display text', 'Page target', 'Insert page link', '[', ']']);
-    $('editor-link-type-external').store('linkInfo', ['Display text', 'External page target', 'Insert external page link', '!', '!']);
-    $('editor-link-type-category').store('linkInfo', ['Display text', 'Category target', 'Insert category link', '~', '~']);
-    $('editor-link-type-url').store('linkInfo', ['Display text', 'URL target', 'Insert URL', '$', '$']);
+    $('editor-link-type-internal').store('linkInfo', [
+        'Display text', 'Page target', 'Insert page link',
+        'My Page',
+        '[', ']'
+    ]);
+    $('editor-link-type-external').store('linkInfo', [
+        'Display text', 'External page target', 'Insert external page link',
+        'Some Page',
+        '!', '!'
+    ]);
+    $('editor-link-type-category').store('linkInfo', [
+        'Display text', 'Category target', 'Insert category link',
+        'News',
+        '~', '~'
+    ]);
+    $('editor-link-type-url').store('linkInfo', [
+        'Display text', 'URL target', 'Insert URL',
+        'http://www.example.com',
+        '$', '$'
+    ]);
     
     // switch between link types
     var activeType = $('editor-link-type-internal');
@@ -224,6 +240,7 @@ function displayLinkHelper () {
             $('editor-link-title1').innerHTML = info[0];
             $('editor-link-title2').innerHTML = info[1];
             $('editor-link-insert').innerHTML = info[2];
+            $('editor-link-target').setProperty('placeholder', info[3]);
             
         });
     });
