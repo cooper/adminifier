@@ -176,10 +176,12 @@ function displayLinkHelper () {
     var rect = li.getBoundingClientRect();
     var box  = createPopupBox(rect.top + li.offsetHeight, rect.left);
     box.innerHTML = '                                                                           \
-<div class="editor-link-type" title="Page"><i class="fa fa-file-text"></i></div>                \
+<div class="editor-link-type active" title="Page"><i class="fa fa-file-text"></i></div>                \
 <div class="editor-link-type" title="External wiki page"><i class="fa fa-globe"></i></div>      \
 <div class="editor-link-type" title="Category"><i class="fa fa-list"></i></div>                 \
 <div class="editor-link-type" title="External URL"><i class="fa fa-external-link"></i></div>    \
+<input type="text" /><br/>   \
+<input type="text" />        \
 ';
     displayPopupBox(box);
 }
