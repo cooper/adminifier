@@ -194,10 +194,10 @@ function displayLinkHelper () {
 <div id="editor-link-type-url" class="editor-link-type" title="External URL"><i class="fa fa-external-link"></i></div> \
 <div style="clear: both;"></div>                        \
 <div id="editor-link-wrapper">                       \
-<span id="editor-link-title2">Display text</span><br /> \
-<input id="editor-link-display" type="text" placeholder="Click here" /><br/>  \
 <span id="editor-link-title1">Page target</span><br />  \
 <input id="editor-link-target" type="text" placeholder="My Page" />           \
+<span id="editor-link-title2">Display text</span><br /> \
+<input id="editor-link-display" type="text" placeholder="Click here" /><br/>  \
 </div>                                                  \
 <div id="editor-link-insert">Insert page link</div>  \
 ';
@@ -259,6 +259,12 @@ function displayLinkHelper () {
             targetText  = $('editor-link-target').getProperty('value'),
             leftDel     = activeType.retrieve('linkInfo')[4],
             rightDel    = activeType.retrieve('linkInfo')[5];
+        
+        // make sure requirements were met
+        if (!displayText.length || !targetText.length) {
+            alert('Please specify display text and target');
+            return;
+        }
         
         // one or two parts, depending on if display == target
         var inner = displayText;
