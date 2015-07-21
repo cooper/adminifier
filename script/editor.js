@@ -159,7 +159,7 @@ function displayFontSelector () {
         div.setStyle('backgroundColor', 'rgb(' + newColor.toString() + ')');
     });
     
-    container.parent.removeChild(container);
+    container.parentElement.removeChild(container);
     container.setStyle('display', 'block');
     box.appendChild(container);
     displayPopupBox(box);
