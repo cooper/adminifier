@@ -150,3 +150,7 @@ div.editor-link-type.active {
 
 /* save helper */
 
+#editor-save-wrapper {
+    margin: 10px;
+    height: 125px;
+}

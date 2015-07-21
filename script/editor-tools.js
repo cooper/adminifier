@@ -254,8 +254,10 @@ function displaySaveHelper () {
     
     // on click save,     box.addClass('sticky');
     box.innerHTML = '   \
+<div id="editor-save-wrapper"> \
 Edit summary<br /> \
 <input id="editor-save-message" class="editor-full-width-input" type="text" placeholder="Updated ' + $('editor').getProperty('data-file') + '" /> \
+</div> \
 <div id="editor-save-commit" class="editor-tool-large-button">Commit changes</div>  \
 ';
     displayPopupBox(box, 150, li);
