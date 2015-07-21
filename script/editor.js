@@ -250,7 +250,7 @@ function wrapTextFunction (type) {
             originalRange.start.row,
             originalRange.start.column + leftSide.length,
             originalRange.end.row,
-            originalRange.start.column + leftSide.length
+            originalRange.end.column + leftSide.length
         ));
         
     };
