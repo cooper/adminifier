@@ -1,4 +1,4 @@
-var Range, editor, currentLi;
+var Range, editor, currentLi, currentPopup;
 
 document.addEvent('pageScriptsLoaded', editorPageScriptsLoadedHandler);
 document.addEvent('pageUnloaded', editorPageUnloadedHandler);
@@ -84,29 +84,24 @@ function fakeAdopt (child) {
 function bodyClickPopoverCheck (e) {
     
     // no popup is displayed
-    var displayedPopup = getCurrentPopup();
-    if (!displayedPopup) return;
+    if (!currentPopup) return;
     
     console.log(e.target);
     
     // the target is the toolbar item
-    var li =  displayedPopup.retrieve('li');
+    var li =  currentPopup.retrieve('li');
     if (e.target == li || li.contains(e.target))
         return;
     
     // this popup can only be closed programmatically
-    if (displayedPopup.hasClass('sticky'))
+    if (currentPopup.hasClass('sticky'))
         return;
     
     // clicked within the popup
-    if (e.target == displayedPopup || displayedPopup.contains(e.target))
+    if (e.target == currentPopup || currentPopup.contains(e.target))
         return;
     
     closeCurrentPopup();
-}
-
-function getCurrentPopup () {
-    return $$('div.editor-popup-box')[0];
 }
 
 function getContrastYIQ (hexColor) {
@@ -118,7 +113,7 @@ function getContrastYIQ (hexColor) {
 }
 
 function closeCurrentPopup () {
-    var box = getCurrentPopup();
+    var box = currentPopup;
     if (!box) return;
     closeCurrentLi();
     box.set('morph', {
@@ -126,13 +121,13 @@ function closeCurrentPopup () {
         onComplete: function () { if (box) box.destroy(); }
     });
     box.morph({ height: '0px' });
+    currentPopup = undefined;
 }
 
 function createPopupBox (posX, posY) {
     
     // already showing something
-    var displayedPopup = getCurrentPopup();
-    if (displayedPopup) return;
+    if (currentPopup) return;
     
     // create box
     var box = new Element('div', {
@@ -152,20 +147,20 @@ function displayPopupBox (box, height, li) {
     box.set('morph', { duration: 150 });
     box.morph({ height: height + 'px' });
     box.store('li', li);
+    currentPopup = box;
 }
 
 // move a popup when the window resizes
 function movePopupBox () {
-    var displayedPopup = getCurrentPopup();
-    if (!displayedPopup) return;
-    var li   = displayedPopup.retrieve('li');
+    if (!currentPopup) return;
+    var li   = currentPopup.retrieve('li');
     var rect = li.getBoundingClientRect();
-    displayedPopup.setStyle('left',
-        displayedPopup.hasClass('right') ?
+    currentPopup.setStyle('left',
+        currentPopup.hasClass('right') ?
         rect.right - 300 :
         rect.left
     );
-    displayedPopup.setStyle('top', rect.top + li.offsetHeight);
+    currentPopup.setStyle('top', rect.top + li.offsetHeight);
 }
 
 // find an appropriate range for selection
@@ -245,7 +240,7 @@ var toolbarFunctions = {
 function openLi (li) {
     
     // if a popup is open, ignore this.
-    if (getCurrentPopup()) return;
+    if (currentPopup) return;
 
     // if another one is animating, force it to instantly finish
     if (currentLi)
@@ -298,7 +293,7 @@ function setupToolbar () {
         // clicked
         li.addEvent('click', function (e) {
             if (li.hasClass('disabled')) return;
-            if (getCurrentPopup()) return;
+            if (currentPopup) return;
             var action = li.getAttribute('data-action');
             if (!action) return;
             var func = toolbarFunctions[action];
@@ -310,7 +305,7 @@ function setupToolbar () {
     
     // leaving the toolbar, close it
     $$('ul.editor-toolbar').addEvent('mouseleave', function () {
-        if (currentLi && !getCurrentPopup())
+        if (currentLi && !currentPopup)
             closeCurrentLi();
     });
     
