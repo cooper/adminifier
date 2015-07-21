@@ -238,6 +238,6 @@ function displaySaveHelper () {
     var li   = $$('li[data-action="save"]')[0];
     var rect = li.getBoundingClientRect();
     var box  = createPopupBox(rect.right - 300, rect.top + li.offsetHeight);
-
+    box.addClass('right');
     displayPopupBox(box, 150, li);
 }

@@ -1,5 +1,6 @@
 console.log('Edit page script loaded');
 document.addEvent('domready', setupToolbar);
+window.addEvent('resize', movePopupBox);
 
 var Range = ace.require('ace/range').Range;
 var editor = ace.edit("editor");
@@ -111,7 +112,7 @@ function closeCurrentPopup () {
     box.morph({ height: '0px' });
 }
 
-function createPopupBox (posX, posY, right) {
+function createPopupBox (posX, posY) {
     
     // already showing something
     var displayedPopup = getCurrentPopup();
@@ -120,10 +121,7 @@ function createPopupBox (posX, posY, right) {
     // create box
     var box = new Element('div', {
         class: 'editor-popup-box',
-        styles: right ? {
-            top:   posY,
-            right: posX
-        } : {
+        styles: {
             top:  posY,
             left: posX
         }
@@ -137,6 +135,20 @@ function displayPopupBox (box, height, li) {
     box.set('morph', { duration: 150 });
     box.morph({ height: height + 'px' });
     box.store('li', li);
+}
+
+// move a popup when the window resizes
+function movePopupBox () {
+    var displayedPopup = getCurrentPopup();
+    if (!displayedPopup) return;
+    var li   = displayedPopup.retrieve('li');
+    var rect = li.getBoundingClientRect();
+    displayedPopup.setStyle('left',
+        displayedPopup.hasClass('right') ?
+        rect.right - 300 :
+        rect.left
+    );
+    displayedPopup.setStyle('top', rect.top + li.offsetHeight);
 }
 
 // find an appropriate range for selection
