@@ -145,10 +145,11 @@ function displayFontSelector () {
                 height: '30px',
                 backgroundColor: colorName,
                 color: '#fff',
-                lineHeight: '30px'
+                lineHeight: '30px',
+                textShadow: '-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000' 
             }
         });
-        div.innerHTML = '<span style="padding-left: 5px;">' + colorName + '</span>';
+        div.innerHTML = '<span style="padding-left: 10px;">' + colorName + '</span>';
         container.appendChild(div);
     });
     
