@@ -85,7 +85,7 @@ function updateEditorTitle() {
 function displayFontSelector () {
     var li   = $$('li[data-action="font"]')[0];
     var rect = li.getBoundingClientRect();
-    var box  = createPopupBox(rect.top + li.offsetHeight, rect.left);
+    var box  = createPopupBox(rect.left, rect.top + li.offsetHeight);
 
     // create a container for scrolling
     var container = new Element('div', {
@@ -134,7 +134,7 @@ function displayFontSelector () {
 function displayLinkHelper () {
     var li   = $$('li[data-action="link"]')[0];
     var rect = li.getBoundingClientRect();
-    var box  = createPopupBox(rect.top + li.offsetHeight, rect.left);
+    var box  = createPopupBox(rect.left, rect.top + li.offsetHeight);
     fakeAdopt(box);
     box.innerHTML = ' \
 <div id="editor-link-type-internal" class="editor-link-type active" title="Page"><i class="fa fa-file-text"></i></div> \

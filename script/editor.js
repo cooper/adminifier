@@ -107,7 +107,7 @@ function closeCurrentPopup () {
     box.morph({ height: '0px' });
 }
 
-function createPopupBox (posX, posY) {
+function createPopupBox (posX, posY, right) {
     
     // already showing something
     var displayedPopup = getCurrentPopup();
@@ -116,9 +116,12 @@ function createPopupBox (posX, posY) {
     // create box
     var box = new Element('div', {
         class: 'editor-popup-box',
-        styles: {
-            top:  posX,
-            left: posY
+        styles: right ? {
+            top:   posY,
+            right: posX
+        } : {
+            top:  posY,
+            left: posX
         }
     });
     
