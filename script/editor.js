@@ -124,6 +124,43 @@ function updateEditorTitle() {
         updatePageTitle(title);
 }
 
+function displayFontSelector () {
+    var rect = $$('li[data-action="font"]')[0].getBoundingClientRect();
+    displayPopupBox(rect.top, rect.left);
+}
+
+function displayPopupBox (posX, posY) {
+    
+    // create box
+    var box = new Element('div', {
+        class: 'editor-popup-box',
+        styles: {
+            top: posX,
+            left: posY
+        }
+    });
+    
+    // on mouse leave, animate exit
+    box.addEvent('mouseleave', function () {
+        box.set('tween', {
+            duration: 300,
+            onComplete: function () {
+                box.destroy();
+            }
+        });
+        box.tween('height', '0px');
+    });
+    
+    // animate entrance
+    document.body.appendChild(box);
+    box.set('morph', { duration: 300 });
+    box.morph({
+        width: '500px',
+        height: '300px'
+    });
+    
+}
+
 function wrapTextFunction (type) {
     return function () {
         
@@ -151,6 +188,7 @@ var toolbarFunctions = {
     italic:     wrapTextFunction('i'),
     underline:  wrapTextFunction('u'),
     strike:     wrapTextFunction('s'),
+    font:       displayFontSelector,
     undo:       function () { editor.undo(); },
     redo:       function () { editor.redo(); },
     'delete':   dummyFunc

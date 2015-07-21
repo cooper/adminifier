@@ -40,7 +40,6 @@ ul.editor-toolbar li {
     display: inline-block;
     width: 15px;
     height: 30px;
-    overflow: hidden;
     cursor: pointer;
     white-space: nowrap;
 }
@@ -55,4 +54,12 @@ ul.editor-toolbar li.disabled {
     color: #aaa;
     /* cursor: not-allowed; */
     cursor: default;
+}
+
+div.editor-popup-box {
+    position: absolute;
+    overflow: hidden;
+    background-color: yellow;
+    width: 0px;
+    height: 0px;
 }
