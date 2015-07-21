@@ -51,7 +51,6 @@ editor.on('input', function () {
         
 });
 
-function dummyFunc () { console.log('button pressed'); }
 
 function selectPageTitle () {
     var range = getPageTitleRange();
@@ -128,9 +127,35 @@ function updateEditorTitle() {
 function displayFontSelector () {
     var li   = $$('li[data-action="font"]')[0];
     var rect = li.getBoundingClientRect();
-    displayPopupBox(rect.top + li.offsetHeight, rect.left);
-}
+    var box  = createPopupBox(rect.top + li.offsetHeight, rect.left);
 
+    // create a container for scrolling
+    var container = new Element('div', {
+        styles: {
+            overflowY: 'auto',
+            height: '100%',
+            width: '100%',
+            padding: '10px'
+        }
+    });
+    box.appendChild(container);
+    
+    // create color elements
+    colorList.each(function (colorName) {
+        var div = new Element('div', {
+            styles: {
+                height: '30px',
+                backgroundColor: colorName,
+                color: '#fff'
+            }
+        });
+        div.innerHTML = colorName
+        container.appendChild(div);
+    });
+    
+    displayPopupBox(box);
+}
+                   
 function closeCurrentPopup () {
     var box = $$('div.editor-popup-box')[0];
     if (!box) return;
@@ -142,7 +167,7 @@ function closeCurrentPopup () {
     box.morph({ height: '0px', width: '0px' });
 }
 
-function displayPopupBox (posX, posY) {
+function createPopupBox (posX, posY) {
     
     // already showing something
     var displayedPopup = $$('div.editor-popup-box')[0];
@@ -160,14 +185,16 @@ function displayPopupBox (posX, posY) {
     // on mouse leave, animate exit
     box.addEvent('mouseleave', closeCurrentPopup);
     
-    // animate entrance
+    return box;
+}
+
+function displayPopupBox (box) {
     document.body.appendChild(box);
     box.set('morph', { duration: 150 });
     box.morph({
         width: '300px',
         height: '150px'
     });
-    
 }
 
 function wrapTextFunction (type) {
@@ -191,6 +218,8 @@ function wrapTextFunction (type) {
         editor.getSession().replace(selectRange, newText);
     };
 }
+
+function dummyFunc () { console.log('button pressed'); }
 
 var toolbarFunctions = {
     bold:       wrapTextFunction('b'),
