@@ -251,6 +251,7 @@ function displaySaveHelper () {
     var rect = li.getBoundingClientRect();
     var box  = createPopupBox(rect.right - 300, rect.top + li.offsetHeight);
     box.addClass('right');
+    fakeAdopt(box);
     
     // on click save,     box.addClass('sticky');
     box.innerHTML = '   \
@@ -260,5 +261,22 @@ Edit summary<br /> \
 </div> \
 <div id="editor-save-commit" class="editor-tool-large-button">Commit changes</div>  \
 ';
+    
+    // on click, save changes
+    $('editor-save-commit').addEvent('click', function () {
+        box.addClass('sticky');
+        $('editor-save-wrapper').innerHTML = '<span style="text-align: center; "><i class="fa fa-spinner fa-3x fa-spin"></i></span>'; // spinner
+        var btn = $('editor-save-commit');
+        btn.innerHTML = 'Saving';
+        btn.setStyle('backgroundColor', '#2096ce');
+        
+        // temporary fake success
+        setTimeout(function () {
+            btn.setStyle('backgroundColor', '#51B068 !important');
+            btn.innerHTML = 'Saved';
+            setTimeout(function () { closeCurrentPopup(); }, 1500);
+        }, 3000);
+    });
+    
     displayPopupBox(box, 120, li);
 }
