@@ -180,7 +180,7 @@ function displayLinkHelper () {
 <div class="editor-link-type" title="External wiki page"><i class="fa fa-globe"></i></div>      \
 <div class="editor-link-type" title="Category"><i class="fa fa-list"></i></div>                 \
 <div class="editor-link-type" title="External URL"><i class="fa fa-external-link"></i></div>    \
-<div style="margin: 10px; height: 90px; clear: both;"> \
+<div style="margin: 10px; height: 80px; clear: both;"> \
 <span id="editor-link-title2">Display text</span><br /> \
 <input type="text" /><br/>   \
 <span id="editor-link-title1">Page target</span><br /> \
