@@ -135,6 +135,14 @@ function fakeAdopt (child) {
     $('fake-parent').appendChild(child);
 }
 
+// close current popup on click outside
+document.body.addEvent('click', function (e) {
+    var displayedPopup = $$('div.editor-popup-box')[0];
+    if (!displayedPopup) return;
+    if (e.target == displayedPopup || displayedPopup.contains(e.target)) return;
+    closeCurrentPopup();
+});
+
 function displayFontSelector () {
     var li   = $$('li[data-action="font"]')[0];
     var rect = li.getBoundingClientRect();
@@ -311,9 +319,6 @@ function createPopupBox (posX, posY) {
             left: posY
         }
     });
-    
-    // on mouse leave, animate exit
-    box.addEvent('mouseleave', closeCurrentPopup);
     
     return box;
 }
