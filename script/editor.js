@@ -187,9 +187,9 @@ function displayLinkHelper () {
 <span id="editor-link-title1">Page target</span><br /> \
 <input type="text" />        \
 </div> \
-<div style="background-color: yellow; height: 30px;"></div> \
+<div style="text-align: center; background-color: #2096ce; height: 30px;">Insert page link</div> \
 ';
-    displayPopupBox(box, 220);
+    displayPopupBox(box, 200);
 }
 
 function getContrastYIQ (hexColor) {
