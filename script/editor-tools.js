@@ -257,5 +257,7 @@ function displaySaveHelper () {
 Edit summary<br /> \
 <input id="editor-save-message" type="text" placeholder="Updated ' + $('editor').getProperty('data-file') + '" /> \
 <div id="editor-save-commit" class="editor-tool-large-button">Commit changes</div>  \
-    displayPopupBox(box, 150, li);
+displayPopupBox(box, 150, li);  \
+';
+    
 }
