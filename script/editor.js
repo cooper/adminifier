@@ -210,7 +210,7 @@ function displayLinkHelper () {
     
     // switch between link types
     var activeType = $('editor-link-type-internal');
-    $$('.edit-link-type').each(function (type) {
+    $$('.editor-link-type').each(function (type) {
         type.addEvent('click', function () {
             
             // set the active type
