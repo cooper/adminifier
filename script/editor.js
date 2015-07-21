@@ -150,7 +150,9 @@ function displayFontSelector () {
                 letterSpacing: '1px'
             }
         });
-        var newColor = new Color(getComputedStyle(div, null).getPropertyValue('background-color')).invert();
+        var color = getComputedStyle(div, null).getPropertyValue('background-color');
+        console.log(color);
+        var newColor = new Color(color).invert();
         div.setStyle('backgroundColor', 'rgb(' + newColor.toString() + ')');
         div.innerHTML = '<span style="padding-left: 10px;">' + colorName + '</span>';
         container.appendChild(div);
