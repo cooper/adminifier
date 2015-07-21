@@ -134,7 +134,7 @@ function wrapTextFunction (type) {
         // use the word range. but only if it's in a word (check strlen).
         if (selectRange.isEmpty()) {
             var wordRange = editor.getSelection().getWordRange();
-            if (trim(editor.getSession.getTextRange(wordRange)).length)
+            if (editor.getSession.getTextRange(wordRange).trim().length)
                 selectRange = wordRange;
         }
         
