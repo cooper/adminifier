@@ -87,10 +87,12 @@ div.editor-link-type {
     width: 75px;
     display: inline-block;
     float: left; /* so that spaces don't matter */
-    background-color: #555;
+    background-color: #222;
     text-align: center;
     height: 25px;
     line-height: 25px;
+    font-size: 15px;
+    color: #fff;
 }
 
 div.editor-link-type:hover {
@@ -98,6 +100,6 @@ div.editor-link-type:hover {
 }
 
 div.editor-link-type.active {
-    background-color: #222;
+    background-color: #555;
 }
     
