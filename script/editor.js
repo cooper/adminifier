@@ -77,6 +77,10 @@ function bodyClickPopoverCheck (e) {
     if (e.target == li || li.contains(e.target))
         return;
     
+    // this popup can only be closed programmatically
+    if (displayedPopup.retrieve('sticky'))
+        return;
+    
     // clicked within the popup
     if (e.target == displayedPopup || displayedPopup.contains(e.target))
         return;

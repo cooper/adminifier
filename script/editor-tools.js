@@ -230,3 +230,13 @@ function displayLinkHelper () {
     
     displayPopupBox(box, 215, li);
 }
+
+// SAVE COMMIT HELPER
+
+function displaySaveHelper () {
+    var li   = $$('li[data-action="save"]')[0];
+    var rect = li.getBoundingClientRect();
+    var box  = createPopupBox(rect.right, rect.top + li.offsetHeight, true);
+
+    displayPopupBox(box, 150, li);
+}
