@@ -146,8 +146,8 @@ function displayFontSelector () {
                 backgroundColor: colorName,
                 color: '#fff',
                 lineHeight: '30px',
-                textShadow: '-1px -1px 1px #000, 1px -1px 1px #000, -1px 1px 1px #000, 1px 1px 1px #000',
-                letterSpacing: '2px'
+                textShadow: '0 0 1px #000',
+                letterSpacing: '1px'
             }
         });
         div.innerHTML = '<span style="padding-left: 10px;">' + colorName + '</span>';
