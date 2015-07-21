@@ -157,9 +157,9 @@ function displayLinkHelper () {
 <div style="clear: both;"></div>                        \
 <div id="editor-link-wrapper">                       \
 <span id="editor-link-title1">Page target</span><br />  \
-<input id="editor-link-target" type="text" placeholder="My Page" />           \
+<input id="editor-link-target" class="editor-full-width-input" type="text" placeholder="My Page" />           \
 <span id="editor-link-title2">Display text</span><br /> \
-<input id="editor-link-display" type="text" placeholder="Click here" /><br/>  \
+<input id="editor-link-display" class="editor-full-width-input" type="text" placeholder="Click here" /><br/>  \
 </div>                                                  \
 <div id="editor-link-insert" class="editor-tool-large-button">Insert page link</div>  \
 ';
@@ -255,7 +255,7 @@ function displaySaveHelper () {
     // on click save,     box.addClass('sticky');
     box.innerHTML = '   \
 Edit summary<br /> \
-<input id="editor-save-message" type="text" placeholder="Updated ' + $('editor').getProperty('data-file') + '" /> \
+<input id="editor-save-message" class="editor-full-width-input" type="text" placeholder="Updated ' + $('editor').getProperty('data-file') + '" /> \
 <div id="editor-save-commit" class="editor-tool-large-button">Commit changes</div>  \
 ';
     displayPopupBox(box, 150, li);
