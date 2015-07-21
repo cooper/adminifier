@@ -66,6 +66,7 @@ div.editor-popup-box {
     position: absolute;
     overflow: hidden;
     background-color: #555;
+    color: #e2e2e2;
     width: 300px;
     height: 0px;
     z-index: 300;
@@ -92,7 +93,7 @@ div.editor-link-type {
     height: 30px;
     line-height: 30px;
     font-size: 15px;
-    color: #fff;
+    color: #e2e2e2;
 }
 
 div.editor-link-type:hover {
@@ -101,5 +102,17 @@ div.editor-link-type:hover {
 
 div.editor-link-type.active {
     background-color: #555;
+}
+
+div.editor-link-wrapper {
+    margin: 10px;
+    height: 130px;
+}
+
+div.editor-link-wrapper input {
+    width: 100%;
+    padding: 3px;
+    border: 1px solid #222;
+    margin-bottom: 10px;
 }
     
