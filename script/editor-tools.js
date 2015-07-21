@@ -8,6 +8,13 @@ function editorLoadedHandler () {
         link:       displayLinkHelper,
         save:       displaySaveHelper
     });
+    
+    addEditorKeyboardShortcuts([
+        [ 'Ctrl-B', 'Command-B',    'bold'      ],
+        [ 'Ctrl-I', 'Command-I',    'italic'    ],
+        [ 'Ctrl-U', 'Command-U',    'underline' ],
+        [ 'Ctrl-S', 'Command-S',    'save'      ]
+    ]);
 
     updateEditorTitle();
     resetSelectionAtTopLeft();
@@ -99,7 +106,8 @@ function displayFontSelector () {
     var li   = $$('li[data-action="font"]')[0];
     var rect = li.getBoundingClientRect();
     var box  = createPopupBox(rect.left, rect.top + li.offsetHeight);
-
+    forceOpenLi(li);
+    
     // create a container for scrolling
     var container = new Element('div', {
         styles: {
@@ -149,6 +157,8 @@ function displayLinkHelper () {
     var rect = li.getBoundingClientRect();
     var box  = createPopupBox(rect.left, rect.top + li.offsetHeight);
     fakeAdopt(box);
+    forceOpenLi(li);
+    
     box.innerHTML = ' \
 <div id="editor-link-type-internal" class="editor-link-type active" title="Page"><i class="fa fa-file-text"></i></div> \
 <div id="editor-link-type-external" class="editor-link-type" title="External wiki page"><i class="fa fa-globe"></i></div> \
@@ -252,6 +262,7 @@ function displaySaveHelper () {
     var box  = createPopupBox(rect.right - 300, rect.top + li.offsetHeight);
     box.addClass('right');
     fakeAdopt(box);
+    forceOpenLi(li);
     
     // on click save,     box.addClass('sticky');
     box.innerHTML = '   \

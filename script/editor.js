@@ -241,6 +241,10 @@ var toolbarFunctions = {
     'delete':   dummyFunc
 };
 
+function forceOpenLi (li) {
+    li.fireEvent('mouseenter');
+}
+
 function closeCurrentLi () {
     if (!currentLi) return;
     currentLi.morph({
@@ -248,6 +252,20 @@ function closeCurrentLi () {
         backgroundColor: '#696969'
     });
     currentLi = undefined;
+}
+
+function addEditorKeyboardShortcuts (cuts) {
+    // c = [ windows shortcut, mac shortcut, action ]
+    cut.each(function (c) {
+        editor.commands.addCommand({
+            name: c[2],
+            bindKey: {
+                windows: c[0],
+                mac:     c[1]
+            },
+            exec: toolbarFunctions[ c[2] ]
+        });
+    });
 }
 
 function setupToolbar () {
