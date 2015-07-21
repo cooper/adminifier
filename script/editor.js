@@ -125,8 +125,9 @@ function updateEditorTitle() {
 }
 
 function displayFontSelector () {
-    var rect = $$('li[data-action="font"]')[0].getBoundingClientRect();
-    displayPopupBox(rect.top, rect.left);
+    var li   = $$('li[data-action="font"]')[0];
+    var rect = li.getBoundingClientRect();
+    displayPopupBox(rect.top + li.offsetHeight, rect.left);
 }
 
 function displayPopupBox (posX, posY) {
@@ -143,7 +144,7 @@ function displayPopupBox (posX, posY) {
     // on mouse leave, animate exit
     box.addEvent('mouseleave', function () {
         box.set('tween', {
-            duration: 300,
+            duration: 150,
             onComplete: function () {
                 box.destroy();
             }
@@ -153,7 +154,7 @@ function displayPopupBox (posX, posY) {
     
     // animate entrance
     document.body.appendChild(box);
-    box.set('morph', { duration: 300 });
+    box.set('morph', { duration: 150 });
     box.morph({
         width: '500px',
         height: '300px'

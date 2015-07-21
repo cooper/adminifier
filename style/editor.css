@@ -63,4 +63,5 @@ div.editor-popup-box {
     background-color: yellow;
     width: 0px;
     height: 0px;
+    z-index: 300;
 }
