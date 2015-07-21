@@ -68,3 +68,12 @@ div.editor-popup-box {
     height: 0px;
     z-index: 300;
 }
+
+div.editor-color-cell {
+    height: 30px;
+    color: #fff;
+    line-height: 30px;
+    font-size: 15px;
+    font-family: 'Helvetica Nueue', Helvetica, sans-serif;
+    cursor: pointer;
+}

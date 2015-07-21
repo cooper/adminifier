@@ -145,14 +145,8 @@ function displayFontSelector () {
     // create color elements
     colorList.each(function (colorName) {
         var div = new Element('div', {
-            styles: {
-                height: '30px',
-                backgroundColor: colorName,
-                color: '#fff',
-                lineHeight: '30px',
-                fontSize: '15px',
-                fontFamily: '\'Helvetica Nueue\', Helvetica, sans-serif'
-            }
+            styles: { backgroundColor: colorName },
+            class: 'editor-color-cell'
         });
         
         // separate the name into words
@@ -164,21 +158,25 @@ function displayFontSelector () {
         var color = new Color(getComputedStyle(div, null).getPropertyValue('background-color'));
         div.setStyle('color', getContrastYIQ(color.hex.substr(1)));
         
+        // add click event
+        div.addEvent('click', wrapTextFunction(colorName));
+        
     });
     
+    // put it where it belongs
     container.parentElement.removeChild(container);
     container.setStyle('display', 'block');
     box.appendChild(container);
-    displayPopupBox(box);
+    
+    displayPopupBox(box);    
 }
 
-function getContrastYIQ (hexcolor) {
-
-    var r = parseInt(hexcolor.substr(0,2),16);
-    var g = parseInt(hexcolor.substr(2,2),16);
-    var b = parseInt(hexcolor.substr(4,2),16);
-    var yiq = ((r*299)+(g*587)+(b*114))/1000;
-    return (yiq >= 128) ? 'black' : 'white';
+function getContrastYIQ (hexColor) {
+    var r = parseInt(hexColor.substr(0, 2), 16);
+    var g = parseInt(hexColor.substr(2, 2), 16);
+    var b = parseInt(hexColor.substr(4, 2), 16);
+    var yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+    return (yiq >= 128) ? '#000' : '#fff';
 }
 
 function closeCurrentPopup () {
