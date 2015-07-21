@@ -320,7 +320,6 @@ function closeCurrentPopup () {
         onComplete: function () { if (box) box.destroy(); }
     });
     box.morph({ height: '0px' });
-    document.body.removeEvent('click', bodyClickPopoverCheck);
 }
 
 function createPopupBox (posX, posY) {
