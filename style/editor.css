@@ -104,16 +104,16 @@ div.editor-link-type.active {
     background-color: #555;
 }
 
-div.editor-link-wrapper {
+#editor-link-wrapper {
     margin: 10px;
     height: 125px;
 }
 
-div.editor-link-wrapper span {
+#editor-link-wrapper span {
     font-size: 14px;
 }
 
-div.editor-link-wrapper input {
+#editor-link-wrapper input {
     width: 290px;
     width: calc(100% - 10px);
     padding: 5px;

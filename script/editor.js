@@ -193,13 +193,13 @@ function displayLinkHelper () {
 <div id="editor-link-type-category" class="editor-link-type" title="Category"><i class="fa fa-list"></i></div> \
 <div id="editor-link-type-url" class="editor-link-type" title="External URL"><i class="fa fa-external-link"></i></div> \
 <div style="clear: both;"></div>                        \
-<div class="editor-link-wrapper">                       \
+<div id="editor-link-wrapper">                       \
 <span id="editor-link-title2">Display text</span><br /> \
 <input id="editor-link-display" type="text" /><br/>     \
 <span id="editor-link-title1">Page target</span><br />  \
 <input id="editor-link-target" type="text" />           \
 </div>                                                  \
-<div class="editor-link-insert">Insert page link</div>  \
+<div id="editor-link-insert">Insert page link</div>  \
 ';
     
     // first input, second input, button title, left delimiter, right delimiter
