@@ -138,7 +138,7 @@ function fakeAdopt (child) {
 // close current popup on click outside
 document.body.addEvent('click', function (e) {
     var displayedPopup = $$('div.editor-popup-box')[0];
-    if (!displayedPopup) return;
+    if (!displayedPopup && e.firstClick) return;
     if (e.target == displayedPopup || displayedPopup.contains(e.target)) return;
     closeCurrentPopup();
 });
@@ -412,7 +412,8 @@ function setupToolbar () {
         });
         
         // clicked
-        li.addEvent('click', function () {
+        li.addEvent('click', function (e) {
+            e.firstClick = true;
             if (li.hasClass('disabled')) return;
             var action = li.getAttribute('data-action');
             if (!action) return;
