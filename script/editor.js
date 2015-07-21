@@ -171,6 +171,19 @@ function displayFontSelector () {
     displayPopupBox(box);    
 }
 
+function displayLinkHelper () {
+    var li   = $$('li[data-action="link"]')[0];
+    var rect = li.getBoundingClientRect();
+    var box  = createPopupBox(rect.top + li.offsetHeight, rect.left);
+    box.innerHTML = '                                                                           \
+<div class="editor-link-type" title="Page"><i class="fa fa-file-text"></i></div>                \
+<div class="editor-link-type" title="External wiki page"><i class="fa fa-globe"></i></div>      \
+<div class="editor-link-type" title="Category"><i class="fa fa-list"></i></div>                 \
+<div class="editor-link-type" title="External URL"><i class="fa fa-external-link"></i></div>    \
+';
+    displayPopupBox(box);
+}
+
 function getContrastYIQ (hexColor) {
     var r = parseInt(hexColor.substr(0, 2), 16);
     var g = parseInt(hexColor.substr(2, 2), 16);
@@ -264,6 +277,7 @@ var toolbarFunctions = {
     underline:  wrapTextFunction('u'),
     strike:     wrapTextFunction('s'),
     font:       displayFontSelector,
+    link:       displayLinkHelper,
     undo:       function () { editor.undo(); },
     redo:       function () { editor.redo(); },
     'delete':   dummyFunc

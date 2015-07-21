@@ -60,6 +60,8 @@ ul.editor-toolbar li.disabled {
     cursor: default;
 }
 
+/* toolbar popups */
+
 div.editor-popup-box {
     position: absolute;
     overflow: hidden;
@@ -69,6 +71,8 @@ div.editor-popup-box {
     z-index: 300;
 }
 
+/* color picker */
+
 div.editor-color-cell {
     height: 30px;
     color: #fff;
@@ -76,3 +80,24 @@ div.editor-color-cell {
     font-size: 15px;
     cursor: pointer;
 }
+
+/* link helper */
+
+div.editor-link-type {
+    width: 75px;
+    display: inline-block;
+    float: left; /* so that spaces don't matter */
+    background-color: #555;
+    text-align: center;
+    height: 25px;
+    line-height: 25px;
+}
+
+div.editor-link-type:hover {
+    background-color: #333;
+}
+
+div.editor-link-type.active {
+    background-color: #222;
+}
+    
