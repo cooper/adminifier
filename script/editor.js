@@ -150,9 +150,8 @@ function displayFontSelector () {
                 backgroundColor: colorName,
                 color: '#fff',
                 lineHeight: '30px',
-                textShadow: '0 0 1px #000',
-                fontSize: '12px',
-                fontFamily: 'Helvetica'
+                fontSize: '15px',
+                fontFamily: '\'Helvetica Nueue\', Helvetica, sans-serif'
             }
         });
         
