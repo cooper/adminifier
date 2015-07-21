@@ -245,6 +245,11 @@ function displayLinkHelper () {
         });
     });
     
+    // selected text = display text
+    var selected = editor.getSelectedText();
+    if (selected.trim().length)
+        $('editor-link-display').setProperty('value', selected);
+    
     displayPopupBox(box, 205);
 }
 
