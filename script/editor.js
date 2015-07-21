@@ -425,8 +425,8 @@ function setupToolbar () {
             if (!action) return;
             var func = toolbarFunctions[action];
             if (!func) return;
-            document.body.addEvent('click', bodyClickPopoverCheck);
             func();
+            document.body.addEvent('click', bodyClickPopoverCheck);
         });
         
     });
