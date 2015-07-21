@@ -131,6 +131,17 @@ function displayFontSelector () {
     displayPopupBox(rect.top + li.offsetHeight, rect.left);
 }
 
+function closeCurrentPopup () {
+    var box = $$('div.editor-popup-box')[0];
+    if (!box) return;
+    closeCurrentLi();
+    box.set('morph', {
+        duration: 150,
+        onComplete: function () { if (box) box.destroy(); }
+    });
+    box.morph({ height: '0px', width: '0px' });
+}
+
 function displayPopupBox (posX, posY) {
     
     // already showing something
@@ -147,14 +158,7 @@ function displayPopupBox (posX, posY) {
     });
     
     // on mouse leave, animate exit
-    box.addEvent('mouseleave', function () {
-        closeCurrentLi();
-        box.set('morph', {
-            duration: 150,
-            onComplete: function () { if (box) box.destroy(); }
-        });
-        box.morph({ height: '0px', width: '0px' });
-    });
+    box.addEvent('mouseleave', closeCurrentPopup);
     
     // animate entrance
     document.body.appendChild(box);
@@ -228,6 +232,7 @@ function setupToolbar () {
             });
             
             currentLi = li;
+            closeCurrentPopup();
         });
         
         // clicked

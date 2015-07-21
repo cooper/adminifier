@@ -43,6 +43,9 @@ ul.editor-toolbar li {
     overflow: hidden;
     cursor: pointer;
     white-space: nowrap;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
 }
 
 ul.editor-toolbar li.right {
