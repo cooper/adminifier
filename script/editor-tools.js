@@ -1,4 +1,4 @@
-document.addEvent('pageScriptsLoaded', function () {
+document.addEvent('editorLoaded', function () {
     Object.append(toolbarFunctions, {
         font:       displayFontSelector,
         link:       displayLinkHelper,

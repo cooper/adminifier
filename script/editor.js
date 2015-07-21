@@ -14,6 +14,7 @@ document.addEvent('pageScriptsLoaded', function () {
     editor.on('input', editorInputHandler);
     setTimeout(function () { editor.resize(); }, 500);
 
+    document.fireEvent('editorLoaded');
 });
 
 var editorExpressions = {
