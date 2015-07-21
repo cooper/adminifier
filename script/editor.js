@@ -151,7 +151,7 @@ function displayFontSelector () {
             }
         });
         var newColor = new Color(div.getStyle('backgroundColor')).invert();
-        div.setStyle('backgroundColor', newColor);
+        div.setStyle('backgroundColor', 'rgb(' + newColor.toString() + ')');
         div.innerHTML = '<span style="padding-left: 10px;">' + colorName + '</span>';
         container.appendChild(div);
     });
