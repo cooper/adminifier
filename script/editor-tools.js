@@ -237,7 +237,7 @@ function displayLinkHelper () {
 function displaySaveHelper () {
     var li   = $$('li[data-action="save"]')[0];
     var rect = li.getBoundingClientRect();
-    var box  = createPopupBox(rect.right, rect.top + li.offsetHeight, true);
+    var box  = createPopupBox(rect.left - 300, rect.top + li.offsetHeight);
 
     displayPopupBox(box, 150, li);
 }
