@@ -135,12 +135,16 @@ function fakeAdopt (child) {
     $('fake-parent').appendChild(child);
 }
 
-// close current popup on click outside                       
+// close current popup on click outside  
 function bodyClickPopoverCheck (e) {
     
     // no popup is displayed
     var displayedPopup = $$('div.editor-popup-box')[0];
     if (!displayedPopup) return;
+    
+    // the target is the toolbar item
+    if (e.target == displayedPopup.retrieve('li'))
+        return;
     
     // clicked within the popup
     if (e.target == displayedPopup || displayedPopup.contains(e.target))
@@ -193,7 +197,7 @@ function displayFontSelector () {
     container.setStyle('display', 'block');
     box.appendChild(container);
     
-    displayPopupBox(box, 200);    
+    displayPopupBox(box, 200, li);  
 }
 
 function displayLinkHelper () {
@@ -289,7 +293,7 @@ function displayLinkHelper () {
         editor.insert(complete);
     });
     
-    displayPopupBox(box, 215);
+    displayPopupBox(box, 215, li);
 }
 
 function getContrastYIQ (hexColor) {
@@ -330,10 +334,11 @@ function createPopupBox (posX, posY) {
     return box;
 }
 
-function displayPopupBox (box, height) {
+function displayPopupBox (box, height, li) {
     document.body.appendChild(box);
     box.set('morph', { duration: 150 });
     box.morph({ height: height + 'px' });
+    box.store('li', li);
 }
 
 function wrapTextFunction (type) {
@@ -396,6 +401,7 @@ function closeCurrentLi () {
 }
 
 function setupToolbar () {
+    document.body.addEvent('click', bodyClickPopoverCheck);
 
     // switch between buttons
     $$('ul.editor-toolbar li').each(function (li) {
@@ -426,7 +432,6 @@ function setupToolbar () {
             var func = toolbarFunctions[action];
             if (!func) return;
             func();
-            document.body.addEvent('click', bodyClickPopoverCheck);
         });
         
     });
