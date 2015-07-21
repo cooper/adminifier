@@ -250,6 +250,7 @@ function displayLinkHelper () {
     });
     
     displayPopupBox(box, 215, li);
+    $('editor-link-target').focus();
 }
 
 // SAVE COMMIT HELPER
@@ -296,4 +297,5 @@ Edit summary<br /> \
     });
     
     displayPopupBox(box, 120, li);
+    $('editor-save-message').focus();
 }
