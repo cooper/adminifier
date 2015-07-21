@@ -151,6 +151,7 @@ function displayPopupBox (box, height, li) {
     box.set('morph', { duration: 150 });
     box.morph({ height: height + 'px' });
     box.store('li', li);
+    forceOpenLi(li);
 }
 
 // move a popup when the window resizes
