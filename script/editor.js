@@ -225,6 +225,7 @@ function wrapTextFunction (type) {
         
         // find the current selection
         var selectRange = editor.getSelection().getRange();
+        var originalRange = selectRange;
         
         // if there is no actual selection (just a cursor position),
         // use the word range. but only if it's in a word (check strlen).
@@ -236,9 +237,22 @@ function wrapTextFunction (type) {
         
         editor.getSelection().setSelectionRange(selectRange);
         
+        // dtermine the new text
         var terminator  = type.length > 1 ? '' : type;
-        var newText     = '[' + type + ']' + editor.getSelectedText() + '[/' + terminator + ']';
+        var leftSide    = '[' + type + ']';
+        var newText     = leftSide + editor.getSelectedText() + '[/' + terminator + ']';
+        
+        // replace the text
         editor.getSession().replace(selectRange, newText);
+        
+        // return to the original selection
+        editor.getSelection().setSelectionRange(new Range(
+            originalRange.start.row,
+            originalRange.start.column + leftSide.length,
+            originalRange.end.row,
+            originalRange.start.column + leftSide.length
+        ));
+        
     };
 }
 
