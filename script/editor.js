@@ -256,7 +256,7 @@ function closeCurrentLi () {
 
 function addEditorKeyboardShortcuts (cuts) {
     // c = [ windows shortcut, mac shortcut, action ]
-    cut.each(function (c) {
+    cuts.each(function (c) {
         editor.commands.addCommand({
             name: c[2],
             bindKey: {
