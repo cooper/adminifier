@@ -124,3 +124,10 @@ div.editor-link-wrapper input {
     background-color: #e2e2e2;
 }
     
+div.editor-link-insert {
+    font-size: 14px;
+    line-height: 30px;
+    text-align: center;
+    background-color: #333;
+    height: 30px;
+}

@@ -175,20 +175,47 @@ function displayLinkHelper () {
     var li   = $$('li[data-action="link"]')[0];
     var rect = li.getBoundingClientRect();
     var box  = createPopupBox(rect.top + li.offsetHeight, rect.left);
-    box.innerHTML = '                                                                           \
-<div class="editor-link-type active" title="Page"><i class="fa fa-file-text"></i></div>                \
-<div class="editor-link-type" title="External wiki page"><i class="fa fa-globe"></i></div>      \
-<div class="editor-link-type" title="Category"><i class="fa fa-list"></i></div>                 \
-<div class="editor-link-type" title="External URL"><i class="fa fa-external-link"></i></div>    \
-<div style="clear: both;"></div> \
-<div class="editor-link-wrapper"> \
+    box.innerHTML = ' \
+<div id="editor-link-type-internal" class="editor-link-type active" title="Page"><i class="fa fa-file-text"></i></div> \
+<div id="editor-link-type-external" class="editor-link-type" title="External wiki page"><i class="fa fa-globe"></i></div> \
+<div id="editor-link-type-category" class="editor-link-type" title="Category"><i class="fa fa-list"></i></div> \
+<div id="editor-link-type-url" class="editor-link-type" title="External URL"><i class="fa fa-external-link"></i></div> \
+<div style="clear: both;"></div>                        \
+<div class="editor-link-wrapper">                       \
 <span id="editor-link-title2">Display text</span><br /> \
-<input type="text" /><br/>   \
-<span id="editor-link-title1">Page target</span><br /> \
-<input type="text" />        \
-</div> \
-<div style="font-size: 14px; line-height: 30px; text-align: center; background-color: #333; height: 30px;">Insert page link</div> \
+<input id="editor-link-display" type="text" /><br/>     \
+<span id="editor-link-title1">Page target</span><br />  \
+<input id="editor-link-target" type="text" />           \
+</div>                                                  \
+<div class="editor-link-insert">Insert page link</div>  \
 ';
+    
+    // first input, second input, button title, left delimiter, right delimiter
+    $('editor-link-type-internal').store('linkInfo', ['Display text', 'Page target', 'Insert page link', '[', ']']);
+    $('editor-link-type-external').store('linkInfo', ['Display text', 'External page target', 'Insert external page link', '!', '!']);
+    $('editor-link-type-category').store('linkInfo', ['Display text', 'Category target', 'Insert category link', '~', '~']);
+    $('editor-link-type-url').store('linkInfo', ['Display text', 'URL target', 'Insert URL', '$', '$']);
+    
+    // switch between link types
+    var activeType = $('editor-link-type-internal');
+    $$('.edit-link-type').each(function (type) {
+        type.addEvent('click', function () {
+            
+            // set the active type
+            if (type.hasClass('active')) return;
+            activeType.removeClass('active');
+            type.addClass('active');
+            activeType = type;
+            
+            // update the text
+            var info = type.retrieve('linkInfo');
+            $('editor-link-title1').innerHTML = info[0];
+            $('editor-link-title2').innerHTML = info[1];
+            $('editor-link-insert').innerHTML = info[2];
+            
+        });
+    });
+    
     displayPopupBox(box, 205);
 }
 
