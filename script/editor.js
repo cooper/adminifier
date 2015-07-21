@@ -156,7 +156,7 @@ function displayFontSelector () {
         container.appendChild(div);
         var color = getComputedStyle(div, null).getPropertyValue('background-color');
         var newColor = new Color(color).invert();
-        div.setStyle('backgroundColor', 'rgb(' + newColor.toString() + ')');
+        div.setStyle('color', 'rgb(' + newColor.toString() + ')');
     });
     
     container.parentElement.removeChild(container);
