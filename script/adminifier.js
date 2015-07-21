@@ -171,7 +171,9 @@ function handlePageData(data) {
     // page redirect
     var target = data['data-redirect'];
     if (target) {
-        window.location.hash = '#!/' + target;
+        var newHash = '#!/' + target;
+        console.log('Redirecting to ' + newHash);
+        window.location.hash = newHash;
         return;
     }
 
