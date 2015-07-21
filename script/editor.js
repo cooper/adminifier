@@ -2,11 +2,13 @@ var Range, editor, currentLi, currentPopup;
 
 document.addEvent('pageScriptsLoaded', editorPageScriptsLoadedHandler);
 document.addEvent('pageUnloaded', editorPageUnloadedHandler);
+document.addEvent('keyup', editorKeyPressedHandler);
 
 function editorPageUnloadedHandler () {
     console.log('Unloading editor script');
     document.removeEvent('pageScriptsLoaded', editorPageScriptsLoadedHandler);
     document.removeEvent('pageUnloaded', editorPageUnloadedHandler);
+    document.removeEvent('keyup', editorKeyPressedHandler);
 }
                   
 function editorPageScriptsLoadedHandler () {
@@ -36,6 +38,19 @@ var editorExpressions = {
 function resetSelectionAtTopLeft () {
     editor.getSelection().setSelectionRange(new Range(0, 0, 0, 0));
     editor.focus();
+}
+
+function editorKeyPressedHandler (e) {
+    if (e.keyCode == 27) handleEditorEscapeKey();
+}
+
+// escape key pressed
+function handleEditorEscapeKey() {
+    
+    // if there's a popup, exit it maybe
+    if (currentPopup)
+        closeCurrentPopup(true);
+    
 }
 
 function editorInputHandler () {
@@ -112,9 +127,14 @@ function getContrastYIQ (hexColor) {
     return (yiq >= 128) ? '#000' : '#fff';
 }
 
-function closeCurrentPopup () {
+function closeCurrentPopup (maybe) {
     var box = currentPopup;
     if (!box) return;
+    
+    // if maybe, check if sticky.
+    if (maybe && box.hasClass('sticky'))
+        return;
+    
     closeCurrentLi();
     box.set('morph', {
         duration: 150,
