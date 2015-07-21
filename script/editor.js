@@ -250,7 +250,7 @@ function displayLinkHelper () {
     if (selected.trim().length)
         $('editor-link-display').setProperty('value', selected);
     
-    displayPopupBox(box, 205);
+    displayPopupBox(box, 225);
 }
 
 function getContrastYIQ (hexColor) {
