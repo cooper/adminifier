@@ -3,6 +3,7 @@ document.addEvent('domready', setupToolbar);
 
 var Range = ace.require('ace/range').Range;
 var editor = ace.edit("editor");
+var currentLi;
 
 var editorExpressions = {
     version:        1.0,
@@ -136,28 +137,27 @@ function displayPopupBox (posX, posY) {
     var box = new Element('div', {
         class: 'editor-popup-box',
         styles: {
-            top: posX,
+            top:  posX,
             left: posY
         }
     });
     
     // on mouse leave, animate exit
+    box.set('morph', { duration: 150 });
     box.addEvent('mouseleave', function () {
+        closeCurrentLi();
         box.set('tween', {
             duration: 150,
-            onComplete: function () {
-                box.destroy();
-            }
+            onComplete: function () { box.destroy(); }
         });
-        box.tween('height', '0px');
+        box.morph({ height: '0px', width: '0px' });
     });
     
     // animate entrance
     document.body.appendChild(box);
-    box.set('morph', { duration: 150 });
     box.morph({
-        width: '500px',
-        height: '300px'
+        width: '300px',
+        height: '150px'
     });
     
 }
@@ -195,8 +195,16 @@ var toolbarFunctions = {
     'delete':   dummyFunc
 };
 
+function closeCurrentLi () {
+    if (!currentLi) return;
+    currentLi.morph({
+        width: '15px',
+        backgroundColor: '#696969'
+    });
+    currentLi = undefined;
+}
+
 function setupToolbar () {
-    var currentLi;
 
     // switch between buttons
     $$('ul.editor-toolbar li').each(function (li) {
@@ -206,13 +214,8 @@ function setupToolbar () {
         li.addEvent('mouseenter', function () {
 
             // if another one is animating, force it to instantly finish
-            if (currentLi) {
-                currentLi.morph({
-                    width: '15px',
-                    backgroundColor: '#696969'
-                });
-                currentLi = undefined;
-            }
+            if (currentLi)
+                closeCurrentLi();
             
             // animate this one
             li.morph({
@@ -237,13 +240,9 @@ function setupToolbar () {
     
     // leaving the toolbar, close it
     $$('ul.editor-toolbar').addEvent('mouseleave', function () {
-        if (currentLi) {
-            currentLi.morph({
-                width: '15px',
-                backgroundColor: '#696969'
-            });
-            currentLi = undefined;
-        }
+        var displayedPopup = $$('div.editor-popup-box')[0];
+        if (currentLi && !displayedPopup)
+            closeCurrentLi();
     });
     
 }
