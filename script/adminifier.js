@@ -17,6 +17,13 @@ Element.Events.editorLoaded = {
     }
 };
 
+Element.implement('onEnter', function (func) {
+    this.addEvent('keyup', function (e) {
+        if (e.key != 'enter') return;
+        func(e);
+    });
+});
+
 function setupFrameLinks(parent) {
     parent.getElements('a.frame-click').each(function (a) {
         a.addEventListener('click', function (e) {

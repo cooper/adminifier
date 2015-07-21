@@ -226,8 +226,8 @@ function displayLinkHelper () {
         $('editor-link-target').setProperty('value', selected);
     }
     
-    // insert click
-    $('editor-link-insert').addEvent('click', function () {
+    // insert link function
+    var insertLink = function () {
         var displayText = $('editor-link-display').getProperty('value'),
             targetText  = $('editor-link-target').getProperty('value'),
             leftDel     = activeType.retrieve('linkInfo')[4],
@@ -247,7 +247,12 @@ function displayLinkHelper () {
         var complete = '[' + leftDel + ' ' + inner + ' ' + rightDel + ']';
         editor.insert(complete);
         closeCurrentPopup();
-    });
+    };
+    
+    // insert on click or enter
+    $('editor-link-insert').addEvent('click', insertLink);
+    $('editor-link-target').onEnter(insertLink);
+    $('editor-link-display').onEnter(insertLink);
     
     displayPopupBox(box, 215, li);
     $('editor-link-target').focus();
@@ -271,8 +276,8 @@ Edit summary<br /> \
 <div id="editor-save-commit" class="editor-tool-large-button">Commit changes</div>  \
 ';
     
-    // on click, save changes
-    $('editor-save-commit').addEvent('click', function () {
+    // save changes function
+    var saveChanges = function () {
         box.addClass('sticky');
         $('editor-save-wrapper').innerHTML = '<div style="text-align: center; line-height: 60px; height: 60px;"><i class="fa fa-spinner fa-3x fa-spin center"></i></div>'; // spinner
         var btn = $('editor-save-commit');
@@ -294,7 +299,11 @@ Edit summary<br /> \
             
             setTimeout(function () { closeCurrentPopup(); }, 1500);
         }, 1500);
-    });
+    };
+    
+    // on click or enter, save changes
+    $('editor-save-commit').addEvent('click', saveChanges);
+    $('editor-save-message').onEnter(saveChanges);
     
     displayPopupBox(box, 120, li);
     $('editor-save-message').focus();
