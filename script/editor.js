@@ -147,11 +147,11 @@ function createPopupBox (posX, posY) {
 }
 
 function displayPopupBox (box, height, li) {
+    openLi(li);
     document.body.appendChild(box);
     box.set('morph', { duration: 150 });
     box.morph({ height: height + 'px' });
     box.store('li', li);
-    openLi(li);
 }
 
 // move a popup when the window resizes
