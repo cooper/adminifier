@@ -133,10 +133,12 @@ function displayFontSelector () {
     var container = new Element('div', {
         styles: {
             overflowY: 'auto',
-            height: '100%'
+            height: '100%',
+            display: 'none'
         }
     });
-    box.appendChild(container);
+    //box.appendChild(container);
+    document.body.appendChild(container);
     
     // create color elements
     colorList.each(function (colorName) {
@@ -157,6 +159,9 @@ function displayFontSelector () {
         div.setStyle('backgroundColor', 'rgb(' + newColor.toString() + ')');
     });
     
+    container.parent.removeChild(container);
+    container.setStyle('display', 'block');
+    box.appendChild(container);
     displayPopupBox(box);
 }
                    
