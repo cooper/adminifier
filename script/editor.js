@@ -11,6 +11,7 @@ document.addEvent('pageScriptsLoaded', function () {
     // render editor
     editor.setTheme("ace/theme/twilight"); /* eclipse is good light one */
     editor.getSession().setMode("ace/mode/plain_text");
+    editor.on('input', editorInputHandler);
     setTimeout(function () { editor.resize(); }, 500);
 
 });
@@ -26,7 +27,7 @@ function resetSelectionAtTopLeft () {
     editor.focus();
 }
 
-editor.on('input', function () {
+function editorInputHandler () {
     
     // update undo
     var um = editor.getSession().getUndoManager();
@@ -55,7 +56,7 @@ editor.on('input', function () {
         editor.getSelection().setSelectionRange(rng);
     }
         
-});
+}
 
 function fakeAdopt (child) {
     if (!$('fake-parent')) {
