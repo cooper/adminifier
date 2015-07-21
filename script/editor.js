@@ -151,7 +151,8 @@ function displayFontSelector () {
                 color: '#fff',
                 lineHeight: '30px',
                 textShadow: '0 0 1px #000',
-                letterSpacing: '1px'
+                fontSize: '12px',
+                fontFamily: 'Helvetica'
             }
         });
         
