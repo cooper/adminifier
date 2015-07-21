@@ -28,8 +28,9 @@ function setupFrameLinks(parent) {
 var currentPage;
 function frameLoad(page) {
     if (currentPage == page) return;
+    document.fireEvent('pageUnloaded');
     currentPage = page;
-    console.log("Loading "+page);
+    console.log("Loading " + page);
     
     // add .php extension, respecting GET arguments
     var parts = page.split('?', 2);

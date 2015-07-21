@@ -1,7 +1,13 @@
 var Range, editor, currentLi;
 
-document.addEvent('pageScriptsLoaded', function () {
-    console.log('Edit page script loaded');
+document.addEvent('pageScriptsLoaded', pageScriptsLoadedHandler);
+document.addEvent('pageUnloaded', function () {
+    console.log('Unloading editor script');
+    document.removeEvent('pageScriptsLoaded', pageScriptsLoadedHandler);
+});
+
+function pageScriptsLoadedHandler () {
+    console.log('Editor script loaded');
     setupToolbar();
     window.addEvent('resize', movePopupBox);
     
@@ -16,7 +22,7 @@ document.addEvent('pageScriptsLoaded', function () {
 
     window.editorLoaded = true;
     document.fireEvent('editorLoaded');
-});
+}
 
 var editorExpressions = {
     pageTitle:      new RegExp('^@page\\.title:(.*)$'),

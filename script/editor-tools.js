@@ -1,4 +1,12 @@
-document.addEvent('editorLoaded', function () {
+document.addEvent('editorLoaded', editorLoadedHandler);
+
+document.addEvent('pageUnloaded', function () {
+    console.log('Unloading editor tools script');
+    document.removeEvent('editorLoaded', editorLoadedHandler);
+});
+
+function editorLoadedHandler () {
+    console.log('Editor tools script loaded');
     Object.append(toolbarFunctions, {
         font:       displayFontSelector,
         link:       displayLinkHelper,
@@ -7,7 +15,7 @@ document.addEvent('editorLoaded', function () {
 
     updateEditorTitle();
     resetSelectionAtTopLeft();
-});
+}
 
 // PAGE TITLE SELECTOR
 
