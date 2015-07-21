@@ -187,7 +187,7 @@ function displayLinkHelper () {
 <span id="editor-link-title1">Page target</span><br /> \
 <input type="text" />        \
 </div> \
-<div style="line-height: 30px; text-align: center; background-color: #333; height: 30px;">Insert page link</div> \
+<div style="text-transform: uppercase; font-size: 14px; line-height: 30px; text-align: center; background-color: #333; height: 30px;">Insert page link</div> \
 ';
     displayPopupBox(box, 205);
 }
