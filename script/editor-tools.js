@@ -260,5 +260,5 @@ Edit summary<br /> \
 </div> \
 <div id="editor-save-commit" class="editor-tool-large-button">Commit changes</div>  \
 ';
-    displayPopupBox(box, 130, li);
+    displayPopupBox(box, 120, li);
 }
