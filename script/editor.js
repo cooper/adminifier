@@ -133,8 +133,6 @@ function displayFontSelector () {
     var container = new Element('div', {
         styles: {
             overflowY: 'auto',
-            height: '100%',
-            width: '100%',
             padding: '10px'
         }
     });
