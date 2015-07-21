@@ -145,7 +145,8 @@ function bodyClickPopoverCheck (e) {
     console.log(e.target);
     
     // the target is the toolbar item
-    if (e.target == displayedPopup.retrieve('li'))
+    var li =  displayedPopup.retrieve('li');
+    if (e.target == li || li.contains(e.target))
         return;
     
     // clicked within the popup
