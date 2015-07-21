@@ -20,6 +20,7 @@ i.fa {
 
 i.fa.center {
     text-align: center !important;
+    vertical-align: middle;
 }
 
 i.fa.right {
