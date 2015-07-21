@@ -267,15 +267,15 @@ Edit summary<br /> \
         box.addClass('sticky');
         $('editor-save-wrapper').innerHTML = '<div style="text-align: center; line-height: 60px; height: 60px;"><i class="fa fa-spinner fa-3x fa-spin center"></i></div>'; // spinner
         var btn = $('editor-save-commit');
-        btn.innerHTML = 'Saving';
+        btn.innerHTML = 'Comitting changes';
         btn.setStyle('backgroundColor', '#2096ce');
         
         // temporary fake success
         setTimeout(function () {
             btn.addClass('saved');
-            btn.innerHTML = 'Saved';
+            btn.innerHTML = 'Saved bb4504b';
             setTimeout(function () { closeCurrentPopup(); }, 1500);
-        }, 3000);
+        }, 1000);
     });
     
     displayPopupBox(box, 120, li);
