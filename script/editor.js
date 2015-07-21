@@ -151,7 +151,7 @@ function displayPopupBox (box, height, li) {
     box.set('morph', { duration: 150 });
     box.morph({ height: height + 'px' });
     box.store('li', li);
-    forceOpenLi(li);
+    openLi(li);
 }
 
 // move a popup when the window resizes
@@ -242,8 +242,22 @@ var toolbarFunctions = {
     'delete':   dummyFunc
 };
 
-function forceOpenLi (li) {
-    li.fireEvent('mouseenter');
+function openLi (li) {
+    
+    // if a popup is open, ignore this.
+    if (getCurrentPopup()) return;
+
+    // if another one is animating, force it to instantly finish
+    if (currentLi)
+        closeCurrentLi();
+
+    // animate this one
+    li.morph({
+        width: '100px',
+        backgroundColor: '#2096ce'
+    });
+
+    currentLi = li;
 }
 
 function closeCurrentLi () {
@@ -278,21 +292,7 @@ function setupToolbar () {
         // hover animation
         li.set('morph', { duration: 150 });
         li.addEvent('mouseenter', function () {
-            
-            // if a popup is open, ignore this.
-            if (getCurrentPopup()) return;
-            
-            // if another one is animating, force it to instantly finish
-            if (currentLi)
-                closeCurrentLi();
-            
-            // animate this one
-            li.morph({
-                width: '100px',
-                backgroundColor: '#2096ce'
-            });
-            
-            currentLi = li;
+            openLi(li);
         });
         
         // clicked
