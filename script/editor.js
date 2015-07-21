@@ -298,6 +298,7 @@ function displayLinkHelper () {
         
         var complete = '[' + leftDel + ' ' + inner + ' ' + rightDel + ']';
         editor.insert(complete);
+        closeCurrentPopup();
     });
     
     displayPopupBox(box, 215, li);
@@ -379,7 +380,8 @@ function wrapTextFunction (type) {
             originalRange.end.row,
             originalRange.end.column + leftSide.length
         ));
-        
+      
+        closeCurrentPopup();
     };
 }
 
