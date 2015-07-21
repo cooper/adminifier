@@ -135,13 +135,19 @@ function fakeAdopt (child) {
     $('fake-parent').appendChild(child);
 }
 
-// close current popup on click outside
-document.body.addEvent('click', function (e) {
+// close current popup on click outside                       
+function bodyClickPopoverCheck (e) {
+    
+    // no popup is displayed
     var displayedPopup = $$('div.editor-popup-box')[0];
-    if (!displayedPopup || e.firstClick) return;
-    if (e.target == displayedPopup || displayedPopup.contains(e.target)) return;
+    if (!displayedPopup) return;
+    
+    // clicked within the popup
+    if (e.target == displayedPopup || displayedPopup.contains(e.target))
+        return;
+    
     closeCurrentPopup();
-});
+}
 
 function displayFontSelector () {
     var li   = $$('li[data-action="font"]')[0];
@@ -303,6 +309,7 @@ function closeCurrentPopup () {
         onComplete: function () { if (box) box.destroy(); }
     });
     box.morph({ height: '0px' });
+    document.body.removeEvent('click', bodyClickPopoverCheck);
 }
 
 function createPopupBox (posX, posY) {
@@ -413,12 +420,12 @@ function setupToolbar () {
         
         // clicked
         li.addEvent('click', function (e) {
-            e.firstClick = true;
             if (li.hasClass('disabled')) return;
             var action = li.getAttribute('data-action');
             if (!action) return;
             var func = toolbarFunctions[action];
             if (!func) return;
+            document.body.addEvent('click', bodyClickPopoverCheck);
             func();
         });
         
