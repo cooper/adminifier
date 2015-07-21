@@ -220,6 +220,7 @@ function setupToolbar () {
         // hover animation
         li.set('morph', { duration: 150 });
         li.addEvent('mouseenter', function () {
+            closeCurrentPopup();
 
             // if another one is animating, force it to instantly finish
             if (currentLi)
@@ -232,7 +233,6 @@ function setupToolbar () {
             });
             
             currentLi = li;
-            closeCurrentPopup();
         });
         
         // clicked
