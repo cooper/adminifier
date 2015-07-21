@@ -251,5 +251,6 @@ function displaySaveHelper () {
     var rect = li.getBoundingClientRect();
     var box  = createPopupBox(rect.right - 300, rect.top + li.offsetHeight);
     box.addClass('right');
+    box.addClass('sticky');
     displayPopupBox(box, 150, li);
 }

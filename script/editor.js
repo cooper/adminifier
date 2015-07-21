@@ -95,7 +95,7 @@ function bodyClickPopoverCheck (e) {
         return;
     
     // this popup can only be closed programmatically
-    if (displayedPopup.retrieve('sticky'))
+    if (displayedPopup.hasClass('sticky'))
         return;
     
     // clicked within the popup
