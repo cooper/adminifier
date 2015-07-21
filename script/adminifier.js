@@ -4,6 +4,19 @@ document.addEvent('domready', function () {
     hashLoad();
 });
 
+// this is for if pageScriptsDone event is added
+// and the page scripts are already done
+Element.Events.pageScriptsLoaded = {
+	onAdd: function (fn) {
+		if (window.pageScriptsDone) fn.call(this);
+	}
+};
+Element.Events.editorLoaded = {
+    onAdd: function (fn) {
+        if (window.editorLoaded) fn.call(this);
+    }
+};
+
 function setupFrameLinks(parent) {
     parent.getElements('a.frame-click').each(function (a) {
         a.addEventListener('click', function (e) {
@@ -147,6 +160,9 @@ function handleCompactSidebarMouseleave (e) {
 
 var currentData;
 function handlePageData(data) {
+    window.pageScriptsDone = false;
+    window.editorLoaded = false;
+    
     console.log(data);
     currentData = data;
     $('content').setStyle('user-select', 'none');
@@ -169,6 +185,8 @@ function handlePageData(data) {
         scriptsLoaded++;
         if (scriptsToLoad > scriptsLoaded) return;
         $('content').setStyle('user-select', 'all');
+        window.pageScriptsDone = true;
+        document.fireEvent('pageScriptsLoaded');
     };
     
     // inject scripts
