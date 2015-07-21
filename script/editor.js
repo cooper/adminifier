@@ -124,6 +124,17 @@ function updateEditorTitle() {
         updatePageTitle(title);
 }
 
+function fakeAdopt (child) {
+    if (!$('fake-parent')) {
+        var parent = new Element('div', {
+            id: 'fake-parent',
+            styles: { display: 'none' }
+        });
+        document.body.appendChild(parent);
+    }
+    $('fake-parent').appendChild(child);
+}
+
 function displayFontSelector () {
     var li   = $$('li[data-action="font"]')[0];
     var rect = li.getBoundingClientRect();
@@ -140,7 +151,7 @@ function displayFontSelector () {
 
     // temporarily add it to the body
     // for when we call getComputedStyle
-    document.body.appendChild(container);
+    fakeAdopt(container);
     
     // create color elements
     colorList.each(function (colorName) {
@@ -175,6 +186,7 @@ function displayLinkHelper () {
     var li   = $$('li[data-action="link"]')[0];
     var rect = li.getBoundingClientRect();
     var box  = createPopupBox(rect.top + li.offsetHeight, rect.left);
+    fakeAdopt(box);
     box.innerHTML = ' \
 <div id="editor-link-type-internal" class="editor-link-type active" title="Page"><i class="fa fa-file-text"></i></div> \
 <div id="editor-link-type-external" class="editor-link-type" title="External wiki page"><i class="fa fa-globe"></i></div> \
