@@ -40,6 +40,7 @@ ul.editor-toolbar li {
     display: inline-block;
     width: 15px;
     height: 30px;
+    overflow: hidden;
     cursor: pointer;
     white-space: nowrap;
 }
