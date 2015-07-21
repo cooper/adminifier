@@ -16,8 +16,10 @@ editor.setTheme("ace/theme/twilight"); /* eclipse is good light one */
 editor.getSession().setMode("ace/mode/plain_text");
 setTimeout(function () { editor.resize(); }, 500);
 
-editor.getSelection().setSelectionRange(new Range(0, 0, 0, 0));
-editor.focus();
+function resetSelectionAtTopLeft () {
+    editor.getSelection().setSelectionRange(new Range(0, 0, 0, 0));
+    editor.focus();
+}
 
 editor.on('input', function () {
     

@@ -6,6 +6,7 @@ Object.append(toolbarFunctions, {
 // PAGE TITLE SELECTOR
 
 updateEditorTitle();
+resetSelectionAtTopLeft();
 
 function selectPageTitle () {
     var range = getPageTitleRange();
