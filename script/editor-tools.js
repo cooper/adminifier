@@ -1,13 +1,15 @@
-Object.append(toolbarFunctions, {
-    font:       displayFontSelector,
-    link:       displayLinkHelper,
-    save:       displaySaveHelper
+document.addEvent('pageScriptsLoaded', function () {
+    Object.append(toolbarFunctions, {
+        font:       displayFontSelector,
+        link:       displayLinkHelper,
+        save:       displaySaveHelper
+    });
+
+    updateEditorTitle();
+    resetSelectionAtTopLeft();
 });
 
 // PAGE TITLE SELECTOR
-
-updateEditorTitle();
-resetSelectionAtTopLeft();
 
 function selectPageTitle () {
     var range = getPageTitleRange();

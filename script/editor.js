@@ -1,21 +1,25 @@
-console.log('Edit page script loaded');
-document.addEvent('domready', setupToolbar);
-window.addEvent('resize', movePopupBox);
+var Range, editor, currentLi;
 
-var Range = ace.require('ace/range').Range;
-var editor = ace.edit("editor");
-var currentLi;
+document.addEvent('pageScriptsLoaded', function () {
+    console.log('Edit page script loaded');
+    setupToolbar();
+    window.addEvent('resize', movePopupBox);
+    
+    Range  = ace.require('ace/range').Range;
+    editor = ace.edit("editor");
+    
+    // render editor
+    editor.setTheme("ace/theme/twilight"); /* eclipse is good light one */
+    editor.getSession().setMode("ace/mode/plain_text");
+    setTimeout(function () { editor.resize(); }, 500);
+
+});
 
 var editorExpressions = {
     pageTitle:      new RegExp('^@page\\.title:(.*)$'),
     pageAuthor:     new RegExp('^@page\\.author:(.*)$'),
     pageCreated:    new RegExp('^@page\\.created:(.*)$')
 };
-
-// render editor
-editor.setTheme("ace/theme/twilight"); /* eclipse is good light one */
-editor.getSession().setMode("ace/mode/plain_text");
-setTimeout(function () { editor.resize(); }, 500);
 
 function resetSelectionAtTopLeft () {
     editor.getSelection().setSelectionRange(new Range(0, 0, 0, 0));

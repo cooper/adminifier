@@ -185,7 +185,6 @@ function handlePageData(data) {
         
         var script = new Element('script', {
             src:   src,
-            async: false,
             class: 'dynamic'
         });
         script.addEvent('load', scriptLoaded);
