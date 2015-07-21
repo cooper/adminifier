@@ -189,7 +189,7 @@ function displayLinkHelper () {
 </div> \
 <div style="background-color: yellow; height: 30px;"></div> \
 ';
-    displayPopupBox(box, 300);
+    displayPopupBox(box, 220);
 }
 
 function getContrastYIQ (hexColor) {
