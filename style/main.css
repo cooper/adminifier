@@ -18,6 +18,10 @@ i.fa {
     width: 1.35em;
 }
 
+i.fa.center {
+    text-align: center !important;
+}
+
 i.fa.right {
     text-align: right !important;
 }

@@ -154,3 +154,7 @@ div.editor-link-type.active {
     margin: 10px;
     height: 60px;
 }
+
+#editor-save-commit.saved {
+    background-color: #51B068 !important;
+}

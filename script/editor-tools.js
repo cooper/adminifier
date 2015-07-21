@@ -265,14 +265,14 @@ Edit summary<br /> \
     // on click, save changes
     $('editor-save-commit').addEvent('click', function () {
         box.addClass('sticky');
-        $('editor-save-wrapper').innerHTML = '<span style="text-align: center; "><i class="fa fa-spinner fa-3x fa-spin"></i></span>'; // spinner
+        $('editor-save-wrapper').innerHTML = '<div style="text-align: center; line-height: 60px; height: 60px;"><i class="fa fa-spinner fa-3x fa-spin center"></i></div>'; // spinner
         var btn = $('editor-save-commit');
         btn.innerHTML = 'Saving';
         btn.setStyle('backgroundColor', '#2096ce');
         
         // temporary fake success
         setTimeout(function () {
-            btn.setStyle('backgroundColor', '#51B068 !important');
+            btn.addClass('saved');
             btn.innerHTML = 'Saved';
             setTimeout(function () { closeCurrentPopup(); }, 1500);
         }, 3000);
