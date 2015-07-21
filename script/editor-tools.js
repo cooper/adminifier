@@ -1,6 +1,7 @@
 Object.append(toolbarFunctions, {
     font:       displayFontSelector,
     link:       displayLinkHelper,
+    save:       displaySaveHelper
 });
 
 // PAGE TITLE SELECTOR
