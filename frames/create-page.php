@@ -29,7 +29,6 @@ ob_start();
 require_once(__DIR__.'/../functions/write-page.php');
 ob_end_clean();
 
-// redirect to edit the new page
-header('Location: edit-page.php?page='.$new_page);
-
 ?>
+
+<meta data-redirect="edit-page?page=<? =$new_page ?>" />

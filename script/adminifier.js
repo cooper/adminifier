@@ -50,7 +50,7 @@ function frameLoad(page) {
                     
                     
                 // Tools for all pages
-                    
+                'data-redirect',    // javascript frame redirect
                 'data-nav',         // navigation item identifier to highlight
                 'data-title',       // page title for top bar
                 'data-icon',        // page icon name for top bar
@@ -167,6 +167,13 @@ function handlePageData(data) {
     console.log(data);
     currentData = data;
     $('content').setStyle('user-select', 'none');
+    
+    // page redirect
+    var target = data['data-redirect'];
+    if (target) {
+        window.location.hash = '#!/' + target;
+        return;
+    }
 
     // page title and icon
     $('page-title').innerHTML = '<i class="fa fa-' + data['data-icon'] + '"></i> <span>' + data['data-title'] + '</span>';
