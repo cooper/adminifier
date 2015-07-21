@@ -94,6 +94,10 @@ div.editor-link-type {
     line-height: 30px;
     font-size: 15px;
     color: #e2e2e2;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
 }
 
 div.editor-link-type:hover {
@@ -130,4 +134,12 @@ div.editor-link-type.active {
     text-align: center;
     background-color: #333;
     height: 30px;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
+
+#editor-link-insert:hover {
+    color: #2096ce;
 }
