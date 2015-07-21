@@ -202,7 +202,7 @@ function closeCurrentPopup () {
         duration: 150,
         onComplete: function () { if (box) box.destroy(); }
     });
-    box.morph({ height: '0px', width: '0px' });
+    box.morph({ height: '0px' });
 }
 
 function createPopupBox (posX, posY) {
@@ -229,10 +229,7 @@ function createPopupBox (posX, posY) {
 function displayPopupBox (box) {
     document.body.appendChild(box);
     box.set('morph', { duration: 150 });
-    box.morph({
-        width: '300px',
-        height: '150px'
-    });
+    box.morph({ height: '150px' });
 }
 
 function wrapTextFunction (type) {

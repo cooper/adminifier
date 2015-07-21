@@ -66,7 +66,7 @@ div.editor-popup-box {
     position: absolute;
     overflow: hidden;
     background-color: #555;
-    width: 0px;
+    width: 300px;
     height: 0px;
     z-index: 300;
 }
