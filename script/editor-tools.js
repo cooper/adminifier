@@ -1,9 +1,5 @@
 document.addEvent('editorLoaded', editorLoadedHandler);
-
-document.addEvent('pageUnloaded', function () {
-    console.log('Unloading editor tools script');
-    document.removeEvent('editorLoaded', editorLoadedHandler);
-});
+document.addEvent('pageUnloaded', editorToolsPageUnloadedHandler);
 
 function editorLoadedHandler () {
     console.log('Editor tools script loaded');
@@ -15,6 +11,12 @@ function editorLoadedHandler () {
 
     updateEditorTitle();
     resetSelectionAtTopLeft();
+}
+
+function editorToolsPageUnloadedHandler () {
+    console.log('Unloading editor tools script');
+    document.removeEvent('editorLoaded', editorLoadedHandler);
+    document.removeEvent('pageUnloaded', editorToolsPageUnloadedHandler);
 }
 
 // PAGE TITLE SELECTOR

@@ -1,12 +1,15 @@
 var Range, editor, currentLi;
 
-document.addEvent('pageScriptsLoaded', pageScriptsLoadedHandler);
-document.addEvent('pageUnloaded', function () {
-    console.log('Unloading editor script');
-    document.removeEvent('pageScriptsLoaded', pageScriptsLoadedHandler);
-});
+document.addEvent('pageScriptsLoaded', editorPageScriptsLoadedHandler);
+document.addEvent('pageUnloaded', editorPageUnloadedHandler);
 
-function pageScriptsLoadedHandler () {
+function editorPageUnloadedHandler () {
+    console.log('Unloading editor script');
+    document.removeEvent('pageScriptsLoaded', editorPageScriptsLoadedHandler);
+    document.removeEvent('pageUnloaded', editorPageUnloadedHandler);
+}
+                  
+function editorPageScriptsLoadedHandler () {
     console.log('Editor script loaded');
     setupToolbar();
     window.addEvent('resize', movePopupBox);
