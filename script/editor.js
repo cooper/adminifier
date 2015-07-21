@@ -139,7 +139,7 @@ function fakeAdopt (child) {
 function bodyClickPopoverCheck (e) {
     
     // no popup is displayed
-    var displayedPopup = $$('div.editor-popup-box')[0];
+    var displayedPopup = getCurrentPopup();
     if (!displayedPopup) return;
     
     console.log(e.target);
@@ -154,6 +154,10 @@ function bodyClickPopoverCheck (e) {
         return;
     
     closeCurrentPopup();
+}
+
+function getCurrentPopup () {
+    return $$('div.editor-popup-box')[0];
 }
 
 function displayFontSelector () {
@@ -308,7 +312,7 @@ function getContrastYIQ (hexColor) {
 }
 
 function closeCurrentPopup () {
-    var box = $$('div.editor-popup-box')[0];
+    var box = getCurrentPopup();
     if (!box) return;
     closeCurrentLi();
     box.set('morph', {
@@ -322,7 +326,7 @@ function closeCurrentPopup () {
 function createPopupBox (posX, posY) {
     
     // already showing something
-    var displayedPopup = $$('div.editor-popup-box')[0];
+    var displayedPopup = getCurrentPopup();
     if (displayedPopup) return;
     
     // create box
@@ -412,7 +416,10 @@ function setupToolbar () {
         // hover animation
         li.set('morph', { duration: 150 });
         li.addEvent('mouseenter', function () {
-
+            
+            // if a popup is open, ignore this.
+            if (getCurrentPopup()) return;
+            
             // if another one is animating, force it to instantly finish
             if (currentLi)
                 closeCurrentLi();
@@ -429,7 +436,7 @@ function setupToolbar () {
         // clicked
         li.addEvent('click', function (e) {
             if (li.hasClass('disabled')) return;
-            closeCurrentPopup();
+            if (getCurrentPopup()) return;
             var action = li.getAttribute('data-action');
             if (!action) return;
             var func = toolbarFunctions[action];
@@ -441,8 +448,7 @@ function setupToolbar () {
     
     // leaving the toolbar, close it
     $$('ul.editor-toolbar').addEvent('mouseleave', function () {
-        var displayedPopup = $$('div.editor-popup-box')[0];
-        if (currentLi && !displayedPopup)
+        if (currentLi && !getCurrentPopup())
             closeCurrentLi();
     });
     
