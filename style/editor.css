@@ -110,9 +110,11 @@ div.editor-link-wrapper {
 }
 
 div.editor-link-wrapper input {
-    width: 100%;
-    padding: 3px;
-    border: 1px solid #222;
+    width: 290px;
+    width: calc(100% - 10px);
+    padding: 5px;
+    border: 1px solid #333;
     margin-bottom: 10px;
+    background-color: #e2e2e2;
 }
     
