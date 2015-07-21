@@ -426,6 +426,7 @@ function setupToolbar () {
         // clicked
         li.addEvent('click', function (e) {
             if (li.hasClass('disabled')) return;
+            closeCurrentPopup();
             var action = li.getAttribute('data-action');
             if (!action) return;
             var func = toolbarFunctions[action];
