@@ -137,7 +137,9 @@ function displayFontSelector () {
             display: 'none'
         }
     });
-    //box.appendChild(container);
+
+    // temporarily add it to the body
+    // for when we call getComputedStyle
     document.body.appendChild(container);
     
     // create color elements
@@ -152,11 +154,16 @@ function displayFontSelector () {
                 letterSpacing: '1px'
             }
         });
-        div.innerHTML = '<span style="padding-left: 10px;">' + colorName + '</span>';
+        
+        // separate the name into words
+        div.innerHTML = '<span style="padding-left: 10px;">' +
+            colorName.replace(/([A-Z])/g, ' $1') + '</span>';
         container.appendChild(div);
-        var color = getComputedStyle(div, null).getPropertyValue('background-color');
-        var newColor = new Color(color).invert();
-        div.setStyle('color', 'rgb(' + newColor.toString() + ')');
+        
+        // compute and set the appropriate text color
+        var color = new Color(getComputedStyle(div, null).getPropertyValue('background-color'));
+        div.setStyle('color', getContrastYIQ(color.hex.substr(1)));
+        
     });
     
     container.parentElement.removeChild(container);
@@ -164,7 +171,16 @@ function displayFontSelector () {
     box.appendChild(container);
     displayPopupBox(box);
 }
-                   
+
+function getContrastYIQ (hexcolor) {
+
+    var r = parseInt(hexcolor.substr(0,2),16);
+    var g = parseInt(hexcolor.substr(2,2),16);
+    var b = parseInt(hexcolor.substr(4,2),16);
+    var yiq = ((r*299)+(g*587)+(b*114))/1000;
+    return (yiq >= 128) ? 'black' : 'white';
+}
+
 function closeCurrentPopup () {
     var box = $$('div.editor-popup-box')[0];
     if (!box) return;
