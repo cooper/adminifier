@@ -1,4 +1,4 @@
-toolbarFunctions.append({
+Object.append(toolbarFunctions, {
     font:       displayFontSelector,
     link:       displayLinkHelper,
 });
