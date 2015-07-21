@@ -62,7 +62,7 @@ echo '<a href="functions/delete-page.php?page='.urlencode($_GET['page']).'">Dele
         <li data-action="italic"><i class="fa fa-italic"></i> Italic</li>
         <li data-action="underline"><i class="fa fa-underline"></i> Underline</li>
         <li data-action="strike"><i class="fa fa-strikethrough"></i> Strike</li>
-        <li data-action="font"><i class="fa fa-font"></i> Font</li>
+        <li data-action="font"><i class="fa fa-font"></i> Color</li>
         <li data-action="header"><i class="fa fa-header"></i> Header</li>
         <li data-action="image"><i class="fa fa-picture-o"></i> Image</li>
         <li data-action="link"><i class="fa fa-link"></i> Link</li>
