@@ -142,6 +142,8 @@ function bodyClickPopoverCheck (e) {
     var displayedPopup = $$('div.editor-popup-box')[0];
     if (!displayedPopup) return;
     
+    console.log(e.target);
+    
     // the target is the toolbar item
     if (e.target == displayedPopup.retrieve('li'))
         return;
