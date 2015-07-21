@@ -266,7 +266,6 @@ function displayLinkHelper () {
             $('editor-link-title2').innerHTML = info[0];
             $('editor-link-insert').innerHTML = info[2];
             $('editor-link-target').setProperty('placeholder', info[3]);
-            $('editor-link-target').setProperty('value', '');
             
         });
     });
