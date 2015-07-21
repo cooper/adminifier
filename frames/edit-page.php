@@ -75,7 +75,7 @@ echo '<a href="functions/delete-page.php?page='.urlencode($_GET['page']).'">Dele
         
     </ul>
 </div>
-<div id="editor"><?= htmlspecialchars($result->content) ?></div>
+<div id="editor" data-file="<?= htmlspecialchars($_GET['page']) ?>"><?= htmlspecialchars($result->content) ?></div>
 
 <? /*
 <form action="functions/write-page.php" method="post">

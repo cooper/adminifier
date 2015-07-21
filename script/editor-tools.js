@@ -161,7 +161,7 @@ function displayLinkHelper () {
 <span id="editor-link-title2">Display text</span><br /> \
 <input id="editor-link-display" type="text" placeholder="Click here" /><br/>  \
 </div>                                                  \
-<div id="editor-link-insert">Insert page link</div>  \
+<div id="editor-link-insert" class="editor-tool-large-button">Insert page link</div>  \
 ';
     
     // first input, second input, button title, left delimiter, right delimiter
@@ -251,6 +251,11 @@ function displaySaveHelper () {
     var rect = li.getBoundingClientRect();
     var box  = createPopupBox(rect.right - 300, rect.top + li.offsetHeight);
     box.addClass('right');
-    box.addClass('sticky');
+    
+    // on click save,     box.addClass('sticky');
+    box.innerHTML = '   \
+Edit summary<br /> \
+<input id="editor-save-message" type="text" placeholder="Updated ' + $('editor').getProperty('data-file') + '" /> \
+<div id="editor-save-commit" class="editor-tool-large-button">Commit changes</div>  \
     displayPopupBox(box, 150, li);
 }

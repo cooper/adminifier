@@ -9,6 +9,7 @@
     z-index: 150;
 }
 
+
 /* toolbar */
 
 div.editor-toolbar-wrapper {
@@ -58,6 +59,20 @@ ul.editor-toolbar li.disabled {
     color: #aaa;
     /* cursor: not-allowed; */
     cursor: default;
+}
+
+/* shared */
+    
+.editor-tool-large-button {
+    font-size: 14px;
+    line-height: 40px;
+    text-align: center;
+    background-color: #333;
+    height: 40px;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
 }
 
 /* toolbar popups */
@@ -127,19 +142,12 @@ div.editor-link-type.active {
     margin-top: 5px;
     background-color: #e2e2e2;
 }
-    
-#editor-link-insert {
-    font-size: 14px;
-    line-height: 40px;
-    text-align: center;
-    background-color: #333;
-    height: 40px;
-    cursor: pointer;
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-}
 
 #editor-link-insert:hover {
     background-color: #2096ce;
+}
+
+/* save helper */
+
+#editor-save-message {
 }
