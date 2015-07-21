@@ -133,6 +133,10 @@ function displayFontSelector () {
 
 function displayPopupBox (posX, posY) {
     
+    // already showing something
+    var displayedPopup = $$('div.editor-popup-box')[0];
+    if (displayedPopup) return;
+    
     // create box
     var box = new Element('div', {
         class: 'editor-popup-box',
@@ -143,18 +147,18 @@ function displayPopupBox (posX, posY) {
     });
     
     // on mouse leave, animate exit
-    box.set('morph', { duration: 150 });
     box.addEvent('mouseleave', function () {
         closeCurrentLi();
-        box.set('tween', {
+        box.set('morph', {
             duration: 150,
-            onComplete: function () { box.destroy(); }
+            onComplete: function () { if (box) box.destroy(); }
         });
         box.morph({ height: '0px', width: '0px' });
     });
     
     // animate entrance
     document.body.appendChild(box);
+    box.set('morph', { duration: 150 });
     box.morph({
         width: '300px',
         height: '150px'
