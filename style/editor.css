@@ -155,6 +155,12 @@ div.editor-link-type.active {
     height: 60px;
 }
 
+#editor-save-commit.saving {
+    background-color: #2096ce;
+    cursor: default;
+}
+
 #editor-save-commit.saved {
     background-color: #51B068 !important;
+    cursor: default;
 }

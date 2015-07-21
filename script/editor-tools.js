@@ -268,12 +268,21 @@ Edit summary<br /> \
         $('editor-save-wrapper').innerHTML = '<div style="text-align: center; line-height: 60px; height: 60px;"><i class="fa fa-spinner fa-3x fa-spin center"></i></div>'; // spinner
         var btn = $('editor-save-commit');
         btn.innerHTML = 'Comitting changes';
-        btn.setStyle('backgroundColor', '#2096ce');
+        btn.addClass('saving');
         
         // temporary fake success
         setTimeout(function () {
+            
+            // switch to checkmark
+            var i = btn.parentElement.getElementsByTagName('i')[0];
+            i.removeClass('fa-spinner');
+            i.removeClass('fa-spin');
+            i.addClass('fa-check-circle');
+            
+            // update button
             btn.addClass('saved');
             btn.innerHTML = 'Saved bb4504b';
+            
             setTimeout(function () { closeCurrentPopup(); }, 1500);
         }, 1000);
     });
