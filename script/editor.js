@@ -54,6 +54,12 @@ function editorClickOutHandler (e) {
     }
 }
 
+function editorConfirmOnPageExit (e) {
+    var message = 'You have unsaved changes.';
+    if (e) e.returnValue = message;
+    return message;
+}
+
 var editorExpressions = {
     pageTitle:      new RegExp('^@page\\.title:(.*)$'),
     pageAuthor:     new RegExp('^@page\\.author:(.*)$'),
@@ -105,6 +111,9 @@ function editorInputHandler () {
         editor.getSelection().setSelectionRange(rng);
     }
         
+    // changes?
+    window.onbeforeunload = editorHasUnsavedChanges() ? editorConfirmOnPageExit : null;
+    
 }
 
 function fakeAdopt (child) {
@@ -164,7 +173,7 @@ function closeCurrentPopup (maybe) {
         onComplete: function () { if (box) box.destroy(); }
     });
     box.morph({ height: '0px' });
-    currentPopup = undefined;
+    currentPopup = null;
 }
 
 function createPopupBox (posX, posY) {
@@ -304,7 +313,7 @@ function closeCurrentLi () {
         width: '15px',
         backgroundColor: '#696969'
     });
-    currentLi = undefined;
+    currentLi = null;
 }
 
 function addEditorKeyboardShortcuts (cuts) {
