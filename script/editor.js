@@ -47,8 +47,8 @@ function editorClickOutHandler (e) {
     }
     var from = findParent('a', e.target);
     if (from) {
-        alert('You have unsaved changes.');
         e.preventDefault();
+        alert('You have unsaved changes.');
     }
 }
 
