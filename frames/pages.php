@@ -2,8 +2,8 @@
 
 // find the sort method
 $valid_types = array('a', 'c', 'u'); // TODO: the rest
-$sort  = 'a';
-$order = '+';
+$sort  = 'c';
+$order = '-';
 if (isset($_GET['sort'])) {
     $parts = str_split($_GET['sort']);
     $sort  = in_array($parts[0], $valid_types) ? $parts[0] : 'a';
