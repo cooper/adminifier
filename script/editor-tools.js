@@ -408,7 +408,12 @@ function displayDeleteConfirmation () {
     
     // delete page function
     var deletePage = function () {
-
+        
+        // "deleting..."
+        $('editor-delete-wrapper').innerHTML = '<i class="fa fa-spinner fa-3x fa-spin center"></i>'; // spinner
+        btn.innerHTML = 'Deleting page';
+        btn.addClass('progress');
+        
     };
     
     // on click, delete page
