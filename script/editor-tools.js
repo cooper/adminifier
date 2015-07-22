@@ -323,11 +323,12 @@ Edit summary<br /> \
                 else {
                     
                     // nothing changed
-                    if (data.rev_error && data.rev_error.match('no changes'))
+                    if (data.rev_error && data.rev_error.match('no changes')) {
                         success({ unchanged: true });
                     
                     // true failure
-                    fail(data.rev_error);
+                    else
+                        fail(data.rev_error);
                     
                 }
             },
