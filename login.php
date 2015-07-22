@@ -14,7 +14,7 @@ if (isset($_SESSION['logged_in'])) {
 <!doctype html>
 <html>
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8" data-wredirect="login.php" />
     <title><?= $config->wiki_name ?> login</title>
     <link rel="icon" type="image/png" href="images/favicon.png" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet' type='text/css' />

@@ -10,6 +10,7 @@ function editorPageUnloadedHandler () {
     document.removeEvent('pageUnloaded', editorPageUnloadedHandler);
     document.removeEvent('keyup', handleEditorEscapeKey);
     document.body.removeEvent('click', editorClickOutHandler);
+    window.onbeforeunload = null;
 }
                   
 function editorPageScriptsLoadedHandler () {

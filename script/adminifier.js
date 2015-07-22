@@ -44,9 +44,9 @@ function frameLoad(page) {
                     
                 // SSV = space-separated values
                     
-                    
                 // Tools for all pages
                 'data-redirect',    // javascript frame redirect
+                'data-wredirect',   // window redirect
                 'data-nav',         // navigation item identifier to highlight
                 'data-title',       // page title for top bar
                 'data-icon',        // page icon name for top bar
@@ -163,8 +163,16 @@ function handlePageData(data) {
     currentData = data;
     $('content').setStyle('user-select', 'none');
     
+    // window redirect
+    var target = data['data-wredirect'];
+    if (target) {
+        console.log('Redirecting to ' + target);
+        window.location = target;
+        return;
+    }
+    
     // page redirect
-    var target = data['data-redirect'];
+    target = data['data-redirect'];
     if (target) {
         var newHash = '#!/' + target;
         console.log('Redirecting to ' + newHash);
