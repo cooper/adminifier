@@ -167,6 +167,7 @@ function handlePageData(data) {
     var target = data['data-wredirect'];
     if (target) {
         console.log('Redirecting to ' + target);
+        window.location.hash = '';
         window.location = target;
         return;
     }
