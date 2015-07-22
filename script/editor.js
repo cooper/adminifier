@@ -36,7 +36,8 @@ function editorPageScriptsLoadedHandler () {
 
 function editorClickOutHandler (e) {
     if (!editorHasUnsavedChanges()) return;
-    var findParent = function (tagname,el) {
+    console.log(e.target);
+    var findParent = function (tagname, el) {
         if ((el.nodeName || el.tagName).toLowerCase() === tagname.toLowerCase())
             return el;
         while (el = el.parentNode) {
@@ -46,6 +47,7 @@ function editorClickOutHandler (e) {
         return null;
     }
     var from = findParent('a', e.target);
+    console.log(from);
     if (from) {
         e.preventDefault();
         alert('You have unsaved changes.');
