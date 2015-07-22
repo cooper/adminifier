@@ -314,12 +314,24 @@ Edit summary<br /> \
         var req = new Request.JSON({
             url: 'functions/write-page.php',
             onSuccess: function (data) {
+                
+                // updated without error
                 if (data.success)
                     success(data.rev_info);
-                else
+                
+                // revision error
+                else {
+                    
+                    // nothing changed
+                    if (data.rev_error && data.rev_error.match('no changes'))
+                        success({ unchanged: true });
+                    
+                    // true failure
                     fail(data.rev_error);
+                    
+                }
             },
-            onFailure: fail
+            onFailure: function () { fail('Request error') },
         }).post({
             page:       $('editor').getProperty('data-file'),
             content:    editor.getValue(),
