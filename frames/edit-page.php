@@ -49,6 +49,8 @@ echo '<a href="functions/delete-page.php?page='.urlencode($_GET['page']).'">Dele
         
         <li data-action="save" class="right"><i class="fa right fa-save"></i> Save</li>
         <li data-action="delete" class="right"><i class="fa right fa-trash"></i> Delete</li>
+        <li data-action="view" class="right"><i class="fa right fa-binoculars"></i> View page</li>
+        <li data-action="options" class="right"><i class="fa right fa-wrench"></i> Options</li>
         <li id="toolbar-redo" data-action="redo" class="right disabled"><i class="fa right fa-repeat"></i> Redo</li>
         <li id="toolbar-undo" data-action="undo" class="right disabled"><i class="fa right fa-undo"></i> Undo</li>
         

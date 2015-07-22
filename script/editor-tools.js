@@ -6,6 +6,7 @@ function editorLoadedHandler () {
     Object.append(toolbarFunctions, {
         font:       displayFontSelector,
         link:       displayLinkHelper,
+        view:       openPageInNewTab,
         save:       displaySaveHelper
     });
     
@@ -257,6 +258,14 @@ function displayLinkHelper () {
     
     displayPopupBox(box, 215, li);
     $('editor-link-target').focus();
+}
+
+// VIEW PAGE BUTTON
+
+function openPageInNewTab () {
+    var root = adminifier.wikiPageRoot;
+    var pageName = $('editor').getProperty('data-file').replace(/\.page$/, '');
+    window.open(root + pageName);
 }
 
 // SAVE COMMIT HELPER
