@@ -79,6 +79,21 @@ ul.editor-toolbar li.disabled {
     background-color: #2096ce;
 }
 
+.editor-tool-large-button.progress {
+    background-color: #2096ce;
+    cursor: default;
+}
+
+.editor-tool-large-button.success {
+    background-color: #51B068 !important;
+    cursor: default;
+}
+
+.editor-tool-large-button.failure {
+    background-color: #D45D5D !important;
+    cursor: default;
+}
+
 .editor-full-width-input {
     width: 290px;
     width: calc(100% - 12px);
@@ -168,4 +183,17 @@ div.editor-link-type.active {
 #editor-save-commit.failed {
     background-color: #D45D5D !important;
     cursor: default;
+}
+
+/* delete confirmation */
+
+#editor-delete-wrapper {
+    text-align: center;
+    line-height: 60px;
+    height: 60px;
+    margin: 10px;
+}
+
+#editor-delete-button:hover {
+    background-color: #D45D5D;
 }

@@ -7,6 +7,7 @@ function editorLoadedHandler () {
         font:       displayFontSelector,
         link:       displayLinkHelper,
         view:       openPageInNewTab,
+        delete:     displayDeleteConfirmation,
         save:       displaySaveHelper
     });
     
@@ -277,7 +278,6 @@ function displaySaveHelper () {
     box.addClass('right');
     fakeAdopt(box);
     
-    // on click save,     box.addClass('sticky');
     box.innerHTML = '   \
 <div id="editor-save-wrapper"> \
 Edit summary<br /> \
@@ -298,7 +298,7 @@ Edit summary<br /> \
         $('editor-save-wrapper').innerHTML = '<div style="text-align: center; line-height: 60px; height: 60px;"><i class="fa fa-spinner fa-3x fa-spin center"></i></div>'; // spinner
         var btn = $('editor-save-commit');
         btn.innerHTML = 'Comitting changes';
-        btn.addClass('saving');
+        btn.addClass('progress');
         
         // successful save callback
         var success = function (info) {
@@ -311,7 +311,8 @@ Edit summary<br /> \
             i.addClass('fa-check-circle');
 
             // update button
-            btn.addClass('saved');
+            btn.addClass('success');
+            btn.removeClass('progress');
             btn.innerHTML = info.unchanged ?
                 'File unchanged' : 'Saved ' + info.id.substr(0, 7);
 
@@ -329,7 +330,8 @@ Edit summary<br /> \
             i.addClass('fa-exclamation-triangle');
 
             // update button
-            btn.addClass('failed');
+            btn.addClass('failure');
+            btn.removeClass('progress');
             btn.innerHTML = 'Save failed';
 
             setTimeout(function () { closeCurrentPopup(); }, 1500);  
@@ -372,4 +374,31 @@ Edit summary<br /> \
     
     displayPopupBox(box, 120, li);
     $('editor-save-message').focus();
+}
+
+// DELETE CONFIRMATION
+
+function displayDeleteConfirmation () {
+    var li   = $$('li[data-action="delete"]')[0];
+    var rect = li.getBoundingClientRect();
+    var box  = createPopupBox(rect.right - 300, rect.top + li.offsetHeight);
+    box.addClass('right');
+    fakeAdopt(box);
+    
+    box.innerHTML = '   \
+        <div id="editor-delete-wrapper"> \
+            <i class="fa fa-3x center fa-question"></i> \
+        </div> \
+<div id="editor-delete-button" class="editor-tool-large-button">Delete</div>  \
+';
+    
+    // delete page function
+    var deletePage = function () {
+
+    };
+    
+    // on click, delete page
+    $('editor-delete-button').addEvent('click', deletePage);
+    
+    displayPopupBox(box, 120, li);
 }
