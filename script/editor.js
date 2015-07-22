@@ -1,4 +1,4 @@
-var Range, editor, currentLi, currentPopup;
+var Range, editor, currentLi, currentPopup, editorLastSavedData;
 
 document.addEvent('pageScriptsLoaded', editorPageScriptsLoadedHandler);
 document.addEvent('pageUnloaded', editorPageUnloadedHandler);
@@ -9,6 +9,7 @@ function editorPageUnloadedHandler () {
     document.removeEvent('pageScriptsLoaded', editorPageScriptsLoadedHandler);
     document.removeEvent('pageUnloaded', editorPageUnloadedHandler);
     document.removeEvent('keyup', handleEditorEscapeKey);
+    document.body.removeEvent('click', editorClickOutHandler);
 }
                   
 function editorPageScriptsLoadedHandler () {
@@ -18,6 +19,7 @@ function editorPageScriptsLoadedHandler () {
     
     Range  = ace.require('ace/range').Range;
     editor = ace.edit("editor");
+    editorLastSavedData = editor.getValue();
     
     // render editor
     editor.setTheme("ace/theme/twilight"); /* eclipse is good light one */
@@ -25,8 +27,29 @@ function editorPageScriptsLoadedHandler () {
     editor.on('input', editorInputHandler);
     setTimeout(function () { editor.resize(); }, 500);
 
+    // listen for clicks to navigate away
+    document.body.addEvent('click', editorClickOutHandler);
+    
     window.editorLoaded = true;
     document.fireEvent('editorLoaded');
+}
+
+function editorClickOutHandler (e) {
+    if (!editorHasUnsavedChanges()) return;
+    var findParent = function (tagname,el) {
+        if ((el.nodeName || el.tagName).toLowerCase() === tagname.toLowerCase())
+            return el;
+        while (el = el.parentNode) {
+            if ((el.nodeName || el.tagName).toLowerCase() === tagname.toLowerCase())
+                return el;
+        }
+        return null;
+    }
+    var from = findParent('a', e.target);
+    if (from) {
+        alert('You have unsaved changes.');
+        e.preventDefault();
+    }
 }
 
 var editorExpressions = {
@@ -327,4 +350,8 @@ function setupToolbar () {
             closeCurrentLi();
     });
     
+}
+
+function editorHasUnsavedChanges () {
+    return editor.getValue() != editorLastSavedData;
 }

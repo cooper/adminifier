@@ -279,6 +279,7 @@ Edit summary<br /> \
     
     // save changes function
     var saveChanges = function () {
+        var saveData = editor.getValue();
         
         // prevent box from closing for now
         box.addClass('sticky');
@@ -292,7 +293,8 @@ Edit summary<br /> \
         
         // successful save callback
         var success = function (info) {
-
+            editorLastSavedData = saveData;
+            
             // switch to checkmark
             var i = btn.parentElement.getElementsByTagName('i')[0];
             i.removeClass('fa-spinner');
@@ -349,7 +351,7 @@ Edit summary<br /> \
             onFailure: function () { fail('Request error') },
         }).post({
             page:       $('editor').getProperty('data-file'),
-            content:    editor.getValue(),
+            content:    saveData,
             message:    message
         });
 
