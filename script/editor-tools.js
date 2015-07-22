@@ -301,13 +301,14 @@ Edit summary<br /> \
 
             // update button
             btn.addClass('saved');
-            btn.innerHTML = 'Saved ' + info.id.substr(0, 7);
+            btn.innerHTML = info.unchanged ?
+                'File unchanged' : 'Saved ' + info.id.substr(0, 7);
 
             setTimeout(function () { closeCurrentPopup(); }, 1500);  
         };
         
         // save failed callback
-        var fail = function () { alert('failure'); };
+        var fail = function (msg) { alert('Save failed: ' + msg); };
         
         // save request
         var req = new Request.JSON({
@@ -316,7 +317,7 @@ Edit summary<br /> \
                 if (data.success)
                     success(data.rev_info);
                 else
-                    fail();
+                    fail(data.rev_error);
             },
             onFailure: fail
         }).post({
