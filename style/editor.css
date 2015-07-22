@@ -80,7 +80,7 @@ ul.editor-toolbar li.disabled {
 }
 
 .editor-tool-large-button.progress {
-    background-color: #2096ce;
+    background-color: #2096ce !important;
     cursor: default;
 }
 
