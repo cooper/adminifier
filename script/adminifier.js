@@ -1,6 +1,6 @@
 window.addEvent('hashchange', hashLoad);
 document.addEvent('domready', function () {
-    setupFrameLinks(document.body);
+    //setupFrameLinks(document.body);
     hashLoad();
 });
 
@@ -23,14 +23,6 @@ Element.implement('onEnter', function (func) {
         func(e);
     });
 });
-
-function setupFrameLinks(parent) {
-    parent.getElements('a.frame-click').each(function (a) {
-        a.addEventListener('click', function (e) {
-            frameLoad(a.getProperty('href').substring(3));
-        });
-    });
-}
 
 var currentPage;
 function frameLoad(page) {
@@ -72,7 +64,7 @@ function frameLoad(page) {
                 );
                 handlePageData(attrs);
             }
-            setupFrameLinks($('content'));
+            //setupFrameLinks($('content'));
         },
         onFail: function (html) {
         }
