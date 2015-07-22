@@ -387,10 +387,25 @@ function displayDeleteConfirmation () {
     
     box.innerHTML = '   \
         <div id="editor-delete-wrapper"> \
-            <i class="fa fa-3x center fa-question"></i> \
+            <i class="fa fa-3x center fa-question-circle"></i> \
         </div> \
-<div id="editor-delete-button" class="editor-tool-large-button">Delete</div>  \
+<div id="editor-delete-button" class="editor-tool-large-button">Are you sure?</div>  \
 ';
+    
+    // button text events
+    var btn = $('editor-delete-button');
+    var shouldChange = function () {
+        return
+            !btn.hasClass('progress') &&
+            !btn.hasClass('success')  &&
+            !btn.hasClass('failure');
+    };
+    btn.addEvent('mouseenter', function () {
+        if (shouldChange()) btn.innerHTML = 'Delete this page';
+    });
+    btn.addEvent('mouseleave', function () {
+        if (shouldChange()) btn.innerHTML = 'Are you sure?';
+    });
     
     // delete page function
     var deletePage = function () {
@@ -398,7 +413,7 @@ function displayDeleteConfirmation () {
     };
     
     // on click, delete page
-    $('editor-delete-button').addEvent('click', deletePage);
+    btn.addEvent('click', deletePage);
     
     displayPopupBox(box, 120, li);
 }
