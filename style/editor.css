@@ -164,3 +164,8 @@ div.editor-link-type.active {
     background-color: #51B068 !important;
     cursor: default;
 }
+
+#editor-save-commit.failed {
+    background-color: #D45D5D !important;
+    cursor: default;
+}

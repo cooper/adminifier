@@ -308,7 +308,21 @@ Edit summary<br /> \
         };
         
         // save failed callback
-        var fail = function (msg) { alert('Save failed: ' + msg); };
+        var fail = function (msg) {
+            alert('Save failed: ' + msg);
+            
+            // switch to /!\
+            var i = btn.parentElement.getElementsByTagName('i')[0];
+            i.removeClass('fa-spinner');
+            i.removeClass('fa-spin');
+            i.addClass('fa-exclamation-triangle');
+
+            // update button
+            btn.addClass('failed');
+            btn.innerHTML = 'Save failed';
+
+            setTimeout(function () { closeCurrentPopup(); }, 1500);  
+        };
         
         // save request
         var req = new Request.JSON({
