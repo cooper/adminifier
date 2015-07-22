@@ -13,7 +13,8 @@ function editorLoadedHandler () {
         [ 'Ctrl-B', 'Command-B',    'bold'      ],
         [ 'Ctrl-I', 'Command-I',    'italic'    ],
         [ 'Ctrl-U', 'Command-U',    'underline' ],
-        [ 'Ctrl-S', 'Command-S',    'save'      ]
+        [ 'Ctrl-S', 'Command-S',    'save'      ],
+        [ 'Ctrl-K', 'Command-K',    'link'      ]
     ]);
 
     updateEditorTitle();
