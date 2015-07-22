@@ -279,27 +279,52 @@ Edit summary<br /> \
     
     // save changes function
     var saveChanges = function () {
+        
+        // prevent box from closing for now
         box.addClass('sticky');
+        var message = $('editor-save-message').getProperty('value');
+        
+        // "saving..."
         $('editor-save-wrapper').innerHTML = '<div style="text-align: center; line-height: 60px; height: 60px;"><i class="fa fa-spinner fa-3x fa-spin center"></i></div>'; // spinner
         var btn = $('editor-save-commit');
         btn.innerHTML = 'Comitting changes';
         btn.addClass('saving');
         
-        // temporary fake success
-        setTimeout(function () {
-            
+        // successful save callback
+        var success = function (info) {
+
             // switch to checkmark
             var i = btn.parentElement.getElementsByTagName('i')[0];
             i.removeClass('fa-spinner');
             i.removeClass('fa-spin');
             i.addClass('fa-check-circle');
-            
+
             // update button
             btn.addClass('saved');
-            btn.innerHTML = 'Saved bb4504b';
-            
-            setTimeout(function () { closeCurrentPopup(); }, 1500);
-        }, 1500);
+            btn.innerHTML = 'Saved ' + info.id.substr(0, 7);
+
+            setTimeout(function () { closeCurrentPopup(); }, 1500);  
+        };
+        
+        // save failed callback
+        var fail = function () { alert('failure'); };
+        
+        // save request
+        var req = new Request.JSON({
+            url: 'functions/write-page.php',
+            onSuccess: function (data) {
+                if (data.success)
+                    success(data.rev_info);
+                else
+                    fail();
+            },
+            onFailure: fail
+        }).post({
+            page:       $('editor').getProperty('data-file'),
+            content:    editor.getValue(),
+            message:    message
+        });
+
     };
     
     // on click or enter, save changes

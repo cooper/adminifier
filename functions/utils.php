@@ -11,8 +11,11 @@ function json_error ($msg = 'Unknown') {
     )));
 }
 
-function json_success () {
-    echo json_encode(array('success' => true));
+function json_success ($other_opts) {
+    $ary = array('success' => true);
+    if ($other_opts)
+        $ary = array_merge($ary, $other_opts);
+    echo json_encode($ary);
 }
 
 ?>
