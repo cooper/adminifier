@@ -1,8 +1,5 @@
 window.addEvent('hashchange', hashLoad);
-document.addEvent('domready', function () {
-    //setupFrameLinks(document.body);
-    hashLoad();
-});
+document.addEvent('domready', hashLoad);
 
 // this is for if pageScriptsDone event is added
 // and the page scripts are already done
@@ -64,7 +61,6 @@ function frameLoad(page) {
                 );
                 handlePageData(attrs);
             }
-            //setupFrameLinks($('content'));
         },
         onFail: function (html) {
         }
