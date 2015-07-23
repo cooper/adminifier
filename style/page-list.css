@@ -2,6 +2,7 @@
     /*table-layout: fixed;*/
     border-collapse: collapse;
     width: 100%;
+    margin-top: 40px;
 }
 
 /* all cells */
@@ -74,7 +75,6 @@ ul.page-list-toolbar li {
     float: left;
     padding: 0 10px;
     display: inline-block;
-    width: 15px;
     height: 40px;
     overflow: hidden;
     cursor: pointer;
