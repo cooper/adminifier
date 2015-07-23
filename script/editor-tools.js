@@ -554,5 +554,5 @@ function generatePageOptions (opts) {
         
         string += '\n';
     });
-    return string + '\n';
+    return string;
 }
