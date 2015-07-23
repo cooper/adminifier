@@ -34,8 +34,8 @@ function sort_method ($type) {
       data-sort="<?= $sort.$order ?>"
 />
 
-<div class="editor-toolbar-wrapper">
-    <ul class="editor-toolbar">
+<div class="page-list-toolbar-wrapper">
+    <ul class="page-list-toolbar">
     </ul>
 </div>
 
