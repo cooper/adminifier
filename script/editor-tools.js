@@ -495,7 +495,7 @@ function displayPageOptionsWindow () {
     });
     
     // delete all the previous lines
-    Object.values.each(found, function (item) {
+    Object.values(found).each(function (item) {
         var range = item.range;
         if (!range) return;
         editor.getSelection().setSelectionRange(range);
