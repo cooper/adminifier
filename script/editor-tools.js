@@ -483,19 +483,28 @@ function displayDeleteConfirmation () {
 // PAGE OPTIONS
 
 function findPageOptions () {
-    
+
     // remember the current selection
     var originalRange = editor.getSelection().getRange();
     
-    // find stuff
-    var opts  = { regExp: true, wrap: true };
-    var found = {
-        title:   editor.find(editorExpressions.pageTitle,   opts),
-        created: editor.find(editorExpressions.pageCreated, opts),
-        author:  editor.find(editorExpressions.pageAuthor,  opts),
-        draft:   editor.find(editorExpressions.pageDraft,   opts)
+    var find = function (exp) {
+        var found = editor.find(exp, { regExp: true, wrap: true });
+        var value = editor.getSelectedText().match(exp)[1];
+        return {
+            text:  editor.getSelectedText(),
+            value: typeof value != 'undefined' ? value.trim() : true,
+            range: found
+        };
     };
     
+    // find stuff
+    var found = {
+        title:   find(editorExpressions.pageTitle),
+        created: find(editorExpressions.pageCreated),
+        author:  find(editorExpressions.pageAuthor),
+        draft:   find(editorExpressions.pageDraft)
+    };
+  
     // revert to the original selection
     editor.getSelection().setSelectionRange(originalRange);
 
