@@ -38,12 +38,15 @@
 /* head cells */
 
 #page-list thead {
+    position: fixed;
+    z-index: 160;
+}
+
+#page-list thead th {
     background-color: #696969;
     height: 40px;
     line-height: 40px;
     color: #E2E2E2;
-    position: fixed;
-    z-index: 160;
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
