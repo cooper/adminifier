@@ -498,6 +498,6 @@ function findPageOptions () {
     
     // revert to the original selection
     editor.getSelection().setSelectionRange(originalRange);
-    
-    console.log(found);
+
+    return found;
 }
