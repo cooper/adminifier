@@ -64,7 +64,8 @@ function editorConfirmOnPageExit (e) {
 var editorExpressions = {
     pageTitle:      new RegExp('^@page\\.title:(.*)$'),
     pageAuthor:     new RegExp('^@page\\.author:(.*)$'),
-    pageCreated:    new RegExp('^@page\\.created:(.*)$')
+    pageCreated:    new RegExp('^@page\\.created:(.*)$'),
+    pageDraft:      new RegExp('^@page\\.draft;$')
 };
 
 function resetSelectionAtTopLeft () {

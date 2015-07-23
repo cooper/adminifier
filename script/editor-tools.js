@@ -479,3 +479,25 @@ function displayDeleteConfirmation () {
     
     displayPopupBox(box, 120, li);
 }
+
+// PAGE OPTIONS
+
+function findPageOptions () {
+    
+    // remember the current selection
+    var originalRange = editor.getSelection().getRange();
+    
+    // find stuff
+    var opts  = { regExp: true, wrap: true };
+    var found = {
+        title:   editor.find(editorExpressions.pageTitle,   opts),
+        created: editor.find(editorExpressions.pageCreated, opts),
+        author:  editor.find(editorExpressions.pageAuthor,  opts),
+        draft:   editor.find(editorExpressions.pageDraft,   opts)
+    };
+    
+    // revert to the original selection
+    editor.getSelection().setSelectionRange(originalRange);
+    
+    console.log(found);
+}
