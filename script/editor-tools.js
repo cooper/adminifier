@@ -504,6 +504,7 @@ function findPageOptions () {
     
     var find = function (exp) {
         var found = editor.find(exp, { regExp: true, wrap: true });
+        if (!found) return;
         var value = editor.getSelectedText().match(exp)[1];
         return {
             text:  editor.getSelectedText(),
@@ -544,6 +545,7 @@ function generatePageOptions (opts) {
         else
             string += ': ' + value + ';';
         
+        string += '\n';
     });
     return string + '\n';
 }
