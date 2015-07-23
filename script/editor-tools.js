@@ -551,8 +551,8 @@ function generatePageOptions (opts) {
         // other value
         else {
             string += ':';
-            if (optName.length < 9)
-                string += Array(9 - optName.length).join(' ');
+            if (optName.length < 11)
+                string += Array(11 - optName.length).join(' ');
             string += value + ';';
         }
         
