@@ -409,10 +409,68 @@ function displayDeleteConfirmation () {
     // delete page function
     var deletePage = function () {
         
+        // prevent box from closing for now
+        box.addClass('sticky');
+        
         // "deleting..."
         $('editor-delete-wrapper').innerHTML = '<i class="fa fa-spinner fa-3x fa-spin center"></i>'; // spinner
         btn.innerHTML = 'Deleting page';
         btn.addClass('progress');
+        
+        // success callback
+        var success = function () {
+            
+            // switch to checkmark
+            var i = btn.parentElement.getElementsByTagName('i')[0];
+            i.removeClass('fa-spinner');
+            i.removeClass('fa-spin');
+            i.addClass('fa-check-circle');
+
+            // update button
+            btn.addClass('success');
+            btn.removeClass('progress');
+            btn.innerHTML = 'File Deleted';
+
+            // redirect
+            setTimeout(function () {
+                window.location = adminifier.adminRoot
+            }, 1500);
+            
+        };
+        
+        var fail = function () {
+
+            // switch to /!\
+            var i = btn.parentElement.getElementsByTagName('i')[0];
+            i.removeClass('fa-spinner');
+            i.removeClass('fa-spin');
+            i.addClass('fa-exclamation-triangle');
+
+            // update button
+            btn.addClass('failure');
+            btn.removeClass('progress');
+            btn.innerHTML = 'Delete failed';
+
+            setTimeout(function () { closeCurrentPopup(); }, 1500);
+        };
+        
+        // delete request
+        var req = new Request.JSON({
+            url: 'functions/delete-page.php',
+            onSuccess: function (data) {
+                
+                // deleted without error
+                if (data.success)
+                    success();
+                
+                // delete error
+                else fail('Unknown error');
+                
+            },
+            onFailure: function () { fail('Request error') },
+        }).post({
+            page: $('editor').getProperty('data-file')
+        });
         
     };
     
