@@ -25,7 +25,19 @@ function sort_method ($type) {
 
 ?>
 
-<meta data-nav="pages" data-title="Pages" data-icon="file-text" data-scripts="page-list" data-sort="<?= $sort.$order ?>" />
+<meta
+      data-nav="pages"
+      data-title="Pages"
+      data-icon="file-text"
+      data-scripts="page-list"
+      data-flags="no-margin"
+      data-sort="<?= $sort.$order ?>"
+/>
+
+<div class="editor-toolbar-wrapper">
+    <ul class="editor-toolbar">
+    </ul>
+</div>
 
 <table id="page-list">
 <thead>

@@ -50,3 +50,46 @@
 #page-list tbody tr:nth-child(even) {
     background-color: #eee;
 }
+
+/* toolbar */
+
+div.page-list-toolbar-wrapper {
+    width: 100%;
+    height: 30px;
+    border-bottom: 1px solid #222;
+    background-color: #696969;
+    z-index: 160;
+}
+
+ul.page-list-toolbar {
+    height: 30px;
+    line-height: 30px;
+    color: #E2E2E2;
+    list-style-type: none;
+    padding: 0 15px;
+}
+
+ul.page-list-toolbar li {
+    float: left;
+    padding: 0 10px;
+    display: inline-block;
+    width: 15px;
+    height: 30px;
+    overflow: hidden;
+    cursor: pointer;
+    white-space: nowrap;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
+
+ul.page-list-toolbar li.right {
+    float: right;
+    text-align: right;
+    direction: rtl;
+}
+
+ul.page-list-toolbar li.disabled {
+    color: #aaa;
+    cursor: default;
+}
