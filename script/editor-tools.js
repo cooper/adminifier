@@ -492,7 +492,7 @@ function findPageOptions () {
         var value = editor.getSelectedText().match(exp)[1];
         return {
             text:  editor.getSelectedText(),
-            value: typeof value != 'undefined' ? value.trim() : true,
+            value: typeof value != 'undefined' ? value.trim().replace(/;$/, '') : true,
             range: found
         };
     };
