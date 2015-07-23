@@ -230,7 +230,7 @@ function getSelectionRanges() {
     if (selectRange.isEmpty()) {
         var wordRange = editor.getSelection().getWordRange();
         var word = editor.getSession().getTextRange(wordRange).trim();
-        if (word.length && !word.match(/^\w*$/))
+        if (word.length && !word.match(/^\W*$/))
             selectRange = wordRange;
     }
     
