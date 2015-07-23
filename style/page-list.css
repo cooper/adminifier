@@ -37,8 +37,16 @@
 
 /* head cells */
 
-#page-list thead th {
-    background-color: #ddd;
+#page-list thead {
+    background-color: #696969;
+    height: 40px;
+    line-height: 40px;
+    color: #E2E2E2;
+    position: fixed;
+    z-index: 160;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
 }
 
 /* body cells */
@@ -53,23 +61,6 @@
 
 /* toolbar */
 
-div.page-list-toolbar-wrapper {
-    width: 100%;
-    height: 40px;
-    border-bottom: 1px solid #ccc;
-    background-color: #696969;
-    z-index: 160;
-    position: fixed;
-}
-
-ul.page-list-toolbar {
-    height: 40px;
-    line-height: 40px;
-    color: #E2E2E2;
-    list-style-type: none;
-    padding: 0 15px;
-}
-
 ul.page-list-toolbar li {
     float: left;
     padding: 0 10px;
@@ -78,9 +69,6 @@ ul.page-list-toolbar li {
     overflow: hidden;
     cursor: pointer;
     white-space: nowrap;
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
 }
 
 ul.page-list-toolbar li.right {

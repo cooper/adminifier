@@ -34,13 +34,6 @@ function sort_method ($type) {
       data-sort="<?= $sort.$order ?>"
 />
 
-<div class="page-list-toolbar-wrapper">
-    <ul class="page-list-toolbar">
-        <li><i class="fa fa-trash"></i> Delete</li>
-    </ul>
-</div>
-
-<div style="height: 40px;"></div>
 <table id="page-list">
 <thead>
     <th class="checkbox"><input type="checkbox" value="0" /></th>
