@@ -59,7 +59,7 @@ function getPageTitleRange () {
         var char = string[i];
         
         // made it to the end without finding semicolon
-        if (typeof char == 'undefined') {
+        if (typeOf(char) == 'null') {
             endIndex = i;
             break;
         }
@@ -488,11 +488,23 @@ function displayPageOptionsWindow () {
     
     // this will actually be passed user input
     var optsString = generatePageOptions({
-        title:      found.title.value,
-        created:    found.created.value,
-        author:     found.author.value,
-        draft:      found.draft.value
+        title:      found.title   ? found.title.value   : null,
+        created:    found.created ? found.created.value : null,
+        author:     found.author  ? found.author.value  : null,
+        draft:      found.draft   ? found.draft.value   : null
     });
+    
+    // delete all the previous lines
+    Object.values.each(found, function (item) {
+        var range = item.range;
+        if (!range) return;
+        editor.getSelection().setSelectionRange(range);
+        editor.removeLines();
+    });
+    
+    // inject the new lines at the beginning
+    editor.getSelection().setSelectionRange(new Range(0, 0, 0, 0));
+    editor.insert(optsString);
     
     return optsString;
 }
@@ -533,7 +545,8 @@ function generatePageOptions (opts) {
         
         // not present
         var value = opts[optName];
-        if (typeof value == 'undefined') return;
+        if (typeOf(value) == 'null') return;
+        if (typeOf(value) == 'string' && !value.length) return;
         
         string += '@page.' + optName;
         
