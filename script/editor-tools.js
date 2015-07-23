@@ -549,8 +549,11 @@ function generatePageOptions (opts) {
             string += ';';
         
         // other value
-        else
-            string += ': ' + value + ';';
+        else {
+            if (value.length < 9)
+                value = Array(9 - value.length).join(' ') + value;
+            string += ':' + value + ';';
+        }
         
         string += '\n';
     });
