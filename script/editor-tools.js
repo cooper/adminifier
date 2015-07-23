@@ -484,7 +484,7 @@ function displayDeleteConfirmation () {
 // PAGE OPTIONS
 
 function displayPageOptionsWindow () {
-    var found = findPageOptions();
+    var found = findPageOptions(true);
     
     // this will actually be passed user input
     var optsString = generatePageOptions({
@@ -494,14 +494,6 @@ function displayPageOptionsWindow () {
         draft:      found.draft   ? found.draft.value   : null
     });
     
-    // delete all the previous lines
-    Object.values(found).each(function (item) {
-        var range = item.range;
-        if (!range) return;
-        editor.getSelection().setSelectionRange(range);
-        editor.removeLines();
-    });
-    
     // inject the new lines at the beginning
     editor.getSelection().setSelectionRange(new Range(0, 0, 0, 0));
     editor.insert(optsString);
@@ -509,7 +501,7 @@ function displayPageOptionsWindow () {
     return optsString;
 }
 
-function findPageOptions () {
+function findPageOptions (remove) {
 
     // remember the current selection
     var originalRange = editor.getSelection().getRange();
@@ -517,9 +509,11 @@ function findPageOptions () {
     var find = function (exp) {
         var found = editor.find(exp, { regExp: true, wrap: true });
         if (!found) return;
-        var value = editor.getSelectedText().match(exp)[1];
+        var text  = editor.getSelectedText();
+        var value = text.match(exp)[1];
+        if (remove) editor.removeLines();
         return {
-            text:  editor.getSelectedText(),
+            text:  text,
             value: typeof value != 'undefined' ? value.trim().replace(/;$/, '') : true,
             range: found
         };
