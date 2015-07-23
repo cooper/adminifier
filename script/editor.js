@@ -226,9 +226,11 @@ function getSelectionRanges() {
 
     // if there is no actual selection (just a cursor position),
     // use the word range. but only if it's in a word (check strlen).
+    // also check if it strictly non-word chars, such as a symbol.
     if (selectRange.isEmpty()) {
         var wordRange = editor.getSelection().getWordRange();
-        if (editor.getSession().getTextRange(wordRange).trim().length)
+        var word = editor.getSession().getTextRange(wordRange).trim();
+        if (word.length && !word.match(/^\w*$/))
             selectRange = wordRange;
     }
     
