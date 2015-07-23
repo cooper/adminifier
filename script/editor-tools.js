@@ -550,9 +550,10 @@ function generatePageOptions (opts) {
         
         // other value
         else {
-            if (value.length < 9)
-                value = Array(9 - value.length).join(' ') + value;
-            string += ':' + value + ';';
+            string += ':';
+            if (optName.length < 9)
+                string += Array(9 - optName.length).join(' ');
+            string += value + ';';
         }
         
         string += '\n';
