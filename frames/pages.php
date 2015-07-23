@@ -40,6 +40,7 @@ function sort_method ($type) {
     </ul>
 </div>
 
+<div style="height: 40px;"></div>
 <table id="page-list">
 <thead>
     <th class="checkbox"><input type="checkbox" value="0" /></th>
