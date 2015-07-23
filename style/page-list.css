@@ -44,13 +44,13 @@
 
 #page-list thead th {
     background-color: #696969;
-    height: 40px;
-    line-height: 40px;
     color: #E2E2E2;
     white-space: nowrap;
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
+    padding: 8px;
+    border: 1px solid #222;
 }
 
 #page-list thead th a {
