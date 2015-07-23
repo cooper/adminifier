@@ -50,7 +50,8 @@
     -webkit-user-select: none;
     -moz-user-select: none;
     padding: 8px;
-    border: 1px solid #222;
+    border: 1px solid transparent;
+    text-align: left;
 }
 
 #page-list thead th a {
