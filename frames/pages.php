@@ -36,6 +36,7 @@ function sort_method ($type) {
 
 <div class="page-list-toolbar-wrapper">
     <ul class="page-list-toolbar">
+        <li><i class="fa fa-trash"></i> Delete</li>
     </ul>
 </div>
 

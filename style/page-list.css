@@ -55,15 +55,16 @@
 
 div.page-list-toolbar-wrapper {
     width: 100%;
-    height: 30px;
-    border-bottom: 1px solid #222;
+    height: 40px;
+    border-bottom: 1px solid #ccc;
     background-color: #696969;
     z-index: 160;
+    position: fixed;
 }
 
 ul.page-list-toolbar {
-    height: 30px;
-    line-height: 30px;
+    height: 40px;
+    line-height: 40px;
     color: #E2E2E2;
     list-style-type: none;
     padding: 0 15px;
@@ -74,7 +75,7 @@ ul.page-list-toolbar li {
     padding: 0 10px;
     display: inline-block;
     width: 15px;
-    height: 30px;
+    height: 40px;
     overflow: hidden;
     cursor: pointer;
     white-space: nowrap;
