@@ -48,6 +48,7 @@ function sort_method ($type) {
     </th>
 </thead>
 <tbody>
+    <tr></tr>
 <? foreach ($pages as $page): ?>
     <tr>
         <td class="checkbox">
