@@ -6,6 +6,7 @@ function editorLoadedHandler () {
     Object.append(toolbarFunctions, {
         font:       displayFontSelector,
         link:       displayLinkHelper,
+        options:    displayPageOptionsWindow,
         view:       openPageInNewTab,
         delete:     displayDeleteConfirmation,
         save:       displaySaveHelper
@@ -482,6 +483,20 @@ function displayDeleteConfirmation () {
 
 // PAGE OPTIONS
 
+function displayPageOptionsWindow () {
+    var found = findPageOptions();
+    
+    // this will actually be passed user input
+    var optsString = generatePageOptions({
+        title:      found.title.value,
+        created:    found.created.value,
+        author:     found.author.value,
+        draft:      found.draft.value
+    });
+    
+    return optsString;
+}
+
 function findPageOptions () {
 
     // remember the current selection
@@ -509,4 +524,26 @@ function findPageOptions () {
     editor.getSelection().setSelectionRange(originalRange);
 
     return found;
+}
+
+function generatePageOptions (opts) {
+    var string = '';
+    ['title', 'created', 'author', 'draft'].each(function (optName) {
+        
+        // not present
+        var value = opts[optName];
+        if (typeof value == 'undefined') return;
+        
+        string += '@page.' + optName;
+        
+        // boolean
+        if (value === true) 
+            string += ';';
+        
+        // other value
+        else
+            string += ': ' + value + ';';
+        
+    });
+    return string + '\n';
 }
