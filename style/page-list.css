@@ -6,7 +6,7 @@
 
 /* all cells */
 
-#page-list td, #page-list th {
+#page-list td {
     border: 1px solid #ccc;
     padding: 8px;
     text-align: left;
@@ -47,9 +47,14 @@
     height: 40px;
     line-height: 40px;
     color: #E2E2E2;
+    white-space: nowrap;
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
+}
+
+#page-list thead th a {
+    color: #E2E2E2;
 }
 
 /* body cells */
