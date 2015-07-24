@@ -567,7 +567,7 @@ function generatePageOptions (opts) {
         biggest = 9,
         done    = {};
     var updateBiggest = function (length, ret) {
-        var maybeBigger = length + 4;
+        var maybeBigger = length + 5;
         console.log('is ' + maybeBigger + ' bigger than ' + biggest);
         if (maybeBigger > biggest)
             biggest = maybeBigger;
