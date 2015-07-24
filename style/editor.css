@@ -1,5 +1,4 @@
 #editor {
-    width: 100%;
     min-height: 500px;
     position: fixed;
     left: 50px;
@@ -8,7 +7,6 @@
     bottom: 0;
     z-index: 150;
 }
-
 
 /* toolbar */
 
