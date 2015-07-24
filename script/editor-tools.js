@@ -487,12 +487,9 @@ function displayPageOptionsWindow () {
     var found = findPageOptions(true);
     
     // this will actually be passed user input
-    var optsString = generatePageOptions({
-        title:      found.title   ? found.title.value   : null,
-        created:    found.created ? found.created.value : null,
-        author:     found.author  ? found.author.value  : null,
-        draft:      found.draft   ? found.draft.value   : null
-    });
+    var optsString = generatePageOptions(Object.map(found, function (value, key) {
+        return value.value;
+    }));
     
     // inject the new lines at the beginning
     editor.getSelection().setSelectionRange(new Range(0, 0, 0, 0));
