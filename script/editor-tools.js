@@ -501,6 +501,21 @@ function displayPageOptionsWindow () {
     return optsString;
 }
 
+function editorRemoveLinesInRanges (ranges) {
+    
+    // get line numbers in descending order
+    // (starting from the bottom)
+    var lines = ranges.map(function (r) {
+        return [ r.start.row, r.end.row ];
+    }).flatten().unique().sort(function (a, b) { return b - a });
+    
+    lines.each(function (line) {
+        var r = new Range(line, 0, line, 0);
+        editor.getSelection().setSelectionRange(r);
+        editor.removeLines();
+    });
+}
+
 function findPageOptions (remove) {
 
     // remember the current selection
@@ -531,8 +546,7 @@ function findPageOptions (remove) {
     
     // the original selection is still active.
     // delete all of the matching lines
-    if (remove)
-        editor.removeLines();
+    if (remove) editorRemoveLinesInRanges(ranges);
 
     // now find booleans
     editor.findAll(boolExp, { regExp: true, wrap: true });
@@ -540,8 +554,7 @@ function findPageOptions (remove) {
     ranges.each(function (i) { rangeFunc(i, true) });
     
     // do this again
-    if (remove)
-        editor.removeLines();
+    if (remove) editorRemoveLinesInRanges(ranges);
     
     // revert to the original selection
     editor.getSelection().setSelectionRange(originalRange);
