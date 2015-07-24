@@ -20,6 +20,7 @@ $_POST = array(
 @page.title:      ;
 @page.created:    $_time;
 @page.author:     $_author;
+@page.draft;
 
 EOF
 );

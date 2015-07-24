@@ -499,18 +499,21 @@ function displayPageOptionsWindow () {
 }
 
 function editorRemoveLinesInRanges (ranges) {
+    console.log(ranges);
     
     // get line numbers in descending order
     // (starting from the bottom)
     var lines = ranges.map(function (r) {
         return [ r.start.row, r.end.row ];
     }).flatten().unique().sort(function (a, b) { return b - a });
-    
+
+    // remove each line
     lines.each(function (line) {
         var r = new Range(line, 0, line, 0);
         editor.getSelection().setSelectionRange(r);
         editor.removeLines();
     });
+    
 }
 
 function findPageOptions (remove) {
@@ -521,10 +524,6 @@ function findPageOptions (remove) {
     var keyValueExp = editorExpressions.keyValueVar,
         boolExp     = editorExpressions.boolVar,
         found       = {};
-    
-    // this selects all occurrences
-    editor.findAll(keyValueExp, { regExp: true, wrap: true });
-    var ranges = editor.getSelection().getAllRanges();
     
     var rangeFunc = function (range, bool) {
         var text  = editor.getSession().getTextRange(range);
@@ -537,21 +536,25 @@ function findPageOptions (remove) {
         };
     };
     
-    // for each range 
+    // find key:value pairs
     var found;
-    ranges.each(function (i) { rangeFunc(i, false) });
+    if (editor.findAll(keyValueExp, { regExp: true, wrap: true })) {
+        var ranges = editor.getSelection().getAllRanges();
+        ranges.each(function (i) { rangeFunc(i, false) });
     
-    // the original selection is still active.
-    // delete all of the matching lines
-    if (remove) editorRemoveLinesInRanges(ranges);
+        // delete all of the matching lines
+        if (remove) editorRemoveLinesInRanges(ranges);
+        
+    }
 
     // now find booleans
-    editor.findAll(boolExp, { regExp: true, wrap: true });
-    ranges = editor.getSelection().getAllRanges();
-    ranges.each(function (i) { rangeFunc(i, true) });
+    if (editor.findAll(boolExp, { regExp: true, wrap: true })) {
+        var ranges = editor.getSelection().getAllRanges();
+        ranges.each(function (i) { rangeFunc(i, true) });
     
-    // do this again
-    if (remove) editorRemoveLinesInRanges(ranges);
+        // do this again
+        if (remove) editorRemoveLinesInRanges(ranges);
+    }
     
     // revert to the original selection
     editor.getSelection().setSelectionRange(originalRange);
