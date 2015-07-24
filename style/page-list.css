@@ -66,10 +66,6 @@
     background-color: #eee;
 }
 
-#page-list tbody :first-child td {
-    padding-top: 48px;
-}
-
 /* toolbar */
 
 ul.page-list-toolbar li {
