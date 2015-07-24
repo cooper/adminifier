@@ -514,20 +514,20 @@ function findPageOptions (remove) {
     editor.findAll(keyValueExp, { regExp: true, wrap: true });
     var ranges = editor.getSelection().getAllRanges();
     
-    var rangeFunc = function (range) {
+    var rangeFunc = function (range, bool) {
         var text  = editor.getSession().getTextRange(range);
-        var match = text.match(keyValueExp);
+        var match = text.match(bool ? boolExp : keyValueExp);
         if (!match) return;
         found[ match[1] ] = {
             text:   text,
-            value:  typeOf(match[2]) == 'string' ? match[2].trim() : true,
+            value:  bool ? true : match[2].trim(),
             range:  range
         };
     };
     
     // for each range 
     var found;
-    ranges.each(rangeFunc);
+    ranges.each(function (i) { rangeFunc(i, false) });
     
     // the original selection is still active.
     // delete all of the matching lines
@@ -537,7 +537,7 @@ function findPageOptions (remove) {
     // now find booleans
     editor.findAll(boolExp, { regExp: true, wrap: true });
     ranges = editor.getSelection().getAllRanges();
-    ranges.each(rangeFunc);
+    ranges.each(function (i) { rangeFunc(i, true) });
     
     // do this again
     if (remove)
