@@ -570,7 +570,7 @@ function generatePageOptions (opts) {
             biggest = maybeBigger;
         return ret;
     };
-    ['title', 'author', 'created', 'draft'].append(
+    ['title', 'author', 'created'].append(
         Object.keys(opts).sort(function (a, b) {
         var aBool = opts[a] === true,
             bBool = opts[b] === true;
