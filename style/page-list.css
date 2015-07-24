@@ -38,8 +38,6 @@
 /* head cells */
 
 #page-list thead {
-    position: fixed;
-    z-index: 160;
 }
 
 #page-list thead th {
