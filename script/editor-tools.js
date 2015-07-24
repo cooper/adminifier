@@ -506,8 +506,8 @@ function findPageOptions (remove) {
     // remember the current selection
     var originalRange = editor.getSelection().getRange();
     
-    var keyValueExp = /^\w*@page\.(\w+):(.*)(;?)\w*$/,
-        boolExp     = /^\w*@page\.(\w+);\w*$/,
+    var keyValueExp = /^\s*@page\.(\w+):(.*?)(;?)\s*$/,
+        boolExp     = /^\s*@page\.(\w+);\s*$/,
         found       = {};
     
     // this selects all occurrences
