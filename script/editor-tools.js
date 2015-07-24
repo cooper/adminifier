@@ -506,27 +506,43 @@ function findPageOptions (remove) {
     // remember the current selection
     var originalRange = editor.getSelection().getRange();
     
-    var find = function (exp) {
-        var found = editor.find(exp, { regExp: true, wrap: true });
-        if (!found) return;
-        var text  = editor.getSelectedText();
-        var value = text.match(exp)[1];
-        if (remove) editor.removeLines();
-        return {
-            text:  text,
-            value: typeof value != 'undefined' ? value.trim().replace(/;$/, '') : true,
-            range: found
+    var keyValueExp = /^\w*@page\.(\w+):(.*)(;?)\w*$/,
+        boolExp     = /^\w*@page\.(\w+);\w*$/,
+        found       = {};
+    
+    // this selects all occurrences
+    editor.findAll(keyValueExp, { regExp: true, wrap: true });
+    var ranges = editor.getSelection().getAllRanges();
+    
+    var rangeFunc = function (range) {
+        var text  = editor.getSession().getTextRange(range);
+        var match = text.match(keyValueExp);
+        if (!match) return;
+        found[ match[1] ] = {
+            text:   text,
+            value:  typeOf(match[2]) == 'string' ? match[2].trim() : true,
+            range:  range
         };
     };
     
-    // find stuff
-    var found = {
-        title:   find(editorExpressions.pageTitle),
-        created: find(editorExpressions.pageCreated),
-        author:  find(editorExpressions.pageAuthor),
-        draft:   find(editorExpressions.pageDraft)
-    };
-  
+    // for each range 
+    var found;
+    ranges.each(rangeFunc);
+    
+    // the original selection is still active.
+    // delete all of the matching lines
+    if (remove)
+        editor.removeLines();
+
+    // now find booleans
+    editor.findAll(boolExp, { regExp: true, wrap: true });
+    ranges = editor.getSelection().getAllRanges();
+    ranges.each(rangeFunc);
+    
+    // do this again
+    if (remove)
+        editor.removeLines();
+    
     // revert to the original selection
     editor.getSelection().setSelectionRange(originalRange);
 
@@ -534,8 +550,38 @@ function findPageOptions (remove) {
 }
 
 function generatePageOptions (opts) {
-    var string = '';
-    ['title', 'created', 'author', 'draft'].each(function (optName) {
+    var string  = '',
+        biggest = 9,
+        done    = {};
+    var updateBiggest = function (length, ret) {
+        var maybeBigger = length + 4;
+        console.log('is ' + maybeBigger + ' bigger than ' + biggest);
+        if (maybeBigger > biggest)
+            biggest = maybeBigger;
+        return ret;
+    };
+    ['title', 'author', 'created', 'draft'].append(
+        Object.keys(opts).sort(function (a, b) {
+        var aBool = opts[a] === true,
+            bBool = opts[b] === true;
+        
+        // both bool, fallback to alphabetical
+        if (aBool && bBool)
+            return a.localeCompare(b);
+        
+        // one bool, it comes last
+        if (bBool && !aBool)
+            return updateBiggest(a.length, -1);
+        if (aBool && !bBool)
+            return updateBiggest(b.length, 1);
+
+        // neither bool, fallback to alphabetical
+        updateBiggest(Math.max(a.length, b.length));
+        return a.localeCompare(b);
+        
+    })).each(function (optName) {
+        if (done[optName]) return;
+        done[optName] = true;
         
         // not present
         var value = opts[optName];
@@ -551,8 +597,8 @@ function generatePageOptions (opts) {
         // other value
         else {
             string += ':';
-            if (optName.length < 11)
-                string += Array(11 - optName.length).join(' ');
+            if (optName.length < biggest)
+                string += Array(biggest - optName.length).join(' ');
             string += value + ';';
         }
         
