@@ -62,12 +62,9 @@ function editorConfirmOnPageExit (e) {
 }
 
 var editorExpressions = {
-    pageTitle:      new RegExp('^@page\\.title:(.*)$'),
-    pageAuthor:     new RegExp('^@page\\.author:(.*)$'),
-    pageCreated:    new RegExp('^@page\\.created:(.*)$'),
-    pageDraft:      new RegExp('^@page\\.draft;$'),
-    keyValueVar:    /^\s*@page\.(\w+):(.*?)(;?)\s*$/,
-    boolVar:        /^\s*@page\.(\w+);\s*$/
+    pageTitle:      new RegExp('\\s*^@page\\.title:(.*)$'),
+    keyValueVar:    new RegExp('^\\s*@page\\.(\\w+):(.*?)(;?)\\s*$'),
+    boolVar:        new RegExp('^\\s*@page\\.(\\w+);\\s*$')
 };
 
 function resetSelectionAtTopLeft () {
