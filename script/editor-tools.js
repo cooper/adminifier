@@ -503,7 +503,7 @@ function displayPageOptionsWindow () {
         editor.getSelection().selectLine();
         
         // if there is text on the line, insert a blank line before it.
-        if (editor.getSelectedText.trim().length) {
+        if (editor.getSelectedText().trim().length) {
             var r = editor.getSelection().getRange();
             editor.getSelection().setSelectionRange(new Range(r.start.row, 0, r.start.row, 0));
             editor.insert('\n');
