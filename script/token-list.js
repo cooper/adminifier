@@ -1,6 +1,7 @@
 var TokenList = new Class({
     
     initialize: function (items, opts) {
+        var _this = this;
         
         // container element options
         var elOpts = { class: 'token-list' };
@@ -11,14 +12,20 @@ var TokenList = new Class({
         this.container = new Element('div', elOpts);
         
         // input field
-        this.input = new Element('input', {
+        var input = this.input = new Element('input', {
             type:  'text',
             class: 'token-list-input'
+        });
+        this.input.addEvent('keyup', function (e) {
+            if (e.key != 'enter') return;
+            var value = input.getProperty('value');
+            if (!value.length) return;
+            _this.addItem(value);
+            input.setProperty('value', '');
         });
         this.container.appendChild(this.input);
         
         // add initial items
-        var _this = this;
         if (items)
             items.each(function (i) { _this.addItem(i); });
         
