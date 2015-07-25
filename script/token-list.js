@@ -47,7 +47,7 @@ var TokenList = new Class({
         span.setProperty('text', item);
         el.appendChild(but);
         el.appendChild(span)
-        this.container.appendChild(el);
+        this.container.insertBefore(el, this.input);
     },
     
     getItems: function () {
