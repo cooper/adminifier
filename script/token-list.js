@@ -11,8 +11,9 @@ var TokenList = new Class({
         this.container = new Element('div', elOpts);
         
         // add initial items
+        var _this = this;
         if (items)
-            items.each(this.addItem);
+            items.each(function (i) { _this.addItem(i); });
         
     },
     
@@ -37,12 +38,13 @@ var TokenList = new Class({
         });
 
         span.setProperty('text', item);
-        this.container.appendChild(but);
-        this.container.appendChild(span);
+        el.appendChild(but);
+        el.appendChild(span)
+        this.container.appendChild(el);
     },
     
     getItems: function () {
-        return this.children.map(function (i) {
+        return Array.from(this.container.children).map(function (i) {
             return i.getProperty('text');
         });
     },
