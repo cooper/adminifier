@@ -495,6 +495,21 @@ function displayPageOptionsWindow () {
     editor.getSelection().setSelectionRange(new Range(0, 0, 0, 0));
     editor.insert(optsString);
     
+    // after inserting, the selection will be the line following
+    // the insertion at column 0.
+    if (true) {
+        
+        // select the line following the page var insertion.
+        editor.getSelection().selectLine();
+        
+        // if there is text on the line, insert a blank line before it.
+        if (editor.getSelectedText.trim().length) {
+            var r = editor.getSelection().getRange();
+            editor.getSelection().setSelectionRange(new Range(r.start.row, 0, r.start.row, 0));
+            editor.insert('\n');
+        }
+    }
+    
     return optsString;
 }
 
