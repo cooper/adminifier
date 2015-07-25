@@ -10,6 +10,13 @@ var TokenList = new Class({
         // create the container
         this.container = new Element('div', elOpts);
         
+        // input field
+        this.input = new Element('input', {
+            type:  'text',
+            class: 'token-list-input'
+        });
+        this.container.appendChild(this.input);
+        
         // add initial items
         var _this = this;
         if (items)
@@ -44,7 +51,7 @@ var TokenList = new Class({
     },
     
     getItems: function () {
-        return Array.from(this.container.children).map(function (i) {
+        return this.container.getElements('span').map(function (i) {
             return i.getProperty('text');
         });
     },
