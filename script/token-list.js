@@ -18,9 +18,9 @@ var TokenList = new Class({
         });
         this.input.addEvent('keyup', function (e) {
             if (e.key != 'enter') return;
-            var value = input.getProperty('value');
-            if (!value.length) return;
-            _this.addItem(value);
+            var value = input.getProperty('value').trim();
+            if (value.length)
+                _this.addItem(value);
             input.setProperty('value', '');
         });
         this.container.appendChild(this.input);
