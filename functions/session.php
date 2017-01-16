@@ -5,6 +5,7 @@
     header('Location: '.$config->admin_root.'/login.php');
         // this must go to login.php because at this point if
         // logged_in is not set, they have been logged out already
+        session_destroy();
         die();
     }
 ?>
