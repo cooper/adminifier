@@ -27,13 +27,13 @@ function frameLoad(page) {
     document.fireEvent('pageUnloaded');
     currentPage = page;
     console.log("Loading " + page);
-    
+
     // add .php extension, respecting GET arguments
     var parts = page.split('?', 2);
     page = parts[0] + '.php';
     if (typeof parts[1] != 'undefined')
         page += '?' + parts[1];
-    
+
     var request = new Request({
         url: 'frames/' + page,
         onSuccess: function (html) {
@@ -41,9 +41,9 @@ function frameLoad(page) {
             var meta = $('content').getElementsByTagName('meta')[0];
             if (meta) {
                 var attrs = meta.getProperties(
-                    
+
                 // SSV = space-separated values
-                    
+
                 // Tools for all pages
                 'data-redirect',    // javascript frame redirect
                 'data-wredirect',   // window redirect
@@ -53,11 +53,11 @@ function frameLoad(page) {
                 'data-scripts',     // SSV script names w/o extensions
                 'data-styles',      // SSV css names w/o extensions
                 'data-flags',       // SSV page flags
-                
+
                 // Used by specific pages
-                    
+
                 'data-sort'         // page-list.php
-                    
+
                 );
                 handlePageData(attrs);
             }
@@ -73,13 +73,13 @@ function hashLoad() {
     if (hash.lastIndexOf('#!/', 0) === 0) {
         hash = hash.substring(3);
     }
-    
+
     // fall back to dashboard
     else {
         window.location.hash = '#!/dashboard';
         return hashLoad();
     }
-    
+
     frameLoad(hash);
 }
 
@@ -137,17 +137,18 @@ function handleCompactSidebarMouseenter (e) {
     }
     a.setStyle('overflow', 'visible');
     p.setStyle('background-color', '#444');
-    p.morph({ 
+    p.morph({
         width: '90px',
         paddingLeft: '10px'
-    });}
+    });
+}
 
 function handleCompactSidebarMouseleave (e) {
     var a = e.target;
     var p = a.retrieve('popover');
     if (!p) return;
     p.setStyle('background-color', '#333');
-    p.morph({ 
+    p.morph({
         width: '0px',
         paddingLeft: '0px'
     });
@@ -158,11 +159,11 @@ var currentData;
 function handlePageData(data) {
     window.pageScriptsDone = false;
     window.editorLoaded = false;
-    
+
     console.log(data);
     currentData = data;
     $('content').setStyle('user-select', 'none');
-    
+
     // window redirect
     var target = data['data-wredirect'];
     if (target) {
@@ -171,7 +172,7 @@ function handlePageData(data) {
         window.location = target;
         return;
     }
-    
+
     // page redirect
     target = data['data-redirect'];
     if (target) {
@@ -185,14 +186,14 @@ function handlePageData(data) {
     $('page-title').innerHTML = '<i class="fa fa-' + data['data-icon'] + '"></i> <span>' + data['data-title'] + '</span>';
     window.scrollTo(0, 0);
     // ^ not sure if scrolling necessary when setting display: none
-    
+
     // highlight navigation item
     var li = $$('li[data-nav="' + data['data-nav'] + '"]')[0];
     if (li) {
         $$('li.active').each(function (li) { li.removeClass('active') });
         li.addClass('active');
     }
-    
+
     // don't show the content until all scripts have loaded
     var scriptsToLoad = 0, scriptsLoaded = -1;
     var scriptLoaded = function () {
@@ -202,19 +203,19 @@ function handlePageData(data) {
         window.pageScriptsDone = true;
         document.fireEvent('pageScriptsLoaded');
     };
-    
+
     // inject scripts
     $$('script.dynamic').each(function (script) { script.destroy(); });
     var srcs = (data['data-scripts'] || '').split(' ');
     srcs.each(function (src) {
         if (!src.length) return;
         scriptsToLoad++;
-        
+
         if (src == 'ace')
             src = 'ace/ace.js';
         else
             src = 'script/' + src + '.js';
-        
+
         var script = new Element('script', {
             src:   src,
             class: 'dynamic'
@@ -223,7 +224,7 @@ function handlePageData(data) {
         document.head.appendChild(script);
     });
     scriptLoaded(); // call once in case there are no scripts
- 
+
     // inject styles
     $$('link.dynamic').each(function (link) { link.destroy(); });
     var links = (data['data-styles'] || '').split(' ');
@@ -237,7 +238,7 @@ function handlePageData(data) {
         });
         document.head.appendChild(link);
     });
-    
+
     // handle page flags
     currentFlags.each(function (flag) {
         if (flag.destroy) flag.destroy();
@@ -250,7 +251,7 @@ function handlePageData(data) {
         currentFlags.push(flag);
         flag.init();
     });
-    
+
 }
 
 function updatePageTitle(title) {

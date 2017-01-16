@@ -13,10 +13,14 @@ if (isset($_SESSION['logged_in'])) {
 if (!isset($_POST['username']) || !isset($_POST['password']))
     die('Credentials not specified');
 
+
 // attempt login
-if ($W->login($_POST['username'], $_POST['password'], session_id())->logged_in) {
+$username  = $_POST['username'];
+$user_info = $W->login($username, $_POST['password'], session_id());
+if ($user_info->logged_in) {
     $_SESSION['logged_in'] = true;
-    $_SESSION['username']  = $_POST['username'];
+    $_SESSION['username']  = $username;
+    $_SESSION['realname']  = $user_info->name ? $user_info->name : $username;
     header('Location: ..'.$config->admin_root.'/');
 }
 
