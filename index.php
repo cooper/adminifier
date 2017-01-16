@@ -6,7 +6,7 @@
 <!doctype html>
 <html>
 <head>
-    
+
 <title><?= $config->wiki_name ?> admin</title>
 <link type="text/css" rel="stylesheet" href="style/main.css" />
 <link type="text/css" rel="stylesheet" href="style/navigation.css" />
@@ -14,21 +14,22 @@
 <link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
 <script type="text/javascript">
-    
+
 var adminifier = {
     adminRoot:      '<?= addslashes($config->admin_root) ?>',
     wikiName:       '<?= addslashes($config->wiki_name) ?>',
     wikiPageRoot:   '<?= addslashes($config->wiki_page_root) ?>'
 };
-    
+
 </script>
 <script type="text/javascript" src="script/mootools.js"></script>
+<script type="text/javascript" src="script/tmpl.min.js"></script>
 <script type="text/javascript" src="script/adminifier.js"></script>
 <meta charset="utf-8" />
 
 </head>
 <body>
-    
+
 <div id="top-bar">
     <span class="top-title account-title"><a href="#"><i class="fa fa-user"></i> <?= $_SESSION['username'] ?></a></span>
     <span class="top-title create-title"><a class="frame-click" href="#!/create-page"><i class="fa fa-plus-circle"></i> New page</a><br /></span>
@@ -49,6 +50,6 @@ var adminifier = {
 
 <div id="content">
 </div>
-    
+
 </body>
 </html>

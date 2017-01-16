@@ -10,19 +10,19 @@ function editorPageUnloadedHandler () {
     document.removeEvent('pageUnloaded', editorPageUnloadedHandler);
     document.removeEvent('keyup', handleEditorEscapeKey);
     document.body.removeEvent('click', editorClickOutHandler);
-    window.removeEvent('rezize', movePopupBox);
+    window.removeEvent('resize', movePopupBox);
     window.onbeforeunload = null;
 }
-                  
+
 function editorPageScriptsLoadedHandler () {
     console.log('Editor script loaded');
     setupToolbar();
     window.addEvent('resize', movePopupBox);
-    
+
     Range  = ace.require('ace/range').Range;
     editor = ace.edit("editor");
     editorLastSavedData = editor.getValue();
-    
+
     // render editor
     editor.setTheme("ace/theme/twilight"); /* eclipse is good light one */
     editor.getSession().setMode("ace/mode/plain_text");
@@ -31,7 +31,7 @@ function editorPageScriptsLoadedHandler () {
 
     // listen for clicks to navigate away
     document.body.addEvent('click', editorClickOutHandler);
-    
+
     window.editorLoaded = true;
     document.fireEvent('editorLoaded');
 }
@@ -78,15 +78,15 @@ function resetSelectionAtTopLeft () {
 function handleEditorEscapeKey(e) {
     if (e.key != 'esc') return;
     console.log('handle escape');
-    
+
     // if there's a popup, exit it maybe
     if (currentPopup)
         closeCurrentPopup(true);
-    
+
 }
 
 function editorInputHandler () {
-    
+
     // update undo
     var um = editor.getSession().getUndoManager();
     if (um.hasUndo())
@@ -99,11 +99,11 @@ function editorInputHandler () {
         $('toolbar-redo').removeClass('disabled');
     else
         $('toolbar-redo').addClass('disabled');
-    
-    
+
+
     // current line
     var lineText = editor.session.getLine(editor.getSelectionRange().start.row);
-    
+
     // we're changing the title.
     // this shouldn't be too expensive, since
     // editor.find() starts with the current line
@@ -113,10 +113,10 @@ function editorInputHandler () {
         updateEditorTitle();
         editor.getSelection().setSelectionRange(rng);
     }
-        
+
     // changes?
     window.onbeforeunload = editorHasUnsavedChanges() ? editorConfirmOnPageExit : null;
-    
+
 }
 
 function fakeAdopt (child) {
@@ -130,27 +130,27 @@ function fakeAdopt (child) {
     $('fake-parent').appendChild(child);
 }
 
-// close current popup on click outside  
+// close current popup on click outside
 function bodyClickPopoverCheck (e) {
-    
+
     // no popup is displayed
     if (!currentPopup) return;
-    
+
     console.log(e.target);
-    
+
     // the target is the toolbar item
     var li =  currentPopup.retrieve('li');
     if (e.target == li || li.contains(e.target))
         return;
-    
+
     // this popup can only be closed programmatically
     if (currentPopup.hasClass('sticky'))
         return;
-    
+
     // clicked within the popup
     if (e.target == currentPopup || currentPopup.contains(e.target))
         return;
-    
+
     closeCurrentPopup();
 }
 
@@ -165,11 +165,11 @@ function getContrastYIQ (hexColor) {
 function closeCurrentPopup (maybe) {
     var box = currentPopup;
     if (!box) return;
-    
+
     // if maybe, check if sticky.
     if (maybe && box.hasClass('sticky'))
         return;
-    
+
     closeCurrentLi();
     box.set('morph', {
         duration: 150,
@@ -180,10 +180,10 @@ function closeCurrentPopup (maybe) {
 }
 
 function createPopupBox (posX, posY) {
-    
+
     // already showing something
     if (currentPopup) return;
-    
+
     // create box
     var box = new Element('div', {
         class: 'editor-popup-box',
@@ -192,7 +192,7 @@ function createPopupBox (posX, posY) {
             left: posX
         }
     });
-    
+
     return box;
 }
 
@@ -220,7 +220,7 @@ function movePopupBox () {
 
 // find an appropriate range for selection
 function getSelectionRanges() {
-    
+
     // find the current selection
     var selectRange = editor.getSelection().getRange();
     var originalRange = selectRange;
@@ -234,7 +234,7 @@ function getSelectionRanges() {
         if (word.length && !word.match(/^\W*$/))
             selectRange = wordRange;
     }
-    
+
     return {
         original: originalRange,
         select: selectRange
@@ -248,7 +248,7 @@ function getSelectionRanges() {
 function replaceSelectionRangeAndReselect (ranges, leftOffset, newText) {
     var selectRange = ranges.select,
         originalRange = ranges.original;
-    
+
     // replace the text
     editor.getSession().replace(selectRange, newText);
 
@@ -259,25 +259,25 @@ function replaceSelectionRangeAndReselect (ranges, leftOffset, newText) {
         originalRange.end.row,
         originalRange.end.column + leftOffset
     ));
-    
+
 }
 
 function wrapTextFunction (type) {
     return function () {
-        
+
         var r = getSelectionRanges();
         var selectRange = r.select,
             originalRange = r.original;
         editor.getSelection().setSelectionRange(selectRange);
-        
+
         // dtermine the new text
         var terminator  = type.length > 1 ? '' : type;
         var leftSide    = '[' + type + ']';
         var newText     = leftSide + editor.getSelectedText() + '[/' + terminator + ']';
-        
+
         // replace the text and select the original text
         replaceSelectionRangeAndReselect(r, leftSide.length, newText);
-      
+
         closeCurrentPopup();
     };
 }
@@ -295,7 +295,7 @@ var toolbarFunctions = {
 };
 
 function openLi (li) {
-    
+
     // if a popup is open, ignore this.
     if (currentPopup) return;
 
@@ -340,13 +340,13 @@ function setupToolbar () {
 
     // switch between buttons
     $$('ul.editor-toolbar li').each(function (li) {
-        
+
         // hover animation
         li.set('morph', { duration: 150 });
         li.addEvent('mouseenter', function () {
             openLi(li);
         });
-        
+
         // clicked
         li.addEvent('click', function (e) {
             if (li.hasClass('disabled')) return;
@@ -357,15 +357,15 @@ function setupToolbar () {
             if (!func) return;
             func();
         });
-        
+
     });
-    
+
     // leaving the toolbar, close it
     $$('ul.editor-toolbar').addEvent('mouseleave', function () {
         if (currentLi && !currentPopup)
             closeCurrentLi();
     });
-    
+
 }
 
 function editorHasUnsavedChanges () {
