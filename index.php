@@ -51,5 +51,9 @@ var adminifier = {
 <div id="content">
 </div>
 
+<?
+    require_once(__DIR__.'/templates/editor-tmpl.php');
+?>
+
 </body>
 </html>
