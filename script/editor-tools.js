@@ -165,7 +165,7 @@ function displayLinkHelper () {
     var box  = createPopupBox(rect.left, rect.top + li.offsetHeight);
     fakeAdopt(box);
 
-    box.innerHTML = tmpl('tmpl-link-helper');
+    box.innerHTML = tmpl('tmpl-link-helper', {});
 
     // first input, second input, button title, left delimiter, right delimiter
     $('editor-link-type-internal').store('linkInfo', [
@@ -283,7 +283,7 @@ function displaySaveHelper () {
         var message = $('editor-save-message').getProperty('value');
 
         // "saving..."
-        $('editor-save-wrapper').innerHTML = tmpl('tmpl-save-spinner');
+        $('editor-save-wrapper').innerHTML = tmpl('tmpl-save-spinner', {});
         var btn = $('editor-save-commit');
         btn.innerHTML = 'Comitting changes';
         btn.addClass('progress');

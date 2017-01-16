@@ -16,7 +16,7 @@
 <script type="text/x-tmpl" id="tmpl-save-helper">
     <div id="editor-save-wrapper">
     Edit summary<br />
-    <input id="editor-save-message" class="editor-full-width-input" type="text" placeholder="Updated {%= o.file %}" /> \
+    <input id="editor-save-message" class="editor-full-width-input" type="text" placeholder="Updated {%= o.file %}" />
     </div>
     <div id="editor-save-commit" class="editor-tool-large-button">Commit changes</div>
 </script>
