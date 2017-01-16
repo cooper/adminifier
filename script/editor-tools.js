@@ -11,7 +11,7 @@ function editorLoadedHandler () {
         delete:     displayDeleteConfirmation,
         save:       displaySaveHelper
     });
-    
+
     addEditorKeyboardShortcuts([
         [ 'Ctrl-B', 'Command-B',    'bold'      ],
         [ 'Ctrl-I', 'Command-I',    'italic'    ],
@@ -28,6 +28,10 @@ function editorToolsPageUnloadedHandler () {
     console.log('Unloading editor tools script');
     document.removeEvent('editorLoaded', editorLoadedHandler);
     document.removeEvent('pageUnloaded', editorToolsPageUnloadedHandler);
+}
+
+function editorGetFilename() {
+    return $('editor').getProperty('data-file');
 }
 
 // PAGE TITLE SELECTOR
@@ -48,51 +52,51 @@ function getPageTitleRange () {
     var found = editor.find(editorExpressions.pageTitle, { regExp: true, wrap: true });
     if (!found) return;
     var string = editor.getSelectedText();
-    
+
     var escaped = false,
         inTitle = false,
         foundText = false,
         startIndex = 0,
         endIndex = 0;
-    
+
     for (var i = 0; ; i++) {
         var char = string[i];
-        
+
         // made it to the end without finding semicolon
         if (typeOf(char) == 'null') {
             endIndex = i;
             break;
         }
-        
+
         // now we're in the title
         if (!inTitle && char == ':') {
             inTitle = true;
             startIndex = i + 1;
             continue;
         }
-        
+
         // if we're in the title but no text has been found,
         // this is just spacing before the actual title
         if (inTitle && !foundText && char == ' ') {
             startIndex++;
             continue;
         }
-                
+
         // ending the title
         if (inTitle && !escaped && char == ';') {
             endIndex = i;
             break;
         }
-        
+
         if (inTitle)
             foundText = true;
-        
+
     }
-    
+
     // offset on the line
     startIndex += found.start.column;
     endIndex   += found.start.column;
-    
+
     console.log('startIndex: ' + startIndex + ', endIndex: ' + endIndex);
     return new Range(found.start.row, startIndex, found.end.row, endIndex);
 }
@@ -110,7 +114,7 @@ function displayFontSelector () {
     var li   = $$('li[data-action="font"]')[0];
     var rect = li.getBoundingClientRect();
     var box  = createPopupBox(rect.left, rect.top + li.offsetHeight);
-    
+
     // create a container for scrolling
     var container = new Element('div', {
         styles: {
@@ -123,34 +127,34 @@ function displayFontSelector () {
     // temporarily add it to the body
     // for when we call getComputedStyle
     fakeAdopt(container);
-    
+
     // create color elements
     colorList.each(function (colorName) {
         var div = new Element('div', {
             styles: { backgroundColor: colorName },
             class: 'editor-color-cell'
         });
-        
+
         // separate the name into words
         div.innerHTML = '<span style="padding-left: 10px;">' +
             colorName.replace(/([A-Z])/g, ' $1') + '</span>';
         container.appendChild(div);
-        
+
         // compute and set the appropriate text color
         var color = new Color(getComputedStyle(div, null).getPropertyValue('background-color'));
         div.setStyle('color', getContrastYIQ(color.hex.substr(1)));
-        
+
         // add click event
         div.addEvent('click', wrapTextFunction(colorName));
-        
+
     });
-    
+
     // put it where it belongs
     container.parentElement.removeChild(container);
     container.setStyle('display', 'block');
     box.appendChild(container);
-    
-    displayPopupBox(box, 200, li);  
+
+    displayPopupBox(box, 200, li);
 }
 
 // LINK HELPER
@@ -160,22 +164,9 @@ function displayLinkHelper () {
     var rect = li.getBoundingClientRect();
     var box  = createPopupBox(rect.left, rect.top + li.offsetHeight);
     fakeAdopt(box);
-    
-    box.innerHTML = ' \
-<div id="editor-link-type-internal" class="editor-link-type active" title="Page"><i class="fa fa-file-text"></i></div> \
-<div id="editor-link-type-external" class="editor-link-type" title="External wiki page"><i class="fa fa-globe"></i></div> \
-<div id="editor-link-type-category" class="editor-link-type" title="Category"><i class="fa fa-list"></i></div> \
-<div id="editor-link-type-url" class="editor-link-type" title="External URL"><i class="fa fa-external-link"></i></div> \
-<div style="clear: both;"></div>                        \
-<div id="editor-link-wrapper">                       \
-<span id="editor-link-title1">Page target</span><br />  \
-<input id="editor-link-target" class="editor-full-width-input" type="text" placeholder="My Page" />           \
-<span id="editor-link-title2">Display text</span><br /> \
-<input id="editor-link-display" class="editor-full-width-input" type="text" placeholder="Click here" /><br/>  \
-</div>                                                  \
-<div id="editor-link-insert" class="editor-tool-large-button">Insert page link</div>  \
-';
-    
+
+    box.innerHTML = tmpl('tmpl-link-helper');
+
     // first input, second input, button title, left delimiter, right delimiter
     $('editor-link-type-internal').store('linkInfo', [
         'Display text', 'Page target', 'Insert page link',
@@ -197,28 +188,28 @@ function displayLinkHelper () {
         'http://www.example.com',
         '$', '$'
     ]);
-    
+
     // switch between link types
     var activeType = $('editor-link-type-internal');
     $$('.editor-link-type').each(function (type) {
         type.addEvent('click', function () {
-            
+
             // set the active type
             if (type.hasClass('active')) return;
             activeType.removeClass('active');
             type.addClass('active');
             activeType = type;
-            
+
             // update the text
             var info = type.retrieve('linkInfo');
             $('editor-link-title1').innerHTML = info[1];
             $('editor-link-title2').innerHTML = info[0];
             $('editor-link-insert').innerHTML = info[2];
             $('editor-link-target').setProperty('placeholder', info[3]);
-            
+
         });
     });
-    
+
     // selected text = display text
     // choose a word if there is no actual selection
     var r = getSelectionRanges();
@@ -229,35 +220,35 @@ function displayLinkHelper () {
         $('editor-link-display').setProperty('value', selected);
         $('editor-link-target').setProperty('value', selected);
     }
-    
+
     // insert link function
     var insertLink = function () {
         var displayText = $('editor-link-display').getProperty('value'),
             targetText  = $('editor-link-target').getProperty('value'),
             leftDel     = activeType.retrieve('linkInfo')[4],
             rightDel    = activeType.retrieve('linkInfo')[5];
-        
+
         // make sure requirements were met
         if (!displayText.length || !targetText.length) {
             alert('Please specify display text and target');
             return;
         }
-        
+
         // one or two parts, depending on if display == target
         var inner = displayText;
         if (displayText.toLowerCase() != targetText.toLowerCase())
             inner += ' | ' + targetText;
-        
+
         var complete = '[' + leftDel + ' ' + inner + ' ' + rightDel + ']';
         editor.insert(complete);
         closeCurrentPopup();
     };
-    
+
     // insert on click or enter
     $('editor-link-insert').addEvent('click', insertLink);
     $('editor-link-target').onEnter(insertLink);
     $('editor-link-display').onEnter(insertLink);
-    
+
     displayPopupBox(box, 215, li);
     $('editor-link-target').focus();
 }
@@ -266,7 +257,7 @@ function displayLinkHelper () {
 
 function openPageInNewTab () {
     var root = adminifier.wikiPageRoot;
-    var pageName = $('editor').getProperty('data-file').replace(/\.page$/, '');
+    var pageName = editorGetFilename().replace(/\.page$/, '');
     window.open(root + pageName);
 }
 
@@ -278,33 +269,29 @@ function displaySaveHelper () {
     var box  = createPopupBox(rect.right - 300, rect.top + li.offsetHeight);
     box.addClass('right');
     fakeAdopt(box);
-    
-    box.innerHTML = '   \
-<div id="editor-save-wrapper"> \
-Edit summary<br /> \
-<input id="editor-save-message" class="editor-full-width-input" type="text" placeholder="Updated ' + $('editor').getProperty('data-file') + '" /> \
-</div> \
-<div id="editor-save-commit" class="editor-tool-large-button">Commit changes</div>  \
-';
-    
+
+    box.innerHTML = tmpl('tmpl-save-helper', {
+        file: editorGetFilename()
+    });
+
     // save changes function
     var saveChanges = function () {
         var saveData = editor.getValue();
-        
+
         // prevent box from closing for now
         box.addClass('sticky');
         var message = $('editor-save-message').getProperty('value');
-        
+
         // "saving..."
-        $('editor-save-wrapper').innerHTML = '<div style="text-align: center; line-height: 60px; height: 60px;"><i class="fa fa-spinner fa-3x fa-spin center"></i></div>'; // spinner
+        $('editor-save-wrapper').innerHTML = tmpl('tmpl-save-spinner');
         var btn = $('editor-save-commit');
         btn.innerHTML = 'Comitting changes';
         btn.addClass('progress');
-        
+
         // successful save callback
         var success = function (info) {
             editorLastSavedData = saveData;
-            
+
             // switch to checkmark
             var i = btn.parentElement.getElementsByTagName('i')[0];
             i.removeClass('fa-spinner');
@@ -317,13 +304,13 @@ Edit summary<br /> \
             btn.innerHTML = info.unchanged ?
                 'File unchanged' : 'Saved ' + info.id.substr(0, 7);
 
-            setTimeout(function () { closeCurrentPopup(); }, 1500);  
+            setTimeout(function () { closeCurrentPopup(); }, 1500);
         };
-        
+
         // save failed callback
         var fail = function (msg) {
             alert('Save failed: ' + msg);
-            
+
             // switch to /!\
             var i = btn.parentElement.getElementsByTagName('i')[0];
             i.removeClass('fa-spinner');
@@ -335,44 +322,44 @@ Edit summary<br /> \
             btn.removeClass('progress');
             btn.innerHTML = 'Save failed';
 
-            setTimeout(function () { closeCurrentPopup(); }, 1500);  
+            setTimeout(function () { closeCurrentPopup(); }, 1500);
         };
-        
+
         // save request
         var req = new Request.JSON({
             url: 'functions/write-page.php',
             onSuccess: function (data) {
-                
+
                 // updated without error
                 if (data.success)
                     success(data.rev_info);
-                
+
                 // revision error
                 else {
-                    
+
                     // nothing changed
                     if (data.rev_error && data.rev_error.match('no changes'))
                         success({ unchanged: true });
-                    
+
                     // true failure
                     else
                         fail(data.rev_error);
-                    
+
                 }
             },
             onFailure: function () { fail('Request error') },
         }).post({
-            page:       $('editor').getProperty('data-file'),
+            page:       editorGetFilename(),
             content:    saveData,
             message:    message
         });
 
     };
-    
+
     // on click or enter, save changes
     $('editor-save-commit').addEvent('click', saveChanges);
     $('editor-save-message').onEnter(saveChanges);
-    
+
     displayPopupBox(box, 120, li);
     $('editor-save-message').focus();
 }
@@ -385,14 +372,14 @@ function displayDeleteConfirmation () {
     var box  = createPopupBox(rect.right - 300, rect.top + li.offsetHeight);
     box.addClass('right');
     fakeAdopt(box);
-    
+
     box.innerHTML = '   \
 <div id="editor-delete-wrapper"> \
     <i class="fa fa-3x center fa-question-circle"></i> \
 </div> \
 <div id="editor-delete-button" class="editor-tool-large-button">Are you sure?</div>  \
 ';
-    
+
     // button text events
     var btn = $('editor-delete-button');
     var shouldChange = function () {
@@ -406,21 +393,21 @@ function displayDeleteConfirmation () {
     btn.addEvent('mouseleave', function () {
         if (shouldChange()) btn.innerHTML = 'Are you sure?';
     });
-    
+
     // delete page function
     var deletePage = function () {
-        
+
         // prevent box from closing for now
         box.addClass('sticky');
-        
+
         // "deleting..."
         $('editor-delete-wrapper').innerHTML = '<i class="fa fa-spinner fa-3x fa-spin center"></i>'; // spinner
         btn.innerHTML = 'Deleting page';
         btn.addClass('progress');
-        
+
         // success callback
         var success = function () {
-            
+
             // switch to checkmark
             var i = btn.parentElement.getElementsByTagName('i')[0];
             i.removeClass('fa-spinner');
@@ -436,9 +423,9 @@ function displayDeleteConfirmation () {
             setTimeout(function () {
                 window.location = adminifier.adminRoot
             }, 1500);
-            
+
         };
-        
+
         var fail = function () {
 
             // switch to /!\
@@ -454,30 +441,30 @@ function displayDeleteConfirmation () {
 
             setTimeout(function () { closeCurrentPopup(); }, 1500);
         };
-        
+
         // delete request
         var req = new Request.JSON({
             url: 'functions/delete-page.php',
             onSuccess: function (data) {
-                
+
                 // deleted without error
                 if (data.success)
                     success();
-                
+
                 // delete error
                 else fail('Unknown error');
-                
+
             },
             onFailure: function () { fail('Request error') },
         }).post({
-            page: $('editor').getProperty('data-file')
+            page: editorGetFilename()
         });
-        
+
     };
-    
+
     // on click, delete page
     btn.addEvent('click', deletePage);
-    
+
     displayPopupBox(box, 120, li);
 }
 
@@ -485,16 +472,16 @@ function displayDeleteConfirmation () {
 
 function displayPageOptionsWindow () {
     var found = findPageOptions(true);
-    
+
     // this will actually be passed user input
     var optsString = generatePageOptions(Object.map(found, function (value, key) {
         return value.value;
     }));
-    
+
     // inject the new lines at the beginning
     editor.getSelection().setSelectionRange(new Range(0, 0, 0, 0));
     editor.insert(optsString);
-    
+
     // after inserting, the selection will be the line following
     // the insertion at column 0.
 
@@ -502,13 +489,13 @@ function displayPageOptionsWindow () {
     if (false) {
         editorInsertBlankLineMaybe();
     }
-    
+
     editorInsertBlankLineMaybe();
     return optsString;
 }
 
 function editorInsertBlankLineMaybe () {
-    
+
     // select the line following the var insertion.
     editor.getSelection().selectLine();
 
@@ -525,7 +512,7 @@ function editorInsertBlankLineMaybe () {
 
 function editorRemoveLinesInRanges (ranges) {
     console.log(ranges);
-    
+
     // get line numbers in descending order
     // (starting from the bottom)
     var lines = ranges.map(function (r) {
@@ -538,18 +525,18 @@ function editorRemoveLinesInRanges (ranges) {
         editor.getSelection().setSelectionRange(r);
         editor.removeLines();
     });
-    
+
 }
 
 function findPageOptions (remove) {
 
     // remember the current selection
     var originalRange = editor.getSelection().getRange();
-    
+
     var keyValueExp = editorExpressions.keyValueVar,
         boolExp     = editorExpressions.boolVar,
         found       = {};
-    
+
     var rangeFunc = function (range, bool) {
         var text  = editor.getSession().getTextRange(range);
         var match = text.match(bool ? boolExp : keyValueExp);
@@ -560,27 +547,27 @@ function findPageOptions (remove) {
             range:  range
         };
     };
-    
+
     // find key:value pairs
     var found;
     if (editor.findAll(keyValueExp, { regExp: true, wrap: true })) {
         var ranges = editor.getSelection().getAllRanges();
         ranges.each(function (i) { rangeFunc(i, false) });
-    
+
         // delete all of the matching lines
         if (remove) editorRemoveLinesInRanges(ranges);
-        
+
     }
 
     // now find booleans
     if (editor.findAll(boolExp, { regExp: true, wrap: true })) {
         var ranges = editor.getSelection().getAllRanges();
         ranges.each(function (i) { rangeFunc(i, true) });
-    
+
         // do this again
         if (remove) editorRemoveLinesInRanges(ranges);
     }
-    
+
     // revert to the original selection
     editor.getSelection().setSelectionRange(originalRange);
 
@@ -602,11 +589,11 @@ function generatePageOptions (opts) {
         Object.keys(opts).sort(function (a, b) {
         var aBool = opts[a] === true,
             bBool = opts[b] === true;
-        
+
         // both bool, fallback to alphabetical
         if (aBool && bBool)
             return a.localeCompare(b);
-        
+
         // one bool, it comes last
         if (bBool && !aBool)
             return updateBiggest(a.length, -1);
@@ -616,21 +603,21 @@ function generatePageOptions (opts) {
         // neither bool, fallback to alphabetical
         updateBiggest(Math.max(a.length, b.length));
         return a.localeCompare(b);
-        
+
     })).each(function (optName) {
         if (done[optName]) return;
         done[optName] = true;
-        
+
         // not present
         var value = opts[optName];
         if (typeOf(value) == 'null') return;
-        
+
         string += '@page.' + optName;
-        
+
         // boolean
-        if (value === true) 
+        if (value === true)
             string += ';';
-        
+
         // other value
         else {
             string += ':';
@@ -638,7 +625,7 @@ function generatePageOptions (opts) {
                 string += Array(biggest - optName.length).join(' ');
             string += value + ';';
         }
-        
+
         string += '\n';
     });
     return string;
