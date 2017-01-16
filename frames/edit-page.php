@@ -17,7 +17,7 @@ echo '<a href="functions/delete-page.php?page='.urlencode($_GET['page']).'">Dele
 
 <meta
       data-nav="pages"
-      data-title="<?= htmlspecialchars($_GET['page']) ?>" 
+      data-title="<?= htmlspecialchars($_GET['page']) ?>"
       data-icon="edit"
       data-scripts="ace colors editor editor-tools token-list"
       data-styles="editor"
@@ -46,14 +46,14 @@ echo '<a href="functions/delete-page.php?page='.urlencode($_GET['page']).'">Dele
 
 <div class="editor-toolbar-wrapper">
     <ul class="editor-toolbar">
-        
+
         <li data-action="save" class="right"><i class="fa right fa-save"></i> Save</li>
         <li data-action="delete" class="right"><i class="fa right fa-trash"></i> Delete</li>
         <li data-action="view" class="right"><i class="fa right fa-binoculars"></i> View</li>
         <li data-action="options" class="right"><i class="fa right fa-wrench"></i> Options</li>
         <li id="toolbar-redo" data-action="redo" class="right disabled"><i class="fa right fa-repeat"></i> Redo</li>
         <li id="toolbar-undo" data-action="undo" class="right disabled"><i class="fa right fa-undo"></i> Undo</li>
-        
+
         <!--
             <li style="float: right;"><i class="fa fa-paste"></i> Paste</li>
             <li style="float: right;"><i class="fa fa-copy"></i> Copy</li>
@@ -74,15 +74,34 @@ echo '<a href="functions/delete-page.php?page='.urlencode($_GET['page']).'">Dele
         <li data-action="history"><i class="fa fa-history"></i> History</li>
         <li data-action="code"><i class="fa fa-code"></i> Code</li>
         <li data-action="cite"><i class="fa fa-copyright"></i> Citation</li>
-        
+
     </ul>
 </div>
 <div id="editor" data-file="<?= htmlspecialchars($_GET['page']) ?>"><?= htmlspecialchars($result->content) ?></div>
 
-<? /*
-<form action="functions/write-page.php" method="post">
-    <input type="hidden" value="<?= htmlspecialchars($_GET['page']) ?>" name="page" />
-    <textarea name="content" style="font-family: monospace; width: 1000px; height: 500px;"><?= htmlspecialchars($result->content) ?></textarea>
-    <input type="submit" name="submit" value="Save" />
-</form>
-*/ ?>
+<script type="text/x-tmpl" id="tmpl-link-helper">
+    <div id="editor-link-type-internal" class="editor-link-type active" title="Page"><i class="fa fa-file-text"></i></div>
+    <div id="editor-link-type-external" class="editor-link-type" title="External wiki page"><i class="fa fa-globe"></i></div>
+    <div id="editor-link-type-category" class="editor-link-type" title="Category"><i class="fa fa-list"></i></div>
+    <div id="editor-link-type-url" class="editor-link-type" title="External URL"><i class="fa fa-external-link"></i></div>
+    <div style="clear: both;"></div>
+    <div id="editor-link-wrapper">
+    <span id="editor-link-title1">Page target</span><br />
+    <input id="editor-link-target" class="editor-full-width-input" type="text" placeholder="My Page" />
+    <span id="editor-link-title2">Display text</span><br />
+    <input id="editor-link-display" class="editor-full-width-input" type="text" placeholder="Click here" /><br/>
+    </div>
+    <div id="editor-link-insert" class="editor-tool-large-button">Insert page link</div>
+</script>
+
+<script type="text/x-tmpl" id="tmpl-save-helper">
+    <div id="editor-save-wrapper">
+    Edit summary<br />
+    <input id="editor-save-message" class="editor-full-width-input" type="text" placeholder="Updated {%= o.file %}" /> \
+    </div>
+    <div id="editor-save-commit" class="editor-tool-large-button">Commit changes</div>
+</script>
+
+<script type="text/x-tmpl" id="tmpl-save-spinner">
+    <div style="text-align: center; line-height: 60px; height: 60px;"><i class="fa fa-spinner fa-3x fa-spin center"></i></div>
+</script>
