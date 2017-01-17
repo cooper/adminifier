@@ -262,9 +262,8 @@ function updatePageTitle(title) {
 }
 
 function pingServer () {
-    console.log('checking status');
     var goToLogin = function () {
-        console.log('going to login');
+        console.log('Going to login');
         window.location.hash = '';
         window.location.target = 'login.php';
     };
@@ -272,10 +271,8 @@ function pingServer () {
         url: 'functions/events.php',
         secure: true,
         onSuccess: function (data) {
-            if (data.type == 'error')
+            if (!data.connected)
                 goToLogin();
-            console.log('success');
-            console.log(data);
         },
         onError: goToLogin,
         onFailure: goToLogin
