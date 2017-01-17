@@ -241,7 +241,7 @@ function displayLinkHelper () {
 
         var complete = '[' + leftDel + ' ' + inner + ' ' + rightDel + ']';
         editor.insert(complete);
-        closeCurrentPopup();
+        closePopup(box);
     };
 
     // insert on click or enter
@@ -310,7 +310,9 @@ function displaySaveHelper () {
             btn.removeClass('progress');
             btn.innerHTML = 'Save failed';
 
-            setTimeout(closeCurrentPopup, 1500);
+            setTimeout(function () {
+                closePopup(box);
+            }, 1500);
             saving = false;
         };
 
@@ -330,7 +332,17 @@ function displaySaveHelper () {
             btn.innerHTML = info.unchanged ?
                 'File unchanged' : 'Saved ' + info.id.substr(0, 7);
 
-            setTimeout(closeCurrentPopup, 1500);
+            setTimeout(function () {
+
+                // make the box no longer sticky, so that when the user
+                // clicks away, it will disappear now
+                box.removeClass('sticky');
+
+                // close the popup only if the mouse isn't over it
+                closePopup(box, false, true);
+
+            }, 1500);
+
             saving = false;
         };
 
@@ -462,7 +474,9 @@ function displayDeleteConfirmation () {
             btn.removeClass('progress');
             btn.innerHTML = 'Delete failed';
 
-            setTimeout(closeCurrentPopup, 1500);
+            setTimeout(function () {
+                closePopup(box);
+            }, 1500);
         };
 
         // delete request

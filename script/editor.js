@@ -162,13 +162,24 @@ function getContrastYIQ (hexColor) {
     return (yiq >= 128) ? '#000' : '#fff';
 }
 
-function closeCurrentPopup (maybe) {
+function closePopup (box, unlessSticky, unlessActive) {
+    if (!currentPopup || currentPopup != box)
+        return;
+    closeCurrentPopup(unlessSticky, unlessActive);
+}
+
+function closeCurrentPopup (unlessSticky, unlessActive) {
     var box = currentPopup;
     if (!box) return;
 
-    // if maybe, check if sticky.
-    if (maybe && box.hasClass('sticky'))
+    // check if sticky
+    if (unlessSticky && box.hasClass('sticky'))
         return;
+
+    // check if mouse is over it
+    if (unlessActive && box.parentElement.getElement(':hover')) {
+        return;
+    }
 
     closeCurrentLi();
     box.set('morph', {
