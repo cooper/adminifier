@@ -337,6 +337,7 @@ function displaySaveHelper () {
         // save request
         var req = new Request.JSON({
             url: 'functions/write-page.php',
+            secure: true,
             onSuccess: function (data) {
                 console.log("on success");
                 console.log(data);
@@ -362,10 +363,14 @@ function displaySaveHelper () {
                 else
                     fail("Unknown error");
             },
+            onError: function () {
+                fail('Bad JSON reply');
+            },
             onFailure: function (data) {
                 console.log("on failure");
                 console.log(data);
-                fail('Request error') },
+                fail('Request error');
+            },
         }).post({
             page:       editorGetFilename(),
             content:    saveData,
