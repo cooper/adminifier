@@ -328,6 +328,7 @@ function displaySaveHelper () {
 
         // successful save callback
         var success = function (data) {
+            console.log(data);
             editorLastSavedData = saveData;
 
             // something went wrong in the page display
@@ -348,7 +349,7 @@ function displaySaveHelper () {
                 'File unchanged' : 'Saved ' + data.id.substr(0, 7);
             if (displayBad)
                 text += ' with errors';
-            box.innerHTML = text;
+            btn.innerHTML = text;
 
             closeBoxSoon();
         };
