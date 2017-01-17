@@ -1,6 +1,23 @@
 window.addEvent('hashchange', hashLoad);
 document.addEvent('domready', hashLoad);
 
+setInterval(function {
+    var goToLogin = function () {
+        window.location.hash = '';
+        window.location.target = 'login.php';
+    };
+    var req = Request.JSON({
+        secure: true,
+        onSuccess: function (data) {
+            if (data.type == 'error')
+                goToLogin();
+        },
+        onError: goToLogin,
+        onFailure: goToLogin
+    });
+    req.get();
+}, 60000);
+
 // this is for if pageScriptsDone event is added
 // and the page scripts are already done
 Element.Events.pageScriptsLoaded = {
