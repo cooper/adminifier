@@ -47,6 +47,9 @@ function sort_method ($type) {
     <th class="created info" data-sort="c">
         <a class="frame-click" href="#!/pages?sort=<?= sort_method('c') ?>">Created</a>
     </th>
+    <th class="created info" data-sort="m">
+        <a class="frame-click" href="#!/pages?sort=<?= sort_method('m') ?>">Modified</a>
+    </th>
 </thead>
 <tbody>
 <? foreach ($pages as $page): ?>
@@ -72,9 +75,14 @@ function sort_method ($type) {
         </td>
         <td class="created info">
             <?=
-                isset($page->created) ?
-                date('M j Y'/*g:i a'*/, $page->created) : ''
+                isset($page->created)           ?
+                date('M j Y', $page->created)   : ''
             ?>
+        </td>
+        <td class="modified info">
+            <?=
+                isset($page->modified_unix)         ?
+                date('M j Y', $page->modified_unix) : ''
         </td>
     </tr>
 <? endforeach; ?>
