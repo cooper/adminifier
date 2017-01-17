@@ -1,12 +1,13 @@
 <?
 
 // find the sort method
-$valid_types = array('a', 'c', 'u'); // TODO: the rest
-$sort  = 'c';
+$valid_types = array('a', 'c', 'u', 'm'); // TODO: the rest
+$sort  = 'm';
 $order = '-';
 if (isset($_GET['sort'])) {
     $parts = str_split($_GET['sort']);
-    $sort  = in_array($parts[0], $valid_types) ? $parts[0] : 'a';
+    if (in_array($parts[0], $valid_types))
+        $sort = $parts[0];
     $order = $parts[1] == '+' ? '+' : '-';
 }
 
