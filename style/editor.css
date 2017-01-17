@@ -60,7 +60,7 @@ ul.editor-toolbar li.disabled {
 }
 
 /* shared */
-    
+
 .editor-tool-large-button {
     font-size: 14px;
     line-height: 40px;
@@ -84,6 +84,11 @@ ul.editor-toolbar li.disabled {
 
 .editor-tool-large-button.success {
     background-color: #51B068 !important;
+    cursor: default;
+}
+
+.editor-tool-large-button.warning {
+    background-color: #CC6E2F !important;
     cursor: default;
 }
 
@@ -167,22 +172,6 @@ div.editor-link-type.active {
     margin: 10px;
     height: 60px;
 }
-
-#editor-save-commit.saving {
-    background-color: #2096ce;
-    cursor: default;
-}
-
-#editor-save-commit.saved {
-    background-color: #51B068 !important;
-    cursor: default;
-}
-
-#editor-save-commit.failed {
-    background-color: #D45D5D !important;
-    cursor: default;
-}
-
 /* delete confirmation */
 
 #editor-delete-wrapper {
