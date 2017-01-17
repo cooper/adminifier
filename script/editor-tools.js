@@ -136,8 +136,9 @@ function displayFontSelector () {
         });
 
         // separate the name into words
-        div.innerHTML = '<span style="padding-left: 10px;">' +
-            colorName.replace(/([A-Z])/g, ' $1') + '</span>';
+        div.innerHTML = tmpl('tmpl-color-name', {
+            colorName: colorName.replace(/([A-Z])/g, ' $1')
+        });
         container.appendChild(div);
 
         // compute and set the appropriate text color
@@ -284,7 +285,7 @@ function displaySaveHelper () {
             // close the popup only if the mouse isn't over it
             closePopup(box, { unlessActive: true });
 
-        }, 1500);
+        }, 3000);
     };
 
     // save changes function
@@ -406,12 +407,7 @@ function displayDeleteConfirmation () {
     box.addClass('right');
     fakeAdopt(box);
 
-    box.innerHTML = '   \
-<div id="editor-delete-wrapper"> \
-    <i class="fa fa-3x center fa-question-circle"></i> \
-</div> \
-<div id="editor-delete-button" class="editor-tool-large-button">Are you sure?</div>  \
-';
+    box.innerHTML = tmpl('tmpl-delete-confirm', {});
 
     // button text events
     var btn = $('editor-delete-button');
@@ -434,7 +430,7 @@ function displayDeleteConfirmation () {
         box.addClass('sticky');
 
         // "deleting..."
-        $('editor-delete-wrapper').innerHTML = '<i class="fa fa-spinner fa-3x fa-spin center"></i>'; // spinner
+        $('editor-delete-wrapper').innerHTML = tmpl('tmpl-save-spinner', {});
         btn.innerHTML = 'Deleting page';
         btn.addClass('progress');
 

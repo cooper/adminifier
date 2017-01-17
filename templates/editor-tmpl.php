@@ -24,3 +24,14 @@
 <script type="text/x-tmpl" id="tmpl-save-spinner">
     <div style="text-align: center; line-height: 60px; height: 60px;"><i class="fa fa-spinner fa-3x fa-spin center"></i></div>
 </script>
+
+<script type="text/x-tmpl" id="tmpl-delete-confirm">
+    <div id="editor-delete-wrapper">
+        <i class="fa fa-3x center fa-question-circle"></i>
+    </div>
+    <div id="editor-delete-button" class="editor-tool-large-button">Are you sure?</div>
+</script>
+
+<script type="text/x-tmpl" id="tmpl-color-name">
+    <span style="padding-left: 10px;">{%= colorName %}</span>
+</script>
