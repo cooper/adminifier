@@ -344,8 +344,8 @@ function displaySaveHelper () {
             // update button
             btn.removeClass('progress');
             btn.addClass(displayBad ? 'warning' : 'success');
-            btn.innerHTML = info.unchanged ?
-                'File unchanged' : 'Saved ' + info.id.substr(0, 7);
+            btn.innerHTML = data.unchanged ?
+                'File unchanged' : 'Saved ' + data.id.substr(0, 7);
             if (displayBad)
                 box.innerHTML = box.innerHTML + ' with errors';
 
