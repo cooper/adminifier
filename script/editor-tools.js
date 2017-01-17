@@ -333,7 +333,7 @@ function displaySaveHelper () {
 
             // something went wrong in the page display
             var displayBad = false;
-            if (!data.result || (data.result.type != 'page' && !data.draft))
+            if (!data.result || (data.result.type != 'page' && !data.result.draft))
                 displayBad = true;
 
             // switch to checkmark
