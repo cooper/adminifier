@@ -83,6 +83,7 @@ function sort_method ($type) {
             <?=
                 isset($page->modified_unix)         ?
                 date('M j Y', $page->modified_unix) : ''
+            ?>
         </td>
     </tr>
 <? endforeach; ?>
