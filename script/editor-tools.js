@@ -310,10 +310,6 @@ function displaySaveHelper () {
         var success = function (info) {
             editorLastSavedData = saveData;
 
-            // some error occurred
-            if (info.error)
-                return fail(info.error);
-
             // switch to checkmark
             var i = btn.parentElement.getElementsByTagName('i')[0];
             i.removeClass('fa-spinner');
@@ -346,9 +342,12 @@ function displaySaveHelper () {
                         success({ unchanged: true });
 
                     // true failure
-                    else
+                    else if (data.rev_error)
                         fail(data.rev_error);
-
+                    else if (data.error)
+                        fail(data.error);
+                    else
+                        fail("Unknown error");
                 }
             },
             onFailure: function () { fail('Request error') },
