@@ -332,7 +332,7 @@ function displaySaveHelper () {
 
             // something went wrong in the page display
             var displayBad = false;
-            if (data.result.type != 'page')
+            if (!data.result || data.result.type != 'page')
                 displayBad = true;
 
             // switch to checkmark
@@ -357,8 +357,7 @@ function displaySaveHelper () {
             url: 'functions/write-page.php',
             secure: true,
             onSuccess: function (data) {
-                console.log("on success");
-                console.log(data);
+
                 // updated without error
                 if (data.success)
                     success(data);
