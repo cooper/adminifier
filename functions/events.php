@@ -7,4 +7,6 @@ $res = $W->ping();
 if (!$res->connected)
     json_error('Not connected', (array)$res);
 
+json_success();
+
 ?>
