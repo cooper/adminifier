@@ -81,8 +81,8 @@ function sort_method ($type) {
         </td>
         <td class="modified info">
             <?=
-                isset($page->modified_unix)         ?
-                date('M j Y', $page->modified_unix) : ''
+                isset($page->mod_unix)         ?
+                date('M j Y', $page->mod_unix) : ''
             ?>
         </td>
     </tr>
