@@ -186,8 +186,10 @@ function closeCurrentPopup (unlessSticky, unlessActive) {
         return;
     }
 
-    // check if mouse is over it
-    if (unlessActive && box.parentElement.getElement(':hover')) {
+    // check if mouse is over it.
+    // note this will only work if the box has at least one child with
+    // the hover selector active
+    if (unlessActive && box.getElement(':hover')) {
         console.log('Keeping popup open because mouse is over it');
         return;
     }
