@@ -2,7 +2,9 @@ window.addEvent('hashchange', hashLoad);
 document.addEvent('domready', hashLoad);
 
 setInterval(function () {
+    console.log('checking status');
     var goToLogin = function () {
+        console.log('going to login');
         window.location.hash = '';
         window.location.target = 'login.php';
     };
@@ -12,6 +14,8 @@ setInterval(function () {
         onSuccess: function (data) {
             if (data.type == 'error')
                 goToLogin();
+            console.log('success');
+            console.log(data);
         },
         onError: goToLogin,
         onFailure: goToLogin
