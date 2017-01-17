@@ -7,6 +7,7 @@ setInterval(function () {
         window.location.target = 'login.php';
     };
     var req = Request.JSON({
+        url: 'functions/events.php',
         secure: true,
         onSuccess: function (data) {
             if (data.type == 'error')
