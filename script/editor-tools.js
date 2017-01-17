@@ -275,7 +275,14 @@ function displaySaveHelper () {
     });
 
     // save changes function
+    var saving = false;
     var saveChanges = function () {
+
+        // already saving
+        if (saving)
+            return;
+        saving = true;
+
         var saveData = editor.getValue();
 
         // prevent box from closing for now
@@ -304,6 +311,7 @@ function displaySaveHelper () {
             btn.innerHTML = 'Save failed';
 
             setTimeout(closeCurrentPopup, 1500);
+            saving = false;
         };
 
         // successful save callback
@@ -323,6 +331,7 @@ function displaySaveHelper () {
                 'File unchanged' : 'Saved ' + info.id.substr(0, 7);
 
             setTimeout(closeCurrentPopup, 1500);
+            saving = false;
         };
 
         // save request
