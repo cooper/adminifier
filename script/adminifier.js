@@ -8,7 +8,7 @@ setInterval(function () {
         window.location.hash = '';
         window.location.target = 'login.php';
     };
-    var req = Request.JSON({
+    var req = new Request.JSON({
         url: 'functions/events.php',
         secure: true,
         onSuccess: function (data) {
