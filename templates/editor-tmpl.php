@@ -33,5 +33,5 @@
 </script>
 
 <script type="text/x-tmpl" id="tmpl-color-name">
-    <span style="padding-left: 10px;">{%= colorName %}</span>
+    <span style="padding-left: 10px;">{%= o.colorName %}</span>
 </script>
