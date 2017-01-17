@@ -1,7 +1,7 @@
 window.addEvent('hashchange', hashLoad);
 document.addEvent('domready', hashLoad);
 
-setInterval(function {
+setInterval(function () {
     var goToLogin = function () {
         window.location.hash = '';
         window.location.target = 'login.php';
