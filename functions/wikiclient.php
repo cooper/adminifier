@@ -1,5 +1,6 @@
 <?
 
+$API = true;
 require_once(__DIR__.'/../private/config.php');
 require_once($config->wikiclient_path);
 
