@@ -81,7 +81,7 @@ function handleEditorEscapeKey(e) {
 
     // if there's a popup, exit it maybe
     if (currentPopup)
-        closeCurrentPopup(true);
+        closeCurrentPopup({ unlessSticky: true });
 
 }
 
@@ -162,7 +162,7 @@ function getContrastYIQ (hexColor) {
     return (yiq >= 128) ? '#000' : '#fff';
 }
 
-function closePopup (box, unlessSticky, unlessActive) {
+function closePopup (box, opts) {
     if (!currentPopup)
         return;
     if (currentPopup != box) {
@@ -173,15 +173,15 @@ function closePopup (box, unlessSticky, unlessActive) {
         );
         return;
     }
-    closeCurrentPopup(unlessSticky, unlessActive);
+    closeCurrentPopup(opts);
 }
 
-function closeCurrentPopup (unlessSticky, unlessActive) {
+function closeCurrentPopup (opts) {
     var box = currentPopup;
     if (!box) return;
 
     // check if sticky
-    if (unlessSticky && box.hasClass('sticky')) {
+    if (opts.unlessSticky && box.hasClass('sticky')) {
         console.log('Keeping popup open because it is marked sticky');
         return;
     }
@@ -189,8 +189,14 @@ function closeCurrentPopup (unlessSticky, unlessActive) {
     // check if mouse is over it.
     // note this will only work if the box has at least one child with
     // the hover selector active
-    if (unlessActive && box.getElement(':hover')) {
+    if (opts.unlessActive && box.getElement(':hover')) {
         console.log('Keeping popup open because mouse is over it');
+
+        // once the mouse exits, close it
+        box.addEvent('mouseleave', function () {
+            closePopup(box, opts);
+        });
+
         return;
     }
 

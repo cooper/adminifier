@@ -282,7 +282,7 @@ function displaySaveHelper () {
             box.removeClass('sticky');
 
             // close the popup only if the mouse isn't over it
-            closePopup(box, false, true);
+            closePopup(box, { unlessActive: true });
 
         }, 1500);
     };
