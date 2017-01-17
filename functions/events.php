@@ -5,6 +5,6 @@ require_once(__DIR__.'/utils.php');
 
 $res = $W->ping();
 if (!$res->connected)
-    json_error('Not connected', $res);
+    json_error('Not connected', (array)$res);
 
 ?>
