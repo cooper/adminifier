@@ -31,6 +31,7 @@ function sort_method ($type) {
       data-title="Pages"
       data-icon="file-text"
       data-scripts="page-list"
+      data-styles="page-list"
       data-flags="no-margin"
       data-sort="<?= $sort.$order ?>"
 />
