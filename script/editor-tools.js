@@ -327,8 +327,13 @@ function displaySaveHelper () {
         };
 
         // successful save callback
-        var success = function (info) {
+        var success = function (data) {
             editorLastSavedData = saveData;
+
+            // something went wrong in the page display
+            var displayBad = false;
+            if (data.result.type != 'page')
+                displayBad = true;
 
             // switch to checkmark
             var i = btn.parentElement.getElementsByTagName('i')[0];
@@ -337,10 +342,12 @@ function displaySaveHelper () {
             i.addClass('fa-check-circle');
 
             // update button
-            btn.addClass('success');
             btn.removeClass('progress');
+            btn.addClass(displayBad ? 'warning' : 'success');
             btn.innerHTML = info.unchanged ?
                 'File unchanged' : 'Saved ' + info.id.substr(0, 7);
+            if (displayBad)
+                box.innerHTML = box.innerHTML + ' with errors';
 
             closeBoxSoon();
         };
@@ -354,13 +361,15 @@ function displaySaveHelper () {
                 console.log(data);
                 // updated without error
                 if (data.success)
-                    success(data.rev_info);
+                    success(data);
 
                 // revision error
 
                 // nothing changed
-                else if (data.rev_error && data.rev_error.match('no changes'))
-                    success({ unchanged: true });
+                else if (data.rev_error && data.rev_error.match('no changes')) {
+                    data.unchanged = true;
+                    success(data);
+                }
 
                 // git error
                 else if (data.rev_error)
