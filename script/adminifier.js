@@ -1,9 +1,6 @@
 window.addEvent('hashchange', hashLoad);
 document.addEvent('domready', hashLoad);
 
-setInterval(pingServer, 60000);
-pingServer();
-
 // this is for if pageScriptsDone event is added
 // and the page scripts are already done
 Element.Events.pageScriptsLoaded = {
@@ -259,23 +256,4 @@ function handlePageData(data) {
 
 function updatePageTitle(title) {
     $$('#page-title span')[0].innerText = title;
-}
-
-function pingServer () {
-    var goToLogin = function () {
-        console.log('Going to login');
-        window.location.hash = '';
-        window.location.target = 'login.php';
-    };
-    var req = new Request.JSON({
-        url: 'functions/events.php',
-        secure: true,
-        onSuccess: function (data) {
-            if (!data.connected)
-                goToLogin();
-        },
-        onError: goToLogin,
-        onFailure: goToLogin
-    });
-    req.get();
 }
