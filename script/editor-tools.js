@@ -344,10 +344,11 @@ function displaySaveHelper () {
             // update button
             btn.removeClass('progress');
             btn.addClass(displayBad ? 'warning' : 'success');
-            btn.innerHTML = data.unchanged ?
+            var text = data.unchanged ?
                 'File unchanged' : 'Saved ' + data.id.substr(0, 7);
             if (displayBad)
-                box.innerHTML = box.innerHTML + ' with errors';
+                text += ' with errors';
+            box.innerHTML = text;
 
             closeBoxSoon();
         };
