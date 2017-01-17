@@ -173,11 +173,14 @@ function closeCurrentPopup (unlessSticky, unlessActive) {
     if (!box) return;
 
     // check if sticky
-    if (unlessSticky && box.hasClass('sticky'))
+    if (unlessSticky && box.hasClass('sticky')) {
+        console.log('Keeping popup open because it is marked sticky');
         return;
+    }
 
     // check if mouse is over it
     if (unlessActive && box.parentElement.getElement(':hover')) {
+        console.log('Keeping popup open because mouse is over it');
         return;
     }
 
