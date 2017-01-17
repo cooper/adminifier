@@ -15,7 +15,8 @@ if (!$res->saved)
     ));
 
 json_success(array(
-    'rev_info' => $res->rev_latest
+    'rev_info' => $res->rev_latest,
+    'result'   => $res->result
 ));
 
 ?>
