@@ -179,6 +179,7 @@ function closePopup (box, opts) {
 function closeCurrentPopup (opts) {
     var box = currentPopup;
     if (!box) return;
+    if (!opts) opts = {};
 
     // check if sticky
     if (opts.unlessSticky && box.hasClass('sticky')) {
