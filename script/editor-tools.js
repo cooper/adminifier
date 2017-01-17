@@ -338,28 +338,34 @@ function displaySaveHelper () {
         var req = new Request.JSON({
             url: 'functions/write-page.php',
             onSuccess: function (data) {
-
+                console.log("on success");
+                console.log(data);
                 // updated without error
                 if (data.success)
                     success(data.rev_info);
 
                 // revision error
-                else {
 
-                    // nothing changed
-                    if (data.rev_error && data.rev_error.match('no changes'))
-                        success({ unchanged: true });
+                // nothing changed
+                else if (data.rev_error && data.rev_error.match('no changes'))
+                    success({ unchanged: true });
 
-                    // true failure
-                    else if (data.rev_error)
-                        fail(data.rev_error);
-                    else if (data.error)
-                        fail(data.error);
-                    else
-                        fail("Unknown error");
-                }
+                // git error
+                else if (data.rev_error)
+                    fail(data.rev_error);
+
+                // other error
+                else if (data.error)
+                    fail(data.error);
+
+                // not sure
+                else
+                    fail("Unknown error");
             },
-            onFailure: function () { fail('Request error') },
+            onFailure: function (data) {
+                console.log("on failure");
+                console.log(data);
+                fail('Request error') },
         }).post({
             page:       editorGetFilename(),
             content:    saveData,
