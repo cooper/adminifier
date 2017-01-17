@@ -288,25 +288,6 @@ function displaySaveHelper () {
         btn.innerHTML = 'Comitting changes';
         btn.addClass('progress');
 
-        // successful save callback
-        var success = function (info) {
-            editorLastSavedData = saveData;
-
-            // switch to checkmark
-            var i = btn.parentElement.getElementsByTagName('i')[0];
-            i.removeClass('fa-spinner');
-            i.removeClass('fa-spin');
-            i.addClass('fa-check-circle');
-
-            // update button
-            btn.addClass('success');
-            btn.removeClass('progress');
-            btn.innerHTML = info.unchanged ?
-                'File unchanged' : 'Saved ' + info.id.substr(0, 7);
-
-            setTimeout(function () { closeCurrentPopup(); }, 1500);
-        };
-
         // save failed callback
         var fail = function (msg) {
             alert('Save failed: ' + msg);
@@ -322,7 +303,30 @@ function displaySaveHelper () {
             btn.removeClass('progress');
             btn.innerHTML = 'Save failed';
 
-            setTimeout(function () { closeCurrentPopup(); }, 1500);
+            setTimeout(closeCurrentPopup, 1500);
+        };
+
+        // successful save callback
+        var success = function (info) {
+            editorLastSavedData = saveData;
+
+            // some error occurred
+            if (info.error)
+                return fail(info.error);
+
+            // switch to checkmark
+            var i = btn.parentElement.getElementsByTagName('i')[0];
+            i.removeClass('fa-spinner');
+            i.removeClass('fa-spin');
+            i.addClass('fa-check-circle');
+
+            // update button
+            btn.addClass('success');
+            btn.removeClass('progress');
+            btn.innerHTML = info.unchanged ?
+                'File unchanged' : 'Saved ' + info.id.substr(0, 7);
+
+            setTimeout(closeCurrentPopup, 1500);
         };
 
         // save request
@@ -439,7 +443,7 @@ function displayDeleteConfirmation () {
             btn.removeClass('progress');
             btn.innerHTML = 'Delete failed';
 
-            setTimeout(function () { closeCurrentPopup(); }, 1500);
+            setTimeout(closeCurrentPopup, 1500);
         };
 
         // delete request
