@@ -11,7 +11,7 @@ if (!$res->saved)
     json_error('Save failed', array(
         'rev_error'  => $res->rev_error,
         'rev_errors' => $res->rev_errors,
-        'error'      => $res->error
+        'error'      => $res->reason
     ));
 
 json_success(array(
