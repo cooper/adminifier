@@ -163,8 +163,16 @@ function getContrastYIQ (hexColor) {
 }
 
 function closePopup (box, unlessSticky, unlessActive) {
-    if (!currentPopup || currentPopup != box)
+    if (!currentPopup)
         return;
+    if (currentPopup != box) {
+        console.warn(
+            'Attempted to close a box other than the current one',
+            box,
+            currentPopup
+        );
+        return;
+    }
     closeCurrentPopup(unlessSticky, unlessActive);
 }
 
