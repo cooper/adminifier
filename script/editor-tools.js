@@ -275,19 +275,18 @@ function displaySaveHelper () {
     });
 
     // save changes function
-    var saving = false;
     var saveChanges = function () {
 
         // already saving
-        if (saving)
+        var message = $('editor-save-message');
+        if (!message)
             return;
-        saving = true;
 
         var saveData = editor.getValue();
 
         // prevent box from closing for now
         box.addClass('sticky');
-        var message = $('editor-save-message').getProperty('value');
+        var message = message.getProperty('value');
 
         // "saving..."
         $('editor-save-wrapper').innerHTML = tmpl('tmpl-save-spinner', {});
@@ -313,7 +312,6 @@ function displaySaveHelper () {
             setTimeout(function () {
                 closePopup(box);
             }, 1500);
-            saving = false;
         };
 
         // successful save callback
@@ -342,8 +340,6 @@ function displaySaveHelper () {
                 closePopup(box, false, true);
 
             }, 1500);
-
-            saving = false;
         };
 
         // save request
