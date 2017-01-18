@@ -383,10 +383,17 @@ function displaySaveHelper () {
                 alert(res.error);
 
                 // highlight the line that had an error
-                var match = res.error.match(/^Line (\d+):/);
+                var match = res.error.match(/^Line (\d+):(.+)/);
                 if (match) {
-                    var range = new Range(match[1], 0, match[1], 1);
+                    var row   = match[1] - 1, errorText = match[2].trim();
+                    var range = new Range(row, 0, row, 1);
                     editor.session.addMarker(range, "error-marker", "fullLine");
+                    editor.selection.setAnnotations([{
+                        row:    row,
+                        column: 0,
+                        text:   errorText,
+                        type:   "error"
+                    }]);
                 }
             }
 
