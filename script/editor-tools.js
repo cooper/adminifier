@@ -337,11 +337,8 @@ function displaySaveHelper () {
 
             // something went wrong in the page display
             var displayBad = false, res = data.result;
-            if (!res || (res.type != 'page' && !res.draft)) {
+            if (!res || (res.type != 'page' && !res.draft))
                 displayBad = true;
-                if (res && res.type == 'not found')
-                    alert(res.error);
-            }
 
             // switch to checkmark
             var i = btn.parentElement.getElementsByTagName('i')[0];
@@ -357,6 +354,10 @@ function displaySaveHelper () {
             if (displayBad)
                 text += ' with errors';
             btn.innerHTML = text;
+
+            // alert the page display error
+            if (res && res.type == 'not found')
+                alert(res.error);
 
             closeBoxSoon();
         };
