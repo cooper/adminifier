@@ -104,8 +104,12 @@ function getPageTitleRange () {
 // find the page title
 function updateEditorTitle() {
     var title = getPageTitle();
-    if (typeof title != 'undefined' && title.length)
+    if (typeof title != 'undefined')
+        return;
+    if (title.length)
         updatePageTitle(title);
+    else
+        updatePageTitle(editorGetFilename());
 }
 
 // TEXT COLOR SELECTOR
