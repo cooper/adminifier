@@ -104,10 +104,8 @@ function findPageVariable (exp) {
         }
 
         // ending a bool var
-        if (inName && char == ';') {
-            delete foundText;
+        if (inName && char == ';')
             break;
-        }
 
         if (inTitle)
             foundText += char;
@@ -655,11 +653,12 @@ function generatePageOptions (opts) {
         done    = {};
     var updateBiggest = function (length, ret) {
         var maybeBigger = length + 5;
-        console.log('is ' + maybeBigger + ' bigger than ' + biggest);
         if (maybeBigger > biggest)
             biggest = maybeBigger;
         return ret;
     };
+
+    // these three always go at the top, in this order
     ['title', 'author', 'created'].append(
         Object.keys(opts).sort(function (a, b) {
         var aBool = opts[a] === true,
@@ -680,12 +679,14 @@ function generatePageOptions (opts) {
         return a.localeCompare(b);
 
     })).each(function (optName) {
-        if (done[optName]) return;
+        if (done[optName])
+            return;
         done[optName] = true;
 
         // not present
         var value = opts[optName];
-        if (typeOf(value) == 'null') return;
+        if (typeOf(value) == 'null')
+            return;
 
         string += '@page.' + optName;
 
@@ -696,8 +697,14 @@ function generatePageOptions (opts) {
         // other value
         else {
             string += ':';
+
+            // add however many spaces to make it line up
             if (optName.length < biggest)
                 string += Array(biggest - optName.length).join(' ');
+
+            // escape semicolons
+            value.replace(/;/g, '\\;');
+            
             string += value + ';';
         }
 
