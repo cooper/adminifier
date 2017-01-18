@@ -388,7 +388,7 @@ function displaySaveHelper () {
                     var row   = match[1] - 1, errorText = match[2].trim();
                     var range = new Range(row, 0, row, 1);
                     editor.session.addMarker(range, "error-marker", "fullLine");
-                    editor.selection.setAnnotations([{
+                    editor.session.setAnnotations([{
                         row:    row,
                         column: 0,
                         text:   errorText,
