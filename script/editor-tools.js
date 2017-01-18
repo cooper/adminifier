@@ -104,7 +104,7 @@ function getPageTitleRange () {
 // find the page title
 function updateEditorTitle() {
     var title = getPageTitle();
-    if (typeof title != 'undefined')
+    if (typeof title == 'undefined')
         return;
     if (title.length)
         updatePageTitle(title);
@@ -337,8 +337,11 @@ function displaySaveHelper () {
 
             // something went wrong in the page display
             var displayBad = false;
-            if (!data.result || (data.result.type != 'page' && !data.result.draft))
+            if (!data.result || (data.result.type != 'page' && !data.result.draft)) {
                 displayBad = true;
+                if (data.result.type == 'not found')
+                    alert(data.result.reason);
+            }
 
             // switch to checkmark
             var i = btn.parentElement.getElementsByTagName('i')[0];
