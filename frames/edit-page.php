@@ -5,9 +5,13 @@ require_once(__DIR__.'/../functions/utils.php');
 if (!isset($_GET['page']))
     die('No page requested');
 
-$result = $W->page_code($_GET['page']);
+// the one means to set {display_result}
+$result = $W->page_code($_GET['page'], 1);
 if ($result->type != 'page_code')
     die('Page does not exist.');
+
+// page display result
+$display_result = json_encode($result->display_result);
 
 ?>
 
@@ -19,6 +23,12 @@ if ($result->type != 'page_code')
       data-styles="editor"
       data-flags="no-margin compact-sidebar"
 />
+
+<script type="text/javascript">
+    document.addEvent('pageScriptsLoaded', function () {
+        handlePageDisplayResult('<?= addslashes($display_result) ?>');
+    });
+</script>
 
 <div class="editor-toolbar-wrapper">
     <ul class="editor-toolbar">

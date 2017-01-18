@@ -379,26 +379,7 @@ function displaySaveHelper () {
             btn.innerHTML = text;
 
             // show the page display error
-            if (res && res.type == 'not found' && !res.draft) {
-
-                // highlight the line that had an error
-                var match = res.error.match(/^Line (\d+):(\d):(.+)/);
-                if (match) {
-                    var row = match[1] - 1,
-                        col = match[2],
-                        errorText = match[3].trim();
-                    editor.session.setAnnotations([{
-                        row:    row,
-                        column: col,
-                        text:   errorText,
-                        type:   "error"
-                    }]);
-                }
-
-                // otherwise alert the error
-                else
-                    alert(res.error);
-            }
+            handlePageDisplayResult(res);
 
             closeBoxSoon();
         };
@@ -455,6 +436,29 @@ function displaySaveHelper () {
 
     displayPopupBox(box, 120, li);
     $('editor-save-message').focus();
+}
+
+function handlePageDisplayResult (res) {
+    if (!res || res.type != 'not found' || res.draft)
+        return;
+
+    // highlight the line that had an error
+    var match = res.error.match(/^Line (\d+):(\d):(.+)/);
+    if (match) {
+        var row = match[1] - 1,
+            col = match[2],
+            errorText = match[3].trim();
+        editor.session.setAnnotations([{
+            row:    row,
+            column: col,
+            text:   errorText,
+            type:   "error"
+        }]);
+    }
+
+    // otherwise alert the error
+    else
+        alert(res.error);
 }
 
 // DELETE CONFIRMATION
