@@ -382,14 +382,14 @@ function displaySaveHelper () {
             if (res && res.type == 'not found' && !res.draft) {
 
                 // highlight the line that had an error
-                var match = res.error.match(/^Line (\d+):(.+)/);
+                var match = res.error.match(/^Line (\d+):(\d):(.+)/);
                 if (match) {
-                    var row   = match[1] - 1, errorText = match[2].trim();
-                    var range = new Range(row, 0, row, 1);
-                    editor.session.addMarker(range, "error-marker", "fullLine");
+                    var row = match[1] - 1,
+                        col = match[2],
+                        errorText = match[3].trim();
                     editor.session.setAnnotations([{
                         row:    row,
-                        column: 0,
+                        column: col,
                         text:   errorText,
                         type:   "error"
                     }]);

@@ -4,7 +4,6 @@ pingServer();
 function pingServer () {
     var goToLogin = function () {
         console.log('Going to login');
-        window.location.hash = '';
         window.location.target = 'login.php';
     };
     var req = new Request.JSON({
