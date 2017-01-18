@@ -47,7 +47,6 @@ function getPageTitle () {
     return;
 }
 
-// TODO: this doesn't yet handle escaped semicolons
 function getPageTitleRange () {
     var found = editor.find(editorExpressions.pageTitle, { regExp: true, wrap: true });
     if (!found) return;
@@ -62,14 +61,20 @@ function getPageTitleRange () {
     for (var i = 0; ; i++) {
         var char = string[i];
 
-        // made it to the end without finding semicolon
+        // made it to the end without finding unescaped semicolon
         if (typeOf(char) == 'null') {
             endIndex = i;
             break;
         }
 
+        // escapes
+        var escaped = string[i - 1] == '\\';
+        if (char == '\\' && !escaped) {
+            continue;
+        }
+
         // now we're in the title
-        if (!inTitle && char == ':') {
+        if (!startIndex && char == ':') {
             inTitle = true;
             startIndex = i + 1;
             continue;
