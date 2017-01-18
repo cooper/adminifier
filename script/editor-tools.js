@@ -605,7 +605,9 @@ function editorRemoveLinesInRanges (ranges) {
 
 function rangeFunc (range, bool) {
     var text  = editor.getSession().getTextRange(range);
-    var match = findPageVariable(bool ? boolExp : keyValueExp);
+    var match = findPageVariable(
+        bool ? editorExpressions.boolVar : editorExpressions.keyValueVar
+    );
     if (!match)
         return;
     return {
@@ -621,11 +623,12 @@ function findPageOptions (remove) {
     // remember the current selection
     var originalRange = editor.getSelection().getRange();
 
-    var keyValueExp = editorExpressions.keyValueVar,
-        boolExp     = editorExpressions.boolVar;
     // find key:value pairs
     var found = {};
-    if (editor.findAll(keyValueExp, { regExp: true, wrap: true })) {
+    if (editor.findAll(editorExpressions.keyValueVar, {
+        regExp: true,
+        wrap: true
+    })) {
         var ranges = editor.getSelection().getAllRanges();
         ranges.each(function (i) {
             var res = rangeFunc(i, false);
@@ -638,7 +641,10 @@ function findPageOptions (remove) {
     }
 
     // now find booleans
-    if (editor.findAll(boolExp, { regExp: true, wrap: true })) {
+    if (editor.findAll(editorExpressions.boolVar, {
+        regExp: true,
+        wrap: true
+    })) {
         var ranges = editor.getSelection().getAllRanges();
         ranges.each(function (i) {
             var res = rangeFunc(i, true);
