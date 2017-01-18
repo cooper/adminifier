@@ -561,6 +561,9 @@ function displayPageOptionsWindow () {
     found = findPageCategories();
     if (found.length) {
         editorInsertBlankLineMaybe();
+        found.each(function (catName) {
+            editor.insert('@category.' + catName + ';\n');
+        });
     }
 
     editorInsertBlankLineMaybe();
