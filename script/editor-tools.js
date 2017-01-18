@@ -103,6 +103,12 @@ function findPageVariable (exp) {
             break;
         }
 
+        // ending a bool var
+        if (inName && char == ';') {
+            delete foundText;
+            break;
+        }
+
         if (inTitle)
             foundText += char;
         else if (inName)
