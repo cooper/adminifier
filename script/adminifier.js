@@ -30,8 +30,9 @@ function frameLoad(page) {
 
     // add .php extension, respecting GET arguments
     var idx = page.indexOf('?');
-    if (idx != -1)
-        page = page.slice(0, idx) + '.php' + page.slice(idx);
+    if (idx == -1)
+        idx = page.length;
+    page = page.slice(0, idx) + '.php' + page.slice(idx);
 
     var request = new Request({
         url: 'frames/' + page,
