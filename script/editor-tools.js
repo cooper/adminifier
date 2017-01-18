@@ -336,11 +336,11 @@ function displaySaveHelper () {
             editorLastSavedData = saveData;
 
             // something went wrong in the page display
-            var displayBad = false;
-            if (!data.result || (data.result.type != 'page' && !data.result.draft)) {
+            var displayBad = false, res = data.result;
+            if (!res || (res.type != 'page' && !res.draft)) {
                 displayBad = true;
-                if (data.result.type == 'not found')
-                    alert(data.result.reason);
+                if (res && res.type == 'not found')
+                    alert(res.error);
             }
 
             // switch to checkmark
