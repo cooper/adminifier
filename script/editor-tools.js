@@ -558,7 +558,8 @@ function displayPageOptionsWindow () {
     // the insertion at column 0.
 
     // now check for categories
-    if (false) {
+    found = findPageCategories();
+    if (found.length) {
         editorInsertBlankLineMaybe();
     }
 
@@ -574,7 +575,10 @@ function editorInsertBlankLineMaybe () {
     // if there is text on the line, insert a blank line before it.
     if (editor.getSelectedText().trim().length) {
         var r = editor.getSelection().getRange();
-        editor.getSelection().setSelectionRange(new Range(r.start.row, 0, r.start.row, 0));
+        editor.getSelection().setSelectionRange(new Range(
+            r.start.row, 0,
+            r.start.row, 0
+        ));
         editor.insert('\n');
         return true;
     }
@@ -597,8 +601,20 @@ function editorRemoveLinesInRanges (ranges) {
         editor.getSelection().setSelectionRange(r);
         editor.removeLines();
     });
-
 }
+
+function rangeFunc (range, bool) {
+    var text  = editor.getSession().getTextRange(range);
+    var match = findPageVariable(bool ? boolExp : keyValueExp);
+    if (!match)
+        return;
+    return {
+        name:   match.name,
+        text:   match.text,
+        value:  bool ? true : match.text.trim(),
+        range:  match.range
+    };
+};
 
 function findPageOptions (remove) {
 
@@ -606,45 +622,57 @@ function findPageOptions (remove) {
     var originalRange = editor.getSelection().getRange();
 
     var keyValueExp = editorExpressions.keyValueVar,
-        boolExp     = editorExpressions.boolVar,
-        found       = {};
-
-    var rangeFunc = function (range, bool) {
-        var text  = editor.getSession().getTextRange(range);
-        var match = findPageVariable(bool ? boolExp : keyValueExp);
-        if (!match)
-            return;
-        found[ match.name ] = {
-            text:   match.text,
-            value:  bool ? true : match.text.trim(),
-            range:  match.range
-        };
-    };
-
+        boolExp     = editorExpressions.boolVar;
     // find key:value pairs
-    var found;
+    var found = {};
     if (editor.findAll(keyValueExp, { regExp: true, wrap: true })) {
         var ranges = editor.getSelection().getAllRanges();
-        ranges.each(function (i) { rangeFunc(i, false) });
+        ranges.each(function (i) {
+            var res = rangeFunc(i, false);
+            if (res) found[res.name] = res;
+        });
 
         // delete all of the matching lines
-        if (remove) editorRemoveLinesInRanges(ranges);
-
+        if (remove)
+            editorRemoveLinesInRanges(ranges);
     }
 
     // now find booleans
     if (editor.findAll(boolExp, { regExp: true, wrap: true })) {
         var ranges = editor.getSelection().getAllRanges();
-        ranges.each(function (i) { rangeFunc(i, true) });
+        ranges.each(function (i) {
+            var res = rangeFunc(i, true);
+            if (res) found[res.name] = res;
+        });
 
         // do this again
-        if (remove) editorRemoveLinesInRanges(ranges);
+        if (remove)
+            editorRemoveLinesInRanges(ranges);
     }
 
     // revert to the original selection
     editor.getSelection().setSelectionRange(originalRange);
 
     return found;
+}
+
+function findPageCategories (remove) {
+    var found = {};
+    if (editor.findAll(editorExpressions.category, {
+        regExp: true,
+        wrap: true
+    })) {
+        var ranges = editor.getSelection().getAllRanges();
+        ranges.each(function (i) {
+            var res = rangeFunc(i, false);
+            if (res) found[res.name] = res;
+        });
+
+        // delete all of the matching lines
+        if (remove)
+            editorRemoveLinesInRanges(ranges);
+    }
+    return Object.keys(found);
 }
 
 function generatePageOptions (opts) {
