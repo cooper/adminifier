@@ -558,7 +558,7 @@ function displayPageOptionsWindow () {
     // the insertion at column 0.
 
     // now check for categories
-    found = findPageCategories();
+    found = findPageCategories(true);
     if (found.length) {
         editorInsertBlankLineMaybe();
         found.each(function (catName) {
