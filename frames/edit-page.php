@@ -10,9 +10,6 @@ $result = $W->page_code($_GET['page'], 1);
 if ($result->type != 'page_code')
     die('Page does not exist.');
 
-// page display result
-$display_result = json_encode($result->display_result);
-
 ?>
 
 <meta
@@ -24,16 +21,8 @@ $display_result = json_encode($result->display_result);
       data-flags="no-margin compact-sidebar"
 />
 
-<script type="text/javascript">
-    (function () {
-        var dealWithPageResult = function () {
-            handlePageDisplayResult('<?= addslashes($display_result) ?>');
-        };
-        if (editor)
-            dealWithPageResult);
-        else
-            document.addEvent('pageScriptsLoaded', dealWithPageResult);
-    })();
+<script type="application/json">
+    <?= addslashes(json_encode($result->display_result)) ?>
 </script>
 
 <div class="editor-toolbar-wrapper">
