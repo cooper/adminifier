@@ -25,9 +25,15 @@ $display_result = json_encode($result->display_result);
 />
 
 <script type="text/javascript">
-    document.addEvent('pageScriptsLoaded', function () {
-        handlePageDisplayResult('<?= addslashes($display_result) ?>');
-    });
+    (function () {
+        var dealWithPageResult = function () {
+            handlePageDisplayResult('<?= addslashes($display_result) ?>');
+        };
+        if (editor)
+            dealWithPageResult);
+        else
+            document.addEvent('pageScriptsLoaded', dealWithPageResult);
+    })();
 </script>
 
 <div class="editor-toolbar-wrapper">
