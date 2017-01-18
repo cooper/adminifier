@@ -58,11 +58,9 @@ function findPageVariable (exp) {
     var string = editor.getSelectedText();
 
     var escaped = false,
-        inTitle = false,
-        foundText = '',
-        foundName = '',
-        startIndex = 0,
-        endIndex = 0;
+        inTitle = false,    inName = false,
+        foundText = '',     foundName = '',
+        startIndex = 0,     endIndex = 0;
 
     for (var i = 0; ; i++) {
         var char = string[i];
@@ -81,8 +79,14 @@ function findPageVariable (exp) {
 
         // now we're in the title
         if (!startIndex && char == ':') {
+            inName  = false;
             inTitle = true;
             startIndex = i + 1;
+            continue;
+        }
+
+        if (!startIndex && char == '.' && !inName) {
+            inName = true;
             continue;
         }
 
@@ -101,7 +105,7 @@ function findPageVariable (exp) {
 
         if (inTitle)
             foundText += char;
-        else if (!startIndex)
+        else if (inName)
             foundName += char;
     }
 
