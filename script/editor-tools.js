@@ -43,6 +43,8 @@ function selectPageTitle () {
     editor.selection.setSelectionRange(found.range);
 }
 
+// returns the page title text, with any escapes accounted for.
+// returns nothing if the @page.title can't be found.
 function getPageTitle () {
     var found = findPageVariable(editorExpressions.pageTitle);
     if (!found)
@@ -597,12 +599,13 @@ function findPageOptions (remove) {
 
     var rangeFunc = function (range, bool) {
         var text  = editor.getSession().getTextRange(range);
-        var match = text.match(bool ? boolExp : keyValueExp);
-        if (!match) return;
+        var found = findPageVariable(bool ? boolExp : keyValueExp);
+        if (!found)
+            return;
         found[ match[1] ] = {
-            text:   text,
-            value:  bool ? true : match[2].trim(),
-            range:  range
+            text:   found.text,
+            value:  bool ? true : found.text.trim(),
+            range:  found.range
         };
     };
 
