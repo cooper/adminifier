@@ -378,9 +378,8 @@ function displaySaveHelper () {
                 text += ' with errors';
             btn.innerHTML = text;
 
-            // alert the page display error
-            if (res && res.type == 'not found') {
-                alert(res.error);
+            // show the page display error
+            if (res && res.type == 'not found' && !res.draft) {
 
                 // highlight the line that had an error
                 var match = res.error.match(/^Line (\d+):(.+)/);
@@ -395,6 +394,10 @@ function displaySaveHelper () {
                         type:   "error"
                     }]);
                 }
+
+                // otherwise alert the error
+                else
+                    alert(res.error);
             }
 
             closeBoxSoon();
