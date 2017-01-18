@@ -603,11 +603,9 @@ function editorRemoveLinesInRanges (ranges) {
     });
 }
 
-function rangeFunc (range, bool) {
+function rangeFunc (range, exp) {
     var text  = editor.getSession().getTextRange(range);
-    var match = findPageVariable(
-        bool ? editorExpressions.boolVar : editorExpressions.keyValueVar
-    );
+    var match = findPageVariable(exp);
     if (!match)
         return;
     return {
@@ -631,7 +629,7 @@ function findPageOptions (remove) {
     })) {
         var ranges = editor.getSelection().getAllRanges();
         ranges.each(function (i) {
-            var res = rangeFunc(i, false);
+            var res = rangeFunc(i, editorExpressions.keyValueVar);
             if (res) found[res.name] = res;
         });
 
@@ -647,7 +645,7 @@ function findPageOptions (remove) {
     })) {
         var ranges = editor.getSelection().getAllRanges();
         ranges.each(function (i) {
-            var res = rangeFunc(i, true);
+            var res = rangeFunc(i, editorExpressions.boolVar);
             if (res) found[res.name] = res;
         });
 
@@ -670,7 +668,7 @@ function findPageCategories (remove) {
     })) {
         var ranges = editor.getSelection().getAllRanges();
         ranges.each(function (i) {
-            var res = rangeFunc(i, false);
+            var res = rangeFunc(i, editorExpressions.category);
             if (res) found[res.name] = res;
         });
 
