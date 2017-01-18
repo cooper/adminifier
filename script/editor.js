@@ -25,7 +25,7 @@ function editorPageScriptsLoadedHandler () {
 
     // render editor
     editor.setTheme("ace/theme/twilight"); /* eclipse is good light one */
-    editor.getSession().setMode("ace/mode/plain_text");
+    editor.session.setMode("ace/mode/plain_text");
     editor.on('input', editorInputHandler);
     setTimeout(function () { editor.resize(); }, 500);
 
@@ -70,7 +70,7 @@ var editorExpressions = {
 };
 
 function resetSelectionAtTopLeft () {
-    editor.getSelection().setSelectionRange(new Range(0, 0, 0, 0));
+    editor.selection.setSelectionRange(new Range(0, 0, 0, 0));
     editor.focus();
 }
 
@@ -88,7 +88,7 @@ function handleEditorEscapeKey(e) {
 function editorInputHandler () {
 
     // update undo
-    var um = editor.getSession().getUndoManager();
+    var um = editor.session.getUndoManager();
     if (um.hasUndo())
         $('toolbar-undo').removeClass('disabled')
     else
@@ -111,7 +111,7 @@ function editorInputHandler () {
         var pos = editor.getCursorPosition();
         var rng = new Range(pos.row, pos.column, pos.row, pos.column);
         updateEditorTitle();
-        editor.getSelection().setSelectionRange(rng);
+        editor.selection.setSelectionRange(rng);
     }
 
     // changes?
@@ -253,15 +253,15 @@ function movePopupBox () {
 function getSelectionRanges() {
 
     // find the current selection
-    var selectRange = editor.getSelection().getRange();
+    var selectRange = editor.selection.getRange();
     var originalRange = selectRange;
 
     // if there is no actual selection (just a cursor position),
     // use the word range. but only if it's in a word (check strlen).
     // also check if it strictly non-word chars, such as a symbol.
     if (selectRange.isEmpty()) {
-        var wordRange = editor.getSelection().getWordRange();
-        var word = editor.getSession().getTextRange(wordRange).trim();
+        var wordRange = editor.selection.getWordRange();
+        var word = editor.session.getTextRange(wordRange).trim();
         if (word.length && !word.match(/^\W*$/))
             selectRange = wordRange;
     }
@@ -281,16 +281,15 @@ function replaceSelectionRangeAndReselect (ranges, leftOffset, newText) {
         originalRange = ranges.original;
 
     // replace the text
-    editor.getSession().replace(selectRange, newText);
+    editor.session.replace(selectRange, newText);
 
     // return to the original selection
-    editor.getSelection().setSelectionRange(new Range(
+    editor.selection.setSelectionRange(new Range(
         originalRange.start.row,
         originalRange.start.column + leftOffset,
         originalRange.end.row,
         originalRange.end.column + leftOffset
     ));
-
 }
 
 function wrapTextFunction (type) {
@@ -299,7 +298,7 @@ function wrapTextFunction (type) {
         var r = getSelectionRanges();
         var selectRange = r.select,
             originalRange = r.original;
-        editor.getSelection().setSelectionRange(selectRange);
+        editor.selection.setSelectionRange(selectRange);
 
         // dtermine the new text
         var terminator  = type.length > 1 ? '' : type;

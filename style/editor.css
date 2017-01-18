@@ -8,6 +8,12 @@
     z-index: 150;
 }
 
+#editor .error-marker {
+    position: absolute;
+    background: rgba(255, 0, 0, 0.5);
+    z-index: 20;
+}
+
 /* toolbar */
 
 div.editor-toolbar-wrapper {

@@ -241,8 +241,8 @@ function displayLinkHelper () {
     // selected text = display text
     // choose a word if there is no actual selection
     var r = getSelectionRanges();
-    editor.getSelection().setSelectionRange(r.select);
-    var selected = editor.getSession().getTextRange(r.select);
+    editor.selection.setSelectionRange(r.select);
+    var selected = editor.session.getTextRange(r.select);
 
     if (selected.trim().length) {
         $('editor-link-display').setProperty('value', selected);
@@ -379,8 +379,15 @@ function displaySaveHelper () {
             btn.innerHTML = text;
 
             // alert the page display error
-            if (res && res.type == 'not found')
+            if (res && res.type == 'not found') {
                 alert(res.error);
+
+                // highlight the line that had an error
+                if (res.error.match(/^Line (\d+):/)) {
+                    var range = new Range(match[1], 0, match[1], 1);
+                    editor.session.addMarker(range, "error-marker", "fullLine");
+                }
+            }
 
             closeBoxSoon();
         };
@@ -551,7 +558,7 @@ function displayPageOptionsWindow () {
     }));
 
     // inject the new lines at the beginning
-    editor.getSelection().setSelectionRange(new Range(0, 0, 0, 0));
+    editor.selection.setSelectionRange(new Range(0, 0, 0, 0));
     editor.insert(optsString);
 
     // after inserting, the selection will be the line following
@@ -573,12 +580,12 @@ function displayPageOptionsWindow () {
 function editorInsertBlankLineMaybe () {
 
     // select the line following the var insertion.
-    editor.getSelection().selectLine();
+    editor.selection.selectLine();
 
     // if there is text on the line, insert a blank line before it.
     if (editor.getSelectedText().trim().length) {
-        var r = editor.getSelection().getRange();
-        editor.getSelection().setSelectionRange(new Range(
+        var r = editor.selection.getRange();
+        editor.selection.setSelectionRange(new Range(
             r.start.row, 0,
             r.start.row, 0
         ));
@@ -601,13 +608,13 @@ function editorRemoveLinesInRanges (ranges) {
     // remove each line
     lines.each(function (line) {
         var r = new Range(line, 0, line, 0);
-        editor.getSelection().setSelectionRange(r);
+        editor.selection.setSelectionRange(r);
         editor.removeLines();
     });
 }
 
 function rangeFunc (range, exp, bool) {
-    var text  = editor.getSession().getTextRange(range);
+    var text  = editor.session.getTextRange(range);
     var match = findPageVariable(exp);
     if (!match)
         return;
@@ -622,7 +629,7 @@ function rangeFunc (range, exp, bool) {
 function findPageOptions (remove) {
 
     // remember the current selection
-    var originalRange = editor.getSelection().getRange();
+    var originalRange = editor.selection.getRange();
 
     // find key:value pairs
     var found = {};
@@ -630,7 +637,7 @@ function findPageOptions (remove) {
         regExp: true,
         wrap: true
     })) {
-        var ranges = editor.getSelection().getAllRanges();
+        var ranges = editor.selection.getAllRanges();
         ranges.each(function (i) {
             var res = rangeFunc(i, editorExpressions.keyValueVar);
             if (res) found[res.name] = res;
@@ -646,7 +653,7 @@ function findPageOptions (remove) {
         regExp: true,
         wrap: true
     })) {
-        var ranges = editor.getSelection().getAllRanges();
+        var ranges = editor.selection.getAllRanges();
         ranges.each(function (i) {
             var res = rangeFunc(i, editorExpressions.boolVar, true);
             if (res) found[res.name] = res;
@@ -658,7 +665,7 @@ function findPageOptions (remove) {
     }
 
     // revert to the original selection
-    editor.getSelection().setSelectionRange(originalRange);
+    editor.selection.setSelectionRange(originalRange);
 
     return found;
 }
@@ -669,7 +676,7 @@ function findPageCategories (remove) {
         regExp: true,
         wrap: true
     })) {
-        var ranges = editor.getSelection().getAllRanges();
+        var ranges = editor.selection.getAllRanges();
         ranges.each(function (i) {
             var res = rangeFunc(i, editorExpressions.category, true);
             if (res) found[res.name] = res;
