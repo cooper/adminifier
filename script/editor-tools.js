@@ -383,7 +383,8 @@ function displaySaveHelper () {
                 alert(res.error);
 
                 // highlight the line that had an error
-                if (res.error.match(/^Line (\d+):/)) {
+                var match = res.error.match(/^Line (\d+):/);
+                if (match) {
                     var range = new Range(match[1], 0, match[1], 1);
                     editor.session.addMarker(range, "error-marker", "fullLine");
                 }
