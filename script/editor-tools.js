@@ -37,24 +37,27 @@ function editorGetFilename() {
 // PAGE TITLE SELECTOR
 
 function selectPageTitle () {
-    var range = getPageTitleRange();
-    if (range) editor.selection.setSelectionRange(range);
+    var found = findPageVariable(editorExpressions.pageTitle);
+    if (!found)
+        return;
+    editor.selection.setSelectionRange(found.range);
 }
 
 function getPageTitle () {
-    var range = getPageTitleRange();
-    if (range) return editor.getSession().getTextRange(range);
-    return;
+    var found = findPageVariable(editorExpressions.pageTitle);
+    if (!found)
+        return;
+    return found.text;
 }
 
-function getPageTitleRange () {
-    var found = editor.find(editorExpressions.pageTitle, { regExp: true, wrap: true });
+function findPageVariable (exp) {
+    var found = editor.find(exp, { regExp: true, wrap: true });
     if (!found) return;
     var string = editor.getSelectedText();
 
     var escaped = false,
         inTitle = false,
-        foundText = false,
+        foundText = '',
         startIndex = 0,
         endIndex = 0;
 
@@ -82,7 +85,7 @@ function getPageTitleRange () {
 
         // if we're in the title but no text has been found,
         // this is just spacing before the actual title
-        if (inTitle && !foundText && char == ' ') {
+        if (inTitle && !foundText.length && char == ' ') {
             startIndex++;
             continue;
         }
@@ -94,16 +97,17 @@ function getPageTitleRange () {
         }
 
         if (inTitle)
-            foundText = true;
-
+            foundText += char;
     }
 
     // offset on the line
     startIndex += found.start.column;
     endIndex   += found.start.column;
 
-    console.log('startIndex: ' + startIndex + ', endIndex: ' + endIndex);
-    return new Range(found.start.row, startIndex, found.end.row, endIndex);
+    return {
+        text: foundText,
+        range: new Range(found.start.row, startIndex, found.end.row, endIndex)
+    };
 }
 
 // find the page title
