@@ -703,8 +703,8 @@ function generatePageOptions (opts) {
                 string += Array(biggest - optName.length).join(' ');
 
             // escape semicolons
-            value.replace(/;/g, '\\;');
-            
+            value = value.replace(/;/g, '\\;');
+
             string += value + ';';
         }
 
