@@ -60,6 +60,7 @@ function findPageVariable (exp) {
     var escaped = false,
         inTitle = false,
         foundText = '',
+        foundName = '',
         startIndex = 0,
         endIndex = 0;
 
@@ -100,6 +101,8 @@ function findPageVariable (exp) {
 
         if (inTitle)
             foundText += char;
+        else if (!startIndex)
+            foundName += char;
     }
 
     // offset on the line
@@ -107,6 +110,7 @@ function findPageVariable (exp) {
     endIndex   += found.start.column;
 
     return {
+        name: foundName,
         text: foundText,
         range: new Range(found.start.row, startIndex, found.end.row, endIndex)
     };
@@ -599,13 +603,13 @@ function findPageOptions (remove) {
 
     var rangeFunc = function (range, bool) {
         var text  = editor.getSession().getTextRange(range);
-        var found = findPageVariable(bool ? boolExp : keyValueExp);
-        if (!found)
+        var match = findPageVariable(bool ? boolExp : keyValueExp);
+        if (!match)
             return;
-        found[ match[1] ] = {
-            text:   found.text,
-            value:  bool ? true : found.text.trim(),
-            range:  found.range
+        found[ match.name ] = {
+            text:   match.text,
+            value:  bool ? true : match.text.trim(),
+            range:  match.range
         };
     };
 
