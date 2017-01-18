@@ -29,16 +29,15 @@ function frameLoad(page) {
     console.log("Loading " + page);
 
     // add .php extension, respecting GET arguments
-    var parts = page.split('?', 2);
-    page = parts[0] + '.php';
-    if (typeof parts[1] != 'undefined')
-        page += '?' + parts[1];
+    var idx = page.indexOf('?');
+    if (idx != -1)
+        page = page.slice(0, idx) + '.php' + page.slice(idx);
 
     var request = new Request({
         url: 'frames/' + page,
         onSuccess: function (html) {
             $('content').innerHTML = html;
-            var meta = $('content').getElementsByTagName('meta')[0];
+            var meta = $('content').getElement('meta');
             if (meta) {
                 var attrs = meta.getProperties(
 
@@ -183,7 +182,7 @@ function handlePageData(data) {
     }
 
     // page title and icon
-    $('page-title').innerHTML = '<i class="fa fa-' + data['data-icon'] + '"></i> <span>' + data['data-title'] + '</span>';
+    $('page-title').innerHTML = tmpl('tmpl-page-title', data);
     window.scrollTo(0, 0);
     // ^ not sure if scrolling necessary when setting display: none
 
