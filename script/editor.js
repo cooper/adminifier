@@ -1,4 +1,4 @@
-var Range, editor;
+var Range, Search, editor;
 (function (a) {
 
 var ae = adminifier.editor = {};
@@ -45,10 +45,7 @@ ae.updatePageTitle = function () {
     var title = ae.getPageTitle();
     if (typeof title == 'undefined')
         return;
-    if (title.length)
-        a.updatePageTitle(title);
-    else
-        a.updatePageTitle(ae.getFilename());
+    a.updatePageTitle(title.length ? title : ae.getFilename());
 };
 
 ae.addKeyboardShortcuts = function (cuts) {
@@ -84,15 +81,16 @@ ae.closePopup = function (box, opts) {
 };
 
 ae.findPageVariable = function (exp) {
-    var found = editor.find(exp, { regExp: true, wrap: true });
+    var search = new Search().set({ needle: exp, regExp: true });
+    var found  = search.findAll(editor.session).getLast();
     if (!found)
         return;
-    var string = editor.getSelectedText();
+    var string = editor.getTextRange(found);
 
-    var escaped = false,
-        inTitle = false,    inName = false,
-        foundText = '',     foundName = '',
-        startIndex = 0,     endIndex = 0;
+    var escaped    = false,
+        inTitle    = false,     inName    = false,
+        foundText  = '',        foundName = '',
+        startIndex = 0,         endIndex  = 0;
 
     for (var i = 0; ; i++) {
         var char = string[i];
@@ -339,6 +337,7 @@ function pageScriptsLoadedHandler () {
     window.addEvent('resize', adjustCurrentPopup);
 
     Range  = ace.require('ace/range').Range;
+    Search = ace.require('ace/search').Search;
     editor = ace.edit("editor");
     ae.lastSavedData = editor.getValue();
 
