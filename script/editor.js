@@ -86,7 +86,6 @@ ae.findPageVariable = function (exp) {
     if (!found)
         return;
     var string = editor.session.getTextRange(found);
-
     var escaped    = false,
         inTitle    = false,     inName    = false,
         foundText  = '',        foundName = '',
@@ -146,7 +145,7 @@ ae.findPageVariable = function (exp) {
     // offset on the line
     startIndex += found.start.column;
     endIndex   += found.start.column;
-
+    console.log('Found', string, startIndex, endIndex);
     return {
         name: foundName,
         text: foundText,
