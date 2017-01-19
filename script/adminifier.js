@@ -11,12 +11,6 @@ Element.Events.pageScriptsLoaded = {
             fn.call(this);
 	}
 };
-Element.Events.editorLoaded = {
-    onAdd: function (fn) {
-        if (window.editorLoaded)
-            fn.call(this);
-    }
-};
 
 Element.implement('onEnter', function (func) {
     this.addEvent('keyup', function (e) {
@@ -159,9 +153,8 @@ function handleCompactSidebarMouseleave (e) {
     }, 200);
 }
 
-function handlePageData(data) {
+function handlePageData (data) {
     window.pageScriptsDone = false;
-    window.editorLoaded = false;
 
     console.log(data);
     a.currentData = data;

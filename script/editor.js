@@ -2,6 +2,13 @@ var Range, editor;
 adminifier.editor = {};
 (function (a, ae) {
 
+Element.Events.editorLoaded = {
+    onAdd: function (fn) {
+        if (ae.editorLoaded)
+            fn.call(this);
+    }
+};
+
 document.addEvent('pageScriptsLoaded', pageScriptsLoadedHandler);
 document.addEvent('pageUnloaded', pageUnloadedHandler);
 document.addEvent('keyup', handleEscapeKey);
@@ -30,7 +37,7 @@ ae.getFilename = function () {
 // returns the page title text, with any escapes accounted for.
 // returns nothing if the @page.title can't be found.
 ae.getPageTitle = function () {
-    var found = ae.findPageVariable(editorExpressions.pageTitle);
+    var found = ae.findPageVariable(ae.expressions.pageTitle);
     if (!found)
         return;
     return found.text;
@@ -290,7 +297,7 @@ function pageScriptsLoadedHandler () {
     // listen for clicks to navigate away
     document.body.addEvent('click', clickOutHandler);
 
-    window.editorLoaded = true;
+    ae.editorLoaded = true;
     document.fireEvent('editorLoaded');
 }
 
@@ -352,7 +359,7 @@ function inputHandler () {
     // we're changing the title.
     // this shouldn't be too expensive, since
     // editor.find() starts with the current line
-    if (lineText.match(editorExpressions.pageTitle)) {
+    if (lineText.match(ae.expressions.pageTitle)) {
         var pos = editor.getCursorPosition();
         var rng = new Range(pos.row, pos.column, pos.row, pos.column);
         ae.updatePageTitle();

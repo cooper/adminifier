@@ -35,7 +35,7 @@ function unloadedHandler () {
 // PAGE TITLE SELECTOR
 
 function selectPageTitle () {
-    var found = ae.findPageVariable(editorExpressions.pageTitle);
+    var found = ae.findPageVariable(ae.expressions.pageTitle);
     if (!found)
         return;
     editor.selection.setSelectionRange(found.range);
@@ -518,13 +518,13 @@ function findPageOptions (remove) {
 
     // find key:value pairs
     var found = {};
-    if (editor.findAll(editorExpressions.keyValueVar, {
+    if (editor.findAll(ae.expressions.keyValueVar, {
         regExp: true,
         wrap: true
     })) {
         var ranges = editor.selection.getAllRanges();
         ranges.each(function (i) {
-            var res = rangeFunc(i, editorExpressions.keyValueVar);
+            var res = rangeFunc(i, ae.expressions.keyValueVar);
             if (res) found[res.name] = res;
         });
 
@@ -534,13 +534,13 @@ function findPageOptions (remove) {
     }
 
     // now find booleans
-    if (editor.findAll(editorExpressions.boolVar, {
+    if (editor.findAll(ae.expressions.boolVar, {
         regExp: true,
         wrap: true
     })) {
         var ranges = editor.selection.getAllRanges();
         ranges.each(function (i) {
-            var res = rangeFunc(i, editorExpressions.boolVar, true);
+            var res = rangeFunc(i, ae.expressions.boolVar, true);
             if (res) found[res.name] = res;
         });
 
@@ -557,13 +557,13 @@ function findPageOptions (remove) {
 
 function findPageCategories (remove) {
     var found = {};
-    if (editor.findAll(editorExpressions.category, {
+    if (editor.findAll(ae.expressions.category, {
         regExp: true,
         wrap: true
     })) {
         var ranges = editor.selection.getAllRanges();
         ranges.each(function (i) {
-            var res = rangeFunc(i, editorExpressions.category, true);
+            var res = rangeFunc(i, ae.expressions.category, true);
             if (res) found[res.name] = res;
         });
 
