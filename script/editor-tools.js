@@ -23,9 +23,6 @@ function loadedHandler () {
         [ 'Ctrl-S', 'Command-S',    'save'      ],
         [ 'Ctrl-K', 'Command-K',    'link'      ]
     ]);
-
-    ae.updatePageTitle(); // why?
-    ae.resetSelectionAtTopLeft();
 }
 
 function unloadedHandler () {
@@ -267,7 +264,7 @@ function displaySaveHelper () {
             alert('Save failed: ' + msg);
 
             // switch to /!\
-            var i = btn.parentElement.getElementsByTagName('i')[0];
+            var i = btn.parentElement.getElement('i');
             i.removeClass('fa-spinner');
             i.removeClass('fa-spin');
             i.addClass('fa-exclamation-triangle');
@@ -291,7 +288,7 @@ function displaySaveHelper () {
                 displayBad = true;
 
             // switch to checkmark
-            var i = btn.parentElement.getElementsByTagName('i')[0];
+            var i = btn.parentElement.getElement('i');
             i.removeClass('fa-spinner');
             i.removeClass('fa-spin');
             i.addClass('fa-check-circle');
@@ -306,7 +303,7 @@ function displaySaveHelper () {
             btn.innerHTML = text;
 
             // show the page display error
-            handlePageDisplayResult(res);
+            ae.handlePageDisplayResult(res);
 
             closeBoxSoon();
         };
@@ -365,29 +362,6 @@ function displaySaveHelper () {
     $('editor-save-message').focus();
 }
 
-function handlePageDisplayResult (res) {
-    if (!res || res.type != 'not found' || res.draft)
-        return;
-
-    // highlight the line that had an error
-    var match = res.error.match(/^Line (\d+):(\d):(.+)/);
-    if (match) {
-        var row = match[1] - 1,
-            col = match[2],
-            errorText = match[3].trim();
-        editor.session.setAnnotations([{
-            row:    row,
-            column: col,
-            text:   errorText,
-            type:   "error"
-        }]);
-    }
-
-    // otherwise alert the error
-    else
-        alert(res.error);
-}
-
 // DELETE CONFIRMATION
 
 function displayDeleteConfirmation () {
@@ -428,7 +402,7 @@ function displayDeleteConfirmation () {
         var success = function () {
 
             // switch to checkmark
-            var i = btn.parentElement.getElementsByTagName('i')[0];
+            var i = btn.parentElement.getElement('i');
             i.removeClass('fa-spinner');
             i.removeClass('fa-spin');
             i.addClass('fa-check-circle');
@@ -448,7 +422,7 @@ function displayDeleteConfirmation () {
         var fail = function () {
 
             // switch to /!\
-            var i = btn.parentElement.getElementsByTagName('i')[0];
+            var i = btn.parentElement.getElement('i');
             i.removeClass('fa-spinner');
             i.removeClass('fa-spin');
             i.addClass('fa-exclamation-triangle');

@@ -266,6 +266,29 @@ ae.replaceSelectionRangeAndReselect = function (ranges, leftOffset, newText) {
     ));
 };
 
+ae.handlePageDisplayResult = function (res) {
+    if (!res || res.type != 'not found' || res.draft)
+        return;
+
+    // highlight the line that had an error
+    var match = res.error.match(/^Line (\d+):(\d):(.+)/);
+    if (match) {
+        var row = match[1] - 1,
+            col = match[2],
+            errorText = match[3].trim();
+        editor.session.setAnnotations([{
+            row:    row,
+            column: col,
+            text:   errorText,
+            type:   "error"
+        }]);
+    }
+
+    // otherwise alert the error
+    else
+        alert(res.error);
+};
+
 ae.wrapTextFunction = wrapTextFunction;
 function wrapTextFunction (type) {
     return function () {
@@ -290,12 +313,14 @@ function wrapTextFunction (type) {
 document.addEvent('pageScriptsLoaded', pageScriptsLoadedHandler);
 document.addEvent('pageUnloaded', pageUnloadedHandler);
 document.addEvent('keyup', handleEscapeKey);
+document.addEvent('editorLoaded', editorLoadedHandler);
 
 function pageUnloadedHandler () {
     console.log('Unloading editor script');
     document.removeEvent('pageScriptsLoaded', pageScriptsLoadedHandler);
     document.removeEvent('pageUnloaded', pageUnloadedHandler);
     document.removeEvent('keyup', handleEscapeKey);
+    document.removeEvent('editorLoaded', editorLoadedHandler);
     document.body.removeEvent('click', clickOutHandler);
     window.removeEvent('resize', adjustCurrentPopup);
     window.onbeforeunload = null;
@@ -322,6 +347,11 @@ function pageScriptsLoadedHandler () {
 
     ae.editorLoaded = true;
     document.fireEvent('editorLoaded');
+}
+
+function editorLoadedHandler () {
+    ae.updatePageTitle();
+    ae.resetSelectionAtTopLeft();
 }
 
 function clickOutHandler (e) {
