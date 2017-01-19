@@ -22,6 +22,7 @@ if ($user_info->logged_in) {
     $_SESSION['logged_in'] = true;
     $_SESSION['username']  = $username;
     $_SESSION['realname']  = $user_info->name ? $user_info->name : $username;
+    $_SESSION['theme']     = $user_info->theme;
     header('Location: ..'.$config->admin_root.'/');
 }
 

@@ -343,8 +343,9 @@ function pageScriptsLoadedHandler () {
     ae.lastSavedData = editor.getValue();
 
     // render editor
-    editor.setTheme("ace/theme/twilight"); /* eclipse is good light one */
-    editor.session.setMode("ace/mode/plain_text");
+    var themeName = adminifier.themeName || 'twilight';
+    editor.setTheme('ace/theme/' + themeName);
+    editor.session.setMode('ace/mode/plain_text');
     editor.on('input', inputHandler);
     setTimeout(function () { editor.resize(); }, 500);
 

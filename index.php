@@ -18,7 +18,8 @@
 var adminifier = {
     adminRoot:      '<?= addslashes($config->admin_root) ?>',
     wikiName:       '<?= addslashes($config->wiki_name) ?>',
-    wikiPageRoot:   '<?= addslashes($config->wiki_page_root) ?>'
+    wikiPageRoot:   '<?= addslashes($config->wiki_page_root) ?>',
+    themeName:      '<?= addslashes($_SESSION['theme']) ?>'
 };
 
 </script>
