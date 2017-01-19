@@ -1,8 +1,5 @@
 (function (a) {
 
-window.addEvent('hashchange', hashLoad);
-document.addEvent('domready', hashLoad);
-
 // this is for if pageScriptsDone event is added
 // and the page scripts are already done
 Element.Events.pageScriptsLoaded = {
@@ -23,6 +20,9 @@ Element.implement('onEnter', function (func) {
 a.updatePageTitle = function (title) {
     $$('#page-title span')[0].innerText = title;
 };
+
+window.addEvent('hashchange', hashLoad);
+document.addEvent('domready', hashLoad);
 
 function frameLoad (page) {
     if (a.currentPage == page)

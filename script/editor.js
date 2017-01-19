@@ -9,10 +9,6 @@ Element.Events.editorLoaded = {
     }
 };
 
-document.addEvent('pageScriptsLoaded', pageScriptsLoadedHandler);
-document.addEvent('pageUnloaded', pageUnloadedHandler);
-document.addEvent('keyup', handleEscapeKey);
-
 ae.expressions = {
     pageTitle:      new RegExp('\\s*^@page\\.title:(.*)$'),
     keyValueVar:    new RegExp('^\\s*@page\\.(\\w+):(.*?)(;?)\\s*$'),
@@ -289,6 +285,10 @@ function wrapTextFunction (type) {
         closeCurrentPopup();
     };
 }
+
+document.addEvent('pageScriptsLoaded', pageScriptsLoadedHandler);
+document.addEvent('pageUnloaded', pageUnloadedHandler);
+document.addEvent('keyup', handleEscapeKey);
 
 function pageUnloadedHandler () {
     console.log('Unloading editor script');
