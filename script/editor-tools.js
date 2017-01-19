@@ -196,7 +196,7 @@ function displayLinkHelper () {
 
         var complete = '[' + leftDel + ' ' + inner + ' ' + rightDel + ']';
         editor.insert(complete);
-        closePopup(box);
+        ae.closePopup(box);
     };
 
     // insert on click or enter
@@ -237,7 +237,7 @@ function displaySaveHelper () {
             box.removeClass('sticky');
 
             // close the popup only if the mouse isn't over it
-            closePopup(box, { unlessActive: true });
+            ae.closePopup(box, { unlessActive: true });
 
         }, 3000);
     };
@@ -459,7 +459,7 @@ function displayDeleteConfirmation () {
             btn.innerHTML = 'Delete failed';
 
             setTimeout(function () {
-                closePopup(box);
+                ae.closePopup(box);
             }, 1500);
         };
 
