@@ -1,11 +1,11 @@
-function (a) {
+(function (a, ae) {
 
-document.addEvent('editorLoaded', editorLoadedHandler);
-document.addEvent('pageUnloaded', editorToolsPageUnloadedHandler);
+document.addEvent('editorLoaded', loadedHandler);
+document.addEvent('pageUnloaded', unloadedHandler);
 
-function editorLoadedHandler () {
+function loadedHandler () {
     console.log('Editor tools script loaded');
-    Object.append(toolbarFunctions, {
+    Object.append(ae.toolbarFunctions, {
         font:       displayFontSelector,
         link:       displayLinkHelper,
         options:    displayPageOptionsWindow,
@@ -14,7 +14,7 @@ function editorLoadedHandler () {
         save:       displaySaveHelper
     });
 
-    addEditorKeyboardShortcuts([
+    ae.addKeyboardShortcuts([
         [ 'Ctrl-B', 'Command-B',    'bold'      ],
         [ 'Ctrl-I', 'Command-I',    'italic'    ],
         [ 'Ctrl-U', 'Command-U',    'underline' ],
@@ -22,119 +22,23 @@ function editorLoadedHandler () {
         [ 'Ctrl-K', 'Command-K',    'link'      ]
     ]);
 
-    updateEditorTitle();
-    resetSelectionAtTopLeft();
+    ae.updatePageTitle();
+    ae.resetSelectionAtTopLeft();
 }
 
-function editorToolsPageUnloadedHandler () {
+function unloadedHandler () {
     console.log('Unloading editor tools script');
-    document.removeEvent('editorLoaded', editorLoadedHandler);
-    document.removeEvent('pageUnloaded', editorToolsPageUnloadedHandler);
-}
-
-function editorGetFilename() {
-    return $('editor').getProperty('data-file');
+    document.removeEvent('editorLoaded', loadedHandler);
+    document.removeEvent('pageUnloaded', unloadedHandler);
 }
 
 // PAGE TITLE SELECTOR
 
 function selectPageTitle () {
-    var found = findPageVariable(editorExpressions.pageTitle);
+    var found = ae.findPageVariable(editorExpressions.pageTitle);
     if (!found)
         return;
     editor.selection.setSelectionRange(found.range);
-}
-
-// returns the page title text, with any escapes accounted for.
-// returns nothing if the @page.title can't be found.
-function getPageTitle () {
-    var found = findPageVariable(editorExpressions.pageTitle);
-    if (!found)
-        return;
-    return found.text;
-}
-
-function findPageVariable (exp) {
-    var found = editor.find(exp, { regExp: true, wrap: true });
-    if (!found) return;
-    var string = editor.getSelectedText();
-
-    var escaped = false,
-        inTitle = false,    inName = false,
-        foundText = '',     foundName = '',
-        startIndex = 0,     endIndex = 0;
-
-    for (var i = 0; ; i++) {
-        var char = string[i];
-
-        // made it to the end without finding unescaped semicolon
-        if (typeOf(char) == 'null') {
-            endIndex = i;
-            break;
-        }
-
-        // escapes
-        var escaped = string[i - 1] == '\\';
-        if (char == '\\' && !escaped) {
-            continue;
-        }
-
-        // now we're in the title
-        if (!startIndex && char == ':') {
-            inName  = false;
-            inTitle = true;
-            startIndex = i + 1;
-            continue;
-        }
-
-        if (!startIndex && char == '.' && !inName) {
-            inName = true;
-            continue;
-        }
-
-        // if we're in the title but no text has been found,
-        // this is just spacing before the actual title
-        if (inTitle && !foundText.length && char == ' ') {
-            startIndex++;
-            continue;
-        }
-
-        // ending the title
-        if (inTitle && !escaped && char == ';') {
-            endIndex = i;
-            break;
-        }
-
-        // ending a bool var
-        if (inName && char == ';')
-            break;
-
-        if (inTitle)
-            foundText += char;
-        else if (inName)
-            foundName += char;
-    }
-
-    // offset on the line
-    startIndex += found.start.column;
-    endIndex   += found.start.column;
-
-    return {
-        name: foundName,
-        text: foundText,
-        range: new Range(found.start.row, startIndex, found.end.row, endIndex)
-    };
-}
-
-// find the page title
-function updateEditorTitle() {
-    var title = getPageTitle();
-    if (typeof title == 'undefined')
-        return;
-    if (title.length)
-        updatePageTitle(title);
-    else
-        updatePageTitle(editorGetFilename());
 }
 
 // TEXT COLOR SELECTOR
@@ -142,7 +46,7 @@ function updateEditorTitle() {
 function displayFontSelector () {
     var li   = $$('li[data-action="font"]')[0];
     var rect = li.getBoundingClientRect();
-    var box  = createPopupBox(rect.left, rect.top + li.offsetHeight);
+    var box  = ae.createPopupBox(rect.left, rect.top + li.offsetHeight);
 
     // create a container for scrolling
     var container = new Element('div', {
@@ -192,7 +96,7 @@ function displayFontSelector () {
 function displayLinkHelper () {
     var li   = $$('li[data-action="link"]')[0];
     var rect = li.getBoundingClientRect();
-    var box  = createPopupBox(rect.left, rect.top + li.offsetHeight);
+    var box  = ae.createPopupBox(rect.left, rect.top + li.offsetHeight);
     fakeAdopt(box);
 
     box.innerHTML = tmpl('tmpl-link-helper', {});
@@ -287,7 +191,7 @@ function displayLinkHelper () {
 
 function openPageInNewTab () {
     var root = a.wikiPageRoot;
-    var pageName = editorGetFilename().replace(/\.page$/, '');
+    var pageName = ae.getFilename().replace(/\.page$/, '');
     window.open(root + pageName);
 }
 
@@ -296,12 +200,12 @@ function openPageInNewTab () {
 function displaySaveHelper () {
     var li   = $$('li[data-action="save"]')[0];
     var rect = li.getBoundingClientRect();
-    var box  = createPopupBox(rect.right - 300, rect.top + li.offsetHeight);
+    var box  = ae.createPopupBox(rect.right - 300, rect.top + li.offsetHeight);
     box.addClass('right');
     fakeAdopt(box);
 
     box.innerHTML = tmpl('tmpl-save-helper', {
-        file: editorGetFilename()
+        file: ae.getFilename()
     });
 
     var closeBoxSoon = function () {
@@ -358,7 +262,7 @@ function displaySaveHelper () {
         // successful save callback
         var success = function (data) {
             console.log(data);
-            a.editorLastSavedData = saveData;
+            ae.lastSavedData = saveData;
 
             // something went wrong in the page display
             var displayBad = false, res = data.result;
@@ -425,7 +329,7 @@ function displaySaveHelper () {
                 fail('Request error');
             },
         }).post({
-            page:       editorGetFilename(),
+            page:       ae.getFilename(),
             content:    saveData,
             message:    message
         });
@@ -468,7 +372,7 @@ function handlePageDisplayResult (res) {
 function displayDeleteConfirmation () {
     var li   = $$('li[data-action="delete"]')[0];
     var rect = li.getBoundingClientRect();
-    var box  = createPopupBox(rect.right - 300, rect.top + li.offsetHeight);
+    var box  = ae.createPopupBox(rect.right - 300, rect.top + li.offsetHeight);
     box.addClass('right');
     fakeAdopt(box);
 
@@ -553,7 +457,7 @@ function displayDeleteConfirmation () {
             },
             onFailure: function () { fail('Request error') },
         }).post({
-            page: editorGetFilename()
+            page: ae.getFilename()
         });
 
     };
@@ -584,55 +488,19 @@ function displayPageOptionsWindow () {
     // now check for categories
     found = findPageCategories(true);
     if (found.length) {
-        editorInsertBlankLineMaybe();
+        ae.insertBlankLineMaybe();
         found.sort().each(function (catName) {
             editor.insert('@category.' + catName + ';\n');
         });
     }
 
-    editorInsertBlankLineMaybe();
+    ae.insertBlankLineMaybe();
     return optsString;
-}
-
-function editorInsertBlankLineMaybe () {
-
-    // select the line following the var insertion.
-    editor.selection.selectLine();
-
-    // if there is text on the line, insert a blank line before it.
-    if (editor.getSelectedText().trim().length) {
-        var r = editor.selection.getRange();
-        editor.selection.setSelectionRange(new Range(
-            r.start.row, 0,
-            r.start.row, 0
-        ));
-        editor.insert('\n');
-        return true;
-    }
-
-    return false;
-}
-
-function editorRemoveLinesInRanges (ranges) {
-    console.log(ranges);
-
-    // get line numbers in descending order
-    // (starting from the bottom)
-    var lines = ranges.map(function (r) {
-        return [ r.start.row, r.end.row ];
-    }).flatten().unique().sort(function (a, b) { return b - a });
-
-    // remove each line
-    lines.each(function (line) {
-        var r = new Range(line, 0, line, 0);
-        editor.selection.setSelectionRange(r);
-        editor.removeLines();
-    });
 }
 
 function rangeFunc (range, exp, bool) {
     var text  = editor.session.getTextRange(range);
-    var match = findPageVariable(exp);
+    var match = ae.findPageVariable(exp);
     if (!match)
         return;
     return {
@@ -662,7 +530,7 @@ function findPageOptions (remove) {
 
         // delete all of the matching lines
         if (remove)
-            editorRemoveLinesInRanges(ranges);
+            ae.removeLinesInRanges(ranges);
     }
 
     // now find booleans
@@ -678,7 +546,7 @@ function findPageOptions (remove) {
 
         // do this again
         if (remove)
-            editorRemoveLinesInRanges(ranges);
+            ae.removeLinesInRanges(ranges);
     }
 
     // revert to the original selection
@@ -701,7 +569,7 @@ function findPageCategories (remove) {
 
         // delete all of the matching lines
         if (remove)
-            editorRemoveLinesInRanges(ranges);
+            ae.removeLinesInRanges(ranges);
     }
     return Object.keys(found);
 }
@@ -772,4 +640,4 @@ function generatePageOptions (opts) {
     return string;
 }
 
-})(adminifier);
+})(adminifier, adminifier.editor);

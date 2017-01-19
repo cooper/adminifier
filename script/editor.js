@@ -1,47 +1,302 @@
 var Range, editor;
-(function (a) {
+adminifier.editor = {};
+(function (a, ae) {
 
-var currentLi, currentPopup;
+document.addEvent('pageScriptsLoaded', pageScriptsLoadedHandler);
+document.addEvent('pageUnloaded', pageUnloadedHandler);
+document.addEvent('keyup', handleEscapeKey);
 
-document.addEvent('pageScriptsLoaded', editorPageScriptsLoadedHandler);
-document.addEvent('pageUnloaded', editorPageUnloadedHandler);
-document.addEvent('keyup', handleEditorEscapeKey);
+ae.expressions = {
+    pageTitle:      new RegExp('\\s*^@page\\.title:(.*)$'),
+    keyValueVar:    new RegExp('^\\s*@page\\.(\\w+):(.*?)(;?)\\s*$'),
+    boolVar:        new RegExp('^\\s*@page\\.(\\w+);\\s*$'),
+    category:       new RegExp('^\\s*@category\\.(\\w+);\\s*$')
+};
 
-function editorPageUnloadedHandler () {
+var ae.toolbarFunctions = {
+    bold:       wrapTextFunction('b'),
+    italic:     wrapTextFunction('i'),
+    underline:  wrapTextFunction('u'),
+    strike:     wrapTextFunction('s'),
+    undo:       function () { editor.undo(); },
+    redo:       function () { editor.redo(); },
+    // 'delete':   dummyFunc
+};
+
+ae.getFilename = function () {
+    return $('editor').getProperty('data-file');
+};
+
+// returns the page title text, with any escapes accounted for.
+// returns nothing if the @page.title can't be found.
+ae.getPageTitle = function () {
+    var found = ae.findPageVariable(editorExpressions.pageTitle);
+    if (!found)
+        return;
+    return found.text;
+};
+
+// update the page title to whatever @page.title says
+ae.updatePageTitle = function () {
+    var title = ae.getPageTitle();
+    if (typeof title == 'undefined')
+        return;
+    if (title.length)
+        a.updatePageTitle(title);
+    else
+        a.updatePageTitle(ae.getFilename());
+};
+
+ae.addKeyboardShortcuts = function (cuts) {
+    // c = [ windows shortcut, mac shortcut, action ]
+    cuts.each(function (c) {
+        editor.commands.addCommand({
+            name: c[2],
+            bindKey: {
+                windows: c[0],
+                mac:     c[1]
+            },
+            exec: ae.toolbarFunctions[ c[2] ]
+        });
+    });
+};
+
+ae.hasUnsavedChanges = function () {
+    return editor.getValue() != ae.lastSavedData;
+};
+
+ae.closePopup = function (box, opts) {
+    if (!ae.currentPopup)
+        return;
+    if (ae.currentPopup != box) {
+        console.warn(
+            'Attempted to close a box other than the current one',
+            box,
+            ae.currentPopup
+        );
+        return;
+    }
+    closeCurrentPopup(opts);
+};
+
+ae.findPageVariable = function (exp) {
+    var found = editor.find(exp, { regExp: true, wrap: true });
+    if (!found)
+        return;
+    var string = editor.getSelectedText();
+
+    var escaped = false,
+        inTitle = false,    inName = false,
+        foundText = '',     foundName = '',
+        startIndex = 0,     endIndex = 0;
+
+    for (var i = 0; ; i++) {
+        var char = string[i];
+
+        // made it to the end without finding unescaped semicolon
+        if (typeOf(char) == 'null') {
+            endIndex = i;
+            break;
+        }
+
+        // escapes
+        var escaped = string[i - 1] == '\\';
+        if (char == '\\' && !escaped) {
+            continue;
+        }
+
+        // now we're in the title
+        if (!startIndex && char == ':') {
+            inName  = false;
+            inTitle = true;
+            startIndex = i + 1;
+            continue;
+        }
+
+        if (!startIndex && char == '.' && !inName) {
+            inName = true;
+            continue;
+        }
+
+        // if we're in the title but no text has been found,
+        // this is just spacing before the actual title
+        if (inTitle && !foundText.length && char == ' ') {
+            startIndex++;
+            continue;
+        }
+
+        // ending the title
+        if (inTitle && !escaped && char == ';') {
+            endIndex = i;
+            break;
+        }
+
+        // ending a bool var
+        if (inName && char == ';')
+            break;
+
+        if (inTitle)
+            foundText += char;
+        else if (inName)
+            foundName += char;
+    }
+
+    // offset on the line
+    startIndex += found.start.column;
+    endIndex   += found.start.column;
+
+    return {
+        name: foundName,
+        text: foundText,
+        range: new Range(found.start.row, startIndex, found.end.row, endIndex)
+    };
+};
+
+ae.insertBlankLineMaybe = function () {
+
+    // select the line following the var insertion.
+    editor.selection.selectLine();
+
+    // if there is text on the line, insert a blank line before it.
+    if (editor.getSelectedText().trim().length) {
+        var r = editor.selection.getRange();
+        editor.selection.setSelectionRange(new Range(
+            r.start.row, 0,
+            r.start.row, 0
+        ));
+        editor.insert('\n');
+        return true;
+    }
+
+    return false;
+};
+
+ae.removeLinesInRanges = function (ranges) {
+
+    // get line numbers in descending order
+    // (starting from the bottom)
+    var lines = ranges.map(function (r) {
+        return [ r.start.row, r.end.row ];
+    }).flatten().unique().sort(function (a, b) { return b - a });
+
+    // remove each line
+    lines.each(function (line) {
+        var r = new Range(line, 0, line, 0);
+        editor.selection.setSelectionRange(r);
+        editor.removeLines();
+    });
+};
+
+ae.resetSelectionAtTopLeft = function () {
+    editor.selection.setSelectionRange(new Range(0, 0, 0, 0));
+    editor.focus();
+};
+
+ae.createPopupBox = function (posX, posY) {
+
+    // already showing something
+    if (ae.currentPopup)
+        return;
+
+    // create box
+    var box = new Element('div', {
+        class: 'editor-popup-box',
+        styles: {
+            top:  posY,
+            left: posX
+        }
+    });
+
+    return box;
+};
+
+ae.displayPopupBox = function (box, height, li) {
+    openLi(li);
+    document.body.appendChild(box);
+    box.set('morph', { duration: 150 });
+    box.morph({ height: height + 'px' });
+    box.store('li', li);
+    ae.currentPopup = box;
+};
+
+// find an appropriate range for selection
+ae.getSelectionRanges = function () {
+
+    // find the current selection
+    var selectRange = editor.selection.getRange();
+    var originalRange = selectRange;
+
+    // if there is no actual selection (just a cursor position),
+    // use the word range. but only if it's in a word (check strlen).
+    // also check if it strictly non-word chars, such as a symbol.
+    if (selectRange.isEmpty()) {
+        var wordRange = editor.selection.getWordRange();
+        var word = editor.session.getTextRange(wordRange).trim();
+        if (word.length && !word.match(/^\W*$/))
+            selectRange = wordRange;
+    }
+
+    return {
+        original: originalRange,
+        select: selectRange
+    }
+};
+
+// this is useful for replacing a range of text
+// with something that surrounds it, such as [b]...[/b]
+// because it re-selects the original selection
+// after performing the operation: [b]<sel>...</sel>[/b]
+ae.replaceSelectionRangeAndReselect = function (ranges, leftOffset, newText) {
+    var selectRange = ranges.select,
+        originalRange = ranges.original;
+
+    // replace the text
+    editor.session.replace(selectRange, newText);
+
+    // return to the original selection
+    editor.selection.setSelectionRange(new Range(
+        originalRange.start.row,
+        originalRange.start.column + leftOffset,
+        originalRange.end.row,
+        originalRange.end.column + leftOffset
+    ));
+};
+
+function pageUnloadedHandler () {
     console.log('Unloading editor script');
-    document.removeEvent('pageScriptsLoaded', editorPageScriptsLoadedHandler);
-    document.removeEvent('pageUnloaded', editorPageUnloadedHandler);
-    document.removeEvent('keyup', handleEditorEscapeKey);
-    document.body.removeEvent('click', editorClickOutHandler);
-    window.removeEvent('resize', movePopupBox);
+    document.removeEvent('pageScriptsLoaded', pageScriptsLoadedHandler);
+    document.removeEvent('pageUnloaded', pageUnloadedHandler);
+    document.removeEvent('keyup', handleEscapeKey);
+    document.body.removeEvent('click', clickOutHandler);
+    window.removeEvent('resize', adjustCurrentPopup);
     window.onbeforeunload = null;
 }
 
-function editorPageScriptsLoadedHandler () {
+function pageScriptsLoadedHandler () {
     console.log('Editor script loaded');
     setupToolbar();
-    window.addEvent('resize', movePopupBox);
+    window.addEvent('resize', adjustCurrentPopup);
 
     Range  = ace.require('ace/range').Range;
     editor = ace.edit("editor");
-    a.editorLastSavedData = editor.getValue();
+    ae.lastSavedData = editor.getValue();
 
     // render editor
     editor.setTheme("ace/theme/twilight"); /* eclipse is good light one */
     editor.session.setMode("ace/mode/plain_text");
-    editor.on('input', editorInputHandler);
+    editor.on('input', inputHandler);
     setTimeout(function () { editor.resize(); }, 500);
 
     // listen for clicks to navigate away
-    document.body.addEvent('click', editorClickOutHandler);
+    document.body.addEvent('click', clickOutHandler);
 
     window.editorLoaded = true;
     document.fireEvent('editorLoaded');
 }
 
-function editorClickOutHandler (e) {
-    if (!editorHasUnsavedChanges()) return;
-    console.log(e.target);
+function clickOutHandler (e) {
+    if (!ae.hasUnsavedChanges())
+        return;
     var findParent = function (tagname, el) {
         if ((el.nodeName || el.tagName).toLowerCase() === tagname.toLowerCase())
             return el;
@@ -59,36 +314,23 @@ function editorClickOutHandler (e) {
     }
 }
 
-function editorConfirmOnPageExit (e) {
+function confirmOnPageExit (e) {
     var message = 'You have unsaved changes.';
     if (e) e.returnValue = message;
     return message;
 }
 
-var editorExpressions = {
-    pageTitle:      new RegExp('\\s*^@page\\.title:(.*)$'),
-    keyValueVar:    new RegExp('^\\s*@page\\.(\\w+):(.*?)(;?)\\s*$'),
-    boolVar:        new RegExp('^\\s*@page\\.(\\w+);\\s*$'),
-    category:       new RegExp('^\\s*@category\\.(\\w+);\\s*$')
-};
-
-function resetSelectionAtTopLeft () {
-    editor.selection.setSelectionRange(new Range(0, 0, 0, 0));
-    editor.focus();
-}
-
 // escape key pressed
-function handleEditorEscapeKey(e) {
+function handleEscapeKey(e) {
     if (e.key != 'esc') return;
     console.log('handle escape');
 
     // if there's a popup, exit it maybe
-    if (currentPopup)
+    if (ae.currentPopup)
         closeCurrentPopup({ unlessSticky: true });
-
 }
 
-function editorInputHandler () {
+function inputHandler () {
 
     // update undo
     var um = editor.session.getUndoManager();
@@ -113,13 +355,15 @@ function editorInputHandler () {
     if (lineText.match(editorExpressions.pageTitle)) {
         var pos = editor.getCursorPosition();
         var rng = new Range(pos.row, pos.column, pos.row, pos.column);
-        updateEditorTitle();
+        ae.updatePageTitle();
         editor.selection.setSelectionRange(rng);
     }
 
     // changes?
-    window.onbeforeunload = editorHasUnsavedChanges() ? editorConfirmOnPageExit : null;
-
+    window.onbeforeunload =
+        ae.hasUnsavedChanges()  ?
+        confirmOnPageExit       :
+        null;
 }
 
 function fakeAdopt (child) {
@@ -137,21 +381,22 @@ function fakeAdopt (child) {
 function bodyClickPopoverCheck (e) {
 
     // no popup is displayed
-    if (!currentPopup) return;
+    if (!ae.currentPopup)
+        return;
 
     console.log(e.target);
 
     // the target is the toolbar item
-    var li =  currentPopup.retrieve('li');
+    var li = ae.currentPopup.retrieve('li');
     if (e.target == li || li.contains(e.target))
         return;
 
     // this popup can only be closed programmatically
-    if (currentPopup.hasClass('sticky'))
+    if (ae.currentPopup.hasClass('sticky'))
         return;
 
     // clicked within the popup
-    if (e.target == currentPopup || currentPopup.contains(e.target))
+    if (e.target == ae.currentPopup || ae.currentPopup.contains(e.target))
         return;
 
     closeCurrentPopup();
@@ -165,24 +410,12 @@ function getContrastYIQ (hexColor) {
     return (yiq >= 128) ? '#000' : '#fff';
 }
 
-function closePopup (box, opts) {
-    if (!currentPopup)
-        return;
-    if (currentPopup != box) {
-        console.warn(
-            'Attempted to close a box other than the current one',
-            box,
-            currentPopup
-        );
-        return;
-    }
-    closeCurrentPopup(opts);
-}
-
 function closeCurrentPopup (opts) {
-    var box = currentPopup;
-    if (!box) return;
-    if (!opts) opts = {};
+    var box = ae.currentPopup;
+    if (!box)
+        return;
+    if (!opts)
+        opts = {};
 
     // check if sticky
     if (opts.unlessSticky && box.hasClass('sticky')) {
@@ -198,7 +431,7 @@ function closeCurrentPopup (opts) {
 
         // once the mouse exits, close it
         box.addEvent('mouseleave', function () {
-            closePopup(box, opts);
+            ae.closePopup(box, opts);
         });
 
         return;
@@ -210,90 +443,23 @@ function closeCurrentPopup (opts) {
         onComplete: function () { if (box) box.destroy(); }
     });
     box.morph({ height: '0px' });
-    currentPopup = null;
-}
-
-function createPopupBox (posX, posY) {
-
-    // already showing something
-    if (currentPopup) return;
-
-    // create box
-    var box = new Element('div', {
-        class: 'editor-popup-box',
-        styles: {
-            top:  posY,
-            left: posX
-        }
-    });
-
-    return box;
-}
-
-function displayPopupBox (box, height, li) {
-    openLi(li);
-    document.body.appendChild(box);
-    box.set('morph', { duration: 150 });
-    box.morph({ height: height + 'px' });
-    box.store('li', li);
-    currentPopup = box;
+    ae.currentPopup = null;
 }
 
 // move a popup when the window resizes
-function movePopupBox () {
-    if (!currentPopup) return;
-    var li   = currentPopup.retrieve('li');
+function adjustCurrentPopup () {
+    var box = ae.currentPopup;
+    if (!box)
+        return;
+    var li   = box.retrieve('li');
     var rect = li.getBoundingClientRect();
-    currentPopup.setStyle('left',
-        currentPopup.hasClass('right') ?
+    box.setStyle('left',
+        box.hasClass('right') ?
         rect.right - 300 :
         rect.left
     );
-    currentPopup.setStyle('top', rect.top + li.offsetHeight);
-}
-
-// find an appropriate range for selection
-function getSelectionRanges() {
-
-    // find the current selection
-    var selectRange = editor.selection.getRange();
-    var originalRange = selectRange;
-
-    // if there is no actual selection (just a cursor position),
-    // use the word range. but only if it's in a word (check strlen).
-    // also check if it strictly non-word chars, such as a symbol.
-    if (selectRange.isEmpty()) {
-        var wordRange = editor.selection.getWordRange();
-        var word = editor.session.getTextRange(wordRange).trim();
-        if (word.length && !word.match(/^\W*$/))
-            selectRange = wordRange;
-    }
-
-    return {
-        original: originalRange,
-        select: selectRange
-    }
-}
-
-// this is useful for replacing a range of text
-// with something that surrounds it, such as [b]...[/b]
-// because it re-selects the original selection
-// after performing the operation: [b]<sel>...</sel>[/b]
-function replaceSelectionRangeAndReselect (ranges, leftOffset, newText) {
-    var selectRange = ranges.select,
-        originalRange = ranges.original;
-
-    // replace the text
-    editor.session.replace(selectRange, newText);
-
-    // return to the original selection
-    editor.selection.setSelectionRange(new Range(
-        originalRange.start.row,
-        originalRange.start.column + leftOffset,
-        originalRange.end.row,
-        originalRange.end.column + leftOffset
-    ));
-}
+    box.setStyle('top', rect.top + li.offsetHeight);
+};
 
 function wrapTextFunction (type) {
     return function () {
@@ -315,25 +481,14 @@ function wrapTextFunction (type) {
     };
 }
 
-function dummyFunc () { console.log('button pressed'); }
-
-var toolbarFunctions = {
-    bold:       wrapTextFunction('b'),
-    italic:     wrapTextFunction('i'),
-    underline:  wrapTextFunction('u'),
-    strike:     wrapTextFunction('s'),
-    undo:       function () { editor.undo(); },
-    redo:       function () { editor.redo(); },
-    'delete':   dummyFunc
-};
-
 function openLi (li) {
 
     // if a popup is open, ignore this.
-    if (currentPopup) return;
+    if (ae.currentPopup)
+        return;
 
     // if another one is animating, force it to instantly finish
-    if (currentLi)
+    if (ae.currentLi)
         closeCurrentLi();
 
     // animate this one
@@ -342,30 +497,17 @@ function openLi (li) {
         backgroundColor: '#2096ce'
     });
 
-    currentLi = li;
+    ae.currentLi = li;
 }
 
 function closeCurrentLi () {
-    if (!currentLi) return;
-    currentLi.morph({
+    if (!ae.currentLi)
+        return;
+    ae.currentLi.morph({
         width: '15px',
         backgroundColor: '#696969'
     });
-    currentLi = null;
-}
-
-function addEditorKeyboardShortcuts (cuts) {
-    // c = [ windows shortcut, mac shortcut, action ]
-    cuts.each(function (c) {
-        editor.commands.addCommand({
-            name: c[2],
-            bindKey: {
-                windows: c[0],
-                mac:     c[1]
-            },
-            exec: toolbarFunctions[ c[2] ]
-        });
-    });
+    ae.currentLi = null;
 }
 
 function setupToolbar () {
@@ -382,27 +524,27 @@ function setupToolbar () {
 
         // clicked
         li.addEvent('click', function (e) {
-            if (li.hasClass('disabled')) return;
-            if (currentPopup) return;
-            var action = li.getAttribute('data-action');
-            if (!action) return;
-            var func = toolbarFunctions[action];
-            if (!func) return;
-            func();
+
+            // disabled or another popup is being displayed
+            if (li.hasClass('disabled') || ae.currentPopup)
+                return;
+
+            // no action? not sure what to do
+            var action = ae.toolbarFunctions[ li.getAttribute('data-action') ];
+            if (!action)
+                return;
+
+            action();
         });
 
     });
 
     // leaving the toolbar, close it
     $$('ul.editor-toolbar').addEvent('mouseleave', function () {
-        if (currentLi && !currentPopup)
+        if (ae.currentLi && !ae.currentPopup)
             closeCurrentLi();
     });
 
 }
 
-function editorHasUnsavedChanges () {
-    return editor.getValue() != a.editorLastSavedData;
-}
-
-})(adminifier);
+})(adminifier, adminifier.editor);
