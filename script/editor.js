@@ -1,6 +1,7 @@
 var Range, editor;
-adminifier.editor = {};
-(function (a, ae) {
+(function (a) {
+
+var ae = adminifier.editor = {};
 
 Element.Events.editorLoaded = {
     onAdd: function (fn) {
@@ -298,6 +299,7 @@ function pageUnloadedHandler () {
     document.body.removeEvent('click', clickOutHandler);
     window.removeEvent('resize', adjustCurrentPopup);
     window.onbeforeunload = null;
+    delete a.editor;
 }
 
 function pageScriptsLoadedHandler () {
@@ -535,4 +537,4 @@ function setupToolbar () {
     });
 }
 
-})(adminifier, adminifier.editor);
+})(adminifier);
