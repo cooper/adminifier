@@ -5,8 +5,8 @@ pingServer();
 
 function pingServer () {
     var goToLogin = function () {
-        console.log('Going to login');
-        window.location.href = 'login.php';
+        console.log('Going to logout');
+        window.location.href = 'logout.php';
     };
     var req = new Request.JSON({
         url: 'functions/events.php',
