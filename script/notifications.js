@@ -1,3 +1,5 @@
+(function (a) {
+
 setInterval(pingServer, 60000);
 pingServer();
 
@@ -18,3 +20,5 @@ function pingServer () {
     });
     req.get();
 }
+
+})(adminifier);

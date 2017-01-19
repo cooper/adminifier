@@ -1,3 +1,5 @@
+function (a) {
+
 document.addEvent('editorLoaded', editorLoadedHandler);
 document.addEvent('pageUnloaded', editorToolsPageUnloadedHandler);
 
@@ -284,7 +286,7 @@ function displayLinkHelper () {
 // VIEW PAGE BUTTON
 
 function openPageInNewTab () {
-    var root = adminifier.wikiPageRoot;
+    var root = a.wikiPageRoot;
     var pageName = editorGetFilename().replace(/\.page$/, '');
     window.open(root + pageName);
 }
@@ -356,7 +358,7 @@ function displaySaveHelper () {
         // successful save callback
         var success = function (data) {
             console.log(data);
-            editorLastSavedData = saveData;
+            a.editorLastSavedData = saveData;
 
             // something went wrong in the page display
             var displayBad = false, res = data.result;
@@ -513,7 +515,7 @@ function displayDeleteConfirmation () {
 
             // redirect
             setTimeout(function () {
-                window.location = adminifier.adminRoot
+                window.location = a.adminRoot
             }, 1500);
 
         };
@@ -769,3 +771,5 @@ function generatePageOptions (opts) {
     });
     return string;
 }
+
+})(adminifier);

@@ -1,4 +1,7 @@
-var Range, editor, currentLi, currentPopup, editorLastSavedData;
+var Range, editor;
+(function (a) {
+
+var currentLi, currentPopup;
 
 document.addEvent('pageScriptsLoaded', editorPageScriptsLoadedHandler);
 document.addEvent('pageUnloaded', editorPageUnloadedHandler);
@@ -21,7 +24,7 @@ function editorPageScriptsLoadedHandler () {
 
     Range  = ace.require('ace/range').Range;
     editor = ace.edit("editor");
-    editorLastSavedData = editor.getValue();
+    a.editorLastSavedData = editor.getValue();
 
     // render editor
     editor.setTheme("ace/theme/twilight"); /* eclipse is good light one */
@@ -399,5 +402,7 @@ function setupToolbar () {
 }
 
 function editorHasUnsavedChanges () {
-    return editor.getValue() != editorLastSavedData;
+    return editor.getValue() != a.editorLastSavedData;
 }
+
+})(adminifier);

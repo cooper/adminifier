@@ -1,3 +1,5 @@
+(function (a) {
+
 window.addEvent('hashchange', hashLoad);
 document.addEvent('domready', hashLoad);
 
@@ -25,10 +27,10 @@ Element.implement('onEnter', function (func) {
 });
 
 function frameLoad (page) {
-    if (adminifier.currentPage == page)
+    if (a.currentPage == page)
         return;
     document.fireEvent('pageUnloaded');
-    adminifier.currentPage = page;
+    a.currentPage = page;
     console.log("Loading " + page);
 
     // add .php extension, respecting GET arguments
@@ -162,7 +164,7 @@ function handlePageData(data) {
     window.editorLoaded = false;
 
     console.log(data);
-    adminifier.currentData = data;
+    a.currentData = data;
     $('content').setStyle('user-select', 'none');
 
     // window redirect
@@ -238,16 +240,16 @@ function handlePageData(data) {
     });
 
     // handle page flags
-    if (adminifier.currentFlags)
-        adminifier.currentFlags.each(function (flag) {
+    if (a.currentFlags)
+        a.currentFlags.each(function (flag) {
             if (flag.destroy)
                 flag.destroy();
         });
-    adminifier.currentFlags = [];
+    a.currentFlags = [];
     SSV(data['data-flags']).each(function (flagName) {
         var flag = flagOptions[flagName];
         if (!flag) return;
-        adminifier.currentFlags.push(flag);
+        a.currentFlags.push(flag);
         flag.init();
     });
 }
@@ -261,3 +263,5 @@ function SSV (str) {
 function updatePageTitle(title) {
     $$('#page-title span')[0].innerText = title;
 }
+
+})(adminifier);
