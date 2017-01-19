@@ -3,7 +3,9 @@
 document.addEvent('editorLoaded', loadedHandler);
 document.addEvent('pageUnloaded', unloadedHandler);
 
+var ae;
 function loadedHandler () {
+    ae = adminifier.editor;
     console.log('Editor tools script loaded');
     Object.append(ae.toolbarFunctions, {
         font:       displayFontSelector,
@@ -659,4 +661,4 @@ function generatePageOptions (opts) {
     return string;
 }
 
-})(adminifier, adminifier.editor);
+})(adminifier);
