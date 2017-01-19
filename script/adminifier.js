@@ -40,7 +40,17 @@ function frameLoad (page) {
     var request = new Request({
         url: 'frames/' + page,
         onSuccess: function (html) {
+
+            // the page may start with JSON metadata...
+            if (!html.indexOf('<!--JSON')) {
+                var json = JSON.parse(html.split('\n', 3)[1]);
+                a.currentJSONMetadata = json;
+            }
+
+            // set the content
             $('content').innerHTML = html;
+
+            // find HTML metadata
             var meta = $('content').getElement('meta');
             if (meta) {
                 var attrs = meta.getProperties(

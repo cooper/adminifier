@@ -11,6 +11,9 @@ if ($result->type != 'page_code')
     die('Page does not exist.');
 
 ?>
+<!--JSON
+<?= json_encode(array('display_result' => $result->display_result)) ?>
+-->
 
 <meta
       data-nav="pages"
@@ -20,10 +23,6 @@ if ($result->type != 'page_code')
       data-styles="editor"
       data-flags="no-margin compact-sidebar"
 />
-
-<script type="application/json">
-    <?= addslashes(json_encode($result->display_result)) ?>
-</script>
 
 <div class="editor-toolbar-wrapper">
     <ul class="editor-toolbar">

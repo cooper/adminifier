@@ -352,6 +352,8 @@ function pageScriptsLoadedHandler () {
 function editorLoadedHandler () {
     ae.updatePageTitle();
     ae.resetSelectionAtTopLeft();
+    if (a.currentJSONMetadata && a.currentJSONMetadata.display_result)
+        ae.handlePageDisplayResult(a.currentJSONMetadata.display_result);
 }
 
 function clickOutHandler (e) {
