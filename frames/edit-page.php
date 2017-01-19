@@ -13,6 +13,7 @@ if ($result->type != 'page_code')
 ?>
 <!--JSON
 <?= json_encode(array('display_result' => $result->display_result)) ?>
+
 -->
 
 <meta
