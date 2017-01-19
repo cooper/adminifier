@@ -373,17 +373,6 @@ function inputHandler () {
         null;
 }
 
-function fakeAdopt (child) {
-    if (!$('fake-parent')) {
-        var parent = new Element('div', {
-            id: 'fake-parent',
-            styles: { display: 'none' }
-        });
-        document.body.appendChild(parent);
-    }
-    $('fake-parent').appendChild(child);
-}
-
 // close current popup on click outside
 function bodyClickPopoverCheck (e) {
 
