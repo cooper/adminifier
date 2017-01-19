@@ -20,6 +20,10 @@ Element.implement('onEnter', function (func) {
     });
 });
 
+a.updatePageTitle = function (title) {
+    $$('#page-title span')[0].innerText = title;
+};
+
 function frameLoad (page) {
     if (a.currentPage == page)
         return;
@@ -251,10 +255,6 @@ function SSV (str) {
     if (typeof str != 'string' || !str.length)
         return [];
     return str.split(' ');
-}
-
-function updatePageTitle(title) {
-    $$('#page-title span')[0].innerText = title;
 }
 
 })(adminifier);

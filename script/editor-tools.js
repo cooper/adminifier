@@ -22,7 +22,7 @@ function loadedHandler () {
         [ 'Ctrl-K', 'Command-K',    'link'      ]
     ]);
 
-    ae.updatePageTitle();
+    ae.updatePageTitle(); // why?
     ae.resetSelectionAtTopLeft();
 }
 
