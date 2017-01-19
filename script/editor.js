@@ -267,8 +267,14 @@ ae.replaceSelectionRangeAndReselect = function (ranges, leftOffset, newText) {
 };
 
 ae.handlePageDisplayResult = function (res) {
-    if (!res || res.type != 'not found' || res.draft)
+    if (!res)
         return;
+
+    // seems to have no issues
+    if (res.type != 'not found' || res.draft) {
+        editor.session.clearAnnotations();
+        return;
+    }
 
     // highlight the line that had an error
     var match = res.error.match(/^Line (\d+):(\d):(.+)/);
