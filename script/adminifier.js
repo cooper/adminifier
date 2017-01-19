@@ -5,27 +5,30 @@ document.addEvent('domready', hashLoad);
 // and the page scripts are already done
 Element.Events.pageScriptsLoaded = {
 	onAdd: function (fn) {
-		if (window.pageScriptsDone) fn.call(this);
+		if (window.pageScriptsDone)
+            fn.call(this);
 	}
 };
 Element.Events.editorLoaded = {
     onAdd: function (fn) {
-        if (window.editorLoaded) fn.call(this);
+        if (window.editorLoaded)
+            fn.call(this);
     }
 };
 
 Element.implement('onEnter', function (func) {
     this.addEvent('keyup', function (e) {
-        if (e.key != 'enter') return;
+        if (e.key != 'enter')
+            return;
         func(e);
     });
 });
 
-var currentPage;
-function frameLoad(page) {
-    if (currentPage == page) return;
+function frameLoad (page) {
+    if (adminifier.currentPage == page)
+        return;
     document.fireEvent('pageUnloaded');
-    currentPage = page;
+    adminifier.currentPage = page;
     console.log("Loading " + page);
 
     // add .php extension, respecting GET arguments
@@ -83,7 +86,6 @@ function hashLoad() {
     frameLoad(hash);
 }
 
-var currentFlags = [];
 var flagOptions = {
     'no-margin': {
         init: function () {
@@ -97,8 +99,8 @@ var flagOptions = {
         init: function () {
             $('navigation-sidebar').tween('width', '50px');
             $('content').tween('margin-left', '50px');
-            $$('#navigation-sidebar li a span').each(function (span) { span.fade('out'); });
             $$('#navigation-sidebar li a').each(function (a) {
+                a.getElement('span').fade('out');
                 a.addEvents({
                     mouseenter: handleCompactSidebarMouseenter,
                     mouseleave: handleCompactSidebarMouseleave
@@ -108,8 +110,8 @@ var flagOptions = {
         destroy: function () {
             $('navigation-sidebar').tween('width', '170px');
             $('content').tween('margin-left', '170px');
-            $$('#navigation-sidebar li a span').each(function (span) { span.fade('in'); });
             $$('#navigation-sidebar li a').each(function (a) {
+                a.getElement('span').fade('in');
                 a.removeEvents({
                     mouseenter: handleCompactSidebarMouseenter,
                     mouseleave: handleCompactSidebarMouseleave
@@ -127,10 +129,8 @@ function handleCompactSidebarMouseenter (e) {
     var a = e.target;
     var p = a.retrieve('popover');
     if (!p) {
-        p = new Element('div', {
-            class: 'navigation-popover'
-        });
-        p.innerHTML = a.getElementsByTagName('span')[0].innerHTML;
+        p = new Element('div', { class: 'navigation-popover' });
+        p.innerHTML = a.getElement('span').innerHTML;
         a.appendChild(p);
         p.set('morph', { duration: 150 });
         a.store('popover', p);
@@ -152,23 +152,23 @@ function handleCompactSidebarMouseleave (e) {
         width: '0px',
         paddingLeft: '0px'
     });
-    setTimeout(function () { a.setStyle('overflow', 'hidden'); }, 200);
+    setTimeout(function () {
+        a.setStyle('overflow', 'hidden');
+    }, 200);
 }
 
-var currentData;
 function handlePageData(data) {
     window.pageScriptsDone = false;
     window.editorLoaded = false;
 
     console.log(data);
-    currentData = data;
+    adminifier.currentData = data;
     $('content').setStyle('user-select', 'none');
 
     // window redirect
     var target = data['data-wredirect'];
     if (target) {
         console.log('Redirecting to ' + target);
-        window.location.hash = '';
         window.location = target;
         return;
     }
@@ -206,8 +206,7 @@ function handlePageData(data) {
 
     // inject scripts
     $$('script.dynamic').each(function (script) { script.destroy(); });
-    var srcs = (data['data-scripts'] || '').split(' ');
-    srcs.each(function (src) {
+    SSV(data['data-scripts']).each(function (src) {
         if (!src.length) return;
         scriptsToLoad++;
 
@@ -227,8 +226,7 @@ function handlePageData(data) {
 
     // inject styles
     $$('link.dynamic').each(function (link) { link.destroy(); });
-    var links = (data['data-styles'] || '').split(' ');
-    links.each(function (style) {
+    SSV(data['data-styles']).each(function (style) {
         if (!style.length) return;
         var link = new Element('link', {
             href:  'style/' + style + '.css',
@@ -240,18 +238,24 @@ function handlePageData(data) {
     });
 
     // handle page flags
-    currentFlags.each(function (flag) {
-        if (flag.destroy) flag.destroy();
-    });
-    currentFlags = [];
-    var flags = (data['data-flags'] || '').split(' ');
-    flags.each(function (flagName) {
+    if (adminifier.currentFlags)
+        adminifier.currentFlags.each(function (flag) {
+            if (flag.destroy)
+                flag.destroy();
+        });
+    adminifier.currentFlags = [];
+    SSV(data['data-flags']).each(function (flagName) {
         var flag = flagOptions[flagName];
         if (!flag) return;
-        currentFlags.push(flag);
+        adminifier.currentFlags.push(flag);
         flag.init();
     });
+}
 
+function SSV (str) {
+    if (typeof str != 'string' || !str.length)
+        return [];
+    return str.split(' ');
 }
 
 function updatePageTitle(title) {
