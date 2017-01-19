@@ -21,10 +21,10 @@ ae.expressions = {
 };
 
 ae.toolbarFunctions = {
-    bold:       ae.wrapTextFunction('b'),
-    italic:     ae.wrapTextFunction('i'),
-    underline:  ae.wrapTextFunction('u'),
-    strike:     ae.wrapTextFunction('s'),
+    bold:       wrapTextFunction('b'),
+    italic:     wrapTextFunction('i'),
+    underline:  wrapTextFunction('u'),
+    strike:     wrapTextFunction('s'),
     undo:       function () { editor.undo(); },
     redo:       function () { editor.redo(); },
     // 'delete':   dummyFunc
@@ -269,7 +269,8 @@ ae.replaceSelectionRangeAndReselect = function (ranges, leftOffset, newText) {
     ));
 };
 
-ae.wrapTextFunction = function (type) {
+ae.wrapTextFunction = wrapTextFunction;
+function wrapTextFunction (type) {
     return function () {
 
         var r = ae.getSelectionRanges();
@@ -287,7 +288,7 @@ ae.wrapTextFunction = function (type) {
 
         closeCurrentPopup();
     };
-};
+}
 
 function pageUnloadedHandler () {
     console.log('Unloading editor script');
