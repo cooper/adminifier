@@ -90,7 +90,7 @@ function displayFontSelector () {
         div.setStyle('color', getContrastYIQ(color.hex.substr(1)));
 
         // add click event
-        div.addEvent('click', wrapTextFunction(colorName));
+        div.addEvent('click', ae.wrapTextFunction(colorName));
 
     });
 
@@ -100,6 +100,14 @@ function displayFontSelector () {
     box.appendChild(container);
 
     ae.displayPopupBox(box, 200, li);
+}
+
+function getContrastYIQ (hexColor) {
+    var r = parseInt(hexColor.substr(0, 2), 16);
+    var g = parseInt(hexColor.substr(2, 2), 16);
+    var b = parseInt(hexColor.substr(4, 2), 16);
+    var yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+    return (yiq >= 128) ? '#000' : '#fff';
 }
 
 // LINK HELPER

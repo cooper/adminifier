@@ -21,10 +21,10 @@ ae.expressions = {
 };
 
 ae.toolbarFunctions = {
-    bold:       wrapTextFunction('b'),
-    italic:     wrapTextFunction('i'),
-    underline:  wrapTextFunction('u'),
-    strike:     wrapTextFunction('s'),
+    bold:       ae.wrapTextFunction('b'),
+    italic:     ae.wrapTextFunction('i'),
+    underline:  ae.wrapTextFunction('u'),
+    strike:     ae.wrapTextFunction('s'),
     undo:       function () { editor.undo(); },
     redo:       function () { editor.redo(); },
     // 'delete':   dummyFunc
@@ -269,6 +269,26 @@ ae.replaceSelectionRangeAndReselect = function (ranges, leftOffset, newText) {
     ));
 };
 
+ae.wrapTextFunction = function (type) {
+    return function () {
+
+        var r = ae.getSelectionRanges();
+        var selectRange = r.select,
+            originalRange = r.original;
+        editor.selection.setSelectionRange(selectRange);
+
+        // dtermine the new text
+        var terminator  = type.length > 1 ? '' : type;
+        var leftSide    = '[' + type + ']';
+        var newText     = leftSide + editor.getSelectedText() + '[/' + terminator + ']';
+
+        // replace the text and select the original text
+        ae.replaceSelectionRangeAndReselect(r, leftSide.length, newText);
+
+        closeCurrentPopup();
+    };
+};
+
 function pageUnloadedHandler () {
     console.log('Unloading editor script');
     document.removeEvent('pageScriptsLoaded', pageScriptsLoadedHandler);
@@ -398,14 +418,6 @@ function bodyClickPopoverCheck (e) {
     closeCurrentPopup();
 }
 
-function getContrastYIQ (hexColor) {
-    var r = parseInt(hexColor.substr(0, 2), 16);
-    var g = parseInt(hexColor.substr(2, 2), 16);
-    var b = parseInt(hexColor.substr(4, 2), 16);
-    var yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
-    return (yiq >= 128) ? '#000' : '#fff';
-}
-
 function closeCurrentPopup (opts) {
     var box = ae.currentPopup;
     if (!box)
@@ -456,26 +468,6 @@ function adjustCurrentPopup () {
     );
     box.setStyle('top', rect.top + li.offsetHeight);
 };
-
-function wrapTextFunction (type) {
-    return function () {
-
-        var r = ae.getSelectionRanges();
-        var selectRange = r.select,
-            originalRange = r.original;
-        editor.selection.setSelectionRange(selectRange);
-
-        // dtermine the new text
-        var terminator  = type.length > 1 ? '' : type;
-        var leftSide    = '[' + type + ']';
-        var newText     = leftSide + editor.getSelectedText() + '[/' + terminator + ']';
-
-        // replace the text and select the original text
-        ae.replaceSelectionRangeAndReselect(r, leftSide.length, newText);
-
-        closeCurrentPopup();
-    };
-}
 
 function openLi (li) {
 
