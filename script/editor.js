@@ -351,8 +351,10 @@ function pageScriptsLoadedHandler () {
     // listen for clicks to navigate away
     document.body.addEvent('click', clickOutHandler);
 
-    ae.editorLoaded = true;
-    document.fireEvent('editorLoaded');
+    if (!ae.editorLoaded) {
+        ae.editorLoaded = true;
+        document.fireEvent('editorLoaded');
+    }
 }
 
 function editorLoadedHandler () {
