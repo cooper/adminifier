@@ -80,8 +80,12 @@ ae.closePopup = function (box, opts) {
     closeCurrentPopup(opts);
 };
 
-ae.findPageVariable = function (exp) {
-    var search = new Search().set({ needle: exp, regExp: true });
+ae.findPageVariable = function (exp, range) {
+    var search = new Search().set({
+        needle: exp,
+        regExp: true,
+        range:  range
+    });
     var found  = search.findAll(editor.session).getLast();
     if (!found)
         return;

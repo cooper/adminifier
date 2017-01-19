@@ -495,7 +495,7 @@ function displayPageOptionsWindow () {
 
 function rangeFunc (range, exp, bool) {
     var text  = editor.session.getTextRange(range);
-    var match = ae.findPageVariable(exp);
+    var match = ae.findPageVariable(exp, range);
     if (!match)
         return;
     return {
