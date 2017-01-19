@@ -88,7 +88,7 @@ function displayFontSelector () {
     container.setStyle('display', 'block');
     box.appendChild(container);
 
-    displayPopupBox(box, 200, li);
+    ae.displayPopupBox(box, 200, li);
 }
 
 // LINK HELPER
@@ -146,7 +146,7 @@ function displayLinkHelper () {
 
     // selected text = display text
     // choose a word if there is no actual selection
-    var r = getSelectionRanges();
+    var r = ae.getSelectionRanges();
     editor.selection.setSelectionRange(r.select);
     var selected = editor.session.getTextRange(r.select);
 
@@ -183,7 +183,7 @@ function displayLinkHelper () {
     $('editor-link-target').onEnter(insertLink);
     $('editor-link-display').onEnter(insertLink);
 
-    displayPopupBox(box, 215, li);
+    ae.displayPopupBox(box, 215, li);
     $('editor-link-target').focus();
 }
 
@@ -340,7 +340,7 @@ function displaySaveHelper () {
     $('editor-save-commit').addEvent('click', saveChanges);
     $('editor-save-message').onEnter(saveChanges);
 
-    displayPopupBox(box, 120, li);
+    ae.displayPopupBox(box, 120, li);
     $('editor-save-message').focus();
 }
 
@@ -465,7 +465,7 @@ function displayDeleteConfirmation () {
     // on click, delete page
     btn.addEvent('click', deletePage);
 
-    displayPopupBox(box, 120, li);
+    ae.displayPopupBox(box, 120, li);
 }
 
 // PAGE OPTIONS

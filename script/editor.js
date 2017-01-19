@@ -13,7 +13,7 @@ ae.expressions = {
     category:       new RegExp('^\\s*@category\\.(\\w+);\\s*$')
 };
 
-var ae.toolbarFunctions = {
+ae.toolbarFunctions = {
     bold:       wrapTextFunction('b'),
     italic:     wrapTextFunction('i'),
     underline:  wrapTextFunction('u'),
@@ -464,7 +464,7 @@ function adjustCurrentPopup () {
 function wrapTextFunction (type) {
     return function () {
 
-        var r = getSelectionRanges();
+        var r = ae.getSelectionRanges();
         var selectRange = r.select,
             originalRange = r.original;
         editor.selection.setSelectionRange(selectRange);
@@ -475,7 +475,7 @@ function wrapTextFunction (type) {
         var newText     = leftSide + editor.getSelectedText() + '[/' + terminator + ']';
 
         // replace the text and select the original text
-        replaceSelectionRangeAndReselect(r, leftSide.length, newText);
+        ae.replaceSelectionRangeAndReselect(r, leftSide.length, newText);
 
         closeCurrentPopup();
     };
@@ -544,7 +544,6 @@ function setupToolbar () {
         if (ae.currentLi && !ae.currentPopup)
             closeCurrentLi();
     });
-
 }
 
 })(adminifier, adminifier.editor);
