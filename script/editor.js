@@ -85,7 +85,7 @@ ae.findPageVariable = function (exp) {
     var found  = search.findAll(editor.session).getLast();
     if (!found)
         return;
-    var string = editor.getTextRange(found);
+    var string = editor.session.getTextRange(found);
 
     var escaped    = false,
         inTitle    = false,     inName    = false,
