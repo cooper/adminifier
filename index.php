@@ -34,6 +34,7 @@ var adminifier = {
 <script type="text/javascript" src="script/tmpl.min.js"></script>
 <script type="text/javascript" src="script/adminifier.js"></script>
 <script type="text/javascript" src="script/notifications.js"></script>
+<script type="text/javascript" src="script/modal-window.js"></script>
 <meta charset="utf-8" />
 
 </head>

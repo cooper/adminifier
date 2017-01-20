@@ -26,3 +26,49 @@ i.fa.center {
 i.fa.right {
     text-align: right !important;
 }
+
+/* MODAL WINDOWS */
+
+.modal-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 400;
+    padding-top: 100px;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    width: 700px;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+}
+
+.modal-padded {
+    padding: 2px 16px;
+}
+
+.modal-done-button {
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.modal-done-button:hover {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 2px 16px;
+    background-color: #555;
+    color: #fff;
+}
