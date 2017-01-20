@@ -42,7 +42,7 @@ i.fa.right {
     background-color: rgba(0, 0, 0, 0.4);
 }
 
-.modal-content {
+.modal-window {
     position: relative;
     background-color: #fefefe;
     width: 700px;
@@ -51,7 +51,7 @@ i.fa.right {
     border: 1px solid #888;
 }
 
-.modal-padded {
+.modal-content {
     padding: 2px 16px;
 }
 
