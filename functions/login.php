@@ -16,7 +16,7 @@ if (isset($_SESSION['logged_in'])) {
 }
 
 // no username/password
-if (!isset($_POST['username']) || !isset($_POST['password'])) {}
+if (!isset($_POST['username']) || !isset($_POST['password'])) {
     if ($is_api)
         json_error('Credentials not specified');
     die('Credentials not specified');
