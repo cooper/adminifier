@@ -223,7 +223,7 @@ ae.removeLinesInRanges = function (ranges) {
     });
 
     var lastLine;
-    for (var i = biggest; i > smallest; i--) {
+    for (var i = biggest; i + 1 > smallest; i--) {
 
         // if the row does not exist, this is the end of a continuous range
         if (!rows[i]) {
