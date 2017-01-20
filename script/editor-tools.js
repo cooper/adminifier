@@ -476,12 +476,14 @@ function displayPageOptionsWindow () {
 
     // inject the new lines at the beginning
     editor.selection.setSelectionRange(new Range(0, 0, 0, 0));
+    console.log('OPTS STRING: ' + optsString);
     editor.insert(optsString);
 
     // after inserting, the selection will be the line following
     // the insertion at column 0.
 
     // now check for categories
+    console.log(editor.selection.getSelectionRange());
     found = findPageCategories(true);
     if (found.length) {
         ae.insertBlankLineMaybe();
