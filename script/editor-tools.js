@@ -411,13 +411,12 @@ function displayDeleteConfirmation () {
             // update button
             btn.addClass('success');
             btn.removeClass('progress');
-            btn.innerHTML = 'File Deleted';
+            btn.innerHTML = 'File deleted';
 
             // redirect
             setTimeout(function () {
                 window.location = a.adminRoot
-            }, 1500);
-
+            }, 3000);
         };
 
         var fail = function () {
