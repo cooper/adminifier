@@ -514,12 +514,11 @@ function findVariables (found, remove, exp, bool) {
     var ranges = search.findAll(editor.session);
     ranges.each(function (i) {
         var res = pageVariableFromRange(i, exp, bool);
-        if (res) found[res.name] = res;
+        if (!res) return;
+        found[res.name] = res;
+        editor.session.doc.removeFullLines(i.start.row, i.end.row);
     });
 
-    // remove maybe
-    if (remove)
-        ae.removeLinesInRanges(ranges);
 }
 
 function findPageOptions (remove) {

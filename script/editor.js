@@ -206,14 +206,6 @@ ae.removeExtraNewlines = function () {
     editor.selection.setRange(oldRange);
 };
 
-ae.removeLinesInRanges = function (ranges) {
-    if (!ranges || !ranges.length)
-        return;
-    ranges.each(function (i) {
-        editor.session.doc.removeFullLines(i.start.row, i.end.row);
-    });
-};
-
 ae.resetSelectionAtTopLeft = function () {
     editor.selection.setRange(new Range(0, 0, 0, 0));
     editor.focus();
