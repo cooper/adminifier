@@ -485,7 +485,7 @@ function inputHandler () {
 function bodyClickPopoverCheck (e) {
 
     // no popup is displayed
-    if (!ae.currentPopup)
+    if (!ae.currentPopup || e.isPopupOpenAction)
         return;
 
     // clicked within the popup
@@ -599,6 +599,7 @@ function setupToolbar () {
             if (!action)
                 return;
 
+            e.isPopupOpenAction = true;
             action();
         });
 
