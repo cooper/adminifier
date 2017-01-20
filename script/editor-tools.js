@@ -516,7 +516,8 @@ function findVariables (found, remove, exp, bool) {
         var res = pageVariableFromRange(i, exp, bool);
         if (!res) return;
         found[res.name] = res;
-        editor.session.doc.removeFullLines(i.start.row, i.end.row);
+        if (remove)
+            editor.session.doc.removeFullLines(i.start.row, i.end.row);
     });
 
 }
