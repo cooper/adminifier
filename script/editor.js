@@ -187,9 +187,11 @@ ae.removeExtraNewlines = function () {
     if (editor.session.getTextRange(i).trim().length)
         return;
 
-    do {
-        editor.selection.selectLine();
-    } while (!editor.getSelectedText().trim().length && editor.removeLines());
+    editor.selection.selectLine();
+    while (!editor.getSelectedText().trim().length {
+        editor.removeLines();
+        editor.selection.selectUp();
+    }
 };
 
 ae.removeLinesInRanges = function (ranges) {
