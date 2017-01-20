@@ -222,8 +222,8 @@ ae.removeLinesInRanges = function (ranges) {
         smallest = Math.min(smallest, i.start.row, i.end.row);
     });
 
-    var lastLine;
-    for (var i = biggest; i > smallest; i--) {
+    var lastLine, stop = smallest - 1;
+    for (var i = biggest; i > stop; i--) {
 
         // if the row does not exist, this is the end of a continuous range
         if (!rows[i]) {
