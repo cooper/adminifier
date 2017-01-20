@@ -428,7 +428,6 @@ function clickOutHandler (e) {
         return null;
     }
     var from = findParent('a', e.target);
-    console.log(from);
     if (from) {
         e.preventDefault();
         alert('You have unsaved changes.');
@@ -489,22 +488,11 @@ function bodyClickPopoverCheck (e) {
     if (!ae.currentPopup)
         return;
 
-    console.log(e.target);
-
-    // the target is the toolbar item
-    var li = ae.currentPopup.retrieve('li');
-    if (e.target == li || li.contains(e.target))
-        return;
-
-    // this popup can only be closed programmatically
-    if (ae.currentPopup.hasClass('sticky'))
-        return;
-
     // clicked within the popup
     if (e.target == ae.currentPopup || ae.currentPopup.contains(e.target))
         return;
 
-    closeCurrentPopup();
+    closeCurrentPopup({ unlessSticky: true, unlessActive: true });
 }
 
 function closeCurrentPopup (opts) {
