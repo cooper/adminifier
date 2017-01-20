@@ -30,19 +30,19 @@ var ModalWindow = new Class({
     },
 
     setTitle: function (title) {
-        var span = this.header.getElement('span');
+        var span = this.title;
         if (!span) {
-            span = new Element('span');
+            span = this.title = new Element('span');
             this.header.adopt(span);
         }
         span.innerText = title;
     },
 
     setIcon: function (iconName) {
-        var icon = this.header.getElement('i');
+        var icon = this.icon;
         if (!icon) {
-            icon = new Element('i');
-            this.header.inject(icon, 'top');
+            icon = this.icon = new Element('i');
+            this.doneButton.inject(icon, 'after');
         }
         icon.className = 'fa fa-' + iconName;
     },
