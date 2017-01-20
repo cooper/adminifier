@@ -5,7 +5,7 @@ require_once(__DIR__.'/functions/session.php');
 require_once(__DIR__.'/private/config.php');
 
 // already logged in
-if (isset($_SESSION['logged_in'])) {
+if ($user_info->logged_in) {
     header('Location: '.$config->admin_root.'/');
     die();
 }

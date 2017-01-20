@@ -7,7 +7,7 @@ require_once(__DIR__.'/utils.php');
 $is_api = $_GET['remote'];
 
 // already logged in
-if (isset($_SESSION['logged_in'])) {
+if ($user_info->logged_in) {
     if ($is_api)
         json_success();
     else
@@ -29,10 +29,8 @@ $user_info = $W->login($username, $_POST['password'], session_id());
 if ($user_info->logged_in) {
     $user_info->realname = $user_info->name ? $user_info->name : $username;
     $user_info->username = $username;
-    $_SESSION['logged_in'] = true;
     $_SESSION['user_info'] = $user_info;
-    $_SESSION['wiki_conf'] = $user_info->conf;
-
+    
     if ($is_api)
         json_success();
     else
