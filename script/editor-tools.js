@@ -483,16 +483,15 @@ function displayPageOptionsWindow () {
     // the insertion at column 0.
 
     // now check for categories
-    console.log(editor.getSelectionRange());
     found = findPageCategories(true);
     if (found.length) {
-        ae.insertBlankLineMaybe();
+        editor.insert('\n');
         found.sort().each(function (catName) {
             editor.insert('@category.' + catName + ';\n');
         });
     }
 
-    ae.insertBlankLineMaybe();
+    editor.insert('\n');
     return optsString;
 }
 
