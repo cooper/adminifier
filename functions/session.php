@@ -12,7 +12,12 @@
     if (!$wiki_conf)
         $wiki_conf = new stdClass;
 
+    $user_info = $_SESSION['user_info'];
+    if (!$user_info)
+        $user_info = new stdClass;
+
     // fall back to wiki shortname if no name is set
     $wiki_name = isset($wiki_conf->name) ?
         $wiki_conf->name : $config->wiki_name;
+
 ?>

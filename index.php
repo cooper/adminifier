@@ -25,7 +25,7 @@ var adminifier = {
     wikiShortName:  <?= option_if_set($config->wiki_name)       ?>,
     wikiName:       <?= option_if_set($wiki_name)               ?>,
     wikiPageRoot:   <?= option_if_set($config->wiki_page_root)  ?>,
-    themeName:      <?= option_if_set($_SESSION['theme'])       ?>
+    themeName:      <?= option_if_set($user_info->theme)        ?>
 
 };
 
@@ -40,7 +40,7 @@ var adminifier = {
 <body>
 
 <div id="top-bar">
-    <span class="top-title account-title"><a href="#"><i class="fa fa-user"></i> <?= $_SESSION['realname'] ?></a></span>
+    <span class="top-title account-title"><a href="#"><i class="fa fa-user"></i> <?= $user_info->realname ?></a></span>
     <span class="top-title create-title"><a class="frame-click" href="#!/create-page"><i class="fa fa-plus-circle"></i> New page</a><br /></span>
     <span class="top-title wiki-title"><?= $wiki_name ?></span>
     <span id="page-title" class="top-title page-title"><i class="fa fa-home"></i> Dashboard</span>

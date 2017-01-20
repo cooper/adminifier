@@ -11,7 +11,7 @@ require_once(__DIR__.'/../functions/utils.php');
 $new_page = 'untitled_'.uniqid().'.page';
 
 $_time   = time();
-$_author = $_SESSION['realname'];
+$_author = $user_info->realname;
 
 // set fake post variables
 $_POST = array(

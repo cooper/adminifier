@@ -27,10 +27,10 @@ if (!isset($_POST['username']) || !isset($_POST['password'])) {
 $username  = $_POST['username'];
 $user_info = $W->login($username, $_POST['password'], session_id());
 if ($user_info->logged_in) {
+    $user_info->realname = $user_info->name ? $user_info->name : $username;
+    $user_info->username = $username;
     $_SESSION['logged_in'] = true;
-    $_SESSION['username']  = $username;
-    $_SESSION['realname']  = $user_info->name ? $user_info->name : $username;
-    $_SESSION['theme']     = $user_info->theme;
+    $_SESSION['user_info'] = $user_info;
     $_SESSION['wiki_conf'] = $user_info->conf;
 
     if ($is_api)
