@@ -165,7 +165,7 @@ ae.insertBlankLineMaybe = function () {
     // if there is text on the line, insert a blank line before it.
     if (editor.getSelectedText().trim().length) {
         var r = editor.selection.getRange();
-        editor.selection.setSelectionRange(new Range(
+        editor.selection.setRange(new Range(
             r.start.row, 0,
             r.start.row, 0
         ));
@@ -176,7 +176,7 @@ ae.insertBlankLineMaybe = function () {
     return false;
 };
 
-ae.removeExtraNewlines = function () {
+ae.removeExtraNewlines = function (oldRange) {
 
     // not on a newline currently
     var i = editor.getSelectionRange();
@@ -201,6 +201,9 @@ ae.removeExtraNewlines = function () {
         editor.removeLines();
         editor.selection.selectLine();
     }
+
+    // put the cursor back where it was
+    editor.selection.setRange(oldRange);
 };
 
 ae.removeLinesInRanges = function (ranges) {
@@ -219,7 +222,7 @@ ae.removeLinesInRanges = function (ranges) {
 };
 
 ae.resetSelectionAtTopLeft = function () {
-    editor.selection.setSelectionRange(new Range(0, 0, 0, 0));
+    editor.selection.setRange(new Range(0, 0, 0, 0));
     editor.focus();
 };
 
@@ -285,7 +288,7 @@ ae.replaceSelectionRangeAndReselect = function (ranges, leftOffset, newText) {
     editor.session.replace(selectRange, newText);
 
     // return to the original selection
-    editor.selection.setSelectionRange(new Range(
+    editor.selection.setRange(new Range(
         originalRange.start.row,
         originalRange.start.column + leftOffset,
         originalRange.end.row,
@@ -329,7 +332,7 @@ function wrapTextFunction (type) {
         var r = ae.getSelectionRanges();
         var selectRange = r.select,
             originalRange = r.original;
-        editor.selection.setSelectionRange(selectRange);
+        editor.selection.setRange(selectRange);
 
         // dtermine the new text
         var terminator  = type.length > 1 ? '' : type;
@@ -455,7 +458,7 @@ function inputHandler () {
         var pos = editor.getCursorPosition();
         var rng = new Range(pos.row, pos.column, pos.row, pos.column);
         ae.updatePageTitle();
-        editor.selection.setSelectionRange(rng);
+        editor.selection.setRange(rng);
     }
 
     // changes?

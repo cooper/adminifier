@@ -49,7 +49,7 @@ function selectPageTitle () {
     var found = ae.findPageVariable(ae.expressions.pageTitle);
     if (!found)
         return;
-    editor.selection.setSelectionRange(found.range);
+    editor.selection.setRange(found.range);
 }
 
 // TEXT COLOR SELECTOR
@@ -166,7 +166,7 @@ function displayLinkHelper () {
     // selected text = display text
     // choose a word if there is no actual selection
     var r = ae.getSelectionRanges();
-    editor.selection.setSelectionRange(r.select);
+    editor.selection.setRange(r.select);
     var selected = editor.session.getTextRange(r.select);
 
     if (selected.trim().length) {
@@ -475,9 +475,10 @@ function displayPageOptionsWindow () {
     }));
 
     // inject the new lines at the beginning
-    editor.selection.setSelectionRange(new Range(0, 0, 0, 0));
+    editor.selection.setRange(new Range(0, 0, 0, 0));
     console.log('OPTS STRING: ' + optsString);
     editor.insert(optsString);
+    var rangeAfterInsert = editor.selection.getRange();
 
     // after inserting, the selection will be the line following
     // the insertion at column 0.
@@ -491,7 +492,7 @@ function displayPageOptionsWindow () {
         });
     }
 
-    ae.removeExtraNewlines();
+    ae.removeExtraNewlines(rangeAfterInsert);
     return optsString;
 }
 
