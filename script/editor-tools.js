@@ -507,45 +507,22 @@ function rangeFunc (range, exp, bool) {
 };
 
 function findPageOptions (remove) {
+    var search = new Search().set({ regExp: true });
 
-    // remember the current selection
-    var originalRange = editor.selection.getRange();
-
-    // find key:value pairs
-    var found = {};
-    if (editor.findAll(ae.expressions.keyValueVar, {
-        regExp: true,
-        wrap: true
-    })) {
-        var ranges = editor.selection.getAllRanges();
+    var doExpression = function (exp, bool) {
+        search.set({ needle: exp });
+        var ranges = search.findAll();
         ranges.each(function (i) {
-            var res = rangeFunc(i, ae.expressions.keyValueVar);
+            var res = rangeFunc(i, exp, bool);
             if (res) found[res.name] = res;
         });
 
-        // delete all of the matching lines
         if (remove)
             ae.removeLinesInRanges(ranges);
-    }
+    };
 
-    // now find booleans
-    if (editor.findAll(ae.expressions.boolVar, {
-        regExp: true,
-        wrap: true
-    })) {
-        var ranges = editor.selection.getAllRanges();
-        ranges.each(function (i) {
-            var res = rangeFunc(i, ae.expressions.boolVar, true);
-            if (res) found[res.name] = res;
-        });
-
-        // do this again
-        if (remove)
-            ae.removeLinesInRanges(ranges);
-    }
-
-    // revert to the original selection
-    editor.selection.setSelectionRange(originalRange);
+    doExpression(ae.expressions.keyValueVar);
+    doExpression(ae.expressions.boolVar, true);
 
     return found;
 }
