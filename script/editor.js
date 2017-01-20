@@ -87,7 +87,8 @@ ae.findPageVariable = function (exp, range) {
     var search = new Search().set({
         needle: exp,
         regExp: true,
-        range:  range
+        range:  range,
+        backwards: true // prefer the last occurrence
     });
     var found = search.find(editor.session);
     if (!found)
