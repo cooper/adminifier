@@ -7,5 +7,12 @@
         // logged_in is not set, they have been logged out already
         die();
     }
+
     $wiki_conf = $_SESSION['wiki_conf'];
+    if (!$wiki_conf)
+        $wiki_conf = new stdClass;
+
+    // fall back to wiki shortname if no name is set
+    $wiki_name = isset($wiki_conf->name) ?
+        $wiki_conf->name : $config->wiki_name;
 ?>

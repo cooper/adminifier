@@ -3,10 +3,6 @@
     require_once(__DIR__.'/private/config.php');
     require_once(__DIR__.'/functions/wikiclient.php');
 
-    // fall back to wiki shortname if no name is set
-    $wiki_name = isset($wiki_conf->name) ?
-        $wiki_conf->name : $config->wiki_name;
-
     function option_if_set (&$opt) {
         if (!isset($opt)) return 'null';
         $escaped = addslashes($opt);
