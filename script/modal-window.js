@@ -1,5 +1,5 @@
 var ModalWindow = new Class({
-
+    Implements: Events,
     initialize: function (opts) {
 
         // fixed shaded region, modal window, padded content region, header
@@ -11,6 +11,12 @@ var ModalWindow = new Class({
         this.header.adopt(this.doneButton);
         this.modalWindow.adopt(this.header, this.content);
         this.container.adopt(this.modalWindow);
+
+        // done button click
+        var _this = this;
+        this.doneButton.addEvent('click', function () {
+            _this.hide();
+        });
 
         // initial options
         if (typeof opts.title != 'undefined')
@@ -58,13 +64,19 @@ var ModalWindow = new Class({
             container = document.body;
         container.adopt(this.container);
         this.container.setStyle('display', 'block');
+        this.shown = true;
     },
 
     hide: function () {
+        if (!this.shown)
+            return;
+        delete this.shown;
+        this.fireEvent('done');
         this.container.setStyle('display', 'none');
     },
 
     destroy: function () {
+        this.hide();
         this.container.destroy();
     }
 });

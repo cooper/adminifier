@@ -25,6 +25,7 @@ a.updatePageTitle = function (title, titleTagOnly) {
 
 window.addEvent('hashchange', hashLoad);
 document.addEvent('domready', hashLoad);
+document.addEvent('keyup', handleEscapeKey);
 
 function frameLoad (page) {
     if (a.currentPage == page)
@@ -167,6 +168,13 @@ function handleCompactSidebarMouseleave (e) {
     setTimeout(function () {
         a.setStyle('overflow', 'hidden');
     }, 200);
+}
+
+// escape key pressed
+function handleEscapeKey (e) {
+    if (e.key != 'esc' || !a.currentModal) return;
+    a.currentModal.destroy();
+    delete a.currentModal;
 }
 
 function handlePageData (data) {
