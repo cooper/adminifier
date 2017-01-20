@@ -222,25 +222,20 @@ ae.removeLinesInRanges = function (ranges) {
         smallest = Math.min(smallest, i.start.row, i.end.row);
     });
 
-    console.log('biggest: ' + biggest);
-    console.log('smallest: ' + smallest);
-
     var lastLine;
-    for (var i = biggest; i >= smallest - 1; i--) {
+    for (var i = biggest; i > smallest; i--) {
 
         // if the row does not exist, this is the end of a continuous range
         if (!rows[i]) {
-            console.log('no row ' + i);
             if (typeof lastLine != 'undefined') {
-                console.log('removing lines');
                 editor.session.doc.removeLines(i + 1, lastLine);
                 lastLine = undefined;
             }
             continue;
         }
 
-        if (typeof lastLine == 'undefined') {
-            lastLine = i; console.log('setting lastLine: ' + i);}
+        if (typeof lastLine == 'undefined')
+            lastLine = i;
     }
 };
 
