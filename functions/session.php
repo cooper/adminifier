@@ -5,6 +5,7 @@
     $user_info = $_SESSION['user_info'];
     if (!$user_info)
         $user_info = new stdClass;
+    $wiki_conf = $user_info->conf ? $user_info->conf : new stdClass;
 
     if (!isset($PUBLIC_PAGE) && !$user_info->logged_in && !isset($API)) {
         header('Location: '.$config->admin_root.'/login.php');
@@ -13,12 +14,7 @@
         die();
     }
 
-    $wiki_conf = $user_info->conf;
-    if (!$wiki_conf)
-        $wiki_conf = new stdClass;
-
     // fall back to wiki shortname if no name is set
     $wiki_name = isset($wiki_conf->name) ?
         $wiki_conf->name : $config->wiki_name;
-
 ?>

@@ -17,8 +17,10 @@ Element.implement('onEnter', function (func) {
     });
 });
 
-a.updatePageTitle = function (title) {
-    $$('#page-title span')[0].innerText = title;
+a.updatePageTitle = function (title, titleTagOnly) {
+    if (!titleTagOnly)
+        $('pageTitle').getElement('span').innerText = title;
+    document.getElement('title').innerText = title;
 };
 
 window.addEvent('hashchange', hashLoad);
@@ -193,6 +195,7 @@ function handlePageData (data) {
 
     // page title and icon
     $('page-title').innerHTML = tmpl('tmpl-page-title', data);
+    a.updatePageTitle(data['data-title'], true);
     window.scrollTo(0, 0);
     // ^ not sure if scrolling necessary when setting display: none
 
