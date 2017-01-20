@@ -3,6 +3,10 @@
     require_once(__DIR__.'/private/config.php');
     require_once(__DIR__.'/functions/wikiclient.php');
 
+    // fall back to wiki shortname if no name is set
+    $wiki_name = isset($wiki_conf->name) ?
+        $wiki_conf->name : $config->wiki_name;
+
     function option_if_set (&$opt) {
         if (!isset($opt)) return 'null';
         $escaped = addslashes($opt);
@@ -13,7 +17,7 @@
 <html>
 <head>
 
-<title><?= $config->wiki_name ?> admin</title>
+<title><?= $wiki_name ?> admin</title>
 <link type="text/css" rel="stylesheet" href="style/main.css" />
 <link type="text/css" rel="stylesheet" href="style/navigation.css" />
 <link type="text/css" rel="stylesheet" href="style/notifications.css" />
@@ -24,7 +28,7 @@
 var adminifier = {
     adminRoot:      <?= option_if_set($config->admin_root)      ?>,
     wikiShortName:  <?= option_if_set($config->wiki_name)       ?>,
-    wikiName:       <?= option_if_set($wiki_conf->name)         ?>,
+    wikiName:       <?= option_if_set($wiki_name)               ?>,
     wikiPageRoot:   <?= option_if_set($config->wiki_page_root)  ?>,
     themeName:      <?= option_if_set($_SESSION['theme'])       ?>
 
@@ -43,7 +47,7 @@ var adminifier = {
 <div id="top-bar">
     <span class="top-title account-title"><a href="#"><i class="fa fa-user"></i> <?= $_SESSION['realname'] ?></a></span>
     <span class="top-title create-title"><a class="frame-click" href="#!/create-page"><i class="fa fa-plus-circle"></i> New page</a><br /></span>
-    <span class="top-title wiki-title"><?= $config->wiki_name ?></span>
+    <span class="top-title wiki-title"><?= $wiki_name ?></span>
     <span id="page-title" class="top-title page-title"><i class="fa fa-home"></i> Dashboard</span>
 </div>
 
