@@ -178,7 +178,7 @@ ae.insertBlankLineMaybe = function () {
 
 ae.removeExtraNewlines = function () {
     do {
-        editor.selectLine();
+        editor.selection.selectLine();
     } while (!editor.getSelectedText().trim.length && editor.removeLines());
 };
 
