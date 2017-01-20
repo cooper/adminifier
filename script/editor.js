@@ -149,7 +149,7 @@ ae.findPageVariable = function (exp, range) {
     // offset on the line
     startIndex += found.start.column;
     endIndex   += found.start.column;
-    console.log('Found', string, startIndex, endIndex);
+
     return {
         name: foundName,
         text: foundText,

@@ -534,6 +534,8 @@ function findPageCategories (remove) {
     return Object.keys(found);
 }
 
+ae.findPageCategories = findPageCategories;
+
 function generatePageOptions (opts) {
     var string  = '',
         biggest = 9,
