@@ -508,6 +508,7 @@ function rangeFunc (range, exp, bool) {
 
 function findPageOptions (remove) {
     var search = new Search().set({ regExp: true });
+    var found  = {};
 
     var doExpression = function (exp, bool) {
         search.set({ needle: exp });
