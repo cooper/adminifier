@@ -177,6 +177,8 @@ ae.insertBlankLineMaybe = function () {
 };
 
 ae.removeLinesInRanges = function (ranges) {
+    if (!ranges || !ranges.length)
+        return;
 
     // find the first and last lines
     var firstLine = Infinity, lastLine = -1;
