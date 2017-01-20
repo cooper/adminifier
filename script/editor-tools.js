@@ -483,7 +483,7 @@ function displayPageOptionsWindow () {
     // the insertion at column 0.
 
     // now check for categories
-    console.log(editor.selection.getSelectionRange());
+    console.log(editor.getSelectionRange());
     found = findPageCategories(true);
     if (found.length) {
         ae.insertBlankLineMaybe();
