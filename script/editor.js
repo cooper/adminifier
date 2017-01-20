@@ -214,15 +214,29 @@ ae.removeLinesInRanges = function (ranges) {
     if (!ranges || !ranges.length)
         return;
 
-    // find the first and last lines
-    var firstLine = Infinity, lastLine = -1;
+    var rows = [], smallest = Infinity, biggest = -1;
     ranges.each(function (i) {
-        if (i.start.row < firstLine) firstLine = i.start.row;
-        if (i.end.row   > lastLine)  lastLine  = i.end.row;
+        rows[i.start.row] = true;
+        rows[i.end.row]   = true;
+        biggest  = Math.max(biggest,  i.start.row, i.end.row);
+        smallest = Math.min(smallest, i.start.row, i.end.row);
     });
 
-    // remove
-    editor.session.doc.removeFullLines(firstLine, lastLine);
+    var lastLine;
+    for (var i = biggest; i >= smallest; i--) {
+
+        // if the row does not exist, this is the end of a continuous range
+        if (!rows[i]) {
+            if (typeof firstLine != 'undefined') {
+                editor.session.doc.removeLines(i + 1, lastLine);
+                firstLine = lastLine = undefined;
+            }
+            continue;
+        }
+
+        if (typeof lastLine == 'undefined')
+            lastLine = i;
+    }
 };
 
 ae.resetSelectionAtTopLeft = function () {
