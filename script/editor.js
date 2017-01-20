@@ -229,7 +229,7 @@ ae.removeLinesInRanges = function (ranges) {
         // if the row does not exist, this is the end of a continuous range
         if (!rows[i]) {
             if (typeof lastLine != 'undefined') {
-                editor.session.doc.removeLines(i + 1, lastLine);
+                editor.session.doc.removeFullLines(i + 1, lastLine);
                 lastLine = undefined;
             }
             continue;
