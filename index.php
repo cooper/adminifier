@@ -5,8 +5,7 @@
 
     function option_if_set (&$opt) {
         if (!isset($opt)) return 'null';
-        $escaped = addslashes($opt);
-        return "'$escaped'";
+        return json_encode($opt);
     }
 ?>
 <!doctype html>
