@@ -194,7 +194,7 @@ ae.removeExtraNewlines = function () {
 
         // the line has length, so this is the end of it.
         if (text.trim().length) {
-            editor.insert(text + '\n');
+            editor.insert('\n' + text);
             break;
         }
 
