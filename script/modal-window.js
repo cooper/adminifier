@@ -8,10 +8,9 @@ var ModalWindow = new Class({
         this.content     = new Element('div',  { class: 'modal-content'     });
         this.header      = new Element('div',  { class: 'modal-header'      });
         this.doneButton  = new Element('span', { class: 'modal-done-button' });
-        this.container.adopt(this.modalWindow);
-        this.modalWindow.adopt(this.content);
         this.header.adopt(this.doneButton);
-        this.content.adopt(this.header);
+        this.modalWindow.adopt(this.header, this.content);
+        this.container.adopt(this.modalWindow);
 
         // initial options
         if (typeof opts.title != 'undefined')
