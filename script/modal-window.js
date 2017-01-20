@@ -23,6 +23,8 @@ var ModalWindow = new Class({
             this.setDoneText(opts.doneText);
         else
             this.setDoneText('Done');
+        if (typeof opts.html != 'undefined')
+            this.content.innerHTML = opts.html;
         if (opts.padded)
             this.content.addClass('padded');
 
@@ -60,5 +62,9 @@ var ModalWindow = new Class({
 
     hide: function () {
         this.container.setStyle('display', 'none');
+    },
+
+    destroy: function () {
+        this.container.destroy();
     }
 });
