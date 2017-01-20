@@ -2,6 +2,12 @@
     require_once(__DIR__.'/functions/session.php');
     require_once(__DIR__.'/private/config.php');
     require_once(__DIR__.'/functions/wikiclient.php');
+
+    function option_if_set (&$opt) {
+        if (!isset($opt)) return 'null';
+        $ecaped = addslashes($opt);
+        return "'$escaped'";
+    }
 ?>
 <!doctype html>
 <html>
@@ -16,10 +22,11 @@
 <script type="text/javascript">
 
 var adminifier = {
-    adminRoot:      '<?= addslashes($config->admin_root) ?>',
-    wikiName:       '<?= addslashes($config->wiki_name) ?>',
-    wikiPageRoot:   '<?= addslashes($config->wiki_page_root) ?>',
-    themeName:      '<?= addslashes($_SESSION['theme']) ?>'
+    adminRoot:      <?= option_if_set($config->admin_root)      ?>,
+    wikiShortName:  <?= option_if_set($config->wiki_name)       ?>,
+    wikiName:       <?= option_if_set($wiki_conf->name)         ?>,
+    wikiPageRoot:   <?= option_if_set($config->wiki_page_root)  ?>,
+    themeName:      <?= option_if_set($_SESSION['theme'])       ?>
 };
 
 </script>

@@ -7,4 +7,5 @@
         // logged_in is not set, they have been logged out already
         die();
     }
+    $wiki_conf = $_SESSION['wiki_conf'];
 ?>
