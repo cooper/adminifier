@@ -493,7 +493,7 @@ function displayPageOptionsWindow () {
     return optsString;
 }
 
-function rangeFunc (range, exp, bool) {
+function pageVariableFromRange (range, exp, bool) {
     var text  = editor.session.getTextRange(range);
     var match = ae.findPageVariable(exp, range);
     if (!match)
@@ -506,44 +506,31 @@ function rangeFunc (range, exp, bool) {
     };
 };
 
+function findExpression (found, remove, exp, bool) {
+    var search = new Search().set({ needle: exp, regExp: true });
+
+    // find each thing
+    var ranges = search.findAll(editor.session);
+    ranges.each(function (i) {
+        var res = pageVariableFromRange(i, exp, bool);
+        if (res) found[res.name] = res;
+    });
+
+    // remove maybe
+    if (remove)
+        ae.removeLinesInRanges(ranges);
+}
+
 function findPageOptions (remove) {
-    var search = new Search().set({ regExp: true });
-    var found  = {};
-
-    var doExpression = function (exp, bool) {
-        search.set({ needle: exp });
-        var ranges = search.findAll(editor.session);
-        ranges.each(function (i) {
-            var res = rangeFunc(i, exp, bool);
-            if (res) found[res.name] = res;
-        });
-
-        if (remove)
-            ae.removeLinesInRanges(ranges);
-    };
-
-    doExpression(ae.expressions.keyValueVar);
-    doExpression(ae.expressions.boolVar, true);
-
+    var found = {};
+    findVariableExpression(found, remove, ae.expressions.keyValueVar);
+    findVariableExpression(found, remove, ae.expressions.boolVar, true);
     return found;
 }
 
 function findPageCategories (remove) {
     var found = {};
-    if (editor.findAll(ae.expressions.category, {
-        regExp: true,
-        wrap: true
-    })) {
-        var ranges = editor.selection.getAllRanges();
-        ranges.each(function (i) {
-            var res = rangeFunc(i, ae.expressions.category, true);
-            if (res) found[res.name] = res;
-        });
-
-        // delete all of the matching lines
-        if (remove)
-            ae.removeLinesInRanges(ranges);
-    }
+    findVariableExpression(found, remove, ae.expressions.category, true);
     return Object.keys(found);
 }
 
