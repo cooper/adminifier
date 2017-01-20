@@ -5,7 +5,7 @@
 
     function option_if_set (&$opt) {
         if (!isset($opt)) return 'null';
-        $ecaped = addslashes($opt);
+        $escaped = addslashes($opt);
         return "'$escaped'";
     }
 ?>
@@ -27,6 +27,7 @@ var adminifier = {
     wikiName:       <?= option_if_set($wiki_conf->name)         ?>,
     wikiPageRoot:   <?= option_if_set($config->wiki_page_root)  ?>,
     themeName:      <?= option_if_set($_SESSION['theme'])       ?>
+
 };
 
 </script>
