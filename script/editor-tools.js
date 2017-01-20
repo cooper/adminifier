@@ -491,7 +491,7 @@ function displayPageOptionsWindow () {
         });
     }
 
-    editor.insert('\n');
+    ae.removeExtraNewlines();
     return optsString;
 }
 
