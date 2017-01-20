@@ -44,7 +44,7 @@ var ModalWindow = new Class({
         var icon = this.icon;
         if (!icon) {
             icon = this.icon = new Element('i');
-            this.doneButton.inject(icon, 'after');
+            this.icon.inject(this.doneButton, 'after');
         }
         icon.className = 'fa fa-' + iconName;
     },
