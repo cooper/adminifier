@@ -475,10 +475,11 @@ function displayPageOptionsWindow () {
     }));
 
     // inject the new lines at the beginning
-    editor.selection.setRange(new Range(0, 0, 0, 0));
+    ae.resetSelectionAtTopLeft();
     console.log('OPTS STRING: ' + optsString);
     editor.insert(optsString);
     var rangeAfterInsert = editor.selection.getRange();
+    console.log(rangeAfterInsert);
 
     // after inserting, the selection will be the line following
     // the insertion at column 0.
