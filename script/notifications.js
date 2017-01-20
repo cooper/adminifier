@@ -11,8 +11,8 @@ function pingServer () {
             if (!data.connected)
                 displayLoginWindow();
         },
-        onError: goToLogin,
-        onFailure: goToLogin
+        onError: displayLoginWindow,
+        onFailure: displayLoginWindow
     });
     req.get();
 }
