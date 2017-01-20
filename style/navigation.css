@@ -77,6 +77,9 @@ div.navigation-popover {
     width: 152px; /* sidebar width minus left padding */
     font-weight: 600;
     padding-left: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 #top-bar span.page-title {
