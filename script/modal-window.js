@@ -18,6 +18,10 @@ var ModalWindow = new Class({
             _this.hide();
         });
 
+        // store self in the container; this is OK because .destroy()
+        // destroys the container
+        this.container.store('modal', this);
+
         // initial options
         if (typeof opts.title != 'undefined')
             this.setTitle(opts.title);

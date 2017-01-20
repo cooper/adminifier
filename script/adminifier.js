@@ -172,9 +172,11 @@ function handleCompactSidebarMouseleave (e) {
 
 // escape key pressed
 function handleEscapeKey (e) {
-    if (e.key != 'esc' || !a.currentModal) return;
-    a.currentModal.destroy();
-    delete a.currentModal;
+    if (e.key != 'esc')
+        return;
+    var modal = document.getElement('modal-container').retrieve('modal');
+    if (modal)
+        modal.destroy();
 }
 
 function handlePageData (data) {
