@@ -176,13 +176,13 @@ ae.insertBlankLineMaybe = function () {
     return false;
 };
 
-ae.removeExtraNewlines = function (oldRange) {
+ae.removeExtraNewlines = function () {
+    var oldRange = editor.selection.getRange();
 
     // not on a newline currently
-    var i = editor.getSelectionRange();
-    i = new Range(
-        i.end.row, 0,
-        i.end.row, Infinity
+    var i = new Range(
+        oldRange.end.row, 0,
+        oldRange.end.row, Infinity
     );
     if (editor.session.getTextRange(i).trim().length)
         return;
