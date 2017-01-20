@@ -20,7 +20,7 @@ Element.implement('onEnter', function (func) {
 a.updatePageTitle = function (title, titleTagOnly) {
     if (!titleTagOnly)
         $('page-title').getElement('span').innerText = title;
-    document.getElement('title').innerText = title + ' | ' + a.wikiName;
+    document.title = title + ' | ' + a.wikiName;
 };
 
 window.addEvent('hashchange', hashLoad);
