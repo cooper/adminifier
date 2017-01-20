@@ -178,17 +178,15 @@ ae.insertBlankLineMaybe = function () {
 
 ae.removeLinesInRanges = function (ranges) {
 
-    // get line numbers in descending order
-    // (starting from the bottom)
-    var lines = ranges.map(function (r) {
-        return [ r.start.row, r.end.row ];
-    }).flatten().unique().sort(function (a, b) { return b - a });
-
-    // remove each line
-    lines.each(function (line) {
-        var r = new Range(line, 0, line, 0);
-        editor.session.doc.removeFullLines(r);
+    // find the first and last lines
+    var firstLine, lastLine;
+    ranges.each(function (i) {
+        if (i.start.row < firstLine) firstLine = i.start.row;
+        if (i.end.row   > lastLine)  lastLine  = i.end.row;
     });
+
+    // remove
+    editor.session.doc.removeFullLines(firstLine, lastLine);
 };
 
 ae.resetSelectionAtTopLeft = function () {
