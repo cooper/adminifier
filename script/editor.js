@@ -187,8 +187,7 @@ ae.removeLinesInRanges = function (ranges) {
     // remove each line
     lines.each(function (line) {
         var r = new Range(line, 0, line, 0);
-        editor.selection.setSelectionRange(r);
-        editor.removeLines();
+        editor.session.doc.removeFullLines(r;)
     });
 };
 
