@@ -6,6 +6,7 @@ document.addEvent('pageUnloaded', unloadedHandler);
 var ae;
 function loadedHandler () {
     ae = adminifier.editor;
+    ae.findPageCategories = findPageCategories;
     console.log('Editor tools script loaded');
     Object.append(ae.toolbarFunctions, {
         font:       displayFontSelector,
@@ -533,8 +534,6 @@ function findPageCategories (remove) {
     findVariables(found, remove, ae.expressions.category, true);
     return Object.keys(found);
 }
-
-ae.findPageCategories = findPageCategories;
 
 function generatePageOptions (opts) {
     var string  = '',
