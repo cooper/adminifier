@@ -506,7 +506,7 @@ function pageVariableFromRange (range, exp, bool) {
     };
 };
 
-function findExpression (found, remove, exp, bool) {
+function findVariables (found, remove, exp, bool) {
     var search = new Search().set({ needle: exp, regExp: true });
 
     // find each thing
@@ -523,14 +523,14 @@ function findExpression (found, remove, exp, bool) {
 
 function findPageOptions (remove) {
     var found = {};
-    findVariableExpression(found, remove, ae.expressions.keyValueVar);
-    findVariableExpression(found, remove, ae.expressions.boolVar, true);
+    findVariables(found, remove, ae.expressions.keyValueVar);
+    findVariables(found, remove, ae.expressions.boolVar, true);
     return found;
 }
 
 function findPageCategories (remove) {
     var found = {};
-    findVariableExpression(found, remove, ae.expressions.category, true);
+    findVariables(found, remove, ae.expressions.category, true);
     return Object.keys(found);
 }
 
