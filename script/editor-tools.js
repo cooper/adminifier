@@ -511,7 +511,7 @@ function findPageOptions (remove) {
 
     var doExpression = function (exp, bool) {
         search.set({ needle: exp });
-        var ranges = search.findAll();
+        var ranges = search.findAll(editor.session);
         ranges.each(function (i) {
             var res = rangeFunc(i, exp, bool);
             if (res) found[res.name] = res;
