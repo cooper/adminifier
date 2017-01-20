@@ -209,16 +209,9 @@ ae.removeExtraNewlines = function () {
 ae.removeLinesInRanges = function (ranges) {
     if (!ranges || !ranges.length)
         return;
-
-    // find the first and last lines
-    var firstLine = Infinity, lastLine = -1;
     ranges.each(function (i) {
-        if (i.start.row < firstLine) firstLine = i.start.row;
-        if (i.end.row   > lastLine)  lastLine  = i.end.row;
+        editor.session.doc.removeFullLines(i.start.row, i.end.row);
     });
-
-    // remove
-    editor.session.doc.removeFullLines(firstLine, lastLine);
 };
 
 ae.resetSelectionAtTopLeft = function () {
