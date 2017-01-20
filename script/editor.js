@@ -33,16 +33,18 @@ ae.getFilename = function () {
 
 // returns the page title text, with any escapes accounted for.
 // returns nothing if the @page.title can't be found.
-ae.getPageTitle = function () {
-    var found = ae.findPageVariable(ae.expressions.pageTitle);
+// range is optional
+ae.getPageTitle = function (range) {
+    var found = ae.findPageVariable(ae.expressions.pageTitle, range);
     if (!found)
         return;
     return found.text;
 };
 
 // update the page title to whatever @page.title says
-ae.updatePageTitle = function () {
-    var title = ae.getPageTitle();
+// range is optional
+ae.updatePageTitle = function (range) {
+    var title = ae.getPageTitle(range);
     if (typeof title == 'undefined')
         return;
     a.updatePageTitle(title.length ? title : ae.getFilename());
@@ -80,6 +82,7 @@ ae.closePopup = function (box, opts) {
     closeCurrentPopup(opts);
 };
 
+// range is optional
 ae.findPageVariable = function (exp, range) {
     var search = new Search().set({
         needle: exp,
@@ -452,13 +455,8 @@ function inputHandler () {
     var lineText = editor.session.getLine(editor.getSelectionRange().start.row);
 
     // we're changing the title.
-    // this shouldn't be too expensive, since
-    // editor.find() starts with the current line
     if (lineText.match(ae.expressions.pageTitle)) {
-        var pos = editor.getCursorPosition();
-        var rng = new Range(pos.row, pos.column, pos.row, pos.column);
-        ae.updatePageTitle();
-        editor.selection.setRange(rng);
+        ae.updatePageTitle(editor.selection.getLineRange());
     }
 
     // changes?
