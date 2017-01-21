@@ -21,6 +21,8 @@ var loginWindow;
 function displayLoginWindow () {
     if (loginWindow)
         return;
+
+    // create login modal window
     loginWindow = new ModalWindow({
         icon:       'user',
         title:      'Login',
@@ -31,10 +33,38 @@ function displayLoginWindow () {
         id:         'login-window',
         width:      '400px',
         onDone:     function () {
-            console.log('calling login.php');
             loginWindow = undefined;
         }
     });
+
+    // if some error we can't deal with occurs, redirect to real login
+    var giveUp = function () {
+        window.location = 'logout.php';
+    };
+
+    // attempt to login remotely
+    var attemptLogin = function () {
+        var req = new Request.JSON({
+            url: 'functions/login.php',
+            secure: true,
+            onSuccess: function (data) {
+                console.log(data);
+                loginWindow.destroy(true);
+            },
+            onError: giveUp,
+            onFailure: giveUp
+        });
+        req.get({ remote: true });
+    };
+
+    // capture enters and clicks
+    loginWindow.content.getElements('input').each(function (input) {
+        if (input.get('type') == 'submit')
+            input.addEvent('click', attemptLogin);
+        else
+            input.onEnter(attemptLogin);
+    });
+
     loginWindow.show();
 }
 
