@@ -4,7 +4,7 @@ $API = true;
 $PUBLIC_PAGE = true;
 require_once(__DIR__.'/utils.php');
 
-$is_api = $_GET['remote'];
+$is_api = $_POST['remote'];
 
 // already logged in
 if ($user_info->logged_in && !$is_api) {

@@ -48,13 +48,20 @@ function displayLoginWindow () {
             url: 'functions/login.php',
             secure: true,
             onSuccess: function (data) {
-                console.log(data);
+                if (!data.success) {
+                    alert('WRONG!'); // FIXME
+                    return;
+                }
                 loginWindow.destroy(true);
             },
             onError: giveUp,
             onFailure: giveUp
         });
-        req.get({ remote: true });
+        req.post({
+            remote:   true,
+            username: document.getElement('input[name=username]').get('value'),
+            password: document.getElement('input[name=password]').get('value')
+        });
     };
 
     // capture enters and clicks
