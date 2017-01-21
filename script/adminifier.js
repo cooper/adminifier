@@ -174,9 +174,9 @@ function handleCompactSidebarMouseleave (e) {
 function handleEscapeKey (e) {
     if (e.key != 'esc')
         return;
-    var modal = document.getElement('modal-container').retrieve('modal');
-    if (modal)
-        modal.destroy();
+    var container = document.getElement('.modal-container');
+    if (container)
+        container.retrieve('modal').destroy();
 }
 
 function handlePageData (data) {
