@@ -17,8 +17,22 @@ function pingServer () {
     req.get();
 }
 
+var loginWindow;
 function displayLoginWindow () {
-
+    if (loginWindow)
+        return;
+    loginWindow = new ModalWindow({
+        icon:       'user',
+        title:      'Login',
+        html:       'Please login again',
+        doneText:   null,
+        sticky:     true,
+        onDone:     function () {
+            console.log('calling login.php');
+            loginWindow = undefined;
+        }
+    });
+    loginWindow.show();
 }
 
 })(adminifier);
