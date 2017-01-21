@@ -56,7 +56,7 @@ function displayLoginWindow () {
                     inputs.each(function (i) { i.set('disabled', false); });
                     return;
                 }
-                loginWindow.content.innerHTML =
+                loginWindow.content.innerHTML = 'Good job'; // FIXME
                 setTimeout(function () {
                     loginWindow.destroy(true);
                 }, 3000);
