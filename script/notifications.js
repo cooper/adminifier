@@ -24,9 +24,10 @@ function displayLoginWindow () {
     loginWindow = new ModalWindow({
         icon:       'user',
         title:      'Login',
-        html:       'Please login again',
-        doneText:   null,
+        html:       tmpl('tmpl-login-window', {}),
+        padded:     true,
         sticky:     true,
+        doneText:   null,
         onDone:     function () {
             console.log('calling login.php');
             loginWindow = undefined;

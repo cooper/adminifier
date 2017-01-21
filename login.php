@@ -29,52 +29,17 @@ if ($user_info->logged_in) {
             width: 300px;
             border: none;
         }
-        td {
-            text-align: left;
-            font-size: larger;
-        }
-        input {
-            font-family: 'Open Sans', sans-serif;
-        }
-        input[type=text], input[type=password] {
-            width: 200px;
-            height: 25px;
-            font-size: 20px;
-            margin-left: 20px;
-            border: 1px solid #999;
-        }
-        input[type=submit] {
-            width: 50px;
-            margin-top: 10px;
-            height: 25px;
-            background-color: #fff;
-            border: 1px solid #999;
-        }
-        input[type=submit]:hover {
-            background-color: #eee;
-        }
-        #box {
+        #login-window {
             width: 400px;
             padding: 30px;
             border: 1px solid #999;
             background-color: white;
             margin: 50px auto;
         }
-        table {
-            table-layout: fixed;
-            border-collapse: separate;
-            border-spacing: 0 8px;
-            width: 90%;
-            margin: auto;
-        }
-        td.left {
-            width: 100px;
-            color: #111;
-        }
     </style>
 </head>
 <body>
-    <div id="box">
+    <div id="login-window">
         <div style="text-align: center; margin-bottom: 20px;">
             <?
                 if (file_exists(__DIR__.'/images/logo.png'))
@@ -99,5 +64,10 @@ if ($user_info->logged_in) {
             </table>
         </form>
     </div>
+
+<?
+    require_once(__DIR__.'/templates/login-tmpl.php');
+?>
+
 </body>
 </html>

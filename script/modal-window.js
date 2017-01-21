@@ -24,20 +24,34 @@ var ModalWindow = new Class({
         this.container.store('modal', this);
 
         // initial options
-        if (typeof opts.title != 'undefined')
+
+        // header text
+        if (opts.title != null)
             this.setTitle(opts.title);
-        if (typeof opts.icon != 'undefined')
+
+        // header icon
+        if (opts.icon != null)
             this.setIcon(opts.icon);
         else
             this.setIcon('cog');
+
+        // done button text
         if (typeof opts.doneText != 'undefined')
             this.setDoneText(opts.doneText);
         else
             this.setDoneText('Done');
-        if (typeof opts.html != 'undefined')
+
+        // content inner HTML
+        if (opts.html != null)
             this.content.innerHTML = opts.html;
+
+        // add padding to content?
         if (opts.padded)
             this.content.addClass('padded');
+
+        // ID for content div
+        if (opts.id != null)
+            this.content.set('id', opts.id);
 
         return this;
     },

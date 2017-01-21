@@ -63,6 +63,7 @@ var adminifier = {
 
 <?
     require_once(__DIR__.'/templates/adminifier-tmpl.php');
+    require_once(__DIR__.'/templates/login-tmpl.php');
     require_once(__DIR__.'/templates/editor-tmpl.php');
 ?>
 
