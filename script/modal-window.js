@@ -103,7 +103,9 @@ var ModalWindow = new Class({
         this.container.setStyle('display', 'none');
     },
 
-    destroy: function () {
+    destroy: function (force) {
+        if (this.sticky && !force)
+            return;
         delete this.sticky;
         this.hide();
         this.doneButton.destroy();
