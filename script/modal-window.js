@@ -25,6 +25,10 @@ var ModalWindow = new Class({
 
         // initial options
 
+        // window width
+        if (opts.width != null)
+            this.modalWindow.setStyle('width', opts.width);
+
         // header text
         if (opts.title != null)
             this.setTitle(opts.title);

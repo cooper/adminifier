@@ -28,6 +28,8 @@ function displayLoginWindow () {
         padded:     true,
         sticky:     true,
         doneText:   null,
+        id:         'login-window',
+        width:      '400px',
         onDone:     function () {
             console.log('calling login.php');
             loginWindow = undefined;
