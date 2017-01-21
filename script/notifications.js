@@ -43,16 +43,23 @@ function displayLoginWindow () {
     };
 
     // attempt to login remotely
+    var inputs = loginWindow.content.getElements('input');
     var attemptLogin = function () {
+        inputs.each(function (i) { i.set('disabled', true); });
+
         var req = new Request.JSON({
             url: 'functions/login.php',
             secure: true,
             onSuccess: function (data) {
                 if (!data.success) {
                     alert('WRONG!'); // FIXME
+                    inputs.each(function (i) { i.set('disabled', false); });
                     return;
                 }
-                loginWindow.destroy(true);
+                loginWindow.content.innerHTML =
+                setTimeout(function () {
+                    loginWindow.destroy(true);
+                }, 3000);
             },
             onError: giveUp,
             onFailure: giveUp
@@ -65,7 +72,7 @@ function displayLoginWindow () {
     };
 
     // capture enters and clicks
-    loginWindow.content.getElements('input').each(function (input) {
+    inputs.each(function (input) {
         if (input.get('type') == 'submit')
             input.addEvent('click', attemptLogin);
         else
