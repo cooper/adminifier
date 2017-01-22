@@ -17,13 +17,12 @@ function pingServer () {
     req.get();
 }
 
-var loginWindow;
 function displayLoginWindow () {
-    if (loginWindow)
+    if ($('login-window'))
         return;
 
     // create login modal window
-    loginWindow = new ModalWindow({
+    var loginWindow = new ModalWindow({
         icon:       'user',
         title:      'Login',
         html:       tmpl('tmpl-login-window', {}),
@@ -31,10 +30,7 @@ function displayLoginWindow () {
         sticky:     true,
         doneText:   null,
         id:         'login-window',
-        width:      '400px',
-        onDone:     function () {
-            loginWindow = undefined;
-        }
+        width:      '400px'
     });
 
     // if some error we can't deal with occurs, redirect to real login
