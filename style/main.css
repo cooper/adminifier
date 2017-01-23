@@ -37,7 +37,6 @@ i.fa.right {
     width: 100%;
     height: 100%;
     z-index: 400;
-    padding-top: 90px;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.5);
 }
@@ -46,7 +45,7 @@ i.fa.right {
     position: relative;
     background-color: #fefefe;
     width: 700px;
-    margin: auto;
+    margin: 90px auto 20px auto;
     padding: 0;
     border: 1px solid #222;
 }
