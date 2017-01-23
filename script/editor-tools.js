@@ -624,15 +624,13 @@ function generatePageOptions (opts) {
             return;
         if (typeOf(value) == 'string' && !value.length)
             return;
+        if (typeOf(value) == 'boolean' && !value)
+            return;
 
         string += '@page.' + optName;
 
-        // boolean
-        if (value === true)
-            string += ';';
-
-        // other value
-        else {
+        // non-boolean value
+        if (value !== true) {
             string += ':';
 
             // add however many spaces to make it line up
@@ -642,10 +640,10 @@ function generatePageOptions (opts) {
             // escape semicolons
             value = value.replace(/;/g, '\\;');
 
-            string += value + ';';
+            string += value;
         }
 
-        string += '\n';
+        string += ';\n';
     });
     return string;
 }

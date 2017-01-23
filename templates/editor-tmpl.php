@@ -38,15 +38,15 @@
 
 <script type="text/x-tmpl" id="tmpl-page-options">
     <table><tbody>
-        <tr>
+        <tr title="Human-readable page title.">
             <td>Title</td>
             <td><input class="title" type="text" value="{%= o.title %}" /></td>
         </tr>
-        <tr>
+        <tr title="Page author. Not used for revision tracking but may be displayed on the page.">
             <td>Author</td>
             <td><input class="author" type="text" value="{%= o.author %}" /></td>
         </tr>
-        <tr>
+        <tr title="Marks the page as a draft; unauthenticated users may not view it.">
             <td>Draft</td>
             <td><input class="draft" type="checkbox"{%= o.draft ? ' checked' : '' %}></td>
         </tr>
