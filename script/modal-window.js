@@ -37,7 +37,7 @@ var ModalWindow = new Class({
     },
 
     setOptions: function (opts) {
-        this.parent(opts);
+        Options.prototype.setOptions.apply(this, opts);
         opts = this.options;
 
         // window width
