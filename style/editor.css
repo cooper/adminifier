@@ -193,14 +193,15 @@ div.editor-link-type.active {
 /* page options modal window */
 
 #editor-options-window td {
-	border-top: 1px solid #aaa;
-	border-bottom: 1px solid #aaa;
+    border-top: 1px solid #bbb;
+	border-bottom: 1px solid #bbb;
 	height: 40px;
 	padding: 5px;
 }
 
 #editor-options-window td:first-child {
     width: 200px;
+    border-right: 1px dotted #ccc;
 }
 
 #editor-options-window td:first-child span {
