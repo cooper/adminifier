@@ -64,7 +64,7 @@ ul.editor-toolbar li.disabled {
     cursor: default;
 }
 
-/* shared */
+/* shared in editor helpers */
 
 .editor-tool-large-button {
     font-size: 14px;
@@ -103,16 +103,15 @@ ul.editor-toolbar li.disabled {
 }
 
 .editor-full-width-input {
-    width: 290px;
-    width: calc(100% - 12px);
+    width: 268px; /* fallback 300px - 20px margin - 10px padding - 2px border */
+    width: calc(100% - 12px); /* 100% - 10px padding - 2px border */
     padding: 5px;
-    font-size: 15px;
     border: 1px solid #333;
+    font-size: 15px;
     margin-bottom: 8px;
     margin-top: 5px;
     background-color: #e2e2e2;
 }
-
 
 /* toolbar popups */
 
@@ -177,6 +176,7 @@ div.editor-link-type.active {
     margin: 10px;
     height: 60px;
 }
+
 /* delete confirmation */
 
 #editor-delete-wrapper {

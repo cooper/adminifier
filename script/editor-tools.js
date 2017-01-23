@@ -466,6 +466,21 @@ function displayDeleteConfirmation () {
 // PAGE OPTIONS
 
 function displayPageOptionsWindow () {
+
+    if ($('options-window'))
+        return;
+
+    var optionsWindow = new ModalWindow({
+        icon:       'cog',
+        title:      'Page options',
+        html:       'stuff',
+        padded:     true,
+        doneText:   'Save',
+        id:         'options-window'
+    });
+
+    optionsWindow.show();
+
     var found = findPageOptions(true);
 
     // this will actually be passed user input
