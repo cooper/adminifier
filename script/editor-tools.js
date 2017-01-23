@@ -486,7 +486,7 @@ function displayPageOptionsWindow () {
         padded:     true,
         doneText:   'Save',
         id:         'options-window',
-        destroy:    true,
+        autoDestroy:    true,
         onDone:     function () { updatePageOptions(newOpts, newCats) }
     });
 
@@ -495,7 +495,7 @@ function displayPageOptionsWindow () {
 
 function updatePageOptions (newOpts, newCats) {
     console.log('updatePageOptions', newOpts, newCats);
-    
+
     // this will actually be passed user input
     var optsString = generatePageOptions(newOpts);
 

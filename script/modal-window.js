@@ -1,8 +1,14 @@
 var ModalWindow = new Class({
-    Implements: Events,
+
+    Implements: [Options, Events],
+
+    options: {
+        icon: 'cog',
+        doneText: 'Done',
+        autoDestroy: false,
+    },
+
     initialize: function (opts) {
-        this.sticky = opts.sticky;
-        this.autoDestroy = opts.destroy;
 
         // fixed shaded region, modal window, padded content region, header
         this.container   = new Element('div',  { class: 'modal-container'   });
@@ -25,6 +31,14 @@ var ModalWindow = new Class({
         this.container.store('modal', this);
 
         // initial options
+        this.setOptions(opts);
+
+        return this;
+    },
+
+    setOptions: function (opts) {
+        this.parent(opts);
+        opts = this.options;
 
         // window width
         if (opts.width != null)
@@ -37,14 +51,10 @@ var ModalWindow = new Class({
         // header icon
         if (opts.icon != null)
             this.setIcon(opts.icon);
-        else
-            this.setIcon('cog');
 
         // done button text
         if (typeof opts.doneText != 'undefined')
             this.setDoneText(opts.doneText);
-        else
-            this.setDoneText('Done');
 
         // content inner HTML
         if (opts.html != null)
@@ -57,8 +67,6 @@ var ModalWindow = new Class({
         // ID for content div
         if (opts.id != null)
             this.content.set('id', opts.id);
-
-        return this;
     },
 
     setTitle: function (title) {
@@ -97,19 +105,19 @@ var ModalWindow = new Class({
     },
 
     hide: function (isDestroy) {
-        if (!this.shown || this.sticky)
+        if (!this.shown || this.options.sticky)
             return;
         delete this.shown;
         this.fireEvent('done');
         this.container.setStyle('display', 'none');
-        if (this.autoDestroy && !isDestroy)
+        if (this.options.autoDestroy && !isDestroy)
             this._destroy();
     },
 
     destroy: function (force) {
-        if (this.sticky && !force)
+        if (this.options.sticky && !force)
             return;
-        delete this.sticky;
+        delete this.options.sticky;
         this.hide(true);
         this._destroy();
     },
@@ -118,4 +126,5 @@ var ModalWindow = new Class({
         this.doneButton.destroy();
         this.container.destroy();
     }
+
 });
