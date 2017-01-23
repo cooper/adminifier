@@ -470,6 +470,15 @@ function displayPageOptionsWindow () {
     if ($('options-window'))
         return;
 
+    var foundOpts = findPageOptions(true);
+    var foundCats = findPageCategories(true);
+
+    var newOpts = Object.map(foundOpts, function (value, key) { // TODO
+        return value.value;
+    });
+
+    var newCats = foundCats; // TODO
+
     var optionsWindow = new ModalWindow({
         icon:       'cog',
         title:      'Page options',
@@ -477,17 +486,17 @@ function displayPageOptionsWindow () {
         padded:     true,
         doneText:   'Save',
         id:         'options-window',
-        destroy:    true
+        destroy:    true,
+        onDone:     function () { updatePageOptions(newOpts, newCats) }
     });
 
     optionsWindow.show();
+}
 
-    var found = findPageOptions(true);
+function updatePageOptions (newOpts, newCats) {
 
     // this will actually be passed user input
-    var optsString = generatePageOptions(Object.map(found, function (value, key) {
-        return value.value;
-    }));
+    var optsString = generatePageOptions(newOpts);
 
     // inject the new lines at the beginning
     ae.resetSelectionAtTopLeft();
@@ -497,7 +506,6 @@ function displayPageOptionsWindow () {
     // the insertion at column 0.
 
     // now check for categories
-    found = findPageCategories(true);
     if (found.length) {
         editor.insert('\n');
         found.sort().each(function (catName) {
@@ -506,7 +514,6 @@ function displayPageOptionsWindow () {
     }
 
     ae.removeExtraNewlines();
-    return optsString;
 }
 
 function pageVariableFromRange (range, exp, bool) {
