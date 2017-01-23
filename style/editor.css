@@ -192,6 +192,34 @@ div.editor-link-type.active {
 
 /* page options modal window */
 
+#editor-options-window td {
+	border-top: 1px solid #aaa;
+	border-bottom: 1px solid #aaa;
+	height: 40px;
+	padding: 5px;
+}
+
+#editor-options-window td:first-child {
+    width: 200px;
+}
+
+#editor-options-window td:first-child span {
+    cursor: help;
+}
+
+#editor-options-window table {
+    table-layout: fixed;
+	border-collapse: collapse;
+	width: 100%;
+}
+
 #editor-options-window input[type=text] {
+	font-size: 20px;
+    width: 100%;
+	height: 100%;
     border: none;
+}
+
+#editor-options-window input:focus {
+    outline: none;
 }
