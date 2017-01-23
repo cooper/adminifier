@@ -553,7 +553,7 @@ function findPageOptions () {
     ranges.combine(findVariables(found, ae.expressions.keyValueVar));
     ranges.combine(findVariables(found, ae.expressions.boolVar, true));
     return {
-        found:  found
+        found:  found,
         ranges: ranges
     };
 }
