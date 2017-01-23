@@ -473,33 +473,37 @@ function displayPageOptionsWindow () {
     var foundOpts = findPageOptions();
     var foundCats = findPageCategories();
 
-    var newOpts = Object.map(foundOpts.found, function (value, key) { // TODO
-        return value.value;
-    });
-
-    var newCats = foundCats.found; // TODO
-
-    var removeRanges = [foundOpts.ranges, foundCats.ranges].flatten();
-
     var optionsWindow = new ModalWindow({
-        icon:       'cog',
-        title:      'Page options',
-        html:       'stuff',
-        padded:     true,
-        doneText:   'Save',
-        id:         'options-window',
+        icon:           'cog',
+        title:          'Page options',
+        html:           'stuff',
+        padded:         true,
+        doneText:       'Save',
+        id:             'options-window',
         autoDestroy:    true,
-        onDone:     function () {
-            ae.removeLinesInRanges(removeRanges);
-            insertPageOptions(newOpts, newCats);
-        }
+        onDone:         updatePageOptions
     });
 
+    optionsWindow.foundOpts = foundOpts;
+    optionsWindow.foundCats = foundCats;
+    optionsWindow.removeRanges = [foundOpts.ranges, foundCats.ranges].flatten();
     optionsWindow.show();
 }
 
-function insertPageOptions (newOpts, newCats) {
+function updatePageOptions () {
     console.log('updatePageOptions', newOpts, newCats);
+
+    // TODO
+    var newOpts = Object.map(this.foundOpts.found, function (value, key) {
+        return value.value;
+    });
+    var newCats = this.foundCats.found;
+
+    ae.removeLinesInRanges(removeRanges);
+    insertPageOptions(newOpts, newCats);
+}
+
+function insertPageOptions (newOpts, newCats) {
 
     // this will actually be passed user input
     var optsString = generatePageOptions(newOpts);
