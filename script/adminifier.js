@@ -1,10 +1,12 @@
 (function (a) {
 
+var pageScriptsDone = false;
+
 // this is for if pageScriptsDone event is added
 // and the page scripts are already done
 Element.Events.pageScriptsLoaded = {
 	onAdd: function (fn) {
-		if (window.pageScriptsDone)
+		if (pageScriptsDone)
             fn.call(this);
 	}
 };
@@ -180,7 +182,7 @@ function handleEscapeKey (e) {
 }
 
 function handlePageData (data) {
-    window.pageScriptsDone = false;
+    pageScriptsDone = false;
 
     console.log(data);
     a.currentData = data;
@@ -222,7 +224,7 @@ function handlePageData (data) {
         scriptsLoaded++;
         if (scriptsToLoad > scriptsLoaded) return;
         $('content').setStyle('user-select', 'all');
-        window.pageScriptsDone = true;
+        pageScriptsDone = true;
         document.fireEvent('pageScriptsLoaded');
     };
 

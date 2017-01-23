@@ -1,4 +1,4 @@
-(function (a, ae) {
+(function (a) {
 
 document.addEvent('editorLoaded', loadedHandler);
 document.addEvent('pageUnloaded', unloadedHandler);
@@ -33,14 +33,15 @@ function unloadedHandler () {
 }
 
 function fakeAdopt (child) {
-    if (!$('fake-parent')) {
-        var parent = new Element('div', {
+    var parent = $('fake-parent');
+    if (!parent) {
+        parent = new Element('div', {
             id: 'fake-parent',
             styles: { display: 'none' }
         });
         document.body.appendChild(parent);
     }
-    $('fake-parent').appendChild(child);
+    parent.appendChild(child);
 }
 
 // PAGE TITLE SELECTOR
