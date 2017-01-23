@@ -486,7 +486,6 @@ function displayPageOptionsWindow () {
 
     optionsWindow.foundOpts = foundOpts;
     optionsWindow.foundCats = foundCats;
-    optionsWindow.removeRanges = [foundOpts.ranges, foundCats.ranges].flatten();
     optionsWindow.show();
 }
 
@@ -499,7 +498,8 @@ function updatePageOptions () {
     });
     var newCats = this.foundCats.found;
 
-    ae.removeLinesInRanges(this.removeRanges);
+    var removeRanges = [foundOpts.ranges, foundCats.ranges].flatten();
+    ae.removeLinesInRanges(removeRanges);
     insertPageOptions(newOpts, newCats);
 }
 
