@@ -466,16 +466,17 @@ function displayDeleteConfirmation () {
 // PAGE OPTIONS
 
 function displayPageOptionsWindow () {
-
     if ($('editor-options-window'))
         return;
 
+    // find and store the current values
     var foundOpts = findPageOptions();
     var foundCats = findPageCategories();
     var foundOptsValues = Object.map(foundOpts.found, function (value) {
         return value.value;
     });
 
+    // create the options window
     var optionsWindow = new ModalWindow({
         icon:           'cog',
         title:          'Page options',
@@ -487,9 +488,19 @@ function displayPageOptionsWindow () {
         onDone:         updatePageOptions
     });
 
+    // update page title as typing
+    var titleInput = optionsWindow.content.getElement('input.title');
+    titleInput.addEvent('input', function () {
+        var title = titleInput.getProperty('value');
+        a.updatePageTitle(title.length ? title : ae.getFilename());
+    });
+
+    // store state in the options window
     optionsWindow.foundOptsValues = foundOptsValues;
     optionsWindow.foundOpts = foundOpts;
     optionsWindow.foundCats = foundCats;
+
+    // show it
     optionsWindow.show();
 }
 
