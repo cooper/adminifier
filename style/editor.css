@@ -201,7 +201,7 @@ div.editor-link-type.active {
 
 #editor-options-window td:first-child {
     width: 200px;
-    border-right: 1px dotted #ccc;
+    border-right: 1px dotted #bbb;
 }
 
 #editor-options-window td:first-child span {

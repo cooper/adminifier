@@ -500,7 +500,8 @@ function updatePageOptions () {
         this.foundOptsValues,
         Object.filter({
             title:  this.container.getElement('input.title') .get('value'),
-            author: this.container.getElement('input.author').get('value')
+            author: this.container.getElement('input.author').get('value'),
+            draft:  this.container.getElement('input.draft') .get('checked')
         }, function (value) {
             return typeof value == 'string';
         })
