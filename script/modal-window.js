@@ -3,9 +3,9 @@ var ModalWindow = new Class({
     Implements: [Options, Events],
 
     options: {
-        icon: 'cog',
-        doneText: 'Done',
-        autoDestroy: false,
+        icon:           'cog',
+        doneText:       'Done',
+        autoDestroy:    false,
     },
 
     initialize: function (opts) {
@@ -37,7 +37,7 @@ var ModalWindow = new Class({
     },
 
     setOptions: function (opts) {
-        Options.prototype.setOptions.apply(this, opts);
+        Options.prototype.setOptions.apply(this, [ opts ]);
         opts = this.options;
 
         // window width
