@@ -470,14 +470,16 @@ function displayPageOptionsWindow () {
     if ($('options-window'))
         return;
 
-    var foundOpts = findPageOptions(true);
-    var foundCats = findPageCategories(true);
+    var foundOpts = findPageOptions();
+    var foundCats = findPageCategories();
 
-    var newOpts = Object.map(foundOpts, function (value, key) { // TODO
+    var newOpts = Object.map(foundOpts.found, function (value, key) { // TODO
         return value.value;
     });
 
-    var newCats = foundCats; // TODO
+    var newCats = foundCats.found; // TODO
+
+    var removeRanges = [foundOpts.ranges, foundCats.ranges].flatten();
 
     var optionsWindow = new ModalWindow({
         icon:       'cog',
@@ -487,13 +489,16 @@ function displayPageOptionsWindow () {
         doneText:   'Save',
         id:         'options-window',
         autoDestroy:    true,
-        onDone:     function () { updatePageOptions(newOpts, newCats) }
+        onDone:     function () {
+            ae.removeLinesInRanges(removeRanges);
+            insertPageOptions(newOpts, newCats);
+        }
     });
 
     optionsWindow.show();
 }
 
-function updatePageOptions (newOpts, newCats) {
+function insertPageOptions (newOpts, newCats) {
     console.log('updatePageOptions', newOpts, newCats);
 
     // this will actually be passed user input
@@ -507,9 +512,9 @@ function updatePageOptions (newOpts, newCats) {
     // the insertion at column 0.
 
     // now check for categories
-    if (found.length) {
+    if (newCats.length) {
         editor.insert('\n');
-        found.sort().each(function (catName) {
+        newCats.sort().each(function (catName) {
             editor.insert('@category.' + catName + ';\n');
         });
     }
@@ -530,7 +535,7 @@ function pageVariableFromRange (range, exp, bool) {
     };
 };
 
-function findVariables (found, remove, exp, bool) {
+function findVariables (found, exp, bool) {
     var search = new Search().set({ needle: exp, regExp: true });
 
     // find each thing
@@ -540,22 +545,26 @@ function findVariables (found, remove, exp, bool) {
         if (res) found[res.name] = res;
     });
 
-    // remove maybe
-    if (remove)
-        ae.removeLinesInRanges(ranges);
+    return ranges;
 }
 
-function findPageOptions (remove) {
-    var found = {};
-    findVariables(found, remove, ae.expressions.keyValueVar);
-    findVariables(found, remove, ae.expressions.boolVar, true);
-    return found;
+function findPageOptions () {
+    var found = {}, ranges = [];
+    ranges.combine(findVariables(found, ae.expressions.keyValueVar));
+    ranges.combine(findVariables(found, ae.expressions.boolVar, true));
+    return {
+        found:  found
+        ranges: ranges
+    };
 }
 
-function findPageCategories (remove) {
-    var found = {};
-    findVariables(found, remove, ae.expressions.category, true);
-    return Object.keys(found);
+function findPageCategories () {
+    var found = {}, ranges = [];
+    ranges.combine(findVariables(found, ae.expressions.category, true));
+    return {
+        found:  Object.keys(found),
+        ranges: ranges
+    };
 }
 
 function generatePageOptions (opts) {
