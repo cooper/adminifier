@@ -35,3 +35,8 @@
 <script type="text/x-tmpl" id="tmpl-color-name">
     <span style="padding-left: 10px;">{%= o.colorName %}</span>
 </script>
+
+<script type="text/x-tmpl" id="tmpl-page-options">
+    <input class="title" type="text" value="{%= o.title %}" />
+    <input class="author" type="text" value="{%= o.author %}" />
+</script>

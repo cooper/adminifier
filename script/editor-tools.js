@@ -476,7 +476,7 @@ function displayPageOptionsWindow () {
     var optionsWindow = new ModalWindow({
         icon:           'cog',
         title:          'Page options',
-        html:           'stuff',
+        html:           tmpl('tmpl-page-options', foundOpts.found),
         padded:         true,
         doneText:       'Save',
         id:             'options-window',
@@ -490,12 +490,22 @@ function displayPageOptionsWindow () {
 }
 
 function updatePageOptions () {
-    console.log('updatePageOptions', newOpts, newCats);
+
+    var newOpts = {
+        title:  this.container.getElement('input.title') .get('value'),
+        author: this.container.getElement('input.author').get('value')
+    };
+
+    newOpts = Object.merge({},
+        Object.map(this.foundOpts.found, function (value) {
+            return value.value;
+        }),
+        Object.filter(newOpts, function (value) {
+            return typeof value == 'string' && value.length;
+        })
+    );
 
     // TODO
-    var newOpts = Object.map(this.foundOpts.found, function (value, key) {
-        return value.value;
-    });
     var newCats = this.foundCats.found;
 
     var removeRanges = [foundOpts.ranges, foundCats.ranges].flatten();
