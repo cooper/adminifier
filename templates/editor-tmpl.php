@@ -37,6 +37,6 @@
 </script>
 
 <script type="text/x-tmpl" id="tmpl-page-options">
-    <input class="title" type="text" value="{%= o.title %}" />
-    <input class="author" type="text" value="{%= o.author %}" />
+    <input class="title" type="text" value="{%= o.title %}" placeholder="{%= o.title %}" />
+    <input class="author" type="text" value="{%= o.author %}" placeholder="{%= o.author %}" />
 </script>
