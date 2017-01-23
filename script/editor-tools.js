@@ -503,7 +503,7 @@ function updatePageOptions () {
             author: this.container.getElement('input.author').get('value'),
             draft:  this.container.getElement('input.draft') .get('checked')
         }, function (value) {
-            return typeof value == 'string';
+            return typeof value != 'undefined';
         })
     );
 
