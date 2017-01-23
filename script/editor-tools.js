@@ -499,7 +499,7 @@ function updatePageOptions () {
     });
     var newCats = this.foundCats.found;
 
-    ae.removeLinesInRanges(removeRanges);
+    ae.removeLinesInRanges(this.removeRanges);
     insertPageOptions(newOpts, newCats);
 }
 
