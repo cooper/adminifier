@@ -494,7 +494,8 @@ function displayPageOptionsWindow () {
 }
 
 function updatePageOptions (newOpts, newCats) {
-
+    console.log('updatePageOptions', newOpts, newCats);
+    
     // this will actually be passed user input
     var optsString = generatePageOptions(newOpts);
 
