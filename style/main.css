@@ -58,10 +58,17 @@ i.fa.right {
 .modal-done-button {
     float: right;
     font-weight: bold;
+    display: inline-block;
+    background-color: #333;
+    border: 1px solid #222;
+    padding: 2px 12px;
+    font-size: 12px;
+    height: 25px;
+    line-height: 25px;
 }
 
 .modal-done-button:hover {
-    color: #000;
+    background: #2096ce;
     text-decoration: none;
     cursor: pointer;
 }
