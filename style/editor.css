@@ -2,7 +2,7 @@
     min-height: 500px;
     position: fixed;
     left: 50px;
-    top: 71px; /* 71 px with toolbar */
+    top: 70px; /* with toolbar */
     right: 0;
     bottom: 0;
     z-index: 150;
