@@ -467,7 +467,7 @@ function displayDeleteConfirmation () {
 
 function displayPageOptionsWindow () {
 
-    if ($('options-window'))
+    if ($('editor-options-window'))
         return;
 
     var foundOpts = findPageOptions();
@@ -482,7 +482,7 @@ function displayPageOptionsWindow () {
         html:           tmpl('tmpl-page-options', foundOptsValues),
         padded:         true,
         doneText:       'Save',
-        id:             'options-window',
+        id:             'editor-options-window',
         autoDestroy:    true,
         onDone:         updatePageOptions
     });

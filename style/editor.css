@@ -189,3 +189,9 @@ div.editor-link-type.active {
 #editor-delete-button:hover {
     background-color: #D45D5D;
 }
+
+/* page options modal window */
+
+#editor-options-window input[type=text] {
+    border: none;
+}

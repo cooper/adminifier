@@ -37,6 +37,18 @@
 </script>
 
 <script type="text/x-tmpl" id="tmpl-page-options">
-    <input class="title" type="text" value="{%= o.title %}" />
-    <input class="author" type="text" value="{%= o.author %}" />
+    <table><tbody>
+        <tr>
+            <td>Title</td>
+            <td><input class="title" type="text" value="{%= o.title %}" /></td>
+        </tr>
+        <tr>
+            <td>Author</td>
+            <td><input class="author" type="text" value="{%= o.author %}" /></td>
+        </tr>
+        <tr>
+            <td>Draft</td>
+            <td><input class="draft" type="checkbox"{%= o.draft ? ' checked' : '' %}></td>
+        </tr>
+    </tbody></table>
 </script>
