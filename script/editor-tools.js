@@ -502,7 +502,7 @@ function updatePageOptions () {
             title:  this.container.getElement('input.title') .get('value'),
             author: this.container.getElement('input.author').get('value')
         }, function (value) {
-            return typeof value == 'string' && value.length;
+            return typeof value == 'string';
         })
     );
 
