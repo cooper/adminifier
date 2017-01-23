@@ -494,6 +494,8 @@ function displayPageOptionsWindow () {
 }
 
 function updatePageOptions () {
+
+    // replace old values with new ones
     var newOpts = Object.merge({},
         this.foundOptsValues,
         Object.filter({
@@ -507,7 +509,7 @@ function updatePageOptions () {
     // TODO
     var newCats = this.foundCats.found;
 
-    var removeRanges = [foundOpts.ranges, foundCats.ranges].flatten();
+    var removeRanges = [this.foundOpts.ranges, this.foundCats.ranges].flatten();
     ae.removeLinesInRanges(removeRanges);
     insertPageOptions(newOpts, newCats);
 }
