@@ -472,11 +472,14 @@ function displayPageOptionsWindow () {
 
     var foundOpts = findPageOptions();
     var foundCats = findPageCategories();
+    var foundOptsValues = Object.map(foundOpts.found, function (value) {
+        return value.value;
+    });
 
     var optionsWindow = new ModalWindow({
         icon:           'cog',
         title:          'Page options',
-        html:           tmpl('tmpl-page-options', foundOpts.found),
+        html:           tmpl('tmpl-page-options', foundOptsValues),
         padded:         true,
         doneText:       'Save',
         id:             'options-window',
@@ -484,23 +487,19 @@ function displayPageOptionsWindow () {
         onDone:         updatePageOptions
     });
 
+    optionsWindow.foundOptsValues = foundOptsValues;
     optionsWindow.foundOpts = foundOpts;
     optionsWindow.foundCats = foundCats;
     optionsWindow.show();
 }
 
 function updatePageOptions () {
-
-    var newOpts = {
-        title:  this.container.getElement('input.title') .get('value'),
-        author: this.container.getElement('input.author').get('value')
-    };
-
-    newOpts = Object.merge({},
-        Object.map(this.foundOpts.found, function (value) {
-            return value.value;
-        }),
-        Object.filter(newOpts, function (value) {
+    var newOpts = Object.merge({},
+        this.foundOptsValues,
+        Object.filter({
+            title:  this.container.getElement('input.title') .get('value'),
+            author: this.container.getElement('input.author').get('value')
+        }, function (value) {
             return typeof value == 'string' && value.length;
         })
     );
