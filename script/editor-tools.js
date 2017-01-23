@@ -476,7 +476,8 @@ function displayPageOptionsWindow () {
         html:       'stuff',
         padded:     true,
         doneText:   'Save',
-        id:         'options-window'
+        id:         'options-window',
+        destroy:    true
     });
 
     optionsWindow.show();

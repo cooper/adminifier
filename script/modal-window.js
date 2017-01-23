@@ -2,6 +2,7 @@ var ModalWindow = new Class({
     Implements: Events,
     initialize: function (opts) {
         this.sticky = opts.sticky;
+        this.autoDestroy = opts.destroy;
 
         // fixed shaded region, modal window, padded content region, header
         this.container   = new Element('div',  { class: 'modal-container'   });
@@ -95,19 +96,25 @@ var ModalWindow = new Class({
         this.shown = true;
     },
 
-    hide: function () {
+    hide: function (isDestroy) {
         if (!this.shown || this.sticky)
             return;
         delete this.shown;
         this.fireEvent('done');
         this.container.setStyle('display', 'none');
+        if (this.autoDestroy && !isDestroy)
+            this._destroy();
     },
 
     destroy: function (force) {
         if (this.sticky && !force)
             return;
         delete this.sticky;
-        this.hide();
+        this.hide(true);
+        this._destroy();
+    },
+
+    _destroy: function () {
         this.doneButton.destroy();
         this.container.destroy();
     }
