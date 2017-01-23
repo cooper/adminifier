@@ -622,6 +622,8 @@ function generatePageOptions (opts) {
         var value = opts[optName];
         if (typeOf(value) == 'null')
             return;
+        if (typeOf(value) == 'string' && !value.length)
+            return;
 
         string += '@page.' + optName;
 
