@@ -48,7 +48,7 @@ i.fa.right {
     width: 700px;
     margin: auto;
     padding: 0;
-    border: 1px solid #666;
+    border: 1px solid #222;
 }
 
 .modal-content.padded {
@@ -78,7 +78,7 @@ i.fa.right {
     padding: 8px 16px;
     background-color: #555;
     color: #fff;
-	border-bottom: 1px solid #666;
+	border-bottom: 1px solid #222;
 }
 
 /* LOGIN MODAL WINDOW */
