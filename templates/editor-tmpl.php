@@ -55,7 +55,7 @@
     <h3>Categories</h3>
     <table><tbody>
         <tr>
-            <td>Add category</td>
+            <td><i class="fa fa-plus-circle" style="color: #00B545;"></i> Add category</td>
         </tr>
     </tbody></table>
 </script>
