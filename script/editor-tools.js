@@ -547,13 +547,14 @@ function displayPageOptionsWindow () {
 
     // add category to liust
     var addCategoryTr = optionsWindow.content.getElement('.add-category');
-    var addCategory = function (catName, safeName) {
-        safeName = a.safeName(safeName != null ? safeName : catName);
+    var addCategory = function (catName, visibleName) {
+        if (visibleName == null) visibleName = catName;
+        var safeName = a.safeName(catName);
         if (getCategories().contains(safeName))
             return;
         var tr = new Element('tr', {
             class: 'category',
-            html:  tmpl('tmpl-page-category', { catName: catName })
+            html:  tmpl('tmpl-page-category', { catName: visibleName })
         });
         tr.store('safeName', safeName);
         tr.addEvent('click', function () {
