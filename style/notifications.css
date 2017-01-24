@@ -8,6 +8,7 @@
     height: 140px;
     color: #fff;
     overflow: hidden;
+    z-index: 500;
 }
 
 #notification-popup h3 {
