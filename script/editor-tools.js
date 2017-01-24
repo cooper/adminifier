@@ -500,14 +500,14 @@ function displayPageOptionsWindow () {
     var getCategories = optionsWindow.getCategories = function () {
         var cats = optionsWindow.content.getElements('td.category');
         return cats.map(function (td) {
-            return td.innerText;
+            return a.safeName(td.innerText);
         });
     };
 
     // add category to liust
     var addCategoryTr = optionsWindow.content.getElement('.add-category');
     var addCategory = function (catName) {
-        if (getCategories().contains(catName))
+        if (getCategories().contains(a.safeName(catName)))
             return;
         var tr = new Element('tr');
         var td = new Element('td', { text: catName, class: 'category' });

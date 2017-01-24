@@ -19,11 +19,17 @@ Element.implement('onEnter', function (func) {
     });
 });
 
+// update page title
 a.updatePageTitle = function (title, titleTagOnly) {
     if (!titleTagOnly)
         $('page-title').getElement('span').innerText = title;
     document.title = title + ' | ' + a.wikiName;
 };
+
+// safe page/category name
+a.safeName = function (name) {
+    return name.replace(/[^\w\.]/g, '_');
+}
 
 window.addEvent('hashchange', hashLoad);
 document.addEvent('domready', hashLoad);
