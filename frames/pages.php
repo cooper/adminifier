@@ -23,7 +23,7 @@ $pages = $W->$method($sort.$order)->pages;
 // if the sort method is different, it returns descending.
 function sort_method ($type) {
     global $sort, $order;
-    $prefix = '#!'.($model ? 'models' : 'pages').'?sort='
+    $prefix = '#!'.($model ? 'models' : 'pages').'?sort=';
     if ($type == $sort)
         return $order == '-' ? $prefix.$type.'%2B' : $prefix.$type.'-';
     return $prefix.$type.'-';
