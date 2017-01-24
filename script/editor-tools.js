@@ -498,7 +498,7 @@ function displayPageOptionsWindow () {
 
     // get categories from list
     var getCategories = optionsWindow.getCategories = function () {
-        var cats = optionsWindow.content.getElements('td.category');
+        var cats = optionsWindow.content.getElements('td.category span');
         return cats.map(function (td) {
             return a.safeName(td.innerText);
         });
@@ -509,9 +509,13 @@ function displayPageOptionsWindow () {
     var addCategory = function (catName) {
         if (getCategories().contains(a.safeName(catName)))
             return;
-        var tr = new Element('tr');
-        var td = new Element('td', { text: catName, class: 'category' });
-        tr.adopt(td);
+        var tr = new Element('tr', {
+            class: 'category',
+            html:  tmpl('tmpl-page-category', { catName: catName })
+        });
+        tr.addEvent('click', function () {
+            this.destroy();
+        });
         tr.inject(addCategoryTr, 'before');
     };
 
