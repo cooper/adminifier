@@ -9,7 +9,7 @@ $W = new Wikiclient(
     $config->wiki_sock,
     $config->wiki_name,
     $config->wiki_pass,
-    $user_info->logged_in ? session_id() : null
+    isset($user_info->logged_in) ? session_id() : null
 );
 
 // login again
