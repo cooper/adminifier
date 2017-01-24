@@ -36,5 +36,5 @@
     display: table-cell;
     vertical-align: middle;
     height: 109px; /* 140px - 20px header - 10px margin - 1px border */
-    padding: 10px;
+    width: 250px; /* leaving out 10px for right side margin */
 }
