@@ -184,14 +184,10 @@ ae.insertBlankLineMaybe = function () {
     return false;
 };
 
-ae.removeExtraNewlines = function (pos) {
-    if (pos)
-        oldRange = new Range(
-            pos.row, pos.column,
-            pos.row, pos.column
-        );
-    else
-        oldRange = editor.selection.getRange();
+// returns number of lines removed
+ae.removeExtraNewlines = function () {
+    var oldLength = editor.session.getLength();
+    var oldRange  = editor.selection.getRange();
 
     // not on a newline currently
     var i = new Range(
@@ -218,6 +214,7 @@ ae.removeExtraNewlines = function (pos) {
 
     // put the cursor back where it was
     editor.selection.setRange(oldRange);
+    return oldLength - editor.session.getLength();
 };
 
 ae.removeLinesInRanges = function (ranges) {

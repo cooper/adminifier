@@ -652,7 +652,20 @@ function insertPageOptions (newOpts, newCats) {
         });
     }
 
-    ae.removeExtraNewlines(pos);
+    // set the current selection to the insert position
+    var oldRange = editor.selection.getRange();
+    editor.selection.setRange(new Range(
+        pos.row, pos.column,
+        pos.row, pos.column
+    ));
+
+    // remove extra newlines; set the selection by shifting up by number
+    // of lines removed
+    var removed = ae.removeExtraNewlines();
+    editor.selection.setRange(
+        oldRange.start.row - removed, oldRange.start.column,
+        oldRange.end.row   - removed, oldRange.end.column
+    );
 }
 
 function pageVariableFromRange (range, exp, bool) {
