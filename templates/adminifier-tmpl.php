@@ -5,5 +5,5 @@
 <script type="text/x-tmpl" id="tmpl-notification">
     <h3>{%= o.title %}</h3>
     <i class="fa fa-{%= o.icon %}"></i>
-    <span>{%= o.message %}</span>
+    <div>{%= o.message %}</div>
 </script>
