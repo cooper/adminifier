@@ -662,10 +662,10 @@ function insertPageOptions (newOpts, newCats) {
     // remove extra newlines; set the selection by shifting up by number
     // of lines removed
     var removed = ae.removeExtraNewlines();
-    editor.selection.setRange(
+    editor.selection.setRange(new Range(
         oldRange.start.row - removed, oldRange.start.column,
         oldRange.end.row   - removed, oldRange.end.column
-    );
+    ));
 }
 
 function pageVariableFromRange (range, exp, bool) {
