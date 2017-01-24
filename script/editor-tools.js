@@ -547,19 +547,32 @@ function displayPageOptionsWindow () {
 
     // add category to liust
     var addCategoryTr = optionsWindow.content.getElement('.add-category');
-    var addCategory = function (catName, visibleName) {
-        if (visibleName == null) visibleName = catName;
+    var addCategory = function (catName) {
+
+        // category already exists
         var safeName = a.safeName(catName);
         if (getCategories().contains(safeName))
             return;
+
+        // is it a main page?
+        var match = catName.match(/(.*)\.main$/), visibleName;
+        if (match)
+            visibleName = match[1] + ' (main page)';
+        else
+            visibleName = catName;
+
+        // create the row
         var tr = new Element('tr', {
             class: 'category',
             html:  tmpl('tmpl-page-category', { catName: visibleName })
         });
-        tr.store('safeName', safeName);
+
+        // on click, delete the category
         tr.addEvent('click', function () {
             this.destroy();
         });
+
+        tr.store('safeName', safeName);
         tr.inject(addCategoryTr, 'before');
     };
 
@@ -568,17 +581,12 @@ function displayPageOptionsWindow () {
         var catName = this.get('value').trim();
         if (!catName.length)
             return;
-        if (catName.match(/\.main$/))
-            addCategory(catName, catName + ' (main page)');
-        else
-            addCategory(catName);
+        addCategory(catName);
         this.set('value', '');
     });
 
     // add initial categories
-    foundCats.found.each(function (catName) {
-        addCategory(catName);
-    });
+    foundCats.found.each(addCategory);
 
     // store state in the options window
     optionsWindow.foundOptsValues = foundOptsValues;
