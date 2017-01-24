@@ -23,9 +23,10 @@ $pages = $W->$method($sort.$order)->pages;
 // if the sort method is different, it returns descending.
 function sort_method ($type) {
     global $sort, $order;
+    $prefix = '#!'.($model ? 'models' : 'pages').'?sort='
     if ($type == $sort)
-        return $order == '-' ? $type.'%2B' : $type.'-';
-    return $type.'-';
+        return $order == '-' ? $prefix.$type.'%2B' : $prefix.$type.'-';
+    return $prefix.$type.'-';
 }
 
 ?>
@@ -56,16 +57,16 @@ function sort_method ($type) {
 <thead>
     <th class="checkbox"><input type="checkbox" value="0" /></th>
     <th class="title" data-sort="a">
-        <a class="frame-click" href="#!/pages?sort=<?= sort_method('a') ?>">Title</a>
+        <a class="frame-click" href="<?= sort_method('a') ?>">Title</a>
     </th>
     <th class="author info" data-sort="u">
-        <a class="frame-click" href="#!/pages?sort=<?= sort_method('u') ?>">Author</a>
+        <a class="frame-click" href="<?= sort_method('u') ?>">Author</a>
     </th>
     <th class="created info" data-sort="c">
-        <a class="frame-click" href="#!/pages?sort=<?= sort_method('c') ?>">Created</a>
+        <a class="frame-click" href="<?= sort_method('c') ?>">Created</a>
     </th>
     <th class="created info" data-sort="m">
-        <a class="frame-click" href="#!/pages?sort=<?= sort_method('m') ?>">Modified</a>
+        <a class="frame-click" href="<?= sort_method('m') ?>">Modified</a>
     </th>
 </thead>
 <tbody>
