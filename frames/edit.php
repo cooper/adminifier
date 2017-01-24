@@ -5,8 +5,11 @@ require_once(__DIR__.'/../functions/utils.php');
 if (!isset($_GET['page']))
     die('No page requested');
 
+$model = isset($_GET['model']);
+
 // the one means to set {display_result}
-$result = $W->page_code($_GET['page'], 1);
+$method = 'page_code'; // FIXME
+$result = $W->$method($_GET['page'], 1);
 if ($result->type != 'page_code')
     die('Page does not exist.');
 
@@ -17,9 +20,14 @@ if ($result->type != 'page_code')
 -->
 
 <meta
+<? if ($model): ?>
+      data-nav="models"
+      data-icon="cube"
+<? else: ?>
       data-nav="pages"
-      data-title="<?= htmlspecialchars($_GET['page']) ?>"
       data-icon="edit"
+<? endif; ?>
+      data-title="<?= htmlspecialchars($_GET['page']) ?>"
       data-scripts="ace colors editor editor-tools token-list"
       data-styles="editor"
       data-flags="no-margin compact-sidebar"
