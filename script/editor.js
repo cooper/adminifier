@@ -184,8 +184,14 @@ ae.insertBlankLineMaybe = function () {
     return false;
 };
 
-ae.removeExtraNewlines = function () {
-    var oldRange = editor.selection.getRange();
+ae.removeExtraNewlines = function (pos) {
+    if (pos)
+        oldRange = new Range(
+            pos.row, pos.column,
+            pos.row, pos.column
+        );
+    else
+        oldRange = editor.selection.getRange();
 
     // not on a newline currently
     var i = new Range(

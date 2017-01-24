@@ -652,13 +652,7 @@ function insertPageOptions (newOpts, newCats) {
         });
     }
 
-    var oldRange = editor.selection.getRange();
-    editor.selection.setRange(new Range(
-        pos.row, pos.column,
-        pos.row, pos.column
-    ));
-    ae.removeExtraNewlines();
-    editor.selection.setRange(oldRange);
+    ae.removeExtraNewlines(pos);
 }
 
 function pageVariableFromRange (range, exp, bool) {
