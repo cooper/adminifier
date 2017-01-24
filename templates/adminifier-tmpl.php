@@ -3,5 +3,5 @@
 </script>
 
 <script type="text/x-tmpl" id="tmpl-notification">
-    <h3>Information</h3>
+    <h3>{%= o.title %}</h3>
 </script>

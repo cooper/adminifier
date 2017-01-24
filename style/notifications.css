@@ -4,14 +4,14 @@
     right: 20px;
     border: 1px solid #222;
     background-color: #666;
-    width: 300px;
-    min-height: 100px;
+    width: 340px;
+    min-height: 140px;
     color: #fff;
 }
 
 #notification-popup h3 {
     margin: 0;
-    padding: 10px 20px;
+    padding: 5px 10px;
     background-color: #333;
     border-bottom: 1px solid #222;
 }

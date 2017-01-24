@@ -98,7 +98,6 @@ var NotificationPopup = window.NotificationPopup = new Class({
         Options.prototype.setOptions.call(this, opts);
         opts = this.options;
         this.popup.innerHTML = tmpl('tmpl-notification', opts);
-        this.popup.getElement('h3').innerText = opts.title;
     },
 
     show: function (container) {
