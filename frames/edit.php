@@ -67,4 +67,6 @@ if ($result->type != 'page_code')
 
     </ul>
 </div>
-<div id="editor" data-file="<?= htmlspecialchars($_GET['page']) ?>"><?= htmlspecialchars($result->content) ?></div>
+<div id="editor" data-file="<?= htmlspecialchars($_GET['page']) ?>"<?
+    if ($model) echo ' data-model';
+?>><?= htmlspecialchars($result->content) ?></div>

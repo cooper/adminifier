@@ -44,7 +44,7 @@
             <td><input class="title" type="text" value="{%= o.title %}" /></td>
         </tr>
         <tr>
-            <td class="left"><span title="Page author. Not used for revision tracking but may be displayed on the page.">Author</span></td>
+            <td class="left"><span title="Page author/primary maintainer. Not used for revision tracking but may be displayed on the page.">Author</span></td>
             <td><input class="author" type="text" value="{%= o.author %}" /></td>
         </tr>
         <tr>
@@ -66,4 +66,18 @@
         <i class="fa fa-minus-circle" style="color: #EB2F42;"></i>
         <span>{%= o.catName %}</span>
     </td>
+</script>
+
+<script type="text/x-tmpl" id="tmpl-model-options">
+    <h3>Settings</h3>
+    <table><tbody>
+        <tr>
+            <td class="left"><span title="Human-readable model title.">Title</span></td>
+            <td><input class="title" type="text" value="{%= o.title %}" /></td>
+        </tr>
+        <tr>
+            <td class="left"><span title="Model author/primary maintainer.">Author</span></td>
+            <td><input class="author" type="text" value="{%= o.author %}" /></td>
+        </tr>
+    </tbody></table>
 </script>

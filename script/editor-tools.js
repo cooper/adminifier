@@ -522,7 +522,8 @@ function displayPageOptionsWindow () {
     var optionsWindow = new ModalWindow({
         icon:           'cog',
         title:          ae.isModel() ? 'Model options' : 'Page options',
-        html:           tmpl('tmpl-page-options', foundOptsValues),
+        html:           tmpl(ae.isModel() ?
+            'tmpl-model-options' : 'tmpl-page-options', foundOptsValues),
         padded:         true,
         doneText:       'Save',
         id:             'editor-options-window',
