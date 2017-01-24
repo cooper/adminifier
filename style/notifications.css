@@ -3,8 +3,15 @@
     bottom: 20px;
     right: 20px;
     border: 1px solid #222;
-    background-color: #555;
+    background-color: #666;
     width: 300px;
     min-height: 100px;
-    padding: 20px;
+    color: #fff;
+}
+
+#notification-popup h3 {
+    margin: 0;
+    padding: 10px 20px;
+    background-color: #333;
+    border-bottom: 1px solid #222;
 }
