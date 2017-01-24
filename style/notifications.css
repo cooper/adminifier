@@ -1,0 +1,10 @@
+#notification-popup {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    border: 1px solid #222;
+    background-color: #555;
+    width: 300px;
+    min-height: 100px;
+    padding: 20px;
+}

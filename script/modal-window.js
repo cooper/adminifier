@@ -6,6 +6,7 @@ var ModalWindow = new Class({
         icon:           'cog',
         doneText:       'Done',
         autoDestroy:    false,
+        sticky:         false
     },
 
     initialize: function (opts) {

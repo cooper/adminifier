@@ -78,4 +78,56 @@ function displayLoginWindow () {
     loginWindow.show();
 }
 
+var NotificationPopup = window.NotificationPopup = new Class({
+
+    Implements: [Options, Events],
+
+    options: {
+        autoDestroy:    false,
+        sticky:         false
+    },
+
+    initialize: function (opts) {
+        this.popup = new Element('notification-popup');
+        this.setOptions(opts);
+    },
+
+    setOptions: function (opts) {
+        Options.prototype.setOptions.call(this, opts);
+        opts = this.options;
+
+
+    },
+
+    show: function (container) {
+        if (!container)
+            container = document.body;
+        container.adopt(this.popup);
+        this.popup.setStyle('display', 'block');
+        this.shown = true;
+    },
+
+    hide: function (isDestroy) {
+        if (!this.shown || this.options.sticky)
+            return;
+        delete this.shown;
+        this.fireEvent('done');
+        this.popup.setStyle('display', 'none');
+        if (this.options.autoDestroy && !isDestroy)
+            this._destroy();
+    },
+
+    destroy: function (force) {
+        if (this.options.sticky && !force)
+            return;
+        delete this.options.sticky;
+        this.hide(true);
+        this._destroy();
+    },
+
+    _destroy: function () {
+        this.popup.destroy();
+    }
+});
+
 })(adminifier);
