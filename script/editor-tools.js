@@ -539,21 +539,23 @@ function displayPageOptionsWindow () {
 
     // get categories from list
     var getCategories = optionsWindow.getCategories = function () {
-        var cats = optionsWindow.content.getElements('tr.category span');
-        return cats.map(function (span) {
-            return a.safeName(span.innerText);
+        var cats = optionsWindow.content.getElements('tr.category');
+        return cats.map(function (tr) {
+            return tr.retrieve('safeName');
         });
     };
 
     // add category to liust
     var addCategoryTr = optionsWindow.content.getElement('.add-category');
-    var addCategory = function (catName) {
-        if (getCategories().contains(a.safeName(catName)))
+    var addCategory = function (catName, safeName) {
+        safeName = a.safeName(safeName != null ? safeName : catName);
+        if (getCategories().contains(safeName))
             return;
         var tr = new Element('tr', {
             class: 'category',
             html:  tmpl('tmpl-page-category', { catName: catName })
         });
+        tr.store('safeName', safeName);
         tr.addEvent('click', function () {
             this.destroy();
         });
@@ -565,7 +567,10 @@ function displayPageOptionsWindow () {
         var catName = this.get('value').trim();
         if (!catName.length)
             return;
-        addCategory(catName);
+        if (catName.match(/\.main$/))
+            addCategory(catName, catName + ' (main page)');
+        else
+            addCategory(catName);
         this.set('value', '');
     });
 
