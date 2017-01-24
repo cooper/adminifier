@@ -199,7 +199,7 @@ div.editor-link-type.active {
 	padding: 5px;
 }
 
-#editor-options-window td:first-child {
+#editor-options-window td.left {
     width: 200px;
     border-right: 1px dotted #bbb;
 }

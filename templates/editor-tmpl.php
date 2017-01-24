@@ -37,18 +37,23 @@
 </script>
 
 <script type="text/x-tmpl" id="tmpl-page-options">
+    <h3>Settings</h3>
     <table><tbody>
         <tr>
-            <td><span title="Human-readable page title.">Title</span></td>
+            <td class="left"><span title="Human-readable page title.">Title</span></td>
             <td><input class="title" type="text" value="{%= o.title %}" /></td>
         </tr>
         <tr>
-            <td><span title="Page author. Not used for revision tracking but may be displayed on the page.">Author</span></td>
+            <td class="left"><span title="Page author. Not used for revision tracking but may be displayed on the page.">Author</span></td>
             <td><input class="author" type="text" value="{%= o.author %}" /></td>
         </tr>
         <tr>
-            <td><span title="Marks the page as a draft; unauthenticated users may not view it.">Draft</span></td>
+            <td class="left"><span title="Marks the page as a draft; unauthenticated users may not view it.">Draft</span></td>
             <td><input class="draft" type="checkbox"{%= o.draft ? ' checked' : '' %}></td>
         </tr>
+    </tbody></table>
+    <h3>Categories</h3>
+    <table><tbody>
+        <tr>Add category</tr>
     </tbody></table>
 </script>
