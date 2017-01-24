@@ -31,6 +31,10 @@ ae.getFilename = function () {
     return $('editor').getProperty('data-file');
 };
 
+ae.isModel = function () {
+    return $('editor').getProperty('data-model');
+};
+
 // returns the page title text, with any escapes accounted for.
 // returns nothing if the @page.title can't be found.
 // range is optional

@@ -521,7 +521,7 @@ function displayPageOptionsWindow () {
     // create the options window
     var optionsWindow = new ModalWindow({
         icon:           'cog',
-        title:          'Page options',
+        title:          ae.isModel() ? 'Model options' : 'Page options',
         html:           tmpl('tmpl-page-options', foundOptsValues),
         padded:         true,
         doneText:       'Save',
@@ -586,7 +586,8 @@ function displayPageOptionsWindow () {
     });
 
     // add initial categories
-    foundCats.found.each(addCategory);
+    if (!ae.isModel())
+        foundCats.found.each(addCategory);
 
     // store state in the options window
     optionsWindow.foundOptsValues = foundOptsValues;
