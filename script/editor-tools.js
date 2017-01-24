@@ -498,7 +498,7 @@ function displayPageOptionsWindow () {
 
     // get categories from list
     var getCategories = optionsWindow.getCategories = function () {
-        var cats = optionsWindow.content.getElements('td.category span');
+        var cats = optionsWindow.content.getElements('tr.category span');
         return cats.map(function (td) {
             return a.safeName(td.innerText);
         });
