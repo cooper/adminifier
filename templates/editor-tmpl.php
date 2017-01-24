@@ -54,6 +54,8 @@
     </tbody></table>
     <h3>Categories</h3>
     <table><tbody>
-        <tr>Add category</tr>
+        <tr>
+            <td>Add category</td>
+        </tr>
     </tbody></table>
 </script>

@@ -125,3 +125,7 @@ i.fa.right {
     width: 100px;
     color: #111;
 }
+
+#login-window h3 {
+    margin: 10px 0;
+}
