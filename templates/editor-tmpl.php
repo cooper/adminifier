@@ -62,6 +62,8 @@
 </script>
 
 <script type="text/x-tmpl" id="tmpl-page-category">
-    <i class="fa fa-minus-circle" style="color: #B50015;"></i>
-    <span>{%= o.catName %}</span>
+    <td>
+        <i class="fa fa-minus-circle" style="color: #B50015;"></i>
+        <span>{%= o.catName %}</span>
+    </td>
 </script>
