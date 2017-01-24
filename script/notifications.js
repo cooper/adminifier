@@ -8,9 +8,11 @@ function pingServer () {
         url: 'functions/events.php',
         secure: true,
         onSuccess: function (data) {
-            if (!data.connected)
+            if (!data.connected) {
                 displayLoginWindow();
-            if (data.notifications) data.notification.each(function (noti) {
+                return;
+            }
+            if (data.notifications) data.notifications.each(function (noti) {
                 displayNotification(noti);
             });
         },
@@ -18,6 +20,26 @@ function pingServer () {
         onFailure: displayLoginWindow
     });
     req.get();
+}
+
+var icons = {
+    user_logged_in: 'user'
+};
+
+var formats = {
+    user_logged_in: function (noti) {
+        if (noti.name != null && noti.name.length)
+            str = noti.name + ' (' + noti.username + ')';
+        else
+            str = noti.username;
+        return str + ' has just logged in';
+    }
+};
+
+function formatNotification (noti) {
+    if (formats[noti.type])
+        return formats[noti.type](noti);
+    return noti.message;
 }
 
 var notificationQueue = [];
@@ -32,9 +54,9 @@ function displayNotification (noti) {
 
     var popup = new NotificationPopup({
         title:          noti.title,
-        message:        noti.message,
-        icon:           noti.icon,
-        hideAfter:      10000,
+        message:        formatNotification(noti),
+        icon:           icons[noti.icon] || 'info-circle',
+        hideAfter:      noti.timeout || 10000,
         autoDestroy:    true,
         onDone:         function () {
             var nextNoti = notificationQueue.shift();
