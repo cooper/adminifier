@@ -521,12 +521,12 @@ function closeCurrentPopup (opts) {
     box.set('morph', {
         duration: 150,
         onComplete: function () {
+            ae.currentPopup = null;
             if (box) box.destroy();
             if (opts.afterHide) opts.afterHide();
         }
     });
     box.morph({ height: '0px' });
-    ae.currentPopup = null;
 }
 
 // move a popup when the window resizes
