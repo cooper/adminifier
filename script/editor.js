@@ -14,7 +14,7 @@ ae.expressions = {
     pageTitle:      new RegExp('\\s*^@page\\.title:(.*)$'),
     keyValueVar:    new RegExp('^\\s*@page\\.(\\w+):(.*?)(;?)\\s*$'),
     boolVar:        new RegExp('^\\s*@page\\.(\\w+);\\s*$'),
-    category:       new RegExp('^\\s*@category\\.(\\w+);\\s*$')
+    category:       new RegExp('^\\s*@category\\.([\\w\\.]+);\\s*$')
 };
 
 ae.toolbarFunctions = {
