@@ -496,10 +496,20 @@ function displayPageOptionsWindow () {
         a.updatePageTitle(title.length ? title : ae.getFilename());
     });
 
+    var addCategoryTr = optionsWindow.content.getElement('.add-category');
     var addCategory = function (catName) {
+        var tr = new Element('tr');
         var td = new Element('td', { text: catName });
-        td.inject(optionsWindow.content.getElement('.add-category'), 'before');
+        tr.adopt(td);
+        tr.inject(addCategoryTr, 'before');
     };
+
+    addCategoryTr.getElement('input').onEnter(function () {
+        var catName = this.get('value').trim();
+        if (!catName.length)
+            return;
+        addCategory(catName);
+    });
 
     foundCats.found.each(function (catName) {
         addCategory(catName);

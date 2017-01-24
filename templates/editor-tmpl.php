@@ -54,7 +54,7 @@
     </tbody></table>
     <h3>Categories</h3>
     <table><tbody>
-        <tr><td class="add-category">
+        <tr class="add-category"><td>
             <i class="fa fa-plus-circle" style="color: #00B545;"></i>
             <input type="text" />
         </td></tr>
