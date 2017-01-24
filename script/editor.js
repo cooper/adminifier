@@ -32,7 +32,7 @@ ae.getFilename = function () {
 };
 
 ae.isModel = function () {
-    return $('editor').getProperty('data-model');
+    return $('editor').getProperty('data-model') != null;
 };
 
 // returns the page title text, with any escapes accounted for.
