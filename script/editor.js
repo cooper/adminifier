@@ -545,7 +545,7 @@ function openLi (li) {
 
     // if a popup is open, ignore this.
     if (ae.currentPopup)
-        return;
+        return false;
 
     // if another one is animating, force it to instantly finish
     if (ae.currentLi)
@@ -558,6 +558,7 @@ function openLi (li) {
     });
 
     ae.currentLi = li;
+    return true;
 }
 
 function closeCurrentLi () {
