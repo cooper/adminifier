@@ -209,13 +209,14 @@ div.editor-link-type.active {
 }
 
 #editor-options-window h3 {
-    margin: 10px 0;
+    margin: 0 0 10px 0;
 }
 
 #editor-options-window table {
     table-layout: fixed;
 	border-collapse: collapse;
 	width: 100%;
+    margin-bottom: 20px;
 }
 
 #editor-options-window input[type=text] {
