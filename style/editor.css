@@ -204,6 +204,11 @@ div.editor-link-type.active {
     border-right: 1px dotted #bbb;
 }
 
+#editor-options-window td.category {
+    cursor: pointer;
+    user-select: none;
+}
+
 #editor-options-window td:first-child span {
     cursor: help;
 }
