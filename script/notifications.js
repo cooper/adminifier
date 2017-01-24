@@ -10,11 +10,39 @@ function pingServer () {
         onSuccess: function (data) {
             if (!data.connected)
                 displayLoginWindow();
+            if (data.notifications) data.notification.each(function (noti) {
+                displayNotification(noti);
+            });
         },
         onError: displayLoginWindow,
         onFailure: displayLoginWindow
     });
     req.get();
+}
+
+var notificationQueue = [];
+function displayNotification (noti) {
+
+    // there is already a notification being displayed,
+    // so add this to the queue.
+    if ($('notification-popup')) {
+        notificationQueue.push(noti);
+        return;
+    }
+
+    var popup = new NotificationPopup({
+        title:          noti.title,
+        message:        noti.message,
+        icon:           noti.icon,
+        hideAfter:      10000,
+        autoDestroy:    true,
+        onDone:         function () {
+            var nextNoti = notificationQueue.shift();
+            if (nextNoti) displayNotification(nextNoti);
+        }
+    });
+
+    popup.show();
 }
 
 function displayLoginWindow () {
@@ -86,6 +114,7 @@ var NotificationPopup = window.NotificationPopup = new Class({
         title:          'Information',
         icon:           'info-circle',
         autoDestroy:    false,
+        hideAfter:      0,
         sticky:         false
     },
 
@@ -97,6 +126,9 @@ var NotificationPopup = window.NotificationPopup = new Class({
     setOptions: function (opts) {
         Options.prototype.setOptions.call(this, opts);
         opts = this.options;
+        var _this = this;
+        if (opts.hideAfter)
+            setTimeout(function () { _this.hide(); }, opts.hideAfter);
         this.popup.innerHTML = tmpl('tmpl-notification', opts);
     },
 
@@ -129,6 +161,7 @@ var NotificationPopup = window.NotificationPopup = new Class({
     _destroy: function () {
         this.popup.destroy();
     }
+
 });
 
 })(adminifier);

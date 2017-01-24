@@ -27,7 +27,7 @@
     float: left;
     width: 80px;
     height: 109px; /* 140px - 20px header - 10px margin - 1px border */
-    line-height: 100px;
+    line-height: 109px;
     font-size: 45px;
     text-align: center;
 }
