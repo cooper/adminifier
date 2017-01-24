@@ -538,57 +538,60 @@ function displayPageOptionsWindow () {
         a.updatePageTitle(title.length ? title : ae.getFilename());
     });
 
-    // get categories from list
-    var getCategories = optionsWindow.getCategories = function () {
-        var cats = optionsWindow.content.getElements('tr.category');
-        return cats.map(function (tr) {
-            return tr.retrieve('safeName');
+    // category list
+    if (!ae.isModel()) {
+
+        // get categories from list
+        var getCategories = optionsWindow.getCategories = function () {
+            var cats = optionsWindow.content.getElements('tr.category');
+            return cats.map(function (tr) {
+                return tr.retrieve('safeName');
+            });
+        };
+
+        // add category to liust
+        var addCategoryTr = optionsWindow.content.getElement('.add-category');
+        var addCategory = function (catName) {
+
+            // category already exists
+            var safeName = a.safeName(catName);
+            if (getCategories().contains(safeName))
+                return;
+
+            // is it a main page?
+            var match = catName.match(/(.*)\.main$/), visibleName;
+            if (match)
+                visibleName = match[1] + ' (main page)';
+            else
+                visibleName = catName;
+
+            // create the row
+            var tr = new Element('tr', {
+                class: 'category',
+                html:  tmpl('tmpl-page-category', { catName: visibleName })
+            });
+
+            // on click, delete the category
+            tr.addEvent('click', function () {
+                this.destroy();
+            });
+
+            tr.store('safeName', safeName);
+            tr.inject(addCategoryTr, 'before');
+        };
+
+        // on enter of category input, add the category.
+        addCategoryTr.getElement('input').onEnter(function () {
+            var catName = this.get('value').trim();
+            if (!catName.length)
+                return;
+            addCategory(catName);
+            this.set('value', '');
         });
-    };
 
-    // add category to liust
-    var addCategoryTr = optionsWindow.content.getElement('.add-category');
-    var addCategory = function (catName) {
-
-        // category already exists
-        var safeName = a.safeName(catName);
-        if (getCategories().contains(safeName))
-            return;
-
-        // is it a main page?
-        var match = catName.match(/(.*)\.main$/), visibleName;
-        if (match)
-            visibleName = match[1] + ' (main page)';
-        else
-            visibleName = catName;
-
-        // create the row
-        var tr = new Element('tr', {
-            class: 'category',
-            html:  tmpl('tmpl-page-category', { catName: visibleName })
-        });
-
-        // on click, delete the category
-        tr.addEvent('click', function () {
-            this.destroy();
-        });
-
-        tr.store('safeName', safeName);
-        tr.inject(addCategoryTr, 'before');
-    };
-
-    // on enter of category input, add the category.
-    addCategoryTr.getElement('input').onEnter(function () {
-        var catName = this.get('value').trim();
-        if (!catName.length)
-            return;
-        addCategory(catName);
-        this.set('value', '');
-    });
-
-    // add initial categories
-    if (!ae.isModel())
+        // add initial categories
         foundCats.found.each(addCategory);
+    }
 
     // store state in the options window
     optionsWindow.foundOptsValues = foundOptsValues;
