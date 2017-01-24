@@ -32,6 +32,7 @@ function unloadedHandler () {
     console.log('Unloading editor tools script');
     document.removeEvent('editorLoaded', loadedHandler);
     document.removeEvent('pageUnloaded', unloadedHandler);
+    clearAutosaveInterval();
 }
 
 function fakeAdopt (child) {
@@ -242,7 +243,12 @@ function _saveHelper (autosave) {
             box.removeClass('sticky');
 
             // close the popup only if the mouse isn't over it
-            ae.closePopup(box, { unlessActive: true });
+            ae.closePopup(box, {
+                unlessActive: true,
+                afterHide: function () {
+                    li.getElement('span').innerText = 'Save';
+                }
+            });
 
         }, 3000);
     };
@@ -326,6 +332,7 @@ function _saveHelper (autosave) {
 
     // on click or enter, save changes
     if (autosave) {
+        li.getElement('span').innerText = 'Autosave';
         saveChanges();
     }
     else {
@@ -385,13 +392,17 @@ function saveRequest (saveData, message, success, fail) {
 
 var autosaveInterval;
 function resetAutosaveInterval () {
-    if (autosaveInterval != null)
-        clearInterval(autosaveInterval);
+    clearAutosaveInterval();
     if (a.autosave) {
         autosaveInterval = setInterval(function () {
             _saveHelper(true);
         }, a.autosave);
     }
+}
+
+function clearAutosaveInterval () {
+    if (autosaveInterval != null)
+        clearInterval(autosaveInterval);
 }
 
 // DELETE CONFIRMATION

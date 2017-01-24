@@ -520,7 +520,10 @@ function closeCurrentPopup (opts) {
     closeCurrentLi();
     box.set('morph', {
         duration: 150,
-        onComplete: function () { if (box) box.destroy(); }
+        onComplete: function () {
+            if (box) box.destroy();
+            if (opts.afterHide) opts.afterHide();
+        }
     });
     box.morph({ height: '0px' });
     ae.currentPopup = null;

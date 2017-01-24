@@ -28,7 +28,7 @@ if ($result->type != 'page_code')
 <div class="editor-toolbar-wrapper">
     <ul class="editor-toolbar">
 
-        <li data-action="save" class="right"><i class="fa right fa-save"></i> Save</li>
+        <li data-action="save" class="right"><i class="fa right fa-save"></i> <span>Save</span></li>
         <li data-action="delete" class="right"><i class="fa right fa-trash"></i> Delete</li>
         <li data-action="revisions" class="right"><i class="fa right fa-history"></i> Revisions</li>
         <li data-action="view" class="right"><i class="fa right fa-binoculars"></i> View</li>
