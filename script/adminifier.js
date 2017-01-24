@@ -15,7 +15,7 @@ Element.implement('onEnter', function (func) {
     this.addEvent('keyup', function (e) {
         if (e.key != 'enter')
             return;
-        func(e);
+        func.call(this, e);
     });
 });
 
