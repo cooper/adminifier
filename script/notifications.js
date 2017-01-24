@@ -32,7 +32,7 @@ var formats = {
             str = noti.name + ' (' + noti.username + ')';
         else
             str = noti.username;
-        return str + ' has just logged in';
+        return str + ' has just logged in.';
     }
 };
 
@@ -52,8 +52,11 @@ function displayNotification (noti) {
         return;
     }
 
+    var titleType = noti.type.replace('_', ' ');
+    titleType = titleType.charAt(0).toUpperCase() + titleType.slice(1);
+
     var popup = new NotificationPopup({
-        title:          noti.title,
+        title:          noti.title || titleType,
         message:        formatNotification(noti),
         icon:           icons[noti.icon] || 'info-circle',
         hideAfter:      noti.timeout || 10000,
