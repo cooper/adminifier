@@ -264,12 +264,14 @@ ae.createPopupBox = function (posX, posY) {
 };
 
 ae.displayPopupBox = function (box, height, li) {
-    openLi(li);
+    if (!openLi(li))
+        return false;
     document.body.appendChild(box);
     box.set('morph', { duration: 150 });
     box.morph({ height: height + 'px' });
     box.store('li', li);
     ae.currentPopup = box;
+    return true;
 };
 
 // find an appropriate range for selection

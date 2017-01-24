@@ -25,8 +25,8 @@ var adminifier = {
     wikiShortName:  <?= option_if_set($config->wiki_name)       ?>,
     wikiName:       <?= option_if_set($wiki_name)               ?>,
     wikiPageRoot:   <?= option_if_set($config->wiki_page_root)  ?>,
-    themeName:      <?= option_if_set($user_info->theme)        ?>
-
+    themeName:      <?= option_if_set($user_info->theme)        ?>,
+    autosave:       10000//5 * 60 * 1000
 };
 
 </script>

@@ -24,6 +24,8 @@ function loadedHandler () {
         [ 'Ctrl-S', 'Command-S',    'save'      ],
         [ 'Ctrl-K', 'Command-K',    'link'      ]
     ]);
+
+    resetAutosaveInterval();
 }
 
 function unloadedHandler () {
@@ -218,6 +220,10 @@ function openPageInNewTab () {
 // SAVE COMMIT HELPER
 
 function displaySaveHelper () {
+    return _saveHelper(false);
+}
+
+function _saveHelper (autosave) {
     var li   = $$('li[data-action="save"]')[0];
     var rect = li.getBoundingClientRect();
     var box  = ae.createPopupBox(rect.right - 300, rect.top + li.offsetHeight);
@@ -311,57 +317,80 @@ function displaySaveHelper () {
         };
 
         // save request
-        var req = new Request.JSON({
-            url: 'functions/write-page.php',
-            secure: true,
-            onSuccess: function (data) {
-
-                // updated without error
-                if (data.success)
-                    success(data);
-
-                // revision error
-
-                // nothing changed
-                else if (data.rev_error && data.rev_error.match('no changes')) {
-                    data.unchanged = true;
-                    success(data);
-                }
-
-                // git error
-                else if (data.rev_error)
-                    fail(data.rev_error);
-
-                // other error
-                else if (data.error)
-                    fail(data.error);
-
-                // not sure
-                else
-                    fail("Unknown error");
-            },
-            onError: function () {
-                fail('Bad JSON reply');
-            },
-            onFailure: function (data) {
-                console.log("on failure");
-                console.log(data);
-                fail('Request error');
-            },
-        }).post({
-            page:       ae.getFilename(),
-            content:    saveData,
-            message:    message
-        });
-
+        saveRequest(saveData, autosave ? 'Autosave' : message, success, fail);
     };
 
-    // on click or enter, save changes
-    $('editor-save-commit').addEvent('click', saveChanges);
-    $('editor-save-message').onEnter(saveChanges);
+    // display it
+    if (!ae.displayPopupBox(box, 120, li))
+        return;
 
-    ae.displayPopupBox(box, 120, li);
-    $('editor-save-message').focus();
+    // on click or enter, save changes
+    if (autosave)
+        saveChanges();
+    else {
+        $('editor-save-commit').addEvent('click', saveChanges);
+        $('editor-save-message').onEnter(saveChanges);
+        $('editor-save-message').focus();
+    }
+}
+
+function saveRequest (saveData, message, success, fail) {
+
+    // do the request
+    new Request.JSON({
+        url: 'functions/write-page.php',
+        secure: true,
+        onSuccess: function (data) {
+
+            // updated without error
+            if (data.success)
+                success(data);
+
+            // revision error
+
+            // nothing changed
+            else if (data.rev_error && data.rev_error.match('no changes')) {
+                data.unchanged = true;
+                success(data);
+            }
+
+            // git error
+            else if (data.rev_error)
+                fail(data.rev_error);
+
+            // other error
+            else if (data.error)
+                fail(data.error);
+
+            // not sure
+            else
+                fail("Unknown error");
+        },
+        onError: function () {
+            fail('Bad JSON reply');
+        },
+        onFailure: function (data) {
+            fail('Request error');
+        },
+    }).post({
+        page:       ae.getFilename(),
+        content:    saveData,
+        message:    message
+    });
+
+    // reset the autosave timer
+    resetAutosaveInterval();
+}
+
+var autosaveInterval;
+function resetAutosaveInterval () {
+    if (autosaveInterval != null)
+        clearInterval(autosaveInterval);
+    if (a.autosave) {
+        autosaveInterval = setInterval(function () {
+            _saveHelper(true);
+        }, a.autosave);
+    }
 }
 
 // DELETE CONFIRMATION
