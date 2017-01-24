@@ -15,8 +15,14 @@ if (isset($_GET['sort'])) {
 }
 
 require_once(__DIR__.'/../functions/utils.php');
-$method = 'page_list'; // FIXME
-$pages = $W->$method($sort.$order)->pages;
+
+// page or model
+$method = $model ? 'model_list' : 'page_list';
+$pages = array();
+if ($model)
+    $pages = $W->model_list($sort.$order)->models;
+else
+    $pages = $W->page_list($sort.$order)->pages;
 
 // if the current sort method is the same as the one passed,
 // this returns the opposite direction for the same method.
