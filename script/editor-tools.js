@@ -635,24 +635,22 @@ function insertPageOptions (newOpts, newCats) {
     var optsString = generatePageOptions(newOpts);
 
     // inject the new lines at the beginning
-    var position = { row: 0, column: 0 };
-    position = editor.session.insert(position, optsString);
+    var pos = { row: 0, column: 0 };
+    pos = editor.session.insert(pos, optsString);
 
     // after inserting, the selection will be the line following
     // the insertion at column 0.
 
     // now check for categories
     if (newCats.length) {
-        position = editor.session.insert(position, '\n');
+        pos = editor.session.insert(pos, '\n');
         newCats.sort().each(function (catName) {
-            position = editor.session.insert(
-                position,
+            pos = editor.session.insert(
+                pos,
                 '@category.' + catName + ';\n'
             );
         });
     }
-
-    //ae.removeExtraNewlines();
 }
 
 function pageVariableFromRange (range, exp, bool) {
