@@ -76,7 +76,10 @@ function sort_method ($type) {
             <input type="checkbox" value="0" />
         </td>
         <td class="title">
-            <a class="frame-click" href="#!/edit-page?page=<?= urlencode($page->file) ?>">
+            <a class="frame-click" href="#!/edit-page?page=<?
+                echo urlencode($page->file);
+                if ($model) echo '&model';
+            ?>">
                 <?=
                     isset($page->title)
                         && strlen(trim($page->title)) ?
