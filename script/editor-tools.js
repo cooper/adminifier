@@ -605,6 +605,7 @@ function displayPageOptionsWindow () {
 function updatePageOptions () {
 
     // replace old option values with new ones
+    var container = this.container;
     var newOpts = Object.merge({},
         this.foundOptsValues,
         Object.filter(Object.map({
@@ -612,7 +613,7 @@ function updatePageOptions () {
             author:     [ 'input.author',   'value'     ],
             draft:      [ 'input.draft',    'checked'   ]
         }, function (value) {
-            var el = this.container.getElement(value[0]);
+            var el = container.getElement(value[0]);
             if (!el) return;
             return el.get(value[1]);
         }), function (value) {
