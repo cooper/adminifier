@@ -635,8 +635,7 @@ function insertPageOptions (newOpts, newCats) {
     var optsString = generatePageOptions(newOpts);
 
     // inject the new lines at the beginning
-    ae.resetSelectionAtTopLeft();
-    editor.insert(optsString);
+    editor.session.insert({ row: 0, column: 0 }, optsString);
 
     // after inserting, the selection will be the line following
     // the insertion at column 0.
@@ -649,7 +648,7 @@ function insertPageOptions (newOpts, newCats) {
         });
     }
 
-    ae.removeExtraNewlines();
+    //ae.removeExtraNewlines();
 }
 
 function pageVariableFromRange (range, exp, bool) {
