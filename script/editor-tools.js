@@ -657,7 +657,7 @@ function insertPageOptions (newOpts, newCats) {
         pos.row, pos.column,
         pos.row, pos.column
     });
-    editor.removeExtraNewlines();
+    ae.removeExtraNewlines();
     editor.selection.setRange(oldRange);
 }
 
