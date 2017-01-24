@@ -221,7 +221,7 @@ div.editor-link-type.active {
 
 #editor-options-window input[type=text] {
 	font-size: 15px;
-    width: 100%;
+    width: 90%;
 	height: 100%;
     border: none;
 }

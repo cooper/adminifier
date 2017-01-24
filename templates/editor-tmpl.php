@@ -56,7 +56,7 @@
     <table><tbody>
         <tr class="add-category"><td>
             <i class="fa fa-plus-circle" style="color: #00B545;"></i>
-            <input type="text" />
+            <input type="text" placeholder="Add category" />
         </td></tr>
     </tbody></table>
 </script>

@@ -496,21 +496,35 @@ function displayPageOptionsWindow () {
         a.updatePageTitle(title.length ? title : ae.getFilename());
     });
 
+    // get categories from list
+    var getCategories = optionsWindow.getCategories = function () {
+        var cats = optionsWindow.content.getElements('td.category');
+        return cats.map(function (td) {
+            return td.innerText;
+        });
+    };
+
+    // add category to liust
     var addCategoryTr = optionsWindow.content.getElement('.add-category');
     var addCategory = function (catName) {
+        if (getCategories().contains(catName))
+            return;
         var tr = new Element('tr');
-        var td = new Element('td', { text: catName });
+        var td = new Element('td', { text: catName, class: 'category' });
         tr.adopt(td);
         tr.inject(addCategoryTr, 'before');
     };
 
+    // on enter of category input, add the category.
     addCategoryTr.getElement('input').onEnter(function () {
         var catName = this.get('value').trim();
         if (!catName.length)
             return;
         addCategory(catName);
+        this.set('value', '');
     });
 
+    // add initial categories
     foundCats.found.each(function (catName) {
         addCategory(catName);
     });
@@ -526,7 +540,7 @@ function displayPageOptionsWindow () {
 
 function updatePageOptions () {
 
-    // replace old values with new ones
+    // replace old option values with new ones
     var newOpts = Object.merge({},
         this.foundOptsValues,
         Object.filter({
@@ -538,8 +552,8 @@ function updatePageOptions () {
         })
     );
 
-    // TODO
-    var newCats = this.foundCats.found;
+    // get new categories
+    var newCats = this.getCategories();
 
     var removeRanges = [this.foundOpts.ranges, this.foundCats.ranges].flatten();
     ae.removeLinesInRanges(removeRanges);
