@@ -1,5 +1,8 @@
 <?
 
+// models.php includes this with $model true.
+$model = isset($model);
+
 // find the sort method
 $valid_types = array('a', 'c', 'u', 'm'); // TODO: the rest
 $sort  = 'm';
@@ -12,7 +15,8 @@ if (isset($_GET['sort'])) {
 }
 
 require_once(__DIR__.'/../functions/utils.php');
-$pages = $W->page_list($sort.$order)->pages;
+$method = 'page_list'; // FIXME
+$pages = $W->$method($sort.$order)->pages;
 
 // if the current sort method is the same as the one passed,
 // this returns the opposite direction for the same method.
@@ -26,6 +30,17 @@ function sort_method ($type) {
 
 ?>
 
+<? if ($model): ?>
+<meta
+      data-nav="models"
+      data-title="Models"
+      data-icon="cube"
+      data-scripts="page-list"
+      data-styles="page-list"
+      data-flags="no-margin"
+      data-sort="<?= $sort.$order ?>"
+/>
+<? else: ?>
 <meta
       data-nav="pages"
       data-title="Pages"
@@ -35,6 +50,7 @@ function sort_method ($type) {
       data-flags="no-margin"
       data-sort="<?= $sort.$order ?>"
 />
+<? endif; ?>
 
 <table id="page-list">
 <thead>
