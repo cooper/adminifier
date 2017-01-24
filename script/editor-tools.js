@@ -643,9 +643,12 @@ function insertPageOptions (newOpts, newCats) {
 
     // now check for categories
     if (newCats.length) {
-        editor.insert('\n');
+        position = editor.session.insert(position, '\n');
         newCats.sort().each(function (catName) {
-            editor.session.insert(position, '@category.' + catName + ';\n');
+            position = editor.session.insert(
+                position,
+                '@category.' + catName + ';\n'
+            );
         });
     }
 
