@@ -161,7 +161,11 @@ var NotificationPopup = window.NotificationPopup = new Class({
         if (!container)
             container = document.body;
         container.adopt(this.popup);
-        this.popup.setStyle('display', 'block');
+        this.popup.setStyles({
+            display: 'block',
+            opacity: 0
+        });
+        this.popup.fade('in');
         this.shown = true;
     },
 
@@ -169,10 +173,14 @@ var NotificationPopup = window.NotificationPopup = new Class({
         if (!this.shown || this.options.sticky)
             return;
         delete this.shown;
-        this.fireEvent('done');
-        this.popup.setStyle('display', 'none');
-        if (this.options.autoDestroy && !isDestroy)
-            this._destroy();
+        this.popup.fade('out');
+        var _this = this;
+        setTimeout(function () {
+            _this.popup.setStyle('display', 'none');
+            _this.fireEvent('done');
+            if (_this.options.autoDestroy && !isDestroy)
+                _this._destroy();
+        }, 500);
     },
 
     destroy: function (force) {
