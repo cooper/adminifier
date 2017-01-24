@@ -607,11 +607,15 @@ function updatePageOptions () {
     // replace old option values with new ones
     var newOpts = Object.merge({},
         this.foundOptsValues,
-        Object.filter({
-            title:  this.container.getElement('input.title') .get('value'),
-            author: this.container.getElement('input.author').get('value'),
-            draft:  this.container.getElement('input.draft') .get('checked')
+        Object.filter(Object.map({
+            title:      [ 'input.title',    'value'     ],
+            author:     [ 'input.author',   'value'     ],
+            draft:      [ 'input.draft',    'checked'   ]
         }, function (value) {
+            var el = this.container.getElement(value[0]);
+            if (!el) return;
+            return el.get(value[1]);
+        }), function (value) {
             return typeof value != 'undefined';
         })
     );
