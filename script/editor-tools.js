@@ -635,7 +635,8 @@ function insertPageOptions (newOpts, newCats) {
     var optsString = generatePageOptions(newOpts);
 
     // inject the new lines at the beginning
-    editor.session.insert({ row: 0, column: 0 }, optsString);
+    var position = { row: 0, column: 0 };
+    position = editor.session.insert(position, optsString);
 
     // after inserting, the selection will be the line following
     // the insertion at column 0.
@@ -644,7 +645,7 @@ function insertPageOptions (newOpts, newCats) {
     if (newCats.length) {
         editor.insert('\n');
         newCats.sort().each(function (catName) {
-            editor.insert('@category.' + catName + ';\n');
+            editor.session.insert(position, '@category.' + catName + ';\n');
         });
     }
 
