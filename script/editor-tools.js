@@ -496,6 +496,15 @@ function displayPageOptionsWindow () {
         a.updatePageTitle(title.length ? title : ae.getFilename());
     });
 
+    var addCategory = function (catName) {
+        var td = new Element('td', { text: catName });
+        td.inject(optionsWindow.content.getElement('.add-category'), 'before');
+    };
+
+    foundCats.found.each(function (catName) {
+        addCategory(catName);
+    });
+
     // store state in the options window
     optionsWindow.foundOptsValues = foundOptsValues;
     optionsWindow.foundOpts = foundOpts;

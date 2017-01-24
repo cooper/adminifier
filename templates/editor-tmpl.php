@@ -49,13 +49,14 @@
         </tr>
         <tr>
             <td class="left"><span title="Marks the page as a draft; unauthenticated users may not view it.">Draft</span></td>
-            <td><input class="draft" type="checkbox"{%= o.draft ? ' checked' : '' %}></td>
+            <td><input class="draft" type="checkbox"{%= o.draft ? ' checked' : '' %} /></td>
         </tr>
     </tbody></table>
     <h3>Categories</h3>
     <table><tbody>
-        <tr>
-            <td><i class="fa fa-plus-circle" style="color: #00B545;"></i> Add category</td>
-        </tr>
+        <tr><td class="add-category">
+            <i class="fa fa-plus-circle" style="color: #00B545;"></i>
+            <input type="text" />
+        </td></tr>
     </tbody></table>
 </script>
