@@ -88,7 +88,10 @@ var NotificationPopup = window.NotificationPopup = new Class({
     },
 
     initialize: function (opts) {
-        this.popup = new Element('notification-popup');
+        this.popup = new Element('div', {
+            class: 'notification-popup',
+            html:  tmpl('tmpl-notification', opts)
+        });
         this.setOptions(opts);
     },
 
