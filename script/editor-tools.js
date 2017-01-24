@@ -651,6 +651,14 @@ function insertPageOptions (newOpts, newCats) {
             );
         });
     }
+
+    var oldRange = editor.selection.getRange();
+    editor.selection.setRange({
+        pos.row, pos.column,
+        pos.row, pos.column
+    });
+    editor.removeExtraNewlines();
+    editor.selection.setRange(oldRange);
 }
 
 function pageVariableFromRange (range, exp, bool) {
