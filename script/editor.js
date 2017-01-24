@@ -246,12 +246,6 @@ ae.resetSelectionAtTopLeft = function () {
 };
 
 ae.createPopupBox = function (posX, posY) {
-
-    // already showing something
-    if (ae.currentPopup)
-        return;
-
-    // create box
     var box = new Element('div', {
         class: 'editor-popup-box',
         styles: {
@@ -259,7 +253,6 @@ ae.createPopupBox = function (posX, posY) {
             left: posX
         }
     });
-
     return box;
 };
 

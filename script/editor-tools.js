@@ -325,8 +325,9 @@ function _saveHelper (autosave) {
         return;
 
     // on click or enter, save changes
-    if (autosave)
+    if (autosave) {
         saveChanges();
+    }
     else {
         $('editor-save-commit').addEvent('click', saveChanges);
         $('editor-save-message').onEnter(saveChanges);
