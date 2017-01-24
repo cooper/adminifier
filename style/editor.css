@@ -208,6 +208,10 @@ div.editor-link-type.active {
     cursor: help;
 }
 
+#editor-options-window h3 {
+    margin: 10px 0;
+}
+
 #editor-options-window table {
     table-layout: fixed;
 	border-collapse: collapse;
