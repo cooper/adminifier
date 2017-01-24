@@ -622,7 +622,7 @@ function updatePageOptions () {
     );
 
     // get new categories
-    var newCats = this.getCategories();
+    var newCats = this.getCategories ? this.getCategories() : [];
 
     var removeRanges = [this.foundOpts.ranges, this.foundCats.ranges].flatten();
     ae.removeLinesInRanges(removeRanges);
