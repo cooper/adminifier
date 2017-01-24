@@ -61,7 +61,7 @@ function displayNotification (noti) {
         icon:           icons[noti.icon] || 'info-circle',
         hideAfter:      noti.timeout || 10000,
         autoDestroy:    true,
-        onDone:         function () {
+        onDestroyed:    function () {
             var nextNoti = notificationQueue.shift();
             if (nextNoti) displayNotification(nextNoti);
         }
@@ -193,6 +193,7 @@ var NotificationPopup = window.NotificationPopup = new Class({
 
     _destroy: function () {
         this.popup.destroy();
+        this.fireEvent('destroyed');
     }
 
 });
