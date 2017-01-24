@@ -22,8 +22,8 @@ $pages = $W->$method($sort.$order)->pages;
 // this returns the opposite direction for the same method.
 // if the sort method is different, it returns descending.
 function sort_method ($type) {
-    global $sort, $order;
-    $prefix = '#!'.($model ? 'models' : 'pages').'?sort=';
+    global $sort, $order, $model;
+    $prefix = '#!/'.($model ? 'models' : 'pages').'?sort=';
     if ($type == $sort)
         return $order == '-' ? $prefix.$type.'%2B' : $prefix.$type.'-';
     return $prefix.$type.'-';
