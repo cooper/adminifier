@@ -1,6 +1,6 @@
 (function (a) {
 
-setInterval(pingServer, 60000);
+setInterval(pingServer, 20000);
 pingServer();
 
 function pingServer () {
@@ -52,7 +52,7 @@ function displayNotification (noti) {
         return;
     }
 
-    var titleType = noti.type.replace('_', ' ');
+    var titleType = noti.type.replace(/_/g, ' ');
     titleType = titleType.charAt(0).toUpperCase() + titleType.slice(1);
 
     var popup = new NotificationPopup({
