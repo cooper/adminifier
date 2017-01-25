@@ -666,8 +666,8 @@ function insertPageOptions (newOpts, newCats) {
     // set the current selection to the insert position
     var oldRange = editor.selection.getRange();
     editor.selection.setRange(new Range(
-        pos.row, pos.column,
-        pos.row, pos.column
+        pos.row, 0,
+        pos.row, 0
     ));
 
     // remove extra newlines at the new position; set the selection to where
