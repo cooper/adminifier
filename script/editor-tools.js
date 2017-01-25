@@ -645,13 +645,14 @@ function insertPageOptions (newOpts, newCats) {
 
     // inject the new lines at the beginning
     var pos = { row: 0, column: 0 };
-    pos = editor.session.insert(pos, optsString + '\n');
+    pos = editor.session.insert(pos, optsString);
 
     // after inserting, the selection will be the line following
     // the insertion at column 0.
 
     // now check for categories
     if (newCats.length) {
+        pos = editor.session.insert(pos, optsString + '\n');
         newCats.sort().each(function (catName) {
             pos = editor.session.insert(
                 pos,
