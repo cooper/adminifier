@@ -6,8 +6,9 @@ document.addEvent('pageUnloaded', unloadedHandler);
 var ae;
 function loadedHandler () {
     ae = adminifier.editor;
-    ae.findPageCategories = findPageCategories;
     console.log('Editor tools script loaded');
+
+    // add toolbar functions
     Object.append(ae.toolbarFunctions, {
         font:       displayFontSelector,
         link:       displayLinkHelper,
@@ -17,6 +18,7 @@ function loadedHandler () {
         save:       displaySaveHelper
     });
 
+    // add keyboard shortcuts
     ae.addKeyboardShortcuts([
         [ 'Ctrl-B', 'Command-B',    'bold'      ],
         [ 'Ctrl-I', 'Command-I',    'italic'    ],
@@ -25,6 +27,11 @@ function loadedHandler () {
         [ 'Ctrl-K', 'Command-K',    'link'      ]
     ]);
 
+    // disable view button for models
+    if (ae.isModel())
+        document.getElement('li[data-action="view"]').addClass('disabled');
+
+    // start the autosave timer
     resetAutosaveInterval();
 }
 
@@ -213,6 +220,8 @@ function displayLinkHelper () {
 // VIEW PAGE BUTTON
 
 function openPageInNewTab () {
+    if (ae.isModel())
+        return;
     var root = a.wikiPageRoot;
     var pageName = ae.getFilename().replace(/\.page$/, '');
     window.open(root + pageName);
