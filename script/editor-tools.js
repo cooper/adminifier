@@ -367,8 +367,8 @@ function saveRequest (saveData, message, success, fail) {
                 fail(data.rev_error);
 
             // other error
-            else if (data.error)
-                fail(data.error);
+            else if (data.reason)
+                fail(data.reason);
 
             // not sure
             else
