@@ -43,7 +43,7 @@ function sort_method ($type) {
     data-nav="models"
     data-title="Models"
     data-icon="cube"
-<? else if ($list_type == 'categories'): ?>
+<? elseif ($list_type == 'categories'): ?>
     data-nav="categories"
     data-title="Categories"
     data-icon="list"
