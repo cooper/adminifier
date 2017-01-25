@@ -1,7 +1,7 @@
 <?
 
-// models.php includes this with $model true.
-$model = isset($model);
+if (!isset($list_type))
+    $list_type = 'pages';
 
 // find the sort method
 $valid_types = array('a', 'c', 'u', 'm'); // TODO: the rest
@@ -17,19 +17,19 @@ if (isset($_GET['sort'])) {
 require_once(__DIR__.'/../functions/utils.php');
 
 // page or model
-$method = $model ? 'model_list' : 'page_list';
 $pages = array();
-if ($model)
-    $pages = $W->model_list($sort.$order)->models;
-else
-    $pages = $W->page_list($sort.$order)->pages;
+switch ($list_type) {
+    case 'pages':       $pages = $W->page_list($sort.$order)->pages;      break;
+    case 'models':      $pages = $W->model_list($sort.$order)->models;    break;
+    case 'categories':  $pages = $W->cat_list($sort.$order)->categories;  break;
+}
 
 // if the current sort method is the same as the one passed,
 // this returns the opposite direction for the same method.
 // if the sort method is different, it returns descending.
 function sort_method ($type) {
-    global $sort, $order, $model;
-    $prefix = '#!/'.($model ? 'models' : 'pages').'?sort=';
+    global $sort, $order, $list_type;
+    $prefix = '#!/'.$list_type.'?sort=';
     if ($type == $sort)
         return $order == '-' ? $prefix.$type.'%2B' : $prefix.$type.'-';
     return $prefix.$type.'-';
@@ -37,27 +37,26 @@ function sort_method ($type) {
 
 ?>
 
-<? if ($model): ?>
+
 <meta
-      data-nav="models"
-      data-title="Models"
-      data-icon="cube"
-      data-scripts="page-list"
-      data-styles="page-list"
-      data-flags="no-margin"
-      data-sort="<?= $sort.$order ?>"
-/>
+<? if ($list_type == 'models'): ?>
+    data-nav="models"
+    data-title="Models"
+    data-icon="cube"
+<? else if ($list_type == 'categories'): ?>
+    data-nav="categories"
+    data-title="Categories"
+    data-icon="list"
 <? else: ?>
-<meta
-      data-nav="pages"
-      data-title="Pages"
-      data-icon="file-text"
-      data-scripts="page-list"
-      data-styles="page-list"
-      data-flags="no-margin"
-      data-sort="<?= $sort.$order ?>"
-/>
+    data-nav="pages"
+    data-title="Pages"
+    data-icon="file-text"
 <? endif; ?>
+    data-scripts="page-list"
+    data-styles="page-list"
+    data-flags="no-margin"
+    data-sort="<?= $sort.$order ?>"
+/>
 
 <table id="page-list">
 <thead>
@@ -84,7 +83,7 @@ function sort_method ($type) {
         <td class="title">
             <a class="frame-click" href="#!/edit?page=<?
                 echo urlencode($page->file);
-                if ($model) echo '&model';
+                if ($list_type == 'model') echo '&model';
             ?>">
                 <?=
                     isset($page->title)
