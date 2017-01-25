@@ -298,7 +298,7 @@ function _saveHelper (autosave) {
 
             // something went wrong in the page display
             var displayBad = false, res = data.result;
-            if (!res || (res.type != 'page' && !res.draft))
+            if (!res || res.type != 'page' && res.type != 'model' && !res.draft)
                 displayBad = true;
 
             // switch to checkmark
