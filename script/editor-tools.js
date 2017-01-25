@@ -498,8 +498,8 @@ function displayDeleteConfirmation () {
                     success();
 
                 // delete error
-                else fail('Unknown error');
-
+                else
+                    fail('Unknown error');
             },
             onFailure: function () { fail('Request error') },
         }).post({
