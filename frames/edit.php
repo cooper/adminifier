@@ -12,12 +12,12 @@ $result = null;
 if ($model) {
     $result = $W->model_code($_GET['page'], 1);
     if ($result->type != 'model_code')
-        die('Model does not exist');
+        die('Model does not exist.');
 }
 else {
     $result = $W->page_code($_GET['page'], 1);
     if ($result->type != 'page_code')
-        die('Page does not exist');
+        die('Page does not exist.');
 }
 
 ?>
