@@ -645,7 +645,7 @@ function insertPageOptions (newOpts, newCats) {
 
     // inject the new lines at the beginning
     var pos = { row: 0, column: 0 };
-    pos = editor.session.insert(pos, optsString);
+    pos = editor.session.insert(pos, optsString + '\n');
 
     // after inserting, the selection will be the line following
     // the insertion at column 0.
@@ -659,8 +659,6 @@ function insertPageOptions (newOpts, newCats) {
             );
         });
     }
-    else
-        pos = editor.session.insert(pos, '\n');
 
     // above this point, the selection has not been affected
 
