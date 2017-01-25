@@ -8,10 +8,17 @@ if (!isset($_GET['page']))
 $model = isset($_GET['model']);
 
 // the one means to set {display_result}
-$method = 'page_code'; // FIXME
-$result = $W->$method($_GET['page'], 1);
-if ($result->type != 'page_code')
-    die('Page does not exist.');
+$result = null;
+if ($model) {
+    $result = $W->model_code($_GET['page'], 1);
+    if ($result->type != 'model_code')
+        die('Model does not exist');
+}
+else {
+    $result = $W->page_code($_GET['page'], 1);
+    if ($result->type != 'page_code')
+        die('Page does not exist');
+}
 
 ?>
 <!--JSON

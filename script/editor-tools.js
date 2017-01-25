@@ -652,6 +652,8 @@ function insertPageOptions (newOpts, newCats) {
         });
     }
 
+    // above this point, the selection has not been affected
+
     // set the current selection to the insert position
     var oldRange = editor.selection.getRange();
     editor.selection.setRange(new Range(
@@ -659,8 +661,8 @@ function insertPageOptions (newOpts, newCats) {
         pos.row, pos.column
     ));
 
-    // remove extra newlines; set the selection by shifting up by number
-    // of lines removed
+    // remove extra newlines at the new position; set the selection to where
+    // it was originally by shifting up by number of lines removed
     var removed = ae.removeExtraNewlines();
     editor.selection.setRange(new Range(
         oldRange.start.row - removed, oldRange.start.column,
