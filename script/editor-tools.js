@@ -658,6 +658,7 @@ function insertPageOptions (newOpts, newCats) {
                 '@category.' + catName + ';\n'
             );
         });
+        pos = editor.session.insert(pos, '\n');
     }
 
     // above this point, the selection has not been affected
