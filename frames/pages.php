@@ -37,6 +37,7 @@ function sort_method ($type) {
 }
 
 function link_to ($page) {
+    global $list_type;
     $encoded = urlencode($page->file);
     switch ($list_type) {
         case 'pages':       return "edit?page=$encoded";
@@ -95,7 +96,7 @@ function link_to ($page) {
             <input type="checkbox" value="0" />
         </td>
         <td class="title">
-            <a class="frame-click" href="#!/<?= link_to($page) ?>">
+            <a class="frame-click" href="#!/<?= link_to($page); ?>">
                 <?=
                     isset($page->title)
                         && strlen(trim($page->title)) ?
