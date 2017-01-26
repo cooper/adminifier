@@ -36,8 +36,17 @@ function sort_method ($type) {
     return $prefix.$type.'-';
 }
 
-?>
+function link_to ($page) {
+    $encoded = urlencode($page->file);
+    switch ($list_type) {
+        case 'pages':       return "edit?page=$encoded";
+        case 'models':      return "edit?page=$encoded&model";
+        case 'images':      return "edit-image?file=$encoded";
+        case 'categories':  return "edit-category?cat=$encoded";
+    }
+}
 
+?>
 
 <meta
 <? if ($list_type == 'models'): ?>
@@ -86,10 +95,7 @@ function sort_method ($type) {
             <input type="checkbox" value="0" />
         </td>
         <td class="title">
-            <a class="frame-click" href="#!/edit?page=<?
-                echo urlencode($page->file);
-                if ($list_type == 'models') echo '&model';
-            ?>">
+            <a class="frame-click" href="#!/<?= link_to($page) ?>">
                 <?=
                     isset($page->title)
                         && strlen(trim($page->title)) ?
