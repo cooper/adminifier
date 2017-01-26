@@ -48,14 +48,14 @@ function sort_method ($type) {
     data-nav="categories"
     data-title="Categories"
     data-icon="list"
-<? else: ?>
-    data-nav="pages"
-    data-title="Pages"
-    data-icon="file-text"
 <? elseif ($list_type == 'images'): ?>
     data-nav="images"
     data-title="Images"
     data-icon="picture-o"
+<? else: ?>
+    data-nav="pages"
+    data-title="Pages"
+    data-icon="file-text"
 <? endif; ?>
     data-scripts="page-list"
     data-styles="page-list"
