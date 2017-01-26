@@ -40,8 +40,8 @@ function link_to ($page) {
     global $list_type;
     $encoded = urlencode($page->file);
     switch ($list_type) {
-        case 'pages':       return "edit?page=$encoded";
-        case 'models':      return "edit?page=$encoded&model";
+        case 'pages':       return "edit-page?page=$encoded";
+        case 'models':      return "edit-model?page=$encoded";
         case 'images':      return "edit-image?file=$encoded";
         case 'categories':  return "edit-category?cat=$encoded";
     }

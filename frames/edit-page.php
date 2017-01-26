@@ -1,11 +1,10 @@
 <?
 
 require_once(__DIR__.'/../functions/utils.php');
+$model = isset($model);
 
 if (!isset($_GET['page']))
     die('No page requested');
-
-$model = isset($_GET['model']);
 
 // the one means to set {display_result}
 $result = null;
