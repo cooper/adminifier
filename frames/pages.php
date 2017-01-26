@@ -4,7 +4,7 @@ if (!isset($list_type))
     $list_type = 'pages';
 
 // find the sort method
-$valid_types = array('a', 'c', 'u', 'm'); // TODO: the rest
+$valid_types = array('a', 'c', 'u', 'm');
 $sort  = 'm';
 $order = '-';
 if (isset($_GET['sort'])) {
@@ -21,6 +21,7 @@ $pages = array();
 switch ($list_type) {
     case 'pages':       $pages = $W->page_list($sort.$order)->pages;      break;
     case 'models':      $pages = $W->model_list($sort.$order)->models;    break;
+    case 'images':      $pages = $W->image_list($sort.$order)->images;    break;
     case 'categories':  $pages = $W->cat_list($sort.$order)->categories;  break;
 }
 
@@ -29,7 +30,7 @@ switch ($list_type) {
 // if the sort method is different, it returns descending.
 function sort_method ($type) {
     global $sort, $order, $list_type;
-    $prefix = '#!/'.$list_type.'?sort=';
+    $prefix = "#!/$list_type?sort=";
     if ($type == $sort)
         return $order == '-' ? $prefix.$type.'%2B' : $prefix.$type.'-';
     return $prefix.$type.'-';
@@ -51,6 +52,10 @@ function sort_method ($type) {
     data-nav="pages"
     data-title="Pages"
     data-icon="file-text"
+<? elseif ($list_type == 'images'): ?>
+    data-nav="images"
+    data-title="Images"
+    data-icon="picture-o"
 <? endif; ?>
     data-scripts="page-list"
     data-styles="page-list"
