@@ -88,7 +88,7 @@ function sort_method ($type) {
         <td class="title">
             <a class="frame-click" href="#!/edit?page=<?
                 echo urlencode($page->file);
-                if ($list_type == 'model') echo '&model';
+                if ($list_type == 'models') echo '&model';
             ?>">
                 <?=
                     isset($page->title)
