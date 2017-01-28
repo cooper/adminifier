@@ -1,6 +1,5 @@
 <?php
 
-$API = true;
 require_once(__DIR__.'/utils.php');
 
 if (!isset($_POST['content']) || !isset($_POST['page']))

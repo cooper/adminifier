@@ -32,4 +32,4 @@ ob_end_clean();
 
 ?>
 
-<meta data-redirect="edit?page=<?= $new_page ?>" />
+<meta data-redirect="edit-page?page=<?= $new_page ?>" />

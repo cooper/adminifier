@@ -1,6 +1,5 @@
 <?php
 
-$API = true;
 require_once(__DIR__.'/utils.php');
 
 $res = $W->ping();

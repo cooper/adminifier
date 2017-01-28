@@ -28,7 +28,7 @@ a.updatePageTitle = function (title, titleTagOnly) {
 
 // safe page/category name
 a.safeName = function (name) {
-    return name.replace(/[^\w\.]/g, '_');
+    return name.replace(/[^\w\.\-]/g, '_');
 }
 
 window.addEvent('hashchange', hashLoad);
