@@ -324,7 +324,7 @@ ae.handlePageDisplayResult = function (res) {
     // annotate errors and warnings
     var annotations = [];
     var addAnnotation = function (str, type) {
-        var match = str.match(/^Line (\d+):(\d+):(.+)/);
+        var match = str.match(/^Line (\d+):(\d+):([\s\S]+)/);
         if (!match) {
             alert(str);
             return;
