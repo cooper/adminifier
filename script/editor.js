@@ -331,7 +331,7 @@ ae.handlePageDisplayResult = function (res) {
         };
         var row = match[1] - 1,
             col = match[2],
-            errorText = match[3].trim();
+            errorText = match[3].trim().replace(/\n/g, '\u2424');
         annotations.push({
             row:    row,
             column: col,
