@@ -321,29 +321,37 @@ ae.handlePageDisplayResult = function (res) {
     if (!res)
         return;
 
-    // seems to have no issues
-    if (res.type != 'not found' || res.draft) {
-        editor.session.clearAnnotations();
-        return;
-    }
-
-    // highlight the line that had an error
-    var match = res.error.match(/^Line (\d+):(\d):(.+)/);
-    if (match) {
+    // annotate errors and warnings
+    var annotations = [];
+    var addAnnotation = function (str, type) {
+        var match = str.match(/^Line (\d+):(\d):(.+)/);
+        if (!match) {
+            alert(str);
+            return;
+        };
         var row = match[1] - 1,
             col = match[2],
             errorText = match[3].trim();
-        editor.session.setAnnotations([{
+        annotations.push({
             row:    row,
             column: col,
             text:   errorText,
-            type:   "error"
-        }]);
-    }
+            type:   type
+        });
+    };
 
-    // otherwise alert the error
+    // warnings
+    if (res.warnings != null)
+        res.warnings.each(function (msg) { addAnnotation(msg, "warning"); });
+
+    // error
+    if (res.error != null)
+        addAnnotation(res.error, "error");
+
+    if (annotations.length)
+        editor.session.setAnnotations(annotations);
     else
-        alert(res.error);
+        editor.session.clearAnnotations();
 };
 
 ae.wrapTextFunction = wrapTextFunction;
