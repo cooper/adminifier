@@ -11,7 +11,7 @@
 <!doctype html>
 <html>
 <head>
-
+<meta charset="utf-8" />
 <title><?= htmlspecialchars($wiki_name) ?></title>
 <link type="text/css" rel="stylesheet" href="style/main.css" />
 <link type="text/css" rel="stylesheet" href="style/navigation.css" />
@@ -36,7 +36,6 @@ var adminifier = {
 <script type="text/javascript" src="script/adminifier.js"></script>
 <script type="text/javascript" src="script/notifications.js"></script>
 <script type="text/javascript" src="script/modal-window.js"></script>
-<meta charset="utf-8" />
 
 </head>
 <body>

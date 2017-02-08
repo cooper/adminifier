@@ -5,9 +5,9 @@ document.addEvent('pageUnloaded', unloadedHandler);
 
 var ae;
 function loadedHandler () {
-    ae = adminifier.editor;
+    ae = a.editor;
     if (!ae) {
-        console.log('editorLoaded fired without editor?', adminifier);
+        console.log('editorLoaded fired without editor?', a);
         return;
     }
     console.log('Editor tools script loaded');
