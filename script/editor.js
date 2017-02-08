@@ -323,10 +323,11 @@ ae.handlePageDisplayResult = function (res) {
 
     // annotate errors and warnings
     var annotations = [];
-    var addAnnotation = function (str, type) {
+    var addAnnotation = function (str, type, isDraft) {
         var match = str.match(/^Line (\d+):(\d+):([\s\S]+)/);
         if (!match) {
-            alert(str);
+            if (!isDraft)
+                alert(str);
             return;
         };
         var row = match[1] - 1,
@@ -346,7 +347,7 @@ ae.handlePageDisplayResult = function (res) {
 
     // error
     if (res.error != null)
-        addAnnotation(res.error, "error");
+        addAnnotation(res.error, "error", res.draft);
 
     if (annotations.length)
         editor.session.setAnnotations(annotations);
