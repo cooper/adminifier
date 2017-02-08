@@ -1,7 +1,9 @@
 (function (a) {
 
-setInterval(pingServer, 20000);
-pingServer();
+document.addEvent('domready', function () {
+    setInterval(pingServer, 20000);
+    pingServer();
+});
 
 function pingServer () {
     var req = new Request.JSON({
