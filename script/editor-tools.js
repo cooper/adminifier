@@ -6,6 +6,10 @@ document.addEvent('pageUnloaded', unloadedHandler);
 var ae;
 function loadedHandler () {
     ae = adminifier.editor;
+    if (!ae) {
+        console.log('editorLoaded fired without editor?', adminifier);
+        return;
+    }
     console.log('Editor tools script loaded');
 
     // add toolbar functions
