@@ -103,6 +103,14 @@ function link_to ($page) {
                     $page->title    :
                     $page->file
                 ?>
+                <?=
+                    isset($page->redirect) && $page->redirect ?
+                    ' (Redirect)' : ''
+                ?>
+                <?=
+                    isset($page->draft) && $page->draft ?
+                    ' (Draft)' : ''
+                ?>
             </a>
         </td>
         <td class="author info">
