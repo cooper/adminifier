@@ -45,12 +45,12 @@ var adminifier = {
     <span class="top-title create-title"><a class="frame-click" href="#!/create-page"><i class="fa fa-plus-circle"></i> New page</a></span>
     <input id="top-search" type="text" placeholder="Search..." />
     <span class="top-title wiki-title"><?= $wiki_name ?></span>
-    <span id="page-title" class="top-title page-title"><i class="fa fa-home"></i> Dashboard</span>
+    <span id="page-title" class="top-title page-title"><i class="fa fa-home"></i></span>
 </div>
 
 <div id="navigation-sidebar">
     <ul id="navigation">
-        <li data-nav="dashboard" class="active"><a class="frame-click" href="#!/dashboard"><i class="fa fa-home"></i> <span>Dashboard</span></a></li>
+        <li data-nav="dashboard"><a class="frame-click" href="#!/dashboard"><i class="fa fa-home"></i> <span>Dashboard</span></a></li>
         <li data-nav="pages"><a class="frame-click" href="#!/pages"><i class="fa fa-file-text"></i> <span>Pages</span></a></li>
         <li data-nav="categories"><a class="frame-click" href="#!/categories"><i class="fa fa-list"></i> <span>Categories</span></a></li>
         <li data-nav="images"><a class="frame-click" href="#!/images"><i class="fa fa-picture-o"></i> <span>Images</span></a></li>
