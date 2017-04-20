@@ -103,8 +103,10 @@ function displayLoginWindow () {
             secure: true,
             onSuccess: function (data) {
                 if (!data.success) {
-                    alert('WRONG!'); // FIXME
-                    inputs.each(function (i) { i.set('disabled', false); });
+                    inputs.each(function (i) {
+                        i.flash('#D45D5D', '#fff');
+                        i.set('disabled', false);
+                    });
                     return;
                 }
                 loginWindow.content.innerHTML = tmpl('tmpl-login-check', {});

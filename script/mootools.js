@@ -1,4 +1,4 @@
-/* MooTools: the javascript framework. license: MIT-style license. copyright: Copyright (c) 2006-2015 [Valerio Proietti](http://mad4milk.net/).*/ 
+/* MooTools: the javascript framework. license: MIT-style license. copyright: Copyright (c) 2006-2015 [Valerio Proietti](http://mad4milk.net/).*/
 /*
 Web Build: http://mootools.net/core/builder/e426a9ae7167c5807b173d5deff673fc
 */
@@ -2791,7 +2791,7 @@ Document.implement({
 	newElement: function(tag, props){
 		if (props){
 			if (props.checked != null) props.defaultChecked = props.checked;
-			if ((props.type == 'checkbox' || props.type == 'radio') && props.value == null) props.value = 'on'; 
+			if ((props.type == 'checkbox' || props.type == 'radio') && props.value == null) props.value = 'on';
 			/*<ltIE9>*/ // IE needs the type to be set before changing content of style element
 			if (!canChangeStyleHTML && tag == 'style'){
 				var styleElement = document.createElement('style');
@@ -5826,7 +5826,7 @@ JSON.secure = true;
 JSON.decode = function(string, secure){
 	if (!string || typeOf(string) != 'string') return null;
     
-	if (secure == null) secure = JSON.secure; 
+	if (secure == null) secure = JSON.secure;
 	if (secure){
 		if (JSON.parse) return JSON.parse(string);
 		if (!JSON.validate(string)) throw new Error('JSON could not decode the input; security is enabled and the value is not secure.');
@@ -6067,7 +6067,7 @@ window.addEvent('load', function(){
 
 })(window, document);
 
-/* MooTools: the javascript framework. license: MIT-style license. copyright: Copyright (c) 2006-2015 [Valerio Proietti](http://mad4milk.net/).*/ 
+/* MooTools: the javascript framework. license: MIT-style license. copyright: Copyright (c) 2006-2015 [Valerio Proietti](http://mad4milk.net/).*/
 /*
 Web Build: http://mootools.net/more/builder/28813f306744202aa05dc3523d3b5cef
 */
@@ -7831,7 +7831,7 @@ String.implement({
 
 })();
 
-/* MooTools: the javascript framework. license: MIT-style license. copyright: Copyright (c) 2006-2015 [Valerio Proietti](http://mad4milk.net/).*/ 
+/* MooTools: the javascript framework. license: MIT-style license. copyright: Copyright (c) 2006-2015 [Valerio Proietti](http://mad4milk.net/).*/
 /*
 Web Build: http://mootools.net/more/builder/f0a7dbca6fb717ef78f4d62f62b6439f
 */
@@ -7956,3 +7956,25 @@ Array.implement({
 });
 
 })();
+
+/* https://davidwalsh.name/mootools-gone-wild-implement-element-flashing */
+Element.implement({
+	flash: function(to,from,reps,prop,dur) {
+		
+		//defaults
+		if(!reps) { reps = 1; }
+		if(!prop) { prop = 'background-color'; }
+		if(!dur) { dur = 250; }
+		
+		//create effect
+		var effect = new Fx.Tween(this, {
+				duration: dur,
+				link: 'chain'
+			})
+		
+		//do it!
+		for(x = 1; x <= reps; x++) {
+			effect.start(prop,from,to).start(prop,to,from);
+		}
+	}
+});
