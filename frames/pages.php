@@ -120,7 +120,7 @@ function link_to ($page) {
         </td>
         <? if ($list_type == 'images'): ?>
             <td class="dimensions info">
-                800x600
+                <?= $page->width.'x'.$page->height ?>
             </td>
         <? endif; ?>
         <td class="author info">
