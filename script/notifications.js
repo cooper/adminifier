@@ -116,7 +116,7 @@ function displayLoginWindow () {
                         
                         // flash text fields and immediately enable them
                         else {
-                            i.flash('#D45D5D', '#fff');
+                            i.flash('#F78383', '#fff');
                             i.set('disabled', false);
                         }
                         
