@@ -103,12 +103,12 @@ function link_to ($page) {
                     $page->title    :
                     $page->file
                 ?>
-                <?= if (isset($page->redirect) && $page->redirect): ?>
+                <? if (isset($page->redirect) && $page->redirect): ?>
                     <span class="pageinfo">Redirect</span>
-                <?= endif; ?>
-                <?= if (isset($page->draft) && $page->draft): ?>
+                <? endif; ?>
+                <? if (isset($page->draft) && $page->draft): ?>
                     <span class="pageinfo">Draft</span>
-                <?= endif; ?>
+                <? endif; ?>
             </a>
         </td>
         <td class="author info">
