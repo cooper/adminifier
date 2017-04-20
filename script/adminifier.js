@@ -304,7 +304,7 @@ function searchHandler () {
 		var text = s.get('value');
 		if (!a.currentData || !a.currentData['data-search'])
 			return;
-		a.currentData['data-search'](text);
+		window[a.currentData['data-search']](text);
 	});
 }
 
