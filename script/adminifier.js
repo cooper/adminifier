@@ -193,6 +193,7 @@ function handlePageData (data) {
     console.log(data);
     a.currentData = data;
     $('content').setStyle('user-select', 'none');
+	$('content').tween('opacity', 0);
 
     // window redirect
     var target = data['data-wredirect'];
@@ -230,6 +231,7 @@ function handlePageData (data) {
         scriptsLoaded++;
         if (scriptsToLoad > scriptsLoaded) return;
         $('content').setStyle('user-select', 'all');
+		$('content').tween('opacity', 1);
         pageScriptsDone = true;
         document.fireEvent('pageScriptsLoaded');
     };
