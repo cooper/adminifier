@@ -300,11 +300,11 @@ function SSV (str) {
 
 function searchHandler () {
 	var s = $('top-search');
-	s.addEvent('change', function () {
+	s.addEvent('keyup', function () {
 		var text = s.get('value');
-		if (!currentData || !currentData['data-search'])
+		if (!a.currentData || !a.currentData['data-search'])
 			return;
-		currentData['data-search'](text);
+		a.currentData['data-search'](text);
 	});
 }
 
