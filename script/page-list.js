@@ -9,3 +9,14 @@
         ' <i class="fa fa-' + char +
         '" style="padding-left: 3px; width: 1em;"></i>';
 })(adminifier.currentData);
+
+function pageSearch (text) {
+    $$('#page-list tbody tr').each(function (tr) {
+        var matchingColumns = 0;
+        tr.getElements('td').each(function (td) {
+            if (text == '' || td.innerText.match(text))
+                matchingColumns++;
+        });
+        tr.setStyle('display', matchingColumns ? 'table-row' : 'none');
+    });
+}

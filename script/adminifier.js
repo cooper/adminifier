@@ -33,6 +33,7 @@ a.safeName = function (name) {
 
 window.addEvent('hashchange', hashLoad);
 document.addEvent('domready', hashLoad);
+document.addEvent('domready', searchHandler)
 document.addEvent('keyup', handleEscapeKey);
 
 function frameLoad (page) {
@@ -295,6 +296,16 @@ function SSV (str) {
     if (typeof str != 'string' || !str.length)
         return [];
     return str.split(' ');
+}
+
+function searchHandler () {
+	var s = $('top-search');
+	s.addEvent('change', function () {
+		var text = s.get('value');
+		if (!currentData || !currentData['data-search'])
+			return;
+		currentData['data-search'](text);
+	});
 }
 
 })(adminifier);
