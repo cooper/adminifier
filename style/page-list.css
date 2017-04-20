@@ -70,7 +70,8 @@
     font-size: small;
     text-transform: uppercase;
     font-weight: bold;
-    color: #444;
+    color: #555;
+    margin: 0 8px;
 }
 
 /* toolbar */
