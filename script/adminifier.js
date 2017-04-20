@@ -48,6 +48,7 @@ function frameLoad (page) {
         idx = page.length;
     page = page.slice(0, idx) + '.php' + page.slice(idx);
 
+	var newContent = new Element('div', { id: 'content' });
     var request = new Request({
         url: 'frames/' + page,
         onSuccess: function (html) {
@@ -59,10 +60,10 @@ function frameLoad (page) {
             }
 
             // set the content
-            $('content').innerHTML = html;
+            newContent.innerHTML = html;
 
             // find HTML metadata
-            var meta = $('content').getElement('meta');
+            var meta = newContent.getElement('meta');
             if (meta) {
                 var attrs = meta.getProperties(
 
@@ -83,7 +84,7 @@ function frameLoad (page) {
                 'data-sort'         // page-list.php
 
                 );
-                handlePageData(attrs);
+                handlePageData(attrs, newContent);
             }
         },
         onFail: function (html) {
@@ -109,17 +110,17 @@ function hashLoad() {
 
 var flagOptions = {
     'no-margin': {
-        init: function () {
-            $('content').addClass('no-margin');
+        init: function (content) {
+            content.addClass('no-margin');
         },
-        destroy: function () {
-            $('content').removeClass('no-margin');
+        destroy: function (content) {
+            content.removeClass('no-margin');
         }
     },
     'compact-sidebar': {
-        init: function () {
+        init: function (content) {
             $('navigation-sidebar').tween('width', '50px');
-            $('content').tween('margin-left', '50px');
+            content.tween('margin-left', '50px');
             $$('#navigation-sidebar li a').each(function (a) {
                 a.getElement('span').fade('out');
                 a.addEvents({
@@ -128,9 +129,9 @@ var flagOptions = {
                 });
             });
         },
-        destroy: function () {
+        destroy: function (content) {
             $('navigation-sidebar').tween('width', '170px');
-            $('content').tween('margin-left', '170px');
+            content.tween('margin-left', '170px');
             $$('#navigation-sidebar li a').each(function (a) {
                 a.getElement('span').fade('in');
                 a.removeEvents({
@@ -187,7 +188,7 @@ function handleEscapeKey (e) {
         container.retrieve('modal').destroy();
 }
 
-function handlePageData (data) {
+function handlePageData (data, newContent) {
     pageScriptsDone = false;
 
     console.log(data);
@@ -229,7 +230,11 @@ function handlePageData (data) {
     var scriptLoaded = function () {
         scriptsLoaded++;
         if (scriptsToLoad > scriptsLoaded) return;
-        $('content').setStyle('user-select', 'all');
+		
+		// replace the content
+		newContent.replaces($('content'));
+        newContent.setStyle('user-select', 'all');
+		
         pageScriptsDone = true;
         document.fireEvent('pageScriptsLoaded');
     };
@@ -271,14 +276,14 @@ function handlePageData (data) {
     if (a.currentFlags)
         a.currentFlags.each(function (flag) {
             if (flag.destroy)
-                flag.destroy();
+                flag.destroy($('content'));
         });
     a.currentFlags = [];
     SSV(data['data-flags']).each(function (flagName) {
         var flag = flagOptions[flagName];
         if (!flag) return;
         a.currentFlags.push(flag);
-        flag.init();
+        flag.init(newContent);
     });
 }
 
