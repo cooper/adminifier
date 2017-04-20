@@ -41,6 +41,7 @@
 }
 
 #page-list thead th {
+    position: fixed;
     background-color: #696969;
     color: #E2E2E2;
     white-space: nowrap;
