@@ -71,7 +71,8 @@ function link_to ($page) {
 <? endif; ?>
     data-scripts="page-list"
     data-styles="page-list"
-    data-flags="no-margin"
+    data-flags="no-margin search"
+    data-search="pageSearch"
     data-sort="<?= $sort.$order ?>"
 />
 

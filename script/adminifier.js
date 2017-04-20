@@ -77,6 +77,7 @@ function frameLoad (page) {
                 'data-scripts',     // SSV script names w/o extensions
                 'data-styles',      // SSV css names w/o extensions
                 'data-flags',       // SSV page flags
+				'data-search', 		// name of function to call on search
 
                 // Used by specific pages
 
@@ -143,7 +144,15 @@ var flagOptions = {
                 p.parentElement.removeChild(p);
             });
         }
-    }
+    },
+	'search': {
+		init: function() {
+			$('top-search').setStyle('display', 'inline-block');
+		},
+		destroy: function () {
+			$('top-search').setStyle('display', 'none');
+		}
+	}
 };
 
 function handleCompactSidebarMouseenter (e) {
