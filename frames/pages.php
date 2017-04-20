@@ -32,7 +32,7 @@ function sort_method ($type) {
     global $sort, $order, $list_type;
     $prefix = "#!/$list_type?sort=";
     if ($type == $sort)
-        return $order == '-' ? $prefix.$type.'+' : $prefix.$type.'-';
+        return $order == '-' ? $prefix.$type.'%2B' : $prefix.$type.'-';
     return $prefix.$type.'-';
 }
 
