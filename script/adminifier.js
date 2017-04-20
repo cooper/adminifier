@@ -149,6 +149,7 @@ var flagOptions = {
 	'search': {
 		init: function() {
 			$('top-search').setStyle('display', 'inline-block');
+			searchUpdate();
 		},
 		destroy: function () {
 			$('top-search').setStyle('display', 'none');
@@ -300,7 +301,6 @@ function SSV (str) {
 
 function searchHandler () {
 	$('top-search').addEvent('keyup', searchUpdate);
-	searchUpdate();
 }
 
 function searchUpdate () {
