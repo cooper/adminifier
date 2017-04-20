@@ -10,7 +10,7 @@ require_once(__DIR__.'/../functions/utils.php');
 // create a random page name
 $new_page = 'untitled_'.uniqid().'.page';
 
-$_time   = time();
+$_time   = gmdate('D, d M Y H:i:s T');
 $_author = $user_info->realname;
 
 // set fake post variables
