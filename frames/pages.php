@@ -77,7 +77,9 @@ function link_to ($page) {
 <thead>
     <th class="checkbox"><input type="checkbox" value="0" /></th>
     <th class="title" data-sort="a">
-        <a class="frame-click" href="<?= sort_method('a') ?>">Title</a>
+        <a class="frame-click" href="<?= sort_method('a') ?>">
+            <?= isset($title_column) ? $title_column : 'Title' ?>
+        </a>
     </th>
     <th class="author info" data-sort="u">
         <a class="frame-click" href="<?= sort_method('u') ?>">Author</a>
