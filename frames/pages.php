@@ -4,7 +4,7 @@ if (!isset($list_type))
     $list_type = 'pages';
 
 // find the sort method
-$valid_types = array('a', 'c', 'u', 'm');
+$valid_types = array('a', 'c', 'u', 'm', 'd');
 $sort  = 'm';
 $order = '-';
 if (isset($_GET['sort'])) {
