@@ -96,6 +96,12 @@ function displayLoginWindow () {
     // attempt to login remotely
     var inputs = loginWindow.content.getElements('input');
     var attemptLogin = function () {
+        
+        // if the submit button is disabled, do not allow this
+        if (loginWindow.content.getElement('input[type=submit]').get('disabled'))
+            return;
+        
+        // disable the inputs temporarily
         inputs.each(function (i) { i.set('disabled', true); });
 
         var req = new Request.JSON({
