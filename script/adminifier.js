@@ -148,6 +148,7 @@ var flagOptions = {
     },
 	'search': {
 		init: function() {
+			$('top-search').set('value', '');
 			$('top-search').setStyle('display', 'inline-block');
 			searchUpdate();
 		},
