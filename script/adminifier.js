@@ -299,13 +299,15 @@ function SSV (str) {
 }
 
 function searchHandler () {
-	var s = $('top-search');
-	s.addEvent('keyup', function () {
-		var text = s.get('value');
-		if (!a.currentData || !a.currentData['data-search'])
-			return;
-		window[a.currentData['data-search']](text);
-	});
+	$('top-search').addEvent('keyup', searchUpdate);
+	searchUpdate();
+}
+
+function searchUpdate () {
+	var text = $('top-search').get('value');
+	if (!a.currentData || !a.currentData['data-search'])
+		return;
+	window[a.currentData['data-search']](text);
 }
 
 })(adminifier);
