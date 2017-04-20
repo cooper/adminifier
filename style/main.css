@@ -125,3 +125,10 @@ i.fa.right {
     width: 100px;
     color: #111;
 }
+
+#login-window-check {
+    text-align: center;
+    line-height: 60px;
+    height: 60px;
+    color: #51B068;
+}
