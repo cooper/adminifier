@@ -121,6 +121,7 @@ div.navigation-popover {
     margin: 8px 0;
     background-color: #666;
     color: #fff;
+    width: 150px;
     display: none;
 }
 
