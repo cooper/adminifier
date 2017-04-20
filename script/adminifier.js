@@ -308,7 +308,10 @@ function searchUpdate () {
 	var text = $('top-search').get('value');
 	if (!a.currentData || !a.currentData['data-search'])
 		return;
-	window[a.currentData['data-search']](text);
+	var searchFunc = window[a.currentData['data-search']];
+	if (!searchFunc)
+		return;
+	searchFunc(text);
 }
 
 })(adminifier);
