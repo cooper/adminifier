@@ -102,10 +102,24 @@ function displayLoginWindow () {
             url: 'functions/login.php',
             secure: true,
             onSuccess: function (data) {
+                
+                // incorrect credentials probably
                 if (!data.success) {
                     inputs.each(function (i) {
-                        i.flash('#D45D5D', '#fff');
-                        i.set('disabled', false);
+                        
+                        // enable submit button after 1 second
+                        if (i.get('type') == 'submit') {
+                            setTimeout(function() {
+                                i.set('disabled', false);
+                            }, 1000);
+                        }
+                        
+                        // flash text fields and immediately enable them
+                        else {
+                            i.flash('#D45D5D', '#fff');
+                            i.set('disabled', false);
+                        }
+                        
                     });
                     return;
                 }
