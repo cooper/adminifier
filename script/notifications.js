@@ -107,7 +107,10 @@ function displayLoginWindow () {
                     inputs.each(function (i) { i.set('disabled', false); });
                     return;
                 }
-                loginWindow.destroy(true);
+                loginWindow.content.innerHTML = tmpl('tmpl-login-check', {});
+                setTimeout(function () {
+                    loginWindow.destroy(true);
+                }, 1000);
             },
             onError: giveUp,
             onFailure: giveUp
