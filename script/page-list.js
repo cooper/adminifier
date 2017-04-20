@@ -13,8 +13,10 @@
 function pageSearch (text) {
     $$('#page-list tbody tr').each(function (tr) {
         var matchingColumns = 0;
-        tr.getElements('td').each(function (td) {
-            if (text == '' || td.innerText.match(text))
+        if (text == '')
+            matchingColumns++;
+        else tr.getElements('td').each(function (td) {
+            if (td.innerText.match(new RegExp(text, 'i')))
                 matchingColumns++;
         });
         tr.setStyle('display', matchingColumns ? 'table-row' : 'none');
