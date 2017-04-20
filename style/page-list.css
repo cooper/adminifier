@@ -62,7 +62,7 @@
     background-color: #fff;
 }
 
-#page-list tbody tr:nth-child(even) {
+#page-list tbody tr[display="table-row"]:nth-child(even) {
     background-color: #eee;
 }
 
