@@ -81,6 +81,11 @@ function link_to ($page) {
             <?= isset($title_column) ? $title_column : 'Title' ?>
         </a>
     </th>
+    <? if ($list_type == 'images'): ?>
+        <th class="dimensions info" data-sort="d">
+            <a class="frame-click" href="<?= sort_method('d') ?>">Dimensions</a>
+        </th>
+    <? endif; ?>
     <th class="author info" data-sort="u">
         <a class="frame-click" href="<?= sort_method('u') ?>">Author</a>
     </th>
@@ -113,6 +118,11 @@ function link_to ($page) {
                 <? endif; ?>
             </a>
         </td>
+        <? if ($list_type == 'images'): ?>
+            <td class="dimensions info">
+                800x600
+            </td>
+        <? endif; ?>
         <td class="author info">
             <?=
                 isset($page->author) ?
