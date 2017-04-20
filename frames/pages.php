@@ -118,11 +118,14 @@ function link_to ($page) {
                 <? if (isset($page->draft) && $page->draft): ?>
                     <span class="pageinfo">Draft</span>
                 <? endif; ?>
+                <? if ($list_type == 'images' && !$page->width): ?>
+                    <span class="pageinfo">Missing</span>
+                <? endif; ?>
             </a>
         </td>
         <? if ($list_type == 'images'): ?>
             <td class="dimensions info">
-                <?= $page->width.'x'.$page->height ?>
+                <? if ($page->width) echo $page->width.'x'.$page->height; ?>
             </td>
         <? endif; ?>
         <td class="author info">
