@@ -234,6 +234,7 @@ function handlePageData (data) {
     if (li) {
         $$('li.active').each(function (li) { li.removeClass('active') });
         li.addClass('active');
+		li.getElement('i').addClass('fa-spin');
     }
 
     // don't show the content until all scripts have loaded
@@ -242,6 +243,7 @@ function handlePageData (data) {
         scriptsLoaded++;
         if (scriptsToLoad > scriptsLoaded) return;
         $('content').setStyle('user-select', 'all');
+		if (li) li.getElement('i').removeClass('fa-spin');
         pageScriptsDone = true;
         document.fireEvent('pageScriptsLoaded');
     };
