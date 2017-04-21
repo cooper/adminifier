@@ -19,7 +19,8 @@ function loadedHandler () {
         options:    displayPageOptionsWindow,
         view:       openPageInNewTab,
         delete:     displayDeleteConfirmation,
-        save:       displaySaveHelper
+        save:       displaySaveHelper,
+        revisions:  displayRevisionViewer
     });
 
     // add keyboard shortcuts
@@ -409,6 +410,19 @@ function resetAutosaveInterval () {
 function clearAutosaveInterval () {
     if (autosaveInterval != null)
         clearInterval(autosaveInterval);
+}
+
+// REVISION VIEWER
+
+function displayRevisionViewer () {
+    var li   = $$('li[data-action="revisions"]')[0];
+    var rect = li.getBoundingClientRect();
+    var box  = ae.createPopupBox(rect.left, rect.top + li.offsetHeight);
+    box.innerHTML = tmpl('tmpl-revision-viewer', {});
+    [1,2,3,4,5].each(function () {
+        var row = tmpl('tmpl-revision-row', {});
+        box.appendChild(row);
+    });
 }
 
 // DELETE CONFIRMATION

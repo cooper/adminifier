@@ -38,6 +38,18 @@
     <div id="editor-color-names"></div>
 </script>
 
+<script type="text/x-tmpl" id="tmpl-revision-viewer">
+    <div id="editor-revisions"></div>
+</script>
+
+<script type="text/x-tmpl" id="tmpl-revision-row">
+    <div id="editor-revision-row">
+        <b>Updated test.page</b><br />
+        Mitchell Cooper<br />
+        21 April 2017 2:22 AM EST
+    </div>
+</script>
+
 <script type="text/x-tmpl" id="tmpl-color-name">
     <span style="padding-left: 10px;">{%= o.colorName %}</span>
 </script>
