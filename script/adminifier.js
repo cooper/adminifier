@@ -26,6 +26,10 @@ a.updatePageTitle = function (title, titleTagOnly) {
     document.title = title + ' | ' + a.wikiName;
 };
 
+a.updateIcon = function (icon) {
+	$('page.title').getElement('i').set('class', 'fa fa-' + icon);
+};
+
 // safe page/category name
 a.safeName = function (name) {
     return name.replace(/[^\w\.\-]/g, '_');
@@ -34,7 +38,6 @@ a.safeName = function (name) {
 window.addEvent('hashchange', hashLoad);
 document.addEvent('domready', hashLoad);
 document.addEvent('domready', searchHandler);
-document.addEvent('domready', spinLi);
 document.addEvent('keyup', handleEscapeKey);
 
 function frameLoad (page) {
@@ -50,6 +53,7 @@ function frameLoad (page) {
         idx = page.length;
     page = page.slice(0, idx) + '.php' + page.slice(idx);
 
+	a.updateIcon('circle-o-notch fa-spin');
     var request = new Request({
         url: 'frames/' + page,
         onSuccess: function (html) {
@@ -225,7 +229,6 @@ function handlePageData (data) {
     }
 
     // page title and icon
-    $('page-title').innerHTML = tmpl('tmpl-page-title', data);
     a.updatePageTitle(data['data-title'], true);
     window.scrollTo(0, 0);
     // ^ not sure if scrolling necessary when setting display: none
@@ -243,10 +246,7 @@ function handlePageData (data) {
         scriptsLoaded++;
         if (scriptsToLoad > scriptsLoaded) return;
         $('content').setStyle('user-select', 'all');
-		$$('li i.fa-spin').each(function (i) {
-			i.removeClass('fa-spin');
-			i.removeClass('fa-circle-o-notch');
-		});
+		a.updateIcon(data['data-icon']);
         pageScriptsDone = true;
         document.fireEvent('pageScriptsLoaded');
     };
@@ -319,17 +319,6 @@ function searchUpdate () {
 	if (!searchFunc)
 		return;
 	searchFunc(text);
-}
-
-function spinLi () {
-	$$('#navigation li').each(function (li) {
-		var i = li.getElement('i');
-		if (!i) return;
-		li.addEvent('click', function () {
-			i.addClass('fa-spin');
-			i.addClass('fa-circle-o-notch');
-		});
-	});
 }
 
 })(adminifier);
