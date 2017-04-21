@@ -33,7 +33,8 @@ a.safeName = function (name) {
 
 window.addEvent('hashchange', hashLoad);
 document.addEvent('domready', hashLoad);
-document.addEvent('domready', searchHandler)
+document.addEvent('domready', searchHandler);
+document.addEvent('domready', spinLi);
 document.addEvent('keyup', handleEscapeKey);
 
 function frameLoad (page) {
@@ -234,7 +235,6 @@ function handlePageData (data) {
     if (li) {
         $$('li.active').each(function (li) { li.removeClass('active') });
         li.addClass('active');
-		li.getElement('i').addClass('fa-spin');
     }
 
     // don't show the content until all scripts have loaded
@@ -243,7 +243,7 @@ function handlePageData (data) {
         scriptsLoaded++;
         if (scriptsToLoad > scriptsLoaded) return;
         $('content').setStyle('user-select', 'all');
-		if (li) li.getElement('i').removeClass('fa-spin');
+		$$('li i.fa-spin').each(function (i) { i.removeClass('fa-spin') });
         pageScriptsDone = true;
         document.fireEvent('pageScriptsLoaded');
     };
@@ -266,20 +266,22 @@ function handlePageData (data) {
         script.addEvent('load', scriptLoaded);
         document.head.appendChild(script);
     });
-    scriptLoaded(); // call once in case there are no scripts
 
     // inject styles
     $$('link.dynamic').each(function (link) { link.destroy(); });
     SSV(data['data-styles']).each(function (style) {
         if (!style.length) return;
+		scriptsToLoad++;
         var link = new Element('link', {
             href:  'style/' + style + '.css',
             class: 'dynamic',
             type:  'text/css',
             rel:   'stylesheet'
         });
+		link.addEvent('load', scriptLoaded);
         document.head.appendChild(link);
     });
+	scriptLoaded(); // call once in case there are no scripts
 
     // handle page flags
     if (a.currentFlags)
@@ -314,6 +316,14 @@ function searchUpdate () {
 	if (!searchFunc)
 		return;
 	searchFunc(text);
+}
+
+function spinLi () {
+	$$('#navigation li').each(function (li) {
+		var i = li.getElement('i');
+		if (!i) return;
+		li.addEvent('click', function () { i.addClass('fa-spin'); });
+	});
 }
 
 })(adminifier);
