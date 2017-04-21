@@ -243,7 +243,10 @@ function handlePageData (data) {
         scriptsLoaded++;
         if (scriptsToLoad > scriptsLoaded) return;
         $('content').setStyle('user-select', 'all');
-		$$('li i.fa-spin').each(function (i) { i.removeClass('fa-spin') });
+		$$('li i.fa-spin').each(function (i) {
+			i.removeClass('fa-spin');
+			i.removeClass('fa-circle-o-notch');
+		});
         pageScriptsDone = true;
         document.fireEvent('pageScriptsLoaded');
     };
@@ -322,7 +325,10 @@ function spinLi () {
 	$$('#navigation li').each(function (li) {
 		var i = li.getElement('i');
 		if (!i) return;
-		li.addEvent('click', function () { i.addClass('fa-spin'); });
+		li.addEvent('click', function () {
+			i.addClass('fa-spin');
+			i.addClass('fa-circle-o-notch');
+		});
 	});
 }
 
