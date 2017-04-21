@@ -229,7 +229,7 @@ function handlePageData (data) {
     }
 
     // page title and icon
-    a.updatePageTitle(data['data-title'], true);
+    a.updatePageTitle(data['data-title']);
     window.scrollTo(0, 0);
     // ^ not sure if scrolling necessary when setting display: none
 
