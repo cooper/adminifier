@@ -419,9 +419,10 @@ function displayRevisionViewer () {
     var rect = li.getBoundingClientRect();
     var box  = ae.createPopupBox(rect.left, rect.top + li.offsetHeight);
     box.innerHTML = tmpl('tmpl-revision-viewer', {});
+    var container = box.getElement('#editor-revisions');
     [1,2,3,4,5].each(function () {
         var rowHTML = tmpl('tmpl-revision-row', {});
-        box.innerHTML += rowHTML;
+        container.innerHTML += rowHTML;
     });
     ae.displayPopupBox(box, 500, li);
 }
