@@ -420,8 +420,8 @@ function displayRevisionViewer () {
     var box  = ae.createPopupBox(rect.left, rect.top + li.offsetHeight);
     box.innerHTML = tmpl('tmpl-revision-viewer', {});
     [1,2,3,4,5].each(function () {
-        var row = tmpl('tmpl-revision-row', {});
-        box.appendChild(row);
+        var rowHTML = tmpl('tmpl-revision-row', {});
+        box.innerHTML += rowHTML;
     });
 }
 
