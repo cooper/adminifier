@@ -45,7 +45,7 @@ var adminifier = {
     <span class="top-title create-title"><a class="frame-click" href="#!/create-page"><i class="fa fa-plus-circle"></i> New page</a></span>
     <input id="top-search" type="text" placeholder="Search..." />
     <span class="top-title wiki-title"><?= $wiki_name ?></span>
-    <span id="page-title" class="top-title page-title"><i class="fa fa-home"></i></span>
+    <span id="page-title" class="top-title page-title"><i class="fa fa-home"></i> <span></span></span>
 </div>
 
 <div id="navigation-sidebar">
