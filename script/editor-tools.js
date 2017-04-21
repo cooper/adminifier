@@ -417,14 +417,14 @@ function clearAutosaveInterval () {
 function displayRevisionViewer () {
     var li   = $$('li[data-action="revisions"]')[0];
     var rect = li.getBoundingClientRect();
-    var box  = ae.createPopupBox(rect.left, rect.top + li.offsetHeight);
+    var box  = ae.createPopupBox(rect.right - 300, rect.top + li.offsetHeight);
     box.innerHTML = tmpl('tmpl-revision-viewer', {});
     var container = box.getElement('#editor-revisions');
     [1,2,3,4,5].each(function () {
         var rowHTML = tmpl('tmpl-revision-row', {});
         container.innerHTML += rowHTML;
     });
-    ae.displayPopupBox(box, 500, li);
+    ae.displayPopupBox(box, 300, li);
 }
 
 // DELETE CONFIRMATION
