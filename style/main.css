@@ -14,17 +14,9 @@ body, ul, li {
 }
 
 i.fa {
-    text-align: left;
+    text-align: center;
     width: 1.35em;
-}
-
-i.fa.center {
-    text-align: center !important;
     vertical-align: middle;
-}
-
-i.fa.right {
-    text-align: right !important;
 }
 
 /* MODAL WINDOWS */
