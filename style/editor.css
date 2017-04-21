@@ -139,7 +139,7 @@ div.editor-color-cell {
     cursor: pointer;
 }
 
-div.editor-color-names {
+#editor-color-names {
     float: left;
     width: 100%;
     overflow-y: auto;

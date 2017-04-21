@@ -74,7 +74,7 @@ function displayFontSelector () {
     var rect = li.getBoundingClientRect();
     var box  = ae.createPopupBox(rect.left, rect.top + li.offsetHeight);
     box.innerHTML = tmpl('tmpl-color-helper', {});
-    var container = box.getElement('.editor-color-names');
+    var container = box.getElement('#editor-color-names');
 
     // temporarily add it to the body
     // for when we call getComputedStyle

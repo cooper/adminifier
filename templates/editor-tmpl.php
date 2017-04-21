@@ -35,6 +35,7 @@
 <script type="text/x-tmpl" id="tmpl-color-helper">
     <div id="editor-color-type-hex" class="editor-color-type editor-small-tab active" title="Hex color picker"><i class="fa fa-hashtag"></i></div>
     <div id="editor-color-type-list" class="editor-color-type editor-small-tab" title="Color list"><i class="fa fa-paint-brush"></i></div>
+    <div id="editor-color-names"></div>
 </script>
 
 <script type="text/x-tmpl" id="tmpl-color-name">
