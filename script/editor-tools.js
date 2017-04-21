@@ -423,6 +423,7 @@ function displayRevisionViewer () {
         var rowHTML = tmpl('tmpl-revision-row', {});
         box.innerHTML += rowHTML;
     });
+    ae.displayPopupBox(box, 500, li);
 }
 
 // DELETE CONFIRMATION
