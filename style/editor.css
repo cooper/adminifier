@@ -248,6 +248,11 @@ div.editor-link-type {
     background-color: rgba(0, 0, 0, 0.2);
 }
 
+#editor-revision-row:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+
 /* small tabs used in various popups */
 
 div.editor-small-tab {
