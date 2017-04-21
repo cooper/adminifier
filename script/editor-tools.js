@@ -74,15 +74,7 @@ function displayFontSelector () {
     var rect = li.getBoundingClientRect();
     var box  = ae.createPopupBox(rect.left, rect.top + li.offsetHeight);
     box.innerHTML = tmpl('tmpl-color-helper', {});
-
-    // create a container for scrolling
-    var container = new Element('div', {
-        styles: {
-            overflowY: 'auto',
-            height: '100%',
-            display: 'none'
-        }
-    });
+    var container = box.getElement('.editor-color-names');
 
     // temporarily add it to the body
     // for when we call getComputedStyle
