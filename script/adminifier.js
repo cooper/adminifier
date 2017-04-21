@@ -27,7 +27,7 @@ a.updatePageTitle = function (title, titleTagOnly) {
 };
 
 a.updateIcon = function (icon) {
-	$('page.title').getElement('i').set('class', 'fa fa-' + icon);
+	$('page-title').getElement('i').set('class', 'fa fa-' + icon);
 };
 
 // safe page/category name
