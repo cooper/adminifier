@@ -73,6 +73,7 @@ function displayFontSelector () {
     var li   = $$('li[data-action="font"]')[0];
     var rect = li.getBoundingClientRect();
     var box  = ae.createPopupBox(rect.left, rect.top + li.offsetHeight);
+    box.innerHTML = tmpl('tmpl-color-helper', {});
 
     // create a container for scrolling
     var container = new Element('div', {

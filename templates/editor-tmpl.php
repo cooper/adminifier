@@ -1,8 +1,8 @@
 <script type="text/x-tmpl" id="tmpl-link-helper">
-    <div id="editor-link-type-internal" class="editor-link-type active" title="Page"><i class="fa fa-file-text"></i></div>
-    <div id="editor-link-type-external" class="editor-link-type" title="External wiki page"><i class="fa fa-globe"></i></div>
-    <div id="editor-link-type-category" class="editor-link-type" title="Category"><i class="fa fa-list"></i></div>
-    <div id="editor-link-type-url" class="editor-link-type" title="External URL"><i class="fa fa-external-link"></i></div>
+    <div id="editor-link-type-internal" class="editor-link-type editor-small-tab active" title="Page"><i class="fa fa-file-text"></i></div>
+    <div id="editor-link-type-external" class="editor-link-type editor-small-tab" title="External wiki page"><i class="fa fa-globe"></i></div>
+    <div id="editor-link-type-category" class="editor-link-type editor-small-tab" title="Category"><i class="fa fa-list"></i></div>
+    <div id="editor-link-type-url" class="editor-link-type editor-small-tab" title="External URL"><i class="fa fa-external-link"></i></div>
     <div style="clear: both;"></div>
     <div id="editor-link-wrapper">
     <span id="editor-link-title1">Page target</span><br />
@@ -30,6 +30,11 @@
         <i class="fa fa-3x center fa-question-circle"></i>
     </div>
     <div id="editor-delete-button" class="editor-tool-large-button">Are you sure?</div>
+</script>
+
+<script type="text/x-tmpl" id="tmpl-color-helper">
+    <div id="editor-color-type-hex" class="editor-color-type editor-small-tab active" title="Hex color picker"><i class="fa fa-hashtag"></i></div>
+    <div id="editor-color-type-list" class="editor-color-type editor-small-tab" title="Color list"><i class="fa fa-paint-brush"></i></div>
 </script>
 
 <script type="text/x-tmpl" id="tmpl-color-name">

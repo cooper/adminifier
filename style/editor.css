@@ -127,6 +127,10 @@ div.editor-popup-box {
 
 /* color picker */
 
+div.editor-color-type {
+    width: 50%;
+}
+
 div.editor-color-cell {
     height: 30px;
     color: #fff;
@@ -139,26 +143,6 @@ div.editor-color-cell {
 
 div.editor-link-type {
     width: 75px;
-    display: inline-block;
-    float: left; /* so that spaces don't matter */
-    background-color: #333;
-    text-align: center;
-    height: 30px;
-    line-height: 30px;
-    font-size: 15px;
-    color: #e2e2e2;
-    cursor: pointer;
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-}
-
-div.editor-link-type:hover {
-    background-color: #222;
-}
-
-div.editor-link-type.active {
-    background-color: #555;
 }
 
 #editor-link-wrapper {
@@ -233,4 +217,30 @@ div.editor-link-type.active {
 
 #editor-options-window input:focus {
     outline: none;
+}
+
+/* small tabs used in various popups */
+
+div.editor-small-tab {
+    display: inline-block;
+    float: left; /* so that spaces don't matter */
+    background-color: #333;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    font-size: 15px;
+    color: #e2e2e2;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
+
+
+div.editor-small-tab:hover {
+    background-color: #222;
+}
+
+div.editor-small-tab.active {
+    background-color: #555;
 }
