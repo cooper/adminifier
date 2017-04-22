@@ -492,7 +492,7 @@ function handleDiffClick (box, row, e) {
 
 // DIFF VIEWER
 
-function displayDiffViewer (box, from, to, split) {
+function displayDiffViewer (box, from, to) {
     ae.closePopup(box);
 
     var finish = function (data) {
@@ -502,16 +502,20 @@ function displayDiffViewer (box, from, to, split) {
         }
         
         // run diff2html
-        var html = Diff2Html.getPrettyHtml(data.diff, {
-            outputFormat: split ? 'side-by-side' : 'line-by-line'
-        });
+        var diffHTML, diffWindow;
+        var runDiff = function (split) {
+            diffHTML = Diff2Html.getPrettyHtml(data.diff, {
+                outputFormat: split ? 'side-by-side' : 'line-by-line'
+            });
+            if (diffWindow) diffWindow.content.innerHTML = diffHTML;
+        };
         
         // create a modal window to show the diff in
-        var diffWindow = new ModalWindow({
+        diffWindow = new ModalWindow({
             icon:           'clone',
             title:          'Compare versions',
             padded:         true,
-            html:           html,
+            html:           diffHTML,
             width:          '90%',
             doneText:       'Done',
             id:             'editor-diff-window',
@@ -522,13 +526,17 @@ function displayDiffViewer (box, from, to, split) {
         diffWindow.addButton('Revert', function () { alert('Unimplemented'); });
         
         // switch modes
-        if (split) diffWindow.addButton('Unified', function () {
-            diffWindow.destroy();
-            displayDiffViewer(box, from, to, true);
-        });
-        else diffWindow.addButton('Split', function () {
-            diffWindow.destroy();
-            displayDiffViewer(box, from, to, true);
+        var but, split;
+        but = diffWindow.addButton('Split', function () {
+            if (split) {
+                runDiff(false);
+                split = false;
+                but.innerText = 'Split';
+                return;
+            }
+            runDiff(true);
+            split = true;
+            but.innerText = 'Unified';
         });
         
         diffWindow.show();
