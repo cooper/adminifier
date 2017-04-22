@@ -280,15 +280,16 @@ ae.setLiLoading = function (li, loading, noCircle) {
         if (!openLi(li))
             return;
         li.addClass('sticky');
-        i.store('oldClasses', i.get('class'));
-        if (noCircle)
-            i.addClass('fa-spin');
-        else
+        if (!noCircle) {
+            i.store('oldClasses', i.get('class'));
             i.set('class', 'fa fa-circle-o-notch fa-spin');
-        return;
+        }
+        return true;
     }
     li.removeClass('sticky');
-    i.set('class', i.retrieve('oldClasses'));
+    if (!noCircle)
+        i.set('class', i.retrieve('oldClasses'));
+    return true;
 };
 
 // find an appropriate range for selection

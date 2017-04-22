@@ -359,7 +359,8 @@ function autosave () {
     };
     
     // attempt to save
-    saveRequest(editor.getValue(), 'Autosave', function (data) { // success
+    var saveData = editor.getValue();
+    saveRequest(saveData, 'Autosave', function (data) { // success
         done();
         ae.lastSavedData = saveData;
         ae.handlePageDisplayResult(res);
