@@ -278,13 +278,12 @@ ae.setLiLoading = function (li, loading) {
     var i = li.getElement('i');
     if (loading) {
         li.addClass('sticky');
-        i.addClass('fa-circle-o-notch');
-        i.addClass('fa-spin');
+        i.store('oldClasses', i.get('class'));
+        i.set('class', 'fa fa-circle-o-notch fa-spin');
         return;
     }
     li.removeClass('sticky');
-    i.removeClass('fa-circle-o-notch');
-    i.removeClass('fa-spin');
+    i.set('class', i.retrieve('oldClasses'));
 };
 
 // find an appropriate range for selection
