@@ -441,7 +441,7 @@ function displayRevisionViewer () {
                 'data-commit': rev.id
             });
             row.innerHTML = tmpl('tmpl-revision-row', rev);
-            row.addEvent('click', function (e) { displayDiffViewer(row, e); })
+            row.addEvent('click', function (e) { handleDiffClick(row, e); })
             container.appendChild(row);
         });
         ae.displayPopupBox(box, 300, li);
@@ -459,7 +459,7 @@ function displayRevisionViewer () {
     });
 }
 
-function displayDiffViewer (row, e) {
+function handleDiffClick (row, e) {
     
     // if we can find a previous commit, we need to ask whether
     // to compare to that or the current version
@@ -472,7 +472,7 @@ function displayDiffViewer (row, e) {
     displayDiffViewer(row.get('data-commit'), 'HEAD');
 }
 
-function displayDiffViewer (from, to) {
+function displayDiffViewerF (from, to) {
     console.log("displaying diff viewer from " + from + " to " + to);
 }
 
