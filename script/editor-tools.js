@@ -464,7 +464,7 @@ function displayRevisionViewer () {
             });
             row.innerHTML = tmpl('tmpl-revision-row', rev);
             row.addEvent('click', function (e) {
-                handleDiffClick(box, row, e);
+                handleDiffClick(row, e);
             });
             container.appendChild(row);
         });
@@ -483,13 +483,13 @@ function displayRevisionViewer () {
     });
 }
 
-function handleDiffClick (box, row, e) {
+function handleDiffClick (row, e) {
     
     // no previous commit, so this is the very first one.
     // we can only show the difference from HEAD
     var prevRow = row.getNext();
     if (!prevRow) {
-        displayDiffViewer(box, row.get('data-commit'), null, 'current');
+        displayDiffViewer(row.get('data-commit'), null, 'current');
         return;
     }
         
@@ -500,7 +500,6 @@ function handleDiffClick (box, row, e) {
     // compare it to the previous commit.
     if (!row.getPrevious()) {
         displayDiffViewer(
-            box,
             prevRow.get('data-commit'),
             row.get('data-commit'),
             'previous'
@@ -520,21 +519,19 @@ function handleDiffClick (box, row, e) {
     overlay.getElements('.editor-revision-diff-button').each(function (but, i) {
         but.addEvent('click', function () {
             if (i) displayDiffViewer(
-                box,
                 prevRow.get('data-commit'),
                 row.get('data-commit'),
                 'previous'
             );
-            else displayDiffViewer(box, row.get('data-commit'), null, 'current');
+            else displayDiffViewer(row.get('data-commit'), null, 'current');
+            overlay.destroy();
         });
     });
 }
 
 // DIFF VIEWER
 
-function displayDiffViewer (box, from, to, which) {
-    ae.closePopup(box);
-
+function displayDiffViewer (from, to, which) {
     var finish = function (data) {
         
         // something wrong happened
