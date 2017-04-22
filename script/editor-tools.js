@@ -415,16 +415,35 @@ function clearAutosaveInterval () {
 // REVISION VIEWER
 
 function displayRevisionViewer () {
+    
+    // display the box
     var li   = $$('li[data-action="revisions"]')[0];
     var rect = li.getBoundingClientRect();
     var box  = ae.createPopupBox(rect.right - 300, rect.top + li.offsetHeight);
     box.innerHTML = tmpl('tmpl-revision-viewer', {});
     var container = box.getElement('#editor-revisions');
-    [1,2,3,4,5].each(function () {
-        var rowHTML = tmpl('tmpl-revision-row', {});
-        container.innerHTML += rowHTML;
-    });
     ae.displayPopupBox(box, 300, li);
+
+    // populate it
+    var req = new Request.JSON({
+        url: 'functions/page-revisions.php' + (ae.isModel() ? '?model' : ''),
+        onSuccess: function (data) {
+            if (!box)
+                return;
+            if (!data.success) {
+                alert(data.error);
+                return;
+            }
+            data.revs.each(function (rev) {
+                var row = new Element('div', { class: 'editor-revision-row' });
+                row.innerHTML = tmpl('tmpl-revision-row', rev);
+                container.appendChild(row);
+            });
+        },
+        onFailure: function () { alert('Failed to fetch revision history'); },
+    }).post({
+        page: ae.getFilename()
+    });
 }
 
 // DELETE CONFIRMATION

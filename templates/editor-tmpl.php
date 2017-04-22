@@ -43,11 +43,9 @@
 </script>
 
 <script type="text/x-tmpl" id="tmpl-revision-row">
-    <div id="editor-revision-row">
-        <b>Updated test.page</b><br />
-        Mitchell Cooper<br />
-        21 April 2017 2:22 AM EST
-    </div>
+    <b>{%= o.message %}</b><br />
+    {%= o.author %}<br />
+    {%= o.date %}
 </script>
 
 <script type="text/x-tmpl" id="tmpl-color-name">
