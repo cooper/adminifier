@@ -418,7 +418,7 @@ function displayRevisionViewer () {
     
     // make the li stay open until finish()
     var li = $$('li[data-action="revisions"]')[0];
-    li.addClass('sticky');
+    ae.setLiLoading(li, true);
 
     // create the box
     var rect = li.getBoundingClientRect();
@@ -428,7 +428,7 @@ function displayRevisionViewer () {
     
     // populate and display it
     var finish = function (data) {
-        li.removeClass('sticky');
+        ae.setLiLoading(li, false);
         if (!box)
             return;
         if (!data.success) {
