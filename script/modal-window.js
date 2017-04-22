@@ -96,6 +96,15 @@ var ModalWindow = new Class({
             this.doneButton.setStyle('display', 'inline');
         }
     },
+    
+    addButton: function (text, onClick) {
+        var but = new Element('span', {
+            class: 'modal-done-button',
+            text: text
+        });
+        but.inject(this.icon, 'before');
+        if (onClick) but.addEvent('click', onClick);
+    },
 
     show: function (container) {
         if (!container)

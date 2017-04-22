@@ -55,6 +55,7 @@ i.fa {
     font-size: 12px;
     height: 25px;
     line-height: 25px;
+    margin-left: 16px;
 }
 
 .modal-done-button:hover {

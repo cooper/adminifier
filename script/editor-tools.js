@@ -492,7 +492,7 @@ function handleDiffClick (box, row, e) {
 
 // DIFF VIEWER
 
-function displayDiffViewer (box, from, to) {
+function displayDiffViewer (box, from, to, split) {
     ae.closePopup(box);
 
     var finish = function (data) {
@@ -503,7 +503,7 @@ function displayDiffViewer (box, from, to) {
         
         // run diff2html
         var html = Diff2Html.getPrettyHtml(data.diff, {
-            // outputFormat: TODO
+            outputFormat: split ? 'side-by-side' : 'line-by-line'
         });
         
         // create a modal window to show the diff in
@@ -516,6 +516,19 @@ function displayDiffViewer (box, from, to) {
             doneText:       'Done',
             id:             'editor-diff-window',
             autoDestroy:    true
+        });
+        
+        // revert this commit
+        diffWindow.addButton('Revert', function () { alert('Unimplemented'); });
+        
+        // switch modes
+        if (split) diffWindow.addButton('Unified', function () {
+            diffWindow.destroy();
+            displayDiffViewer(box, from, to, true);
+        });
+        else diffWindow.addButton('Split', function () {
+            diffWindow.destroy();
+            displayDiffViewer(box, from, to, true);
         });
         
         diffWindow.show();
