@@ -463,30 +463,46 @@ function displayRevisionViewer () {
 
 function handleDiffClick (box, row, e) {
     
-    // if we can find a previous commit, we need to ask whether
-    // to compare to that or the current version
+    // no previous commit, so this is the very first one.
+    // we can only show the difference from HEAD
     var prevRow = row.getNext();
-    if (prevRow) {
-        overlayHTML = tmpl('tmpl-revision-overlay', {});
-        row.innerHTML += overlayHTML;
-        var overlay = row.getElement('.editor-revision-overlay');
-        overlay.addEvent('mouseleave', function () {
-            overlay.destroy();
-        });
-        overlay.getElements('.editor-revision-diff-button').each(function (but, i) {
-            but.addEvent('click', function () {
-                if (i) displayDiffViewer(
-                    box,
-                    prevRow.get('data-commit'),
-                    row.get('data-commit')
-                );
-                else displayDiffViewer(box, row.get('data-commit'), null);
-            });
-        });
+    if (!prevRow) {
+        displayDiffViewer(box, row.get('data-commit'), null);
+        return;
+    }
+        
+    // if we can find a previous commit, we may need to ask whether
+    // to compare to that or the current version
+        
+    // if there is no row before this, this is the latest commit
+    if (!row.getPrevious()) {
+        displayDiffViewer(
+            box,
+            prevRow.get('data-commit'),
+            row.get('data-commit')
+        );
         return;
     }
     
-    displayDiffViewer(box, row.get('data-commit'), null);
+    // display buttons to decide which diff to show
+    overlayHTML = tmpl('tmpl-revision-overlay', {});
+    row.innerHTML += overlayHTML;
+    var overlay = row.getElement('.editor-revision-overlay');
+    overlay.addEvent('mouseleave', function () {
+        overlay.destroy();
+    });
+    
+    // on click, display the diff viewer given the from..to
+    overlay.getElements('.editor-revision-diff-button').each(function (but, i) {
+        but.addEvent('click', function () {
+            if (i) displayDiffViewer(
+                box,
+                prevRow.get('data-commit'),
+                row.get('data-commit')
+            );
+            else displayDiffViewer(box, row.get('data-commit'), null);
+        });
+    });
 }
 
 // DIFF VIEWER
@@ -495,8 +511,16 @@ function displayDiffViewer (box, from, to) {
     ae.closePopup(box);
 
     var finish = function (data) {
+        
+        // something wrong happened
         if (!data.success) {
             alert(data.error);
+            return;
+        }
+        
+        // no differences
+        if (typeof data.diff == 'undefined') {
+            alert('No changes');
             return;
         }
         
