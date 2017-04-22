@@ -568,8 +568,10 @@ function displayDiffViewer (box, from, to, which) {
             width:          '90%',
             doneText:       'Done',
             id:             'editor-diff-window',
-            onDone:         function () { box.removeClass('sticky'); },
-            autoDestroy:    true
+            autoDestroy:    true,
+            onDone:         function () {
+                setTimeout(function () { box.removeClass('sticky'); }, 100);
+            },
         });
         
         // revert this commit
