@@ -57,6 +57,8 @@ i.fa {
     line-height: 25px;
     margin-left: 16px;
     user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
 }
 
 .modal-done-button:hover {
