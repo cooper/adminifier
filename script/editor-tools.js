@@ -467,19 +467,21 @@ function handleDiffClick (box, row, e) {
     // we can only show the difference from HEAD
     var prevRow = row.getNext();
     if (!prevRow) {
-        displayDiffViewer(box, row.get('data-commit'), null);
+        displayDiffViewer(box, row.get('data-commit'), null, 'current');
         return;
     }
         
     // if we can find a previous commit, we may need to ask whether
     // to compare to that or the current version
         
-    // if there is no row before this, this is the latest commit
+    // if there is no row before this, this is the latest commit. we can only
+    // compare it to the previous commit.
     if (!row.getPrevious()) {
         displayDiffViewer(
             box,
             prevRow.get('data-commit'),
-            row.get('data-commit')
+            row.get('data-commit'),
+            'previous'
         );
         return;
     }
@@ -498,16 +500,17 @@ function handleDiffClick (box, row, e) {
             if (i) displayDiffViewer(
                 box,
                 prevRow.get('data-commit'),
-                row.get('data-commit')
+                row.get('data-commit'),
+                'previous'
             );
-            else displayDiffViewer(box, row.get('data-commit'), null);
+            else displayDiffViewer(box, row.get('data-commit'), null, 'current');
         });
     });
 }
 
 // DIFF VIEWER
 
-function displayDiffViewer (box, from, to) {
+function displayDiffViewer (box, from, to, which) {
     ae.closePopup(box);
 
     var finish = function (data) {
@@ -537,7 +540,7 @@ function displayDiffViewer (box, from, to) {
         // create a modal window to show the diff in
         diffWindow = new ModalWindow({
             icon:           'clone',
-            title:          'Compare versions',
+            title:          "Compare revision to " + which,
             padded:         true,
             html:           diffHTML,
             width:          '90%',
