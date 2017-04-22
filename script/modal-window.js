@@ -76,7 +76,7 @@ var ModalWindow = new Class({
             span = this.title = new Element('span');
             this.header.adopt(span);
         }
-        span.innerText = title;
+        span.innerText = ' ' + title;
     },
 
     setIcon: function (iconName) {
