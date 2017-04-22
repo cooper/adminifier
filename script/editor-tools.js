@@ -502,7 +502,7 @@ function displayDiffViewer (box, from, to) {
         }
         
         // run diff2html
-        var html = Diff2Html.getPrettyHtml(data.diff,
+        var html = Diff2Html.getPrettyHtml(data.diff, {
             // outputFormat: TODO
         });
         
