@@ -39,7 +39,6 @@ var adminifier = {
 <script type="text/javascript" src="script/modal-window.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.js"></script>
 <script type="text/javascript" src="diff2html/dist/diff2html.js"></script>
-<script type="text/javascript" src="diff2html/dist/diff2html-ui.js"></script>
 <script type="text/javascript">
 jQuery.noConflict();
 </script>
