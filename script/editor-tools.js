@@ -363,7 +363,7 @@ function autosave () {
     saveRequest(saveData, 'Autosave', function (data) { // success
         done();
         ae.lastSavedData = saveData;
-        ae.handlePageDisplayResult(res);
+        ae.handlePageDisplayResult(data.result);
     }, function (msg) { // failure
         done();
         alert('Save failed: ' + msg);
