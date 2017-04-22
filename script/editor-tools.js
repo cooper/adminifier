@@ -494,9 +494,23 @@ function handleDiffClick (box, row, e) {
 
 function displayDiffViewer (box, from, to) {
     ae.closePopup(box);
-    console.log("displaying diff viewer from " + from + " to " + to);
+
     var finish = function (data) {
-        console.log(data);
+        if (!data.success) {
+            alert(data.error);
+            return;
+        }
+        var diffWindow = new ModalWindow({
+            icon:           'clone',
+            title:          'Compare versions',
+            padded:         true,
+            doneText:       'Done',
+            id:             'editor-diff-window',
+            autoDestroy:    true
+        });
+        var pre = new Element('pre', { text: data.diff });
+        diffWindow.content.adopt(pre);
+        diffWindow.show();
     };
 
     // request revision history
