@@ -246,11 +246,11 @@ div.editor-link-type {
 }
 
 .editor-revision-row:nth-child(even) {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: #555;
 }
 
 .editor-revision-row:hover, .editor-revision-diff-button:hover {
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: #333;
     cursor: pointer;
 }
 
