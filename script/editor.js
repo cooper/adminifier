@@ -477,8 +477,10 @@ function handleEscapeKey(e) {
     console.log('handle escape');
 
     // if there's a popup, exit it maybe
-    if (ae.currentPopup)
-        closeCurrentPopup({ unlessSticky: true });
+    if (ae.currentPopup) closeCurrentPopup({
+        unlessSticky: true,
+        reason: 'Escape key'
+    });
 }
 
 function inputHandler () {
@@ -523,7 +525,11 @@ function bodyClickPopoverCheck (e) {
     if (e.target == ae.currentPopup || ae.currentPopup.contains(e.target))
         return;
 
-    closeCurrentPopup({ unlessSticky: true, unlessActive: true });
+    closeCurrentPopup({
+        unlessSticky: true,
+        unlessActive: true,
+        reason: 'Clicked outside the popup'
+    });
 }
 
 function closeCurrentPopup (opts) {
@@ -535,7 +541,7 @@ function closeCurrentPopup (opts) {
 
     // check if sticky
     if (opts.unlessSticky && box.hasClass('sticky')) {
-        console.log('Keeping popup open because it is marked sticky');
+        console.log('Keeping popup open: Sticky');
         return;
     }
 
@@ -543,7 +549,7 @@ function closeCurrentPopup (opts) {
     // note this will only work if the box has at least one child with
     // the hover selector active
     if (opts.unlessActive && box.getElement(':hover')) {
-        console.log('Keeping popup open because mouse is over it');
+        console.log('Keeping popup open: Active');
 
         // once the mouse exits, close it
         box.addEvent('mouseleave', function () {
@@ -552,6 +558,10 @@ function closeCurrentPopup (opts) {
 
         return;
     }
+
+    // Safe point - we will close the box.
+    if (opts.reason)
+        console.log('Closing popup: ' + opts.reason);
 
     closeCurrentLi();
     box.set('morph', {
