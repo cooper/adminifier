@@ -464,7 +464,7 @@ function displayRevisionViewer () {
             });
             row.innerHTML = tmpl('tmpl-revision-row', rev);
             row.addEvent('click', function (e) {
-                handleDiffClick(row, e);
+                handleDiffClick(box, row, e);
             });
             container.appendChild(row);
         });
@@ -483,13 +483,13 @@ function displayRevisionViewer () {
     });
 }
 
-function handleDiffClick (row, e) {
+function handleDiffClick (box, row, e) {
     
     // no previous commit, so this is the very first one.
     // we can only show the difference from HEAD
     var prevRow = row.getNext();
     if (!prevRow) {
-        displayDiffViewer(row.get('data-commit'), null, 'current');
+        displayDiffViewer(box, row.get('data-commit'), null, 'current');
         return;
     }
         
@@ -500,6 +500,7 @@ function handleDiffClick (row, e) {
     // compare it to the previous commit.
     if (!row.getPrevious()) {
         displayDiffViewer(
+            box,
             prevRow.get('data-commit'),
             row.get('data-commit'),
             'previous'
@@ -519,11 +520,12 @@ function handleDiffClick (row, e) {
     overlay.getElements('.editor-revision-diff-button').each(function (but, i) {
         but.addEvent('click', function () {
             if (i) displayDiffViewer(
+                box,
                 prevRow.get('data-commit'),
                 row.get('data-commit'),
                 'previous'
             );
-            else displayDiffViewer(row.get('data-commit'), null, 'current');
+            else displayDiffViewer(box, row.get('data-commit'), null, 'current');
             overlay.destroy();
         });
     });
@@ -531,7 +533,8 @@ function handleDiffClick (row, e) {
 
 // DIFF VIEWER
 
-function displayDiffViewer (from, to, which) {
+function displayDiffViewer (box, from, to, which) {
+    box.addClass('sticky');
     var finish = function (data) {
         
         // something wrong happened
@@ -565,6 +568,7 @@ function displayDiffViewer (from, to, which) {
             width:          '90%',
             doneText:       'Done',
             id:             'editor-diff-window',
+            onDone:         function () { box.removeClass('sticky'); },
             autoDestroy:    true
         });
         
