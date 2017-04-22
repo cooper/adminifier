@@ -354,7 +354,8 @@ function autosave () {
     // on fail or success, close the li
     var done = function () {
         setTimeout(function () {
-            ae.setLiLoading(li, false);
+            li.getElement('span').innerText = 'Save';
+            ae.setLiLoading(li, false, true);
         }, 2000);
     };
     
