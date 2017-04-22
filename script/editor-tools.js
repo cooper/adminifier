@@ -422,9 +422,11 @@ function displayRevisionViewer () {
     var box  = ae.createPopupBox(rect.right - 300, rect.top + li.offsetHeight);
     box.innerHTML = tmpl('tmpl-revision-viewer', {});
     var container = box.getElement('#editor-revisions');
-
+    li.store('sticky', true);
+    
     // populate and display it
     var finish = function (data) {
+        li.store('sticky', false);
         if (!box)
             return;
         if (!data.success) {
