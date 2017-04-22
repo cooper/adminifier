@@ -473,17 +473,15 @@ function handleDiffClick (box, row, e) {
         overlay.addEvent('mouseleave', function () {
             overlay.destroy();
         });
-        var isPrevious = false;
-        overlay.getElements('.editor-revision-diff-button').each(function (but) {
+        overlay.getElements('.editor-revision-diff-button').each(function (but, i) {
             but.addEvent('click', function () {
-                if (isPrevious) displayDiffViewer(
+                if (i) displayDiffViewer(
                     box,
                     prevRow.get('data-commit'),
                     row.get('data-commit')
                 );
-                else displayDiffViewer(box, row.get('data-commit'), null)
+                else displayDiffViewer(box, row.get('data-commit'), null);
             });
-            isPrevious = true;
         });
         return;
     }
