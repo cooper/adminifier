@@ -466,7 +466,7 @@ function handleDiffClick (row, e) {
     var prevRow = row.getNext();
     if (prevRow) {
         overlayHTML = tmpl('tmpl-revision-overlay', {});
-        row.innerHTML .= overlayHTML;
+        row.innerHTML += overlayHTML;
         return;
     }
     
