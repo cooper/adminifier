@@ -231,7 +231,7 @@ function displaySaveHelper () {
     return _saveHelper(false);
 }
 
-function _saveHelper (autosave) {
+function _saveHelper () {
     var li   = $$('li[data-action="save"]')[0];
     var rect = li.getBoundingClientRect();
     var box  = ae.createPopupBox(rect.right - 300, rect.top + li.offsetHeight);
@@ -330,7 +330,7 @@ function _saveHelper (autosave) {
         };
 
         // save request
-        saveRequest(saveData, autosave ? 'Autosave' : message, success, fail);
+        saveRequest(saveData, message, success, fail);
     };
 
     // display it
@@ -338,15 +338,35 @@ function _saveHelper (autosave) {
         return;
 
     // on click or enter, save changes
-    if (autosave) {
-        li.getElement('span').innerText = 'Autosave';
-        saveChanges();
-    }
-    else {
-        $('editor-save-commit').addEvent('click', saveChanges);
-        $('editor-save-message').onEnter(saveChanges);
-        $('editor-save-message').focus();
-    }
+    $('editor-save-commit').addEvent('click', saveChanges);
+    $('editor-save-message').onEnter(saveChanges);
+    $('editor-save-message').focus();
+}
+
+function autosave () {
+    if (ae.currentPopup) return; // FIXME
+    
+    // make it apparent that autosave is occurring
+    var li = $$('li[data-action="save"]')[0];
+    ae.setLiLoading(li, true, true);
+    li.getElement('span').innerText = 'Autosave';
+    
+    // on fail or success, close the li
+    var done = function () {
+        setTimeout(function () {
+            ae.setLiLoading(li, false);
+        }, 2000);
+    };
+    
+    // attempt to save
+    saveRequest(editor.getValue(), 'Autosave', function (data) { // success
+        done();
+        ae.lastSavedData = saveData;
+        ae.handlePageDisplayResult(res);
+    }, function (msg) { // failure
+        done();
+        alert('Save failed: ' + msg);
+    });
 }
 
 function saveRequest (saveData, message, success, fail) {
@@ -401,9 +421,7 @@ var autosaveInterval;
 function resetAutosaveInterval () {
     clearAutosaveInterval();
     if (a.autosave) {
-        autosaveInterval = setInterval(function () {
-            _saveHelper(true);
-        }, a.autosave);
+        autosaveInterval = setInterval(autosave, a.autosave);
     }
 }
 

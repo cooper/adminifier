@@ -274,12 +274,15 @@ ae.displayPopupBox = function (box, height, li) {
     return true;
 };
 
-ae.setLiLoading = function (li, loading) {
+ae.setLiLoading = function (li, loading, noCircle) {
     var i = li.getElement('i');
     if (loading) {
         li.addClass('sticky');
         i.store('oldClasses', i.get('class'));
-        i.set('class', 'fa fa-circle-o-notch fa-spin');
+        if (noCircle)
+            i.addClass('fa-spin');
+        else
+            i.set('class', 'fa fa-circle-o-notch fa-spin');
         return;
     }
     li.removeClass('sticky');
