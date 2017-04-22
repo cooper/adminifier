@@ -465,11 +465,12 @@ function handleDiffClick (row, e) {
     // to compare to that or the current version
     var prevRow = row.getNext();
     if (prevRow) {
-        console.log("Asking");
+        overlayHTML = tmpl('tmpl-revision-overlay', {});
+        row.innerHTML .= overlayHTML;
         return;
     }
     
-    displayDiffViewer(row.get('data-commit'), 'HEAD');
+    displayDiffViewer(row.get('data-commit'), null);
 }
 
 // DIFF VIEWER

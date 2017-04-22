@@ -249,9 +249,26 @@ div.editor-link-type {
     background-color: rgba(0, 0, 0, 0.2);
 }
 
-.editor-revision-row:hover {
+.editor-revision-row:hover, .editor-revision-diff-button:hover {
     background-color: rgba(0, 0, 0, 0.4);
     cursor: pointer;
+}
+
+.editor-revision-row-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: inherit;
+}
+
+.editor-revision-diff-button {
+    width: 100px;
+    text-align: center;
+    line-height: 100%;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 /* small tabs used in various popups */
