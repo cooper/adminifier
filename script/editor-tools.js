@@ -728,7 +728,6 @@ function displayPageOptionsWindow () {
         html:           tmpl(ae.isModel() ?
             'tmpl-model-options' : 'tmpl-page-options', foundOptsValues),
         padded:         true,
-        doneText:       'Save',
         id:             'editor-options-window',
         autoDestroy:    true,
         onDone:         updatePageOptions
