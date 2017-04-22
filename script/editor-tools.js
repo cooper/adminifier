@@ -416,31 +416,36 @@ function clearAutosaveInterval () {
 
 function displayRevisionViewer () {
     
-    // display the box
+    // create the box
     var li   = $$('li[data-action="revisions"]')[0];
     var rect = li.getBoundingClientRect();
     var box  = ae.createPopupBox(rect.right - 300, rect.top + li.offsetHeight);
     box.innerHTML = tmpl('tmpl-revision-viewer', {});
     var container = box.getElement('#editor-revisions');
-    ae.displayPopupBox(box, 300, li);
 
-    // populate it
+    // populate and display it
+    var finish = function (data) {
+        if (!box)
+            return;
+        if (!data.success) {
+            alert(data.error);
+            return;
+        }
+        data.revs.each(function (rev) {
+            var row = new Element('div', { class: 'editor-revision-row' });
+            row.innerHTML = tmpl('tmpl-revision-row', rev);
+            container.appendChild(row);
+        });
+        ae.displayPopupBox(box, 300, li);
+    };
+
+    // request revision history
     var req = new Request.JSON({
         url: 'functions/page-revisions.php' + (ae.isModel() ? '?model' : ''),
-        onSuccess: function (data) {
-            if (!box)
-                return;
-            if (!data.success) {
-                alert(data.error);
-                return;
-            }
-            data.revs.each(function (rev) {
-                var row = new Element('div', { class: 'editor-revision-row' });
-                row.innerHTML = tmpl('tmpl-revision-row', rev);
-                container.appendChild(row);
-            });
+        onSuccess: finish,
+        onFailure: function () {
+            finish({ error: 'Failed to fetch revision history' });
         },
-        onFailure: function () { alert('Failed to fetch revision history'); },
     }).post({
         page: ae.getFilename()
     });

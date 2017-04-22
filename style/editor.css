@@ -244,11 +244,11 @@ div.editor-link-type {
     padding: 10px;
 }
 
-#editor-revision-row:nth-child(even) {
+.editor-revision-row:nth-child(even) {
     background-color: rgba(0, 0, 0, 0.2);
 }
 
-#editor-revision-row:hover {
+.editor-revision-row:hover {
     background-color: rgba(0, 0, 0, 0.4);
     cursor: pointer;
 }
