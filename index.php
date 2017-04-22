@@ -21,6 +21,8 @@
 <link rel="stylesheet" type="text/css" href="diff2html/dist/diff2html.css">
 <script type="text/javascript">
 
+jQuery.noConflict();
+
 var adminifier = {
     adminRoot:      <?= option_if_set($config->admin_root)      ?>,
     wikiShortName:  <?= option_if_set($config->wiki_name)       ?>,
@@ -37,6 +39,7 @@ var adminifier = {
 <script type="text/javascript" src="script/adminifier.js"></script>
 <script type="text/javascript" src="script/notifications.js"></script>
 <script type="text/javascript" src="script/modal-window.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.js"></script>
 <script type="text/javascript" src="diff2html/dist/diff2html.js"></script>
 <script type="text/javascript" src="diff2html/dist/diff2html-ui.js"></script>
 
