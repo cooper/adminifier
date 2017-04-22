@@ -513,12 +513,13 @@ function handleDiffClick (box, row, e) {
     row.innerHTML += overlayHTML;
     var overlay = row.getElement('.editor-revision-overlay');
     overlay.addEvent('mouseleave', function () {
-        overlay.destroy();
+        overlay.dispose();
     });
     
     // on click, display the diff viewer given the from..to
     overlay.getElements('.editor-revision-diff-button').each(function (but, i) {
         but.addEvent('click', function () {
+            overlay.dispose();
             if (i) displayDiffViewer(
                 box,
                 prevRow.get('data-commit'),
@@ -526,7 +527,6 @@ function handleDiffClick (box, row, e) {
                 'previous'
             );
             else displayDiffViewer(box, row.get('data-commit'), null, 'current');
-            overlay.destroy();
         });
     });
 }
