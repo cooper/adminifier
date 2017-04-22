@@ -265,9 +265,8 @@ div.editor-link-type {
 
 .editor-revision-diff-button {
     float: left;
-    width: 100px;
+    width: 50%;
     text-align: center;
-    line-height: 100%;
     white-space: nowrap;
     overflow: hidden;
 }
@@ -275,6 +274,10 @@ div.editor-link-type {
 .editor-revision-diff-button:hover {
     background-color: #222;
     cursor: pointer;
+}
+
+.editor-revision-diff-button i {
+    margin-bottom: 8px;
 }
 
 /* small tabs used in various popups */
