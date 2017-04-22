@@ -277,6 +277,8 @@ ae.displayPopupBox = function (box, height, li) {
 ae.setLiLoading = function (li, loading, noCircle) {
     var i = li.getElement('i');
     if (loading) {
+        if (!openLi(li))
+            return;
         li.addClass('sticky');
         i.store('oldClasses', i.get('class'));
         if (noCircle)
