@@ -416,13 +416,15 @@ function clearAutosaveInterval () {
 
 function displayRevisionViewer () {
     
+    // make the li stay open until finish()
+    var li = $$('li[data-action="revisions"]')[0];
+    li.store('sticky', true);
+
     // create the box
-    var li   = $$('li[data-action="revisions"]')[0];
     var rect = li.getBoundingClientRect();
     var box  = ae.createPopupBox(rect.right - 300, rect.top + li.offsetHeight);
     box.innerHTML = tmpl('tmpl-revision-viewer', {});
     var container = box.getElement('#editor-revisions');
-    li.store('sticky', true);
     
     // populate and display it
     var finish = function (data) {
