@@ -501,22 +501,22 @@ function displayDiffViewer (box, from, to) {
             return;
         }
         
+        // run diff2html
+        var html = Diff2Html.getPrettyHtml(data.diff,
+            // outputFormat: TODO
+        });
+        
         // create a modal window to show the diff in
         var diffWindow = new ModalWindow({
             icon:           'clone',
             title:          'Compare versions',
             padded:         true,
+            html:           html,
             doneText:       'Done',
             id:             'editor-diff-window',
             autoDestroy:    true
         });
         
-        // create diff2html UI and draw it in the window
-        var diff2htmlUi = new Diff2HtmlUI({ diff: data.diff });
-        diff2htmlUi.draw(diffWindow.content, {
-            // outputFormat: TODO
-        });
-
         diffWindow.show();
     };
 
