@@ -493,7 +493,7 @@ function handleDiffClick (box, row, e) {
 // DIFF VIEWER
 
 function displayDiffViewer (box, from, to) {
-    closePopup(box);
+    ae.closePopup(box);
     console.log("displaying diff viewer from " + from + " to " + to);
     var finish = function (data) {
         console.log(data);
