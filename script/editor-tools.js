@@ -500,6 +500,8 @@ function displayDiffViewer (box, from, to) {
             alert(data.error);
             return;
         }
+        
+        // create a modal window to show the diff in
         var diffWindow = new ModalWindow({
             icon:           'clone',
             title:          'Compare versions',
@@ -508,8 +510,13 @@ function displayDiffViewer (box, from, to) {
             id:             'editor-diff-window',
             autoDestroy:    true
         });
-        var pre = new Element('pre', { text: data.diff });
-        diffWindow.content.adopt(pre);
+        
+        // create diff2html UI and draw it in the window
+        var diff2htmlUi = new Diff2HtmlUI({ diff: data.diff });
+        diff2htmlUi.draw(diffWindow.content, {
+            // outputFormat: TODO
+        });
+
         diffWindow.show();
     };
 
