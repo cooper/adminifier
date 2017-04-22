@@ -9,7 +9,7 @@ if (!isset($_POST['page']))
 
 $res = $W->page_revs($_POST['page']);
 
-if (!$res->response != 'page_revs')
+if ($res->response != 'page_revs')
     json_error('Failed to fetch revision history');
 
 json_success((array)$res);
