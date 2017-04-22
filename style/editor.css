@@ -263,15 +263,6 @@ div.editor-link-type {
     background-color: #333;
 }
 
-.editor-revision-overlay-center {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    height: 40px;
-}
-
 .editor-revision-diff-button {
     float: left;
     width: 50%;
@@ -286,7 +277,7 @@ div.editor-link-type {
 }
 
 .editor-revision-diff-button i {
-    margin-bottom: 8px;
+    margin-top: 10px;
 }
 
 /* small tabs used in various popups */
