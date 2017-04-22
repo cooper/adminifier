@@ -289,6 +289,8 @@ ae.setLiLoading = function (li, loading, noCircle) {
     li.removeClass('sticky');
     if (!noCircle)
         i.set('class', i.retrieve('oldClasses'));
+    if (!ae.currentPopup)
+        closeCurrentLi();
     return true;
 };
 
