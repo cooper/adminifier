@@ -568,7 +568,7 @@ function openLi (li) {
 
     // if another one is animating, force it to instantly finish
     if (ae.currentLi) {
-        if (ae.currentLi.retrieve('sticky'))
+        if (ae.currentLi.hasClass('sticky'))
             return;
         closeCurrentLi();
     }
@@ -586,7 +586,7 @@ function openLi (li) {
 function closeCurrentLi () {
     if (!ae.currentLi)
         return;
-    if (ae.currentLi.retrieve('sticky'))
+    if (ae.currentLi.hasClass('sticky'))
         return;
     ae.currentLi.morph({
         width: '15px',
