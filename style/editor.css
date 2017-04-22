@@ -242,6 +242,7 @@ div.editor-link-type {
 
 .editor-revision-row {
     padding: 10px;
+    position: relative; /* for diff selector */
 }
 
 .editor-revision-row:nth-child(even) {

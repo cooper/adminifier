@@ -472,7 +472,9 @@ function handleDiffClick (row, e) {
     displayDiffViewer(row.get('data-commit'), 'HEAD');
 }
 
-function displayDiffViewerF (from, to) {
+// DIFF VIEWER
+
+function displayDiffViewer (from, to) {
     console.log("displaying diff viewer from " + from + " to " + to);
 }
 
