@@ -476,6 +476,22 @@ function handleDiffClick (row, e) {
 
 function displayDiffViewer (from, to) {
     console.log("displaying diff viewer from " + from + " to " + to);
+    var finish = function (data) {
+        console.log(data);
+    };
+
+    // request revision history
+    var req = new Request.JSON({
+        url: 'functions/page-diff.php' + (ae.isModel() ? '?model' : ''),
+        onSuccess: finish,
+        onFailure: function () {
+            finish({ error: 'Failed to fetch page diff' });
+        },
+    }).post({
+        page: ae.getFilename(),
+        from: from,
+        to: to
+    });
 }
 
 // DELETE CONFIRMATION
