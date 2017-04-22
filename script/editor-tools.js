@@ -441,6 +441,7 @@ function displayRevisionViewer () {
                 'data-commit': rev.id
             });
             row.innerHTML = tmpl('tmpl-revision-row', rev);
+            row.addEvent('click', function (e) { displayDiffViewer(row, e); })
             container.appendChild(row);
         });
         ae.displayPopupBox(box, 300, li);
@@ -456,6 +457,23 @@ function displayRevisionViewer () {
     }).post({
         page: ae.getFilename()
     });
+}
+
+function displayDiffViewer (row, e) {
+    
+    // if we can find a previous commit, we need to ask whether
+    // to compare to that or the current version
+    var prevRow = row.getNext();
+    if (prevRow) {
+        console.log("Asking");
+        return;
+    }
+    
+    displayDiffViewer(row.get('data-commit'), 'HEAD');
+}
+
+function displayDiffViewer (from, to) {
+    console.log("displaying diff viewer from " + from + " to " + to);
 }
 
 // DELETE CONFIRMATION
