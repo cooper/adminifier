@@ -512,6 +512,7 @@ function displayDiffViewer (box, from, to) {
             title:          'Compare versions',
             padded:         true,
             html:           html,
+            width:          '90%',
             doneText:       'Done',
             id:             'editor-diff-window',
             autoDestroy:    true
