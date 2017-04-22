@@ -1,0 +1,3 @@
+[submodule "diff2html"]
+	path = diff2html
+	url = https://github.com/rtfpessoa/diff2html.git

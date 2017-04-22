@@ -18,6 +18,7 @@
 <link type="text/css" rel="stylesheet" href="style/notifications.css" />
 <link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="diff2html/dist/diff2html.css">
 <script type="text/javascript">
 
 var adminifier = {
@@ -36,6 +37,8 @@ var adminifier = {
 <script type="text/javascript" src="script/adminifier.js"></script>
 <script type="text/javascript" src="script/notifications.js"></script>
 <script type="text/javascript" src="script/modal-window.js"></script>
+<script type="text/javascript" src="diff2html/dist/diff2html.js"></script>
+<script type="text/javascript" src="diff2html/dist/diff2html-ui.js"></script>
 
 </head>
 <body>
