@@ -254,7 +254,7 @@ div.editor-link-type {
     cursor: pointer;
 }
 
-.editor-revision-row-overlay {
+.editor-revision-overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -263,12 +263,21 @@ div.editor-link-type {
     background-color: #333;
 }
 
+.editor-revision-overlay-center {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 40px;
+}
+
 .editor-revision-diff-button {
     float: left;
     width: 50%;
+    height: 100%;
     text-align: center;
     white-space: nowrap;
-    overflow: hidden;
 }
 
 .editor-revision-diff-button:hover {
