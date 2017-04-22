@@ -441,7 +441,9 @@ function displayRevisionViewer () {
                 'data-commit': rev.id
             });
             row.innerHTML = tmpl('tmpl-revision-row', rev);
-            row.addEvent('click', function (e) { handleDiffClick(row, e); })
+            row.addEvent('click', function (e) {
+                handleDiffClick(box, row, e);
+            });
             container.appendChild(row);
         });
         ae.displayPopupBox(box, 300, li);
@@ -459,7 +461,7 @@ function displayRevisionViewer () {
     });
 }
 
-function handleDiffClick (row, e) {
+function handleDiffClick (box, row, e) {
     
     // if we can find a previous commit, we need to ask whether
     // to compare to that or the current version
@@ -467,15 +469,31 @@ function handleDiffClick (row, e) {
     if (prevRow) {
         overlayHTML = tmpl('tmpl-revision-overlay', {});
         row.innerHTML += overlayHTML;
+        var overlay = row.getElement('.editor-revision-overlay');
+        overlay.addEvent('mouseleave', function () {
+            overlay.destroy();
+        });
+        var isPrevious = false;
+        overlay.getElements('.editor-revision-diff-button').each(function (but) {
+            but.addEvent('click', function () {
+                displayDiffViewer(
+                    box,
+                    row.get('data-commit'),
+                    isPrevious ? prevRow.get('data-commit') : null
+                );
+            });
+            isPrevious = true;
+        });
         return;
     }
     
-    displayDiffViewer(row.get('data-commit'), null);
+    displayDiffViewer(box, row.get('data-commit'), null);
 }
 
 // DIFF VIEWER
 
-function displayDiffViewer (from, to) {
+function displayDiffViewer (box, from, to) {
+    closePopup(box);
     console.log("displaying diff viewer from " + from + " to " + to);
     var finish = function (data) {
         console.log(data);
