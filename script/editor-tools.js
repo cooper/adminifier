@@ -436,7 +436,10 @@ function displayRevisionViewer () {
             return;
         }
         data.revs.each(function (rev) {
-            var row = new Element('div', { class: 'editor-revision-row' });
+            var row = new Element('div', {
+                class: 'editor-revision-row',
+                'data-commit': rev.id
+            });
             row.innerHTML = tmpl('tmpl-revision-row', rev);
             container.appendChild(row);
         });
