@@ -476,11 +476,12 @@ function handleDiffClick (box, row, e) {
         var isPrevious = false;
         overlay.getElements('.editor-revision-diff-button').each(function (but) {
             but.addEvent('click', function () {
-                displayDiffViewer(
+                if (isPrevious) displayDiffViewer(
                     box,
-                    row.get('data-commit'),
-                    isPrevious ? prevRow.get('data-commit') : null
+                    prevRow.get('data-commit'),
+                    row.get('data-commit')
                 );
+                else displayDiffViewer(box, row.get('data-commit'), null)
             });
             isPrevious = true;
         });
