@@ -509,6 +509,7 @@ function displayDiffViewer (box, from, to) {
             });
             if (diffWindow) diffWindow.content.innerHTML = diffHTML;
         };
+        runDiff();
         
         // create a modal window to show the diff in
         diffWindow = new ModalWindow({
@@ -531,12 +532,12 @@ function displayDiffViewer (box, from, to) {
             if (split) {
                 runDiff(false);
                 split = false;
-                but.innerText = 'Split';
+                but.set('text', 'Split');
                 return;
             }
             runDiff(true);
             split = true;
-            but.innerText = 'Unified';
+            but.set('text', 'Unified');
         });
         
         diffWindow.show();

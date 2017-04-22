@@ -104,6 +104,7 @@ var ModalWindow = new Class({
         });
         but.inject(this.icon, 'before');
         if (onClick) but.addEvent('click', onClick);
+        return but;
     },
 
     show: function (container) {
