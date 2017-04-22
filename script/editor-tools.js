@@ -354,9 +354,11 @@ function autosave () {
     // on fail or success, close the li
     var done = function () {
         setTimeout(function () {
-            li.getElement('span').innerText = 'Save';
             ae.setLiLoading(li, false, true);
         }, 2000);
+        setTimeout(function () {
+            li.getElement('span').innerText = 'Save';
+        }, 2500);
     };
     
     // attempt to save

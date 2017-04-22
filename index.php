@@ -27,7 +27,7 @@ var adminifier = {
     wikiName:       <?= option_if_set($wiki_name)               ?>,
     wikiPageRoot:   <?= option_if_set($config->wiki_page_root)  ?>,
     themeName:      <?= option_if_set($user_info->theme)        ?>,
-    autosave:       <?= 10 * 1000 ?>
+    autosave:       <?= 5 * 60 * 1000 ?>
 
 };
 
@@ -37,11 +37,6 @@ var adminifier = {
 <script type="text/javascript" src="script/adminifier.js"></script>
 <script type="text/javascript" src="script/notifications.js"></script>
 <script type="text/javascript" src="script/modal-window.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.js"></script>
-<script type="text/javascript" src="diff2html/dist/diff2html.js"></script>
-<script type="text/javascript">
-jQuery.noConflict();
-</script>
 
 </head>
 <body>

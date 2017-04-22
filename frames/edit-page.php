@@ -34,7 +34,7 @@ else {
       data-icon="edit"
 <? endif; ?>
       data-title="<?= htmlspecialchars($_GET['page']) ?>"
-      data-scripts="ace colors editor editor-tools token-list"
+      data-scripts="ace jquery colors editor editor-tools token-list diff2html"
       data-styles="editor"
       data-flags="no-margin compact-sidebar"
 />

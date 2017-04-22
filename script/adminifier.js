@@ -243,6 +243,8 @@ function handlePageData (data) {
     // don't show the content until all scripts have loaded
     var scriptsToLoad = 0, scriptsLoaded = -1;
     var scriptLoaded = function () {
+		if (typeof jQuery != 'undefined')
+			jQuery.noConflict();
         scriptsLoaded++;
         if (scriptsToLoad > scriptsLoaded) return;
         $('content').setStyle('user-select', 'all');
@@ -259,6 +261,10 @@ function handlePageData (data) {
 
         if (src == 'ace')
             src = 'ace/ace.js';
+		else if (src == 'jquery')
+			src = '//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.js';
+		else if (src == 'diff2html')
+			src = 'diff2html/dist/diff2html.js';
         else
             src = 'script/' + src + '.js';
 
