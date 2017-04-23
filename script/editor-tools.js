@@ -249,7 +249,7 @@ function _saveHelper () {
             ae.closePopup(box, {
                 unlessActive: true,
                 afterHide: function () {
-                    li.getElement('span').innerText = 'Save';
+                    li.getElement('span').set('text', 'Save');
                 }
             });
 
@@ -345,7 +345,7 @@ function autosave () {
     // make it apparent that autosave is occurring
     var li = liForAction('save');
     ae.setLiLoading(li, true, true);
-    li.getElement('span').innerText = 'Autosave';
+    li.getElement('span').set('text', 'Autosave');
     
     // on fail or success, close the li
     var done = function () {
@@ -353,7 +353,7 @@ function autosave () {
             ae.setLiLoading(li, false, true);
         }, 2000);
         setTimeout(function () {
-            li.getElement('span').innerText = 'Save';
+            li.getElement('span').set('text', 'Save');
         }, 2500);
     };
     
@@ -481,7 +481,7 @@ function displayRevisionViewer () {
 }
 
 function handleDiffClick (box, row, e) {
-    var msg = row.getElement('b').innerText;
+    var msg = row.getElement('b').get('text').trim();
     var prevRow = row.getNext();
     
     // display overlay
