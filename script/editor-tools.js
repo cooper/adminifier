@@ -537,6 +537,16 @@ function handleDiffClick (box, row, e) {
             );
         },
         
+        // revert
+        function () {
+            alert('Unimplemented');
+        },
+        
+        // restore
+        function () {
+            alert('Unimplemented');
+        },
+        
         // back
         function () {
             overlay.setStyle('display', 'none');

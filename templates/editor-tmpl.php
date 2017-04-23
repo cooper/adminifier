@@ -65,8 +65,18 @@
             Compare to current
         </div>
         <div class="editor-revision-diff-button" title="Compare this revision to the one before it">
-            <i class="fa fa-undo"></i>
+            <i class="fa fa-clock-o"></i>
             Compare to previous
+        </div>
+    </div>
+    <div>
+        <div class="editor-revision-diff-button" title="Revert this change">
+            <i class="fa fa-undo"></i>
+            Revert
+        </div>
+        <div class="editor-revision-diff-button" title="Revert all changes since this version">
+            <i class="fa fa-share"></i>
+            Restore
         </div>
     </div>
     <div>
