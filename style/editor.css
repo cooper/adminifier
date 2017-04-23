@@ -249,12 +249,8 @@ div.editor-link-type {
     background-color: #444;
 }
 
-.editor-revision-row:nth-child(odd) {
+.editor-revision-row:not(.preview):nth-child(odd) {
     border-bottom: 1px solid #444;
-}
-
-.editor-revision-row.preview {
-    border-bottom: 1px solid #333;
 }
 
 .editor-revision-row:not(.preview):hover {
@@ -278,6 +274,11 @@ div.editor-link-type {
     line-height: 40px;
     padding: 0 10px;
     white-space: nowrap;
+}
+
+.editor-revision-diff-button:first-child {
+    margin-top: 20px;
+    border-top: 1px solid #333;
 }
 
 .editor-revision-diff-button:hover {
