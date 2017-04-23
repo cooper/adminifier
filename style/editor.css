@@ -245,8 +245,12 @@ div.editor-link-type {
     position: relative; /* for diff selector */
 }
 
-.editor-revision-row:nth-child(even) {
+.editor-revision-row:nth-child(odd) {
     background-color: #444;
+}
+
+.editor-revision-row:nth-child(even) {
+    border-bottom: 1px solid #444;
 }
 
 .editor-revision-row:hover {
