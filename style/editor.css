@@ -238,11 +238,11 @@ div.editor-link-type {
     overflow-y: auto;
     height: 100%;
     font-size: small;
+    position: relative;
 }
 
 .editor-revision-row {
     padding: 10px;
-    position: relative; /* for diff selector */
 }
 
 .editor-revision-row:nth-child(odd) {
@@ -264,7 +264,7 @@ div.editor-link-type {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #333;
+    background-color: #555;
 }
 
 .editor-revision-diff-button {
@@ -276,7 +276,7 @@ div.editor-link-type {
 }
 
 .editor-revision-diff-button:hover {
-    background-color: #222;
+    background-color: #333;
     cursor: pointer;
 }
 

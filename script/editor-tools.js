@@ -507,8 +507,8 @@ function handleDiffClick (box, row, e) {
     
     // display buttons to decide which diff to show
     overlayHTML = tmpl('tmpl-revision-overlay', {});
-    row.innerHTML += overlayHTML;
-    var overlay = row.getElement('.editor-revision-overlay');
+    box.innerHTML += overlayHTML;
+    var overlay = box.getElement('.editor-revision-overlay');
     overlay.addEvent('mouseleave', function () {
         overlay.destroy();
     });
