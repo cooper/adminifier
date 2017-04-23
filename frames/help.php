@@ -7,4 +7,6 @@
       data-flags=""
 />
 
-Help will be here.
+<h2>Help is on the way.</h2>
+In the meantime, refer to the
+<a href="https://github.com/cooper/wikifier/blob/master/README.md">wikifier documentation</a>.
