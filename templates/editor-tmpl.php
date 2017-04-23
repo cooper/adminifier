@@ -49,15 +49,13 @@
 </script>
 
 <script type="text/x-tmpl" id="tmpl-revision-overlay">
-<div class="editor-revision-overlay">
-    <div class="editor-revision-diff-button" title="Compare to current">
-        <i class="fa fa-3x fa-circle-o"></i><br />
-        Current
-    </div>
-    <div class="editor-revision-diff-button" title="Compare to previous">
-        <i class="fa fa-3x fa-undo"></i><br />
-        Previous
-    </div>
+<div class="editor-revision-diff-button" title="Compare to current">
+    <i class="fa fa-3x fa-circle-o"></i><br />
+    Current
+</div>
+<div class="editor-revision-diff-button" title="Compare to previous">
+    <i class="fa fa-3x fa-undo"></i><br />
+    Previous
 </div>
 </script>
 

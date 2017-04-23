@@ -505,13 +505,10 @@ function handleDiffClick (box, row, e) {
         return;
     }
     
-    // display buttons to decide which diff to show
-    overlayHTML = tmpl('tmpl-revision-overlay', {});
-    box.innerHTML += overlayHTML;
-    var overlay = box.getElement('.editor-revision-overlay');
-    overlay.addEvent('mouseleave', function () {
-        overlay.destroy();
-    });
+    // display overlay
+    var overlay = new Element('div', { class: 'editor-revision-overlay' });
+    overlay.appendChild(row.clone());
+    overlay.innerHTML += tmpl('tmpl-revision-overlay', {});
     
     // on click, display the diff viewer given the from..to
     overlay.getElements('.editor-revision-diff-button').each(function (but, i) {
