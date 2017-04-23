@@ -481,6 +481,7 @@ function displayRevisionViewer () {
 }
 
 function handleDiffClick (box, row, e) {
+    var msg = row.getElement('b').innerText;
     var prevRow = row.getNext();
     
     // display overlay
@@ -508,7 +509,13 @@ function handleDiffClick (box, row, e) {
                 alert('This is the current version');
                 return;
             }
-            displayDiffViewer(box, row.get('data-commit'), null, 'current');
+            displayDiffViewer(
+                box,
+                row.get('data-commit'),
+                null,
+                msg,
+                'current'
+            );
         },
         
         // diff previous
@@ -521,6 +528,7 @@ function handleDiffClick (box, row, e) {
                 box,
                 prevRow.get('data-commit'),
                 row.get('data-commit'),
+                msg,
                 'previous'
             );
         },
@@ -538,7 +546,7 @@ function handleDiffClick (box, row, e) {
 
 // DIFF VIEWER
 
-function displayDiffViewer (box, from, to, which) {
+function displayDiffViewer (box, from, to, message, which) {
     box.addClass('sticky');
     var finish = function (data) {
         
@@ -567,7 +575,7 @@ function displayDiffViewer (box, from, to, which) {
         // create a modal window to show the diff in
         diffWindow = new ModalWindow({
             icon:           'clone',
-            title:          "Compare revision to " + which,
+            title:          "Compare '" + message + "' to " + which,
             padded:         true,
             html:           diffHTML,
             width:          '90%',
