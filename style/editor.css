@@ -255,7 +255,7 @@ div.editor-link-type {
 
 .editor-revision-row.preview {
     border-bottom: none;
-    padding-bottom: 0;
+    padding: 20px 10px 0 10px;
 }
 
 .editor-revision-row:not(.preview):hover {
