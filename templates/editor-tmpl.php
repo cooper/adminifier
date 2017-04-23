@@ -71,8 +71,8 @@
     </div>
     <div>
         <div class="editor-revision-diff-button" title="Return to the revision list">
-            <i class="fa fa-times"></i>
-            Cancel
+            <i class="fa fa-chevron-left"></i>
+            Back
         </div>
     </div>
 </script>
