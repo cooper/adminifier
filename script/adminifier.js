@@ -265,6 +265,8 @@ function handlePageData (data) {
 			src = '//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.js';
 		else if (src == 'diff2html')
 			src = 'diff2html/dist/diff2html.js';
+		else if (src == 'colorpicker')
+			src = 'colorpicker/DynamicColorPicker.js';
         else
             src = 'script/' + src + '.js';
 
@@ -281,8 +283,15 @@ function handlePageData (data) {
     SSV(data['data-styles']).each(function (style) {
         if (!style.length) return;
 		scriptsToLoad++;
+		
+		var href;
+		if (style == 'colorpicker')
+			href = 'colorpicker/colorpicker.css';
+		else
+			href = 'style/' + style + '.css';
+		
         var link = new Element('link', {
-            href:  'style/' + style + '.css',
+            href:  href,
             class: 'dynamic',
             type:  'text/css',
             rel:   'stylesheet'
