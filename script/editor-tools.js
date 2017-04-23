@@ -443,8 +443,9 @@ function displayRevisionViewer () {
     ae.setLiLoading(li, true);
 
     // create the box
-    var rect = li.getBoundingClientRect();
-    var box  = ae.createPopupBox(rect.right - 300, rect.top + li.offsetHeight);
+    var box = ae.createPopupBox(null, null);
+    box.setStyles({ right: 0, bottom: 0 });
+    box.addClass('fixed');
     box.innerHTML = tmpl('tmpl-revision-viewer', {});
     var container = box.getElement('#editor-revisions');
     
@@ -468,7 +469,7 @@ function displayRevisionViewer () {
             });
             container.appendChild(row);
         });
-        ae.displayPopupBox(box, 300, li);
+        ae.displayPopupBox(box, 'auto', li);
     };
 
     // request revision history

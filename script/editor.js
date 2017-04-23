@@ -264,11 +264,20 @@ ae.createPopupBox = function (posX, posY) {
 };
 
 ae.displayPopupBox = function (box, height, li) {
+    
+    // can't open the li
     if (!openLi(li))
         return false;
+        
     document.body.appendChild(box);
+    
+    // animate open
     box.set('morph', { duration: 150 });
-    box.morph({ height: height + 'px' });
+    if (typeof height == 'number')
+        box.morph({ height: height + 'px' });
+    else
+        box.setStyle('height', height);
+        
     box.store('li', li);
     ae.currentPopup = box;
     return true;
@@ -577,9 +586,17 @@ function closeCurrentPopup (opts) {
 
 // move a popup when the window resizes
 function adjustCurrentPopup () {
+    
+    // no popup open
     var box = ae.currentPopup;
     if (!box)
         return;
+        
+    // this is a fixed box, don't move it
+    if (box.hasClass('fixed'))
+        return;
+    
+    // check for right, otherwise left
     var li   = box.retrieve('li');
     var rect = li.getBoundingClientRect();
     box.setStyle('left',
