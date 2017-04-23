@@ -43,7 +43,7 @@
 </script>
 
 <script type="text/x-tmpl" id="tmpl-revision-row">
-    <b>{%= o.message %}</b><br />
+    <b>{%= o.message.replace(/^Updated (.*?):/, '') %}</b><br />
     {%= o.author %}<br />
     {%= o.date %}
 </script>

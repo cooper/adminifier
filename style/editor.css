@@ -274,7 +274,6 @@ div.editor-link-type {
 
 .editor-revision-diff-button {
     background-color: #444;
-    border-bottom: 1px solid #333;
     height: 40px;
     line-height: 40px;
     padding: 0 10px;
@@ -283,7 +282,6 @@ div.editor-link-type {
 
 .editor-revision-diff-button:first-child {
     margin-top: 20px;
-    border-top: 1px solid #333;
 }
 
 .editor-revision-diff-button:hover {
