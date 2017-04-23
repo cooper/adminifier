@@ -454,6 +454,10 @@ function displayRevisionViewer () {
             alert(data.error);
             return;
         }
+        if (!data.revs) {
+            alert('No revisions');
+            return;
+        }
         data.revs.each(function (rev) {
             var row = new Element('div', {
                 class: 'editor-revision-row',
