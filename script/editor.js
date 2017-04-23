@@ -268,9 +268,13 @@ ae.displayPopupBox = function (box, height, li) {
     // can't open the li
     if (!openLi(li))
         return false;
-        
+    
+    // add to body
     document.body.appendChild(box);
+    
+    // set as current popup, initial adjustment
     ae.currentPopup = box;
+    box.store('li', li);
     adjustCurrentPopup();
     
     // animate open
@@ -280,7 +284,6 @@ ae.displayPopupBox = function (box, height, li) {
     else
         box.setStyle('height', height);
         
-    box.store('li', li);
     return true;
 };
 
@@ -593,7 +596,7 @@ function adjustCurrentPopup () {
     if (!box)
         return;
         
-    var li   = box.retrieve('li');
+    var li = box.retrieve('li');
     var rect = li.getBoundingClientRect();
             
     // adjust top no matter what
