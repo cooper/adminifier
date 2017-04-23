@@ -34,7 +34,7 @@ function loadedHandler () {
 
     // disable view button for models
     if (ae.isModel())
-        document.getElement('li[data-action="view"]').addClass('disabled');
+        liForAction('view').addClass('disabled');
 
     // start the autosave timer
     resetAutosaveInterval();
@@ -71,7 +71,7 @@ function selectPageTitle () {
 // TEXT COLOR SELECTOR
 
 function displayFontSelector () {
-    var li  = $$('li[data-action="font"]')[0];
+    var li  = liForAction('font');
     var box = ae.createPopupBox(li);
     box.innerHTML = tmpl('tmpl-color-helper', {});
     var container = box.getElement('#editor-color-names');
@@ -121,7 +121,7 @@ function getContrastYIQ (hexColor) {
 // LINK HELPER
 
 function displayLinkHelper () {
-    var li  = $$('li[data-action="link"]')[0];
+    var li  = liForAction('link');
     var box = ae.createPopupBox(li);
     fakeAdopt(box);
 
@@ -230,7 +230,7 @@ function displaySaveHelper () {
 }
 
 function _saveHelper () {
-    var li  = $$('li[data-action="save"]')[0];
+    var li  = liForAction('save');
     var box = ae.createPopupBox(li);
     fakeAdopt(box);
 
@@ -343,7 +343,7 @@ function autosave () {
     if (ae.currentPopup) return; // FIXME
     
     // make it apparent that autosave is occurring
-    var li = $$('li[data-action="save"]')[0];
+    var li = liForAction('save');
     ae.setLiLoading(li, true, true);
     li.getElement('span').innerText = 'Autosave';
     
@@ -435,7 +435,7 @@ function clearAutosaveInterval () {
 function displayRevisionViewer () {
     
     // make the li stay open until finish()
-    var li = $$('li[data-action="revisions"]')[0];
+    var li = liForAction('revisions');
     ae.setLiLoading(li, true);
 
     // create the box
@@ -608,7 +608,7 @@ function displayDiffViewer (box, from, to, which) {
 // DELETE CONFIRMATION
 
 function displayDeleteConfirmation () {
-    var li  = $$('li[data-action="delete"]')[0];
+    var li  = liForAction('delete');
     var box = ae.createPopupBox(li);
     fakeAdopt(box);
 
@@ -976,6 +976,10 @@ function generatePageOptions (opts) {
         string += ';\n';
     });
     return string;
+}
+
+function liForAction (action) {
+    return document.getElement('li[data-action="' + action + '"]');
 }
 
 })(adminifier);
