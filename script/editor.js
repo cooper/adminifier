@@ -425,7 +425,7 @@ function pageUnloadedHandler () {
     document.removeEvent('editorLoaded', editorLoadedHandler);
     document.body.removeEvent('click', clickOutHandler);
     window.removeEvent('resize', adjustCurrentPopup);
-    window.onbeforeunload = null;
+    delete window.onbeforeunload;
     delete a.editor;
 }
 
@@ -433,7 +433,8 @@ function pageScriptsLoadedHandler () {
     console.log('Editor script loaded');
     setupToolbar();
     window.addEvent('resize', adjustCurrentPopup);
-
+    window.onbeforeunload = confirmOnPageExit;
+    
     Range  = ace.require('ace/range').Range;
     Search = ace.require('ace/search').Search;
     editor = ace.edit("editor");
@@ -482,6 +483,8 @@ function clickOutHandler (e) {
 }
 
 function confirmOnPageExit (e) {
+    if (!ae.hasUnsavedChanges())
+        return;
     var message = 'You have unsaved changes.';
     if (e) e.returnValue = message;
     return message;
@@ -522,12 +525,6 @@ function inputHandler () {
     if (lineText.match(ae.expressions.pageTitle)) {
         ae.updatePageTitle(editor.selection.getLineRange());
     }
-
-    // changes?
-    window.onbeforeunload =
-        ae.hasUnsavedChanges()  ?
-        confirmOnPageExit       :
-        null;
 }
 
 // close current popup on click outside
