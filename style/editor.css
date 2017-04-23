@@ -272,10 +272,11 @@ div.editor-link-type {
 }
 
 .editor-revision-diff-button {
-    width: 100%;
+    background-color: #444;
     border-bottom: 1px solid #333;
-    height: 30px;
-    line-height: 30px;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 10px;
     white-space: nowrap;
 }
 
