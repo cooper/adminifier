@@ -481,29 +481,7 @@ function displayRevisionViewer () {
 }
 
 function handleDiffClick (box, row, e) {
-    
-    // no previous commit, so this is the very first one.
-    // we can only show the difference from HEAD
     var prevRow = row.getNext();
-    if (!prevRow) {
-        displayDiffViewer(box, row.get('data-commit'), null, 'current');
-        return;
-    }
-        
-    // if we can find a previous commit, we may need to ask whether
-    // to compare to that or the current version
-        
-    // if there is no row before this, this is the latest commit. we can only
-    // compare it to the previous commit.
-    if (!row.getPrevious()) {
-        displayDiffViewer(
-            box,
-            prevRow.get('data-commit'),
-            row.get('data-commit'),
-            'previous'
-        );
-        return;
-    }
     
     // display overlay
     var overlay = new Element('div', { class: 'editor-revision-overlay' });
@@ -526,11 +504,19 @@ function handleDiffClick (box, row, e) {
         
         // diff current
         function () {
+            if (!row.getPrevious()) {
+                alert('This is the current version');
+                return;
+            }
             displayDiffViewer(box, row.get('data-commit'), null, 'current');
         },
         
         // diff previous
         function () {
+            if (!prevRow) {
+                alert('This is the oldest revision');
+                return;
+            }
             displayDiffViewer(
                 box,
                 prevRow.get('data-commit'),
