@@ -57,6 +57,7 @@ var adminifier = {
         <li data-nav="images"><a class="frame-click" href="#!/images"><i class="fa fa-picture-o"></i> <span>Images</span></a></li>
         <li data-nav="models"><a class="frame-click" href="#!/models"><i class="fa fa-cube"></i> <span>Models</span></a></li>
         <li data-nav="settings"><a class="frame-click" href="#!/settings"><i class="fa fa-cog"></i> <span>Settings</a></li>
+        <li data-nav="help"><a class="frame-click" href="#!/help"><i class="fa fa-question-circle"></i> <span>Help</a></li>
         <li><a href="logout.php"><i class="fa fa-arrow-circle-left"></i> <span>Logout</span></a></li>
     </ul>
 </div>
