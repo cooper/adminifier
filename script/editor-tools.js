@@ -541,7 +541,8 @@ function handleDiffClick (box, row, e) {
         
         // back
         function () {
-            overlay.destroy();
+            overlay.setStyle('display', 'none');
+            setTimeout(function () { overlay.destroy(); }, 100);
         }
     ];
     overlay.getElements('.editor-revision-diff-button').each(function (but, i) {
