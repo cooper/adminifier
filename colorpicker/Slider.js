@@ -47,7 +47,7 @@ Refresh.Web.Slider = new Class({
 		this._arrow.style.top = '0px';
 		this._arrow.style.left = '0px';
 		this._arrow.style.cursor = 'default';
-        this._arrow.injectInside(document.body);
+        this._arrow.inject(document.body);
         this.Arrow = this._arrow;
 
 		// attach 'this' to html objects

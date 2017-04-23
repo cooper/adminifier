@@ -68,14 +68,14 @@ Refresh.Web.ColorPicker = new Class({
             position: "absolute",
             left: 0,
             top: 0
-            }} ).injectInside(this._mapBase);
+            }} ).inject(this._mapBase);
 		this._mapL2 = new Element('img',{src:this.options.clientFilesPath + 'blank.gif', width:this.options.pickerSize, height:this.options.pickerSize, styles: {
             clear: "both",
             margin: 0,
             position: "absolute",
             left: 0,
             top: 0,
-            opacity: 0.5 }} ).injectInside(this._mapBase);
+            opacity: 0.5 }} ).inject(this._mapBase);
 		
 		// BAR
 		this._bar = $(this.id + '_ColorBar');
@@ -90,14 +90,14 @@ Refresh.Web.ColorPicker = new Class({
 		this._barL1.style.position = 'absolute';
 		this._barL1.style.left = '0px';
 		this._barL1.style.top = '0px';
-        this._barL1.injectInside(this._bar);
+        this._barL1.inject(this._bar);
 
 		this._barL2 = new Element('img',{src:this.options.clientFilesPath + 'blank.gif', width:20, height:this.options.pickerSize} );
 		this._barL1.style.margin = '0px';
 		this._barL1.style.position = 'absolute';
 		this._barL1.style.left = '0px';
 		this._barL1.style.top = '0px';
-        this._barL2.injectInside(this._bar);
+        this._barL2.inject(this._bar);
 		
 		this._barL3 = new Element('img',{src:this.options.clientFilesPath + 'blank.gif', width:20, height:this.options.pickerSize} );
 		this._barL3.style.margin = '0px';
@@ -105,14 +105,14 @@ Refresh.Web.ColorPicker = new Class({
 		this._barL3.style.left = '0px';
 		this._barL3.style.top = '0px';
 		this._barL3.style.backgroundColor = '#ff0000';
-        this._barL3.injectInside(this._bar);
+        this._barL3.inject(this._bar);
 		
 		this._barL4 = new Element('img',{src:this.options.clientFilesPath + 'bar-brightness.png', width:20, height:this.options.pickerSize} );
 		this._barL4.style.margin = '0px';
 		this._barL4.style.position = 'absolute';
 		this._barL4.style.left = '0px';
 		this._barL4.style.top = '0px';
-        this._barL4.injectInside(this._bar);
+        this._barL4.inject(this._bar);
 		
 		// attach map slider
 		this._map = new Refresh.Web.Slider(this._mapL2, {
