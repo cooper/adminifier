@@ -507,7 +507,7 @@ function handleDiffClick (box, row, e) {
     
     // display overlay
     var overlay = new Element('div', { class: 'editor-revision-overlay' });
-    overlay.appendChild(row.clone());
+    overlay.appendChild(row.clone().addClass('preview'));
     overlay.innerHTML += tmpl('tmpl-revision-overlay', {});
     box.appendChild(overlay);
     
