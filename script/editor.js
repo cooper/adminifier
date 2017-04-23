@@ -277,8 +277,10 @@ ae.displayPopupBox = function (box, height, li) {
     box.set('morph', { duration: 150 });
     if (height == 'auto') {
         height = window.innerHeight - parseInt(box.getStyle('top'));
+        box.set('morph', {
+            onComplete: function () { box.setStyle('height', 'auto'); }
+        });
         box.morph({ height: height + 'px' });
-        setTimeout(function () { box.setStyle('height', 'auto'); }, 500);
     }
     else if (typeof height == 'number')
         box.morph({ height: height + 'px' });
@@ -586,6 +588,9 @@ function closeCurrentPopup (opts) {
             if (opts.afterHide) opts.afterHide();
         }
     });
+    
+    if (box.getStyle('height') == 'auto')
+        box.setStyle('height', window.innerHeight - parseInt(box.getStyle('top')));
     box.morph({ height: '0px' });
 }
 
