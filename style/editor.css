@@ -249,8 +249,13 @@ div.editor-link-type {
     background-color: #444;
 }
 
-.editor-revision-row:not(.preview):nth-child(odd) {
+.editor-revision-row:nth-child(odd) {
     border-bottom: 1px solid #444;
+}
+
+.editor-revision-row.preview {
+    border-bottom: none;
+    padding-bottom: 0;
 }
 
 .editor-revision-row:not(.preview):hover {

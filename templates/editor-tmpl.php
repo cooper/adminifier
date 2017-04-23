@@ -58,6 +58,8 @@
             <i class="fa fa-code"></i>
             View source
         </div>
+    </div>
+    <div>
         <div class="editor-revision-diff-button" title="Compare this revision to the current version">
             <i class="fa fa-circle-o"></i>
             Compare to current
