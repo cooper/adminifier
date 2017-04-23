@@ -1,0 +1,18 @@
+.colorpicker-container {
+    background-color: #555;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+.colorpicker-container input[type=text] {
+    border: 1px solid #333;
+    background-color: #777;
+    color: #fff;
+    padding: 2px 4px;
+}
+
+.colorpicker-container .picker-arrow {
+}
