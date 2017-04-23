@@ -270,6 +270,8 @@ ae.displayPopupBox = function (box, height, li) {
         return false;
         
     document.body.appendChild(box);
+    ae.currentPopup = box;
+    adjustCurrentPopup();
     
     // animate open
     box.set('morph', { duration: 150 });
@@ -279,7 +281,6 @@ ae.displayPopupBox = function (box, height, li) {
         box.setStyle('height', height);
         
     box.store('li', li);
-    ae.currentPopup = box;
     return true;
 };
 
@@ -592,19 +593,22 @@ function adjustCurrentPopup () {
     if (!box)
         return;
         
-    // this is a fixed box, don't move it
+    var li   = box.retrieve('li');
+    var rect = li.getBoundingClientRect();
+            
+    // adjust top no matter what
+    box.setStyle('top', rect.top + li.offsetHeight);
+    
+    // this is a fixed box; don't change left or right
     if (box.hasClass('fixed'))
         return;
     
-    // check for right, otherwise left
-    var li   = box.retrieve('li');
-    var rect = li.getBoundingClientRect();
+    // set left or right
     box.setStyle('left',
         box.hasClass('right') ?
         rect.right - 300 :
         rect.left
     );
-    box.setStyle('top', rect.top + li.offsetHeight);
 };
 
 function openLi (li) {
