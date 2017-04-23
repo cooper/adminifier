@@ -509,6 +509,7 @@ function handleDiffClick (box, row, e) {
     var overlay = new Element('div', { class: 'editor-revision-overlay' });
     overlay.appendChild(row.clone());
     overlay.innerHTML += tmpl('tmpl-revision-overlay', {});
+    box.appendChild(overlay);
     
     // on click, display the diff viewer given the from..to
     overlay.getElements('.editor-revision-diff-button').each(function (but, i) {
