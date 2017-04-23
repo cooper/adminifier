@@ -246,11 +246,11 @@ div.editor-link-type {
 }
 
 .editor-revision-row:nth-child(odd) {
-    border-bottom: 1px solid #696969;
+    border-bottom: 1px solid #444;
 }
 
 .editor-revision-row:nth-child(even) {
-    background-color: #696969;
+    background-color: #444;
 }
 
 .editor-revision-row:hover {
