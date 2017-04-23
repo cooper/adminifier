@@ -49,14 +49,22 @@
 </script>
 
 <script type="text/x-tmpl" id="tmpl-revision-overlay">
-<div class="editor-revision-diff-button" title="Compare to current">
-    <i class="fa fa-3x fa-circle-o"></i><br />
-    Current
-</div>
-<div class="editor-revision-diff-button" title="Compare to previous">
-    <i class="fa fa-3x fa-undo"></i><br />
-    Previous
-</div>
+    <div class="editor-revision-diff-button" title="View the page at this point in history">
+        <i class="fa fa-binoculars"></i>
+        View on wiki
+    </div>
+    <div class="editor-revision-diff-button" title="View the page source at this point in history">
+        <i class="fa fa-code"></i>
+        View source
+    </div>
+    <div class="editor-revision-diff-button" title="Compare this revision to the current version">
+        <i class="fa fa-circle-o"></i>
+        Compare to current
+    </div>
+    <div class="editor-revision-diff-button" title="Compare this revision to the one before it">
+        <i class="fa fa-undo"></i>
+        Compare to previous
+    </div>
 </script>
 
 <script type="text/x-tmpl" id="tmpl-color-name">

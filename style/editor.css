@@ -268,20 +268,16 @@ div.editor-link-type {
 }
 
 .editor-revision-diff-button {
-    float: left;
-    width: 50%;
-    height: 100%;
-    text-align: center;
+    width: 100%;
+    border-bottom: 1px solid #444;
+    height: 30px;
+    line-height: 30px;
     white-space: nowrap;
 }
 
 .editor-revision-diff-button:hover {
     background-color: #333;
     cursor: pointer;
-}
-
-.editor-revision-diff-button i {
-    margin-top: 10px;
 }
 
 /* small tabs used in various popups */
