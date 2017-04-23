@@ -252,14 +252,10 @@ ae.resetSelectionAtTopLeft = function () {
     editor.focus();
 };
 
-ae.createPopupBox = function (posX, posY) {
-    var box = new Element('div', {
-        class: 'editor-popup-box',
-        styles: {
-            top:  posY,
-            left: posX
-        }
-    });
+ae.createPopupBox = function (li) {
+    var box = new Element('div', { class: 'editor-popup-box' });
+    if (li && li.hasClass('right'))
+        box.addClass('right');
     return box;
 };
 

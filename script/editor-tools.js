@@ -71,9 +71,8 @@ function selectPageTitle () {
 // TEXT COLOR SELECTOR
 
 function displayFontSelector () {
-    var li   = $$('li[data-action="font"]')[0];
-    var rect = li.getBoundingClientRect();
-    var box  = ae.createPopupBox(rect.left, rect.top + li.offsetHeight);
+    var li  = $$('li[data-action="font"]')[0];
+    var box = ae.createPopupBox(li);
     box.innerHTML = tmpl('tmpl-color-helper', {});
     var container = box.getElement('#editor-color-names');
 
@@ -122,9 +121,8 @@ function getContrastYIQ (hexColor) {
 // LINK HELPER
 
 function displayLinkHelper () {
-    var li   = $$('li[data-action="link"]')[0];
-    var rect = li.getBoundingClientRect();
-    var box  = ae.createPopupBox(rect.left, rect.top + li.offsetHeight);
+    var li  = $$('li[data-action="link"]')[0];
+    var box = ae.createPopupBox(li);
     fakeAdopt(box);
 
     box.innerHTML = tmpl('tmpl-link-helper', {});
@@ -232,10 +230,8 @@ function displaySaveHelper () {
 }
 
 function _saveHelper () {
-    var li   = $$('li[data-action="save"]')[0];
-    var rect = li.getBoundingClientRect();
-    var box  = ae.createPopupBox(rect.right - 300, rect.top + li.offsetHeight);
-    box.addClass('right');
+    var li  = $$('li[data-action="save"]')[0];
+    var box = ae.createPopupBox(li);
     fakeAdopt(box);
 
     box.innerHTML = tmpl('tmpl-save-helper', {
@@ -443,7 +439,7 @@ function displayRevisionViewer () {
     ae.setLiLoading(li, true);
 
     // create the box
-    var box = ae.createPopupBox(null, null);
+    var box = ae.createPopupBox(li);
     box.setStyles({ right: 0, bottom: 0 });
     box.addClass('fixed');
     box.innerHTML = tmpl('tmpl-revision-viewer', {});
@@ -612,10 +608,8 @@ function displayDiffViewer (box, from, to, which) {
 // DELETE CONFIRMATION
 
 function displayDeleteConfirmation () {
-    var li   = $$('li[data-action="delete"]')[0];
-    var rect = li.getBoundingClientRect();
-    var box  = ae.createPopupBox(rect.right - 300, rect.top + li.offsetHeight);
-    box.addClass('right');
+    var li  = $$('li[data-action="delete"]')[0];
+    var box = ae.createPopupBox(li);
     fakeAdopt(box);
 
     box.innerHTML = tmpl('tmpl-delete-confirm', {});
