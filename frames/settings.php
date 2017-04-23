@@ -9,5 +9,8 @@
 
 Settings will be here.
 <pre>
-<? print_r($wiki_conf); ?>
+<?
+    require_once(__DIR__.'/../functions/utils.php');
+    print_r($wiki_conf);
+?>
 </pre>
