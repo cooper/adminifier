@@ -511,18 +511,41 @@ function handleDiffClick (box, row, e) {
     overlay.innerHTML += tmpl('tmpl-revision-overlay', {});
     box.appendChild(overlay);
     
-    // on click, display the diff viewer given the from..to
-    overlay.getElements('.editor-revision-diff-button').each(function (but, i) {
-        but.addEvent('click', function () {
-            overlay.destroy();
-            if (i) displayDiffViewer(
+    // button clicks
+    var funcs = [
+        
+        // view on wiki
+        function () {
+            alert('Unimplemented');
+        },
+        
+        // view source
+        function () {
+            alert('Unimplemented');
+        },
+        
+        // diff current
+        function () {
+            displayDiffViewer(box, row.get('data-commit'), null, 'current');
+        },
+        
+        // diff previous
+        function () {
+            displayDiffViewer(
                 box,
                 prevRow.get('data-commit'),
                 row.get('data-commit'),
                 'previous'
             );
-            else displayDiffViewer(box, row.get('data-commit'), null, 'current');
-        });
+        },
+        
+        // back
+        function () {
+            overlay.destroy();
+        }
+    ];
+    overlay.getElements('.editor-revision-diff-button').each(function (but, i) {
+        but.addEvent('click', funcs.shift());
     });
 }
 
