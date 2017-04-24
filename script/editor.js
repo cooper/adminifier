@@ -580,7 +580,6 @@ function closeCurrentPopup (opts) {
     if (ae.onPopupDestroy) {
         ae.onPopupDestroy(box);
         delete ae.onPopupDestroy;
-        return;
     }
 
     closeCurrentLi();
