@@ -77,6 +77,8 @@ function displayFontSelector () {
     var box = ae.createPopupBox(li);
     box.innerHTML = tmpl('tmpl-color-helper', {});
     
+    ae.setLiLoading(li, true);
+    
     // create color picker
     var cp = new DynamicColorPicker({
         injectInto: box.getElement('#editor-color-hex')
@@ -118,6 +120,7 @@ function displayFontSelector () {
 
     // delay showing the box until the color picker is loaded
     DynamicColorPicker.autoLoad(function () {
+        ae.setLiLoading(li, false);
         box.setStyle('width', '395px');
         cp.show();
         ae.displayPopupBox(box, 260, li);
