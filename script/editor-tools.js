@@ -117,6 +117,7 @@ function displayFontSelector () {
     box.appendChild(container);
 
     // delay showing the box until the color picker is loaded
+    fakeAdopt(box);
     DynamicColorPicker.autoLoad(function () {
         box.setStyle('width', '410px');
         cp.show();
