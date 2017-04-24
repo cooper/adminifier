@@ -86,7 +86,7 @@ function displayFontSelector () {
     
     // on close, destroy color picker
     ae.onPopupDestroy = function () {
-        cp.destroy();
+        cp.picker.destroy();
     };
     
     // create crayon picker.
