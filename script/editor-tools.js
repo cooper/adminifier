@@ -87,6 +87,7 @@ function displayFontSelector () {
 
     // temporarily add it to the body
     // for when we call getComputedStyle
+    fakeAdopt(box);
     fakeAdopt(container);
 
     // create color elements
@@ -118,8 +119,8 @@ function displayFontSelector () {
     // delay showing the box until the color picker is loaded
     DynamicColorPicker.autoLoad(function () {
         box.setStyle('width', '395px');
-        ae.displayPopupBox(box, 260, li);
         cp.show();
+        ae.displayPopupBox(box, 260, li);
     }, 100);
 }
 
