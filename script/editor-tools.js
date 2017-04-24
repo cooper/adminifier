@@ -118,6 +118,7 @@ function displayFontSelector () {
     DynamicColorPicker.autoLoad(function () {
         box.setStyle('width', '395px');
         cp.show();
+        cp.picker.updateVisuals();
         ae.setLiLoading(li, false);
         ae.displayPopupBox(box, 290, li);
     }, 100);
