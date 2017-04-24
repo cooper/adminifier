@@ -40,7 +40,7 @@ DynamicColorPicker = new Class({
         DynamicColorPicker.autoLoad(this.options.autoLoadPath, function() {
             self.container = new Element("div", {
                 "class": "colorpicker-container"
-            }).inject(this.options.parent);
+            }).inject(self.options.parent);
 
             self.id = DynamicColorPicker.generateId();
             self.setContainerHtml(self.id);
