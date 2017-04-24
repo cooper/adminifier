@@ -144,10 +144,10 @@ function displayFontSelector () {
     // delay showing the box until the color picker is loaded
     DynamicColorPicker.autoLoad(function () {
         box.setStyle('width', '395px');
-        cp.show();
         ae.setLiLoading(li, false);
         ae.displayPopupBox(box, 290, li);
-        cp.picker.setColorMode('h');
+        cp.show();
+//        cp.picker.setColorMode('h');
     }, 100);
 }
 
