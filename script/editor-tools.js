@@ -149,10 +149,10 @@ function displayFontSelector () {
         
         // prevent the popup from closing due to a click on the positioner
         cp.container.addEvents({
-            mouseenter: function () {
+            mouseover: function () {
                 box.addClass('sticky');
             },
-            mouseleave: function () {
+            mouseout: function () {
                 box.removeClass('sticky');
             }
         });
