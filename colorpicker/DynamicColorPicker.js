@@ -202,9 +202,9 @@ DynamicColorPicker = new Class({
 });
 
 // "Static" function on the DynamicColorPicker class for generating IDs
-DynamicColorPicker.generateId = (function() {
+DynamicColorPicker.generateId = function() {
     return 'colorpicker';
-})();
+};
 
 DynamicColorPicker.auto = function(spec, options) {
     $$(spec).each(function(el) {
