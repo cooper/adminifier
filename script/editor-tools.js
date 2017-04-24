@@ -79,7 +79,7 @@ function displayFontSelector () {
     
     // create color picker
     var cp = new DynamicColorPicker({
-        parent: box.getElement('editor-color-hex')
+        injectInto: box.getElement('#editor-color-hex')
     });
     DynamicColorPicker.autoLoad(function () { cp.show(); }, 100);
     

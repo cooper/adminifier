@@ -24,7 +24,7 @@ DynamicColorPicker = new Class({
     Implements: [Options, Events],
 
     options: {
-        parent: document.body,
+        injectInto: document.body,
         textField: null,
         startMode: 'h',
         startHex: 'ff0000',
@@ -38,10 +38,10 @@ DynamicColorPicker = new Class({
         var self = this;
 
         DynamicColorPicker.autoLoad(function() {
-            console.log("injecting to: ", self.options.parent);
+            console.log("injecting to: ", self.options.injectInto);
             self.container = new Element("div", {
                 "class": "colorpicker-container"
-            }).inject(self.options.parent);
+            }).inject(self.options.injectInto);
 
             self.id = DynamicColorPicker.generateId();
             self.setContainerHtml(self.id);
