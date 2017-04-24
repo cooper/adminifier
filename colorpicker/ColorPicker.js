@@ -23,14 +23,14 @@ Refresh.Web.ColorPicker = new Class({
         this.setOptions(options);
 
 		// attach radio & check boxes
-		this._hueRadio = $(this.id + '_HueRadio');
-		this._saturationRadio = $(this.id + '_SaturationRadio');
-		this._valueRadio = $(this.id + '_BrightnessRadio');
+		this._hueRadio = $(this.id + '-hue-radio');
+		this._saturationRadio = $(this.id + '-saturation-radio');
+		this._valueRadio = $(this.id + '-brightness-radio');
 		
-		this._redRadio = $(this.id + '_RedRadio');
-		this._greenRadio = $(this.id + '_GreenRadio');
-		this._blueRadio = $(this.id + '_BlueRadio');
-		//this._webSafeCheck = $(this.id + '_WebSafeCheck');
+		this._redRadio = $(this.id + '-red-radio');
+		this._greenRadio = $(this.id + '-green-radio');
+		this._blueRadio = $(this.id + '-blue-radio');
+		//this._webSafeCheck = $(this.id + '-WebSafeCheck');
 
 		this._hueRadio.value = 'h';
 		this._saturationRadio.value = 's';
@@ -54,10 +54,10 @@ Refresh.Web.ColorPicker = new Class({
 		this._blueRadio.addEvent('click', this._event_onRadioClicked);
 
 		// attach simple properties
-		this._preview = $(this.id + '_Preview');
+		this._preview = $(this.id + '-preview');
 		
 		// MAP
-		this._mapBase = $(this.id + '_ColorMap');
+		this._mapBase = $(this.id + '-color-map');
 		this._mapBase.style.width = this.options.pickerSize + 'px';
 		this._mapBase.style.height = this.options.pickerSize + 'px';
 		this._mapBase.style.padding = 0;
@@ -79,7 +79,7 @@ Refresh.Web.ColorPicker = new Class({
             opacity: 0.5 }} ).inject(this._mapBase);
 		
 		// BAR
-		this._bar = $(this.id + '_ColorBar');
+		this._bar = $(this.id + '-color-bar');
 		this._bar.style.width = '20px';
 		this._bar.style.height = this.options.pickerSize + 'px';
 		this._bar.style.padding = 0;
