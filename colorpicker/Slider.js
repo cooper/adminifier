@@ -57,7 +57,7 @@ Refresh.Web.Slider = new Class({
 		
 		var _this = this;
 		this._event_docMouseMove = function (e) { _this._docMouseMove.call(_this, e); };
-		this._event_docMouseUp   = function (e) { _this._event_docMouseUp.call(_this, e); };
+		this._event_docMouseUp   = function (e) { _this._docMouseUp.call(_this, e); };
 
 		this._bar.addEvent('mousedown', function (e) { _this._bar_mouseDown.call(_this, e); });
 		this._arrow.addEvent('mousedown', function (e) { _this._arrow_mouseDown.call(_this, e); });
