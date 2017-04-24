@@ -26,11 +26,11 @@ Refresh.Web.ColorValuePicker = new Class({
 
 		// events
 		var _this = this;
-		this._event_onHsvKeyUp 	= function (e) { this._onHsvKeyUp.call(_this, e); };
-		this._event_onHsvBlur 	= function (e) { this._onHsvBlur.call(_this, e); };
-		this._event_onRgbKeyUp 	= function (e) { this._onRgbKeyUp.call(_this, e); };
-		this._event_onRgbBlur 	= function (e) { this._onRgbBlur.call(_this, e); };
-		this._event_onHexKeyUp	= function (e) { this._onHexKeyUp.call(_this, e); };
+		this._event_onHsvKeyUp 	= function (e) { _this._onHsvKeyUp.call(_this, e); };
+		this._event_onHsvBlur 	= function (e) { _this._onHsvBlur.call(_this, e); };
+		this._event_onRgbKeyUp 	= function (e) { _this._onRgbKeyUp.call(_this, e); };
+		this._event_onRgbBlur 	= function (e) { _this._onRgbBlur.call(_this, e); };
+		this._event_onHexKeyUp	= function (e) { _this._onHexKeyUp.call(_this, e); };
 		
 		// HSB
 		this._hueInput.addEvent('keyup', this._event_onHsvKeyUp);
