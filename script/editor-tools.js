@@ -117,7 +117,8 @@ function displayFontSelector () {
     container.setStyle('display', 'block');
     box.appendChild(container);
 
-    ae.displayPopupBox(box, 200, li);
+    box.setStyle('width', '420px');
+    ae.displayPopupBox(box, 280, li);
 }
 
 function getContrastYIQ (hexColor) {
