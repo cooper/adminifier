@@ -42,7 +42,6 @@ Refresh.Web.Slider = new Class({
 		});
 		this._arrow.style.fontSize = this.options.arrowSize;
         this._arrow.inject(this.options.injectInto);
-		console.log('injected into: ', this.options.injectInto);
         this.Arrow = this._arrow;
 
 		// attach 'this' to html objects
@@ -76,9 +75,8 @@ Refresh.Web.Slider = new Class({
 		this._barWidth = this._bar.getWidth();
 		this._barHeight = this._bar.getHeight();
 		
-		var pos = this._bar.getPosition(); // FIXME: May not be the right kind of position...
-		this._barTop = pos.y;
-		this._barLeft = pos.x;
+		this._barTop = this._bar.offsetTop;
+		this._barLeft = this._bar.offsetLeft;
 		
 		this._barBottom = this._barTop + this._barHeight;
 		this._barRight = this._barLeft + this._barWidth;
