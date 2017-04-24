@@ -76,6 +76,7 @@ function displayFontSelector () {
     var li  = liForAction('font');
     var box = ae.createPopupBox(li);
     box.innerHTML = tmpl('tmpl-color-helper', {});
+    fakeAdopt(box); // for injectInto
     ae.setLiLoading(li, true);
     
     // create color picker
@@ -85,12 +86,8 @@ function displayFontSelector () {
     
     // create crayon picker.
     var container = box.getElement('#editor-color-names');
-
-    // temporarily add it to the body
-    // for when we call getComputedStyle
-    fakeAdopt(box);
-    fakeAdopt(container);
-
+    fakeAdopt(container); // for getComputedStyle()
+    
     // create color elements
     colorList.each(function (colorName) {
         var div = new Element('div', {
@@ -122,7 +119,7 @@ function displayFontSelector () {
         box.setStyle('width', '395px');
         cp.show();
         ae.setLiLoading(li, false);
-        ae.displayPopupBox(box, 260, li);
+        ae.displayPopupBox(box, 290, li);
     }, 100);
 }
 
