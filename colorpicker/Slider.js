@@ -42,6 +42,7 @@ Refresh.Web.Slider = new Class({
 		});
 		this._arrow.style.fontSize = this.options.arrowSize;
         this._arrow.inject(this.options.injectInto);
+		console.log('injected into: ', this.options.injectInto);
         this.Arrow = this._arrow;
 
 		// attach 'this' to html objects
