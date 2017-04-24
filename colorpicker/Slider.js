@@ -39,14 +39,7 @@ Refresh.Web.Slider = new Class({
 			class: 'picker-arrow',
 			html: this.options.arrowCharacter
 		});
-		this._arrow.border = 0;
-		this._arrow.margin = 0;
-		this._arrow.padding = 0;
 		this._arrow.style.fontSize = this.options.arrowSize;
-		this._arrow.style.position = 'absolute';
-		this._arrow.style.top = '0px';
-		this._arrow.style.left = '0px';
-		this._arrow.style.cursor = 'default';
         this._arrow.inject(document.body);
         this.Arrow = this._arrow;
 
