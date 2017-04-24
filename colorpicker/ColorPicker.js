@@ -627,7 +627,7 @@ Refresh.Web.ColorPicker = new Class({
 			if (src != null && src.indexOf('map-hue') == -1)
 				obj.style.filter = 'progid:DXImageTransform.Microsoft.AlphaImageLoader(src=\'' + src + '\') progid:DXImageTransform.Microsoft.Alpha(opacity=' + alpha + ')';
 		} else {
-			obj.setOpacity(alpha/100);
+			obj.setStyle('opacity', alpha/100);
 		}
 	}
 });
