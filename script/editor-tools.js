@@ -130,6 +130,12 @@ function displayFontSelector () {
         $('editor-color-hex').setStyle('display', 'none');
         $('editor-color-names').setStyle('display', 'block');
     });
+    
+    // on clicking the preview, insert
+    $('colorpicker_Preview').addEvent('click', function () {
+        var color = cp.picker.color.hex;
+        return ae.wrapTextFunction(color)();
+    });
 
     // put it where it belongs
     container.parentElement.removeChild(container);
