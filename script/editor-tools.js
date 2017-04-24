@@ -147,6 +147,16 @@ function displayFontSelector () {
             return ae.wrapTextFunction('#' + color)();
         });
         
+        // prevent the popup from closing due to a click on the positioner
+        cp.container.addEvents({
+            mouseenter: function () {
+                box.addClass('sticky');
+            },
+            mouseleave: function () {
+                box.removeClass('sticky');
+            }
+        });
+        
         // show the box with the picker
         box.setStyle('width', '395px');
         ae.setLiLoading(li, false);
