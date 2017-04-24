@@ -123,12 +123,14 @@ function displayFontSelector () {
         btnList.removeClass('active');
         $('editor-color-names').setStyle('display', 'none');
         $('editor-color-hex').setStyle('display', 'block');
+        cp.picker.show();
     });
     btnList.addEvent('click', function () {
         btnList.addClass('active');
         btnPicker.removeClass('active');
         $('editor-color-hex').setStyle('display', 'none');
         $('editor-color-names').setStyle('display', 'block');
+        cp.picker.hide();
     });
 
 
