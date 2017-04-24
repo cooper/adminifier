@@ -6,9 +6,6 @@
 .colorpicker-container {
     background-color: #555;
     color: #fff;
-    position: absolute;
-    top: 0;
-    left: 0;
     display: none;
 }
 
