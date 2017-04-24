@@ -76,7 +76,6 @@ function displayFontSelector () {
     var li  = liForAction('font');
     var box = ae.createPopupBox(li);
     box.innerHTML = tmpl('tmpl-color-helper', {});
-    
     ae.setLiLoading(li, true);
     
     // create color picker
@@ -120,10 +119,10 @@ function displayFontSelector () {
 
     // delay showing the box until the color picker is loaded
     DynamicColorPicker.autoLoad(function () {
-        ae.setLiLoading(li, false);
         box.setStyle('width', '395px');
         cp.show();
         ae.displayPopupBox(box, 260, li);
+        ae.setLiLoading(li, false);
     }, 100);
 }
 
