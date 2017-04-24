@@ -34,14 +34,12 @@ DynamicColorPicker = new Class({
     initialize: function(options) {
         this.setOptions(options);
         this.options.clientFilesPath = this.options.pickerPath + '/images/';
-
+        this.container = new Element("div", {
+            "class": "colorpicker-container"
+        });
         var self = this;
-
         DynamicColorPicker.autoLoad(function() {
-            console.log("injecting to: ", self.options.injectInto);
-            self.container = new Element("div", {
-                "class": "colorpicker-container"
-            }).inject(self.options.injectInto);
+            self.container.inject(self.options.injectInto);
             self.setContainerHtml();
             self.picker = new Refresh.Web.ColorPicker('colorpicker', self.options);
             self.picker.addEvent('change', self._onColorChange.bind(self));
