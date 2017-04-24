@@ -13,8 +13,8 @@ Refresh.Web.ColorPicker = new Class({
 
     options: {
         pickerSize: 256,
-        startMode:'h',
-        startHex:'ff0000',
+        startMode: 'h',
+        startHex: 'ff0000',
         clientFilesPath: 'colorpicker/images/'
     },
 
@@ -154,6 +154,7 @@ Refresh.Web.ColorPicker = new Class({
 		this.color = null;
 	},
 	show: function() {
+        this.setColorMode(this.options.startMode);
 		this._map.Arrow.style.display = '';
 		this._slider.Arrow.style.display = '';
 		this._map.setPositioningVariables();
