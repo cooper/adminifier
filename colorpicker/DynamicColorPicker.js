@@ -231,7 +231,7 @@ DynamicColorPicker.autoLoad = (function() {
     var loadStage = 0; // 0 = not loaded, 1 = loading, 2 = loaded
     var callbacks = [];
 
-    return function(path, onload) {
+    return function(onload) {
         // If loaded, immediately done
         if (loadStage == 2) { if (onload) onload(); return; }
 
@@ -258,7 +258,7 @@ DynamicColorPicker.autoLoad = (function() {
                 callbacks.each(function(f) { f(); });
         };
 
-        path = path || "colorpicker";
+        var path = "colorpicker";
         Asset.javascript(path + "/ColorPicker.js", { onload: onFileLoaded });
         Asset.javascript(path + "/ColorValuePicker.js", { onload: onFileLoaded });
         Asset.javascript(path + "/ColorMethods.js", { onload: onFileLoaded });

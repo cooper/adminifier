@@ -81,7 +81,7 @@ function displayFontSelector () {
     var cp = new DynamicColorPicker({
         parent: box.getElement('editor-color-hex')
     });
-    cp.autoLoad(function () { cp.show(); }, 100);
+    DynamicColorPicker.autoLoad(function () { cp.show(); }, 100);
     
     // create crayon picker.
     var container = box.getElement('#editor-color-names');
