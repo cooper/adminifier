@@ -156,7 +156,7 @@ function displayFontSelector () {
                 box.removeClass('sticky');
             }
         });
-        cp.container.getElements('.colorpicker-arrow').each(function (arrow) {
+        $$('.colorpicker-arrow').each(function (arrow) {
             arrow.addClass('no-close-popup');
         });
         
