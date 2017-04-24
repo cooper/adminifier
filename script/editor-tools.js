@@ -84,6 +84,11 @@ function displayFontSelector () {
         injectInto: box.getElement('#editor-color-hex')
     });
     
+    // on close, destroy color picker
+    ae.onPopupDestroy = function () {
+        cp.destroy();
+    };
+    
     // create crayon picker.
     var container = box.getElement('#editor-color-names');
     fakeAdopt(container); // for getComputedStyle()

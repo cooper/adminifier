@@ -164,6 +164,10 @@ Refresh.Web.ColorPicker = new Class({
 		this._map.Arrow.style.display = 'none';
 		this._slider.Arrow.style.display = 'none';
 	},
+    destroy: function () {
+        this._map.Arrow.destroy();
+		this._slider.Arrow.destroy();
+    },
 	_onRadioClicked: function(e) {
 		this.setColorMode(e.target.value);
 	},

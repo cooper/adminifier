@@ -575,6 +575,13 @@ function closeCurrentPopup (opts) {
     // Safe point - we will close the box.
     if (opts.reason)
         console.log('Closing popup: ' + opts.reason);
+        
+    // run destroy callback
+    if (ae.onPopupDestroy) {
+        ae.onPopupDestroy(box);
+        delete ae.onPopupDestroy;
+        return;
+    }
 
     closeCurrentLi();
     box.set('morph', {
