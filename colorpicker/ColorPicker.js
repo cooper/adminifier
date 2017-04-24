@@ -154,7 +154,6 @@ Refresh.Web.ColorPicker = new Class({
 		this.color = null;
 	},
 	show: function() {
-        this.setColorMode(this.options.startMode);
 		this._map.Arrow.style.display = '';
 		this._slider.Arrow.style.display = '';
 		this._map.setPositioningVariables();
