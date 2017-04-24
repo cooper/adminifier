@@ -43,9 +43,7 @@ Refresh.Web.ColorPicker = new Class({
 		// attach events to radio & checks
 
         var _this = this;
-		this._event_onRadioClicked = function(e) {
-            this._onRadioClicked.call(_this, e);
-        };
+		this._event_onRadioClicked = function(e) { _this._onRadioClicked.call(_this, e); };
 
 		this._hueRadio.addEvent('click', this._event_onRadioClicked);
 		this._saturationRadio.addEvent('click', this._event_onRadioClicked);
