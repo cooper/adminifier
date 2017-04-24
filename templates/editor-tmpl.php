@@ -39,6 +39,109 @@
     <div id="editor-color-hex"></div>
 </script>
 
+<script type="text/x-tmpl" id="tmpl-color-container">
+    <table>
+        <tr>
+            <td valign="top">
+                <div id="cp1_ColorMap"></div>
+            </td>
+            <td valign="top">
+                <div id="cp1_ColorBar"></div>
+            </td>
+            <td valign="top">
+                <table>
+                    <tr>
+                        <td colspan="3">
+                            <div id="cp1_Preview" style="background-color: #fff; width: 90px; height: 60px; padding: 0; margin: 0;">
+                                <br />
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="radio" id="cp1_HueRadio" name="cp1_Mode" value="0" />
+                        </td>
+                        <td>
+                            <label for="cp1_HueRadio">H</label>
+                        </td>
+                        <td>
+                            <input type="text" id="cp1_Hue" value="0" style="width: 40px;" /> &deg;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="radio" id="cp1_SaturationRadio" name="cp1_Mode" value="1" />
+                        </td>
+                        <td>
+                            <label for="cp1_SaturationRadio">S</label>
+                        </td>
+                        <td>
+                            <input type="text" id="cp1_Saturation" value="100" style="width: 40px;" /> %
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="radio" id="cp1_BrightnessRadio" name="cp1_Mode" value="2" />
+                        </td>
+                        <td>
+                            <label for="cp1_BrightnessRadio">B</label>
+                        </td>
+                        <td>
+                            <input type="text" id="cp1_Brightness" value="100" style="width: 40px;" /> %
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" height="5">
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="radio" id="cp1_RedRadio" name="cp1_Mode" value="r" />
+                        </td>
+                        <td>
+                            <label for="cp1_RedRadio">R</label>
+                        </td>
+                        <td>
+                            <input type="text" id="cp1_Red" value="255" style="width: 40px;" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="radio" id="cp1_GreenRadio" name="cp1_Mode" value="g" />
+                        </td>
+                        <td>
+                            <label for="cp1_GreenRadio">G</label>
+                        </td>
+                        <td>
+                            <input type="text" id="cp1_Green" value="0" style="width: 40px;" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="radio" id="cp1_BlueRadio" name="cp1_Mode" value="b" />
+                        </td>
+                        <td>
+                            <label for="cp1_BlueRadio">B</label>
+                        </td>
+                        <td>
+                            <input type="text" id="cp1_Blue" value="0" style="width: 40px;" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            #
+                        </td>
+                        <td colspan="2">
+                            <input type="text" id="cp1_Hex" value="FF0000" style="width: 57px;" />
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</script>
+
 <script type="text/x-tmpl" id="tmpl-revision-viewer">
     <div id="editor-revisions"></div>
 </script>

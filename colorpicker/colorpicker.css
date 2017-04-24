@@ -15,4 +15,6 @@
 }
 
 .colorpicker-container .picker-arrow {
+    color: #fff;
+    z-index: 1000;
 }

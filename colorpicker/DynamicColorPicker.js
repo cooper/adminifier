@@ -42,11 +42,8 @@ DynamicColorPicker = new Class({
             self.container = new Element("div", {
                 "class": "colorpicker-container"
             }).inject(self.options.injectInto);
-
-            self.id = DynamicColorPicker.generateId();
-            self.setContainerHtml(self.id);
-
-            self.picker = new Refresh.Web.ColorPicker(self.id, self.options);
+            self.setContainerHtml();
+            self.picker = new Refresh.Web.ColorPicker('colorpicker', self.options);
             self.picker.addEvent('change', self._onColorChange.bind(self));
 
             self.open = false;
@@ -59,8 +56,7 @@ DynamicColorPicker = new Class({
         this.picker._cvp.setValuesFromHex();
     },
 
-    show: function(x, y) {
-        if (x && y) this.container.setStyles({ "left": x + "px", "top": y + "px" });
+    show: function() {
         this.picker.show();
         this.container.setStyles({ "display": "block" });
         this.open = true;
@@ -75,8 +71,9 @@ DynamicColorPicker = new Class({
         this.open = false;
     },
 
-    toggle: function(x, y) {
-        if (this.open) this.hide(); else this.show(x, y);
+    toggle: function() {
+        if (this.open) this.hide();
+        else this.show();
     },
 
     _onColorChange: function() {
@@ -85,126 +82,10 @@ DynamicColorPicker = new Class({
         this.fireEvent('change', newHex);
     },
 
-    setContainerHtml: function(id) {
-        // This HTML was copy-pasted from John's website, and we do a search-replace on the ID to make it unique for multiple instances :)
-        this.container.set("html", '<table>\
-                <tr>\
-                    <td valign="top">\
-                        <div id="cp1_ColorMap"></div>\
-                    </td>\
-                    <td valign="top">\
-                        <div id="cp1_ColorBar"></div>\
-                    </td>\
-        \
-                    <td valign="top">\
-        \
-                        <table>\
-                            <tr>\
-                                <td colspan="3">\
-                                    <div id="cp1_Preview" style="background-color: #fff; width: 90px; height: 60px; padding: 0; margin: 0;">\
-                                        <br />\
-                                    </div>\
-                                </td>\
-                            </tr>\
-                            <tr>\
-                                <td>\
-                                    <input type="radio" id="cp1_HueRadio" name="cp1_Mode" value="0" />\
-                                </td>\
-                                <td>\
-                                    <label for="cp1_HueRadio">H</label>\
-                                </td>\
-                                <td>\
-                                    <input type="text" id="cp1_Hue" value="0" style="width: 40px;" /> &deg;\
-                                </td>\
-                            </tr>\
-        \
-                            <tr>\
-                                <td>\
-                                    <input type="radio" id="cp1_SaturationRadio" name="cp1_Mode" value="1" />\
-                                </td>\
-                                <td>\
-                                    <label for="cp1_SaturationRadio">S</label>\
-                                </td>\
-                                <td>\
-                                    <input type="text" id="cp1_Saturation" value="100" style="width: 40px;" /> %\
-                                </td>\
-                            </tr>\
-        \
-                            <tr>\
-                                <td>\
-                                    <input type="radio" id="cp1_BrightnessRadio" name="cp1_Mode" value="2" />\
-                                </td>\
-                                <td>\
-                                    <label for="cp1_BrightnessRadio">B</label>\
-                                </td>\
-                                <td>\
-                                    <input type="text" id="cp1_Brightness" value="100" style="width: 40px;" /> %\
-                                </td>\
-                            </tr>\
-        \
-                            <tr>\
-                                <td colspan="3" height="5">\
-        \
-                                </td>\
-                            </tr>\
-        \
-                            <tr>\
-                                <td>\
-                                    <input type="radio" id="cp1_RedRadio" name="cp1_Mode" value="r" />\
-                                </td>\
-                                <td>\
-                                    <label for="cp1_RedRadio">R</label>\
-                                </td>\
-                                <td>\
-                                    <input type="text" id="cp1_Red" value="255" style="width: 40px;" />\
-                                </td>\
-                            </tr>\
-        \
-                            <tr>\
-                                <td>\
-                                    <input type="radio" id="cp1_GreenRadio" name="cp1_Mode" value="g" />\
-                                </td>\
-                                <td>\
-                                    <label for="cp1_GreenRadio">G</label>\
-                                </td>\
-                                <td>\
-                                    <input type="text" id="cp1_Green" value="0" style="width: 40px;" />\
-                                </td>\
-                            </tr>\
-        \
-                            <tr>\
-                                <td>\
-                                    <input type="radio" id="cp1_BlueRadio" name="cp1_Mode" value="b" />\
-                                </td>\
-                                <td>\
-                                    <label for="cp1_BlueRadio">B</label>\
-                                </td>\
-                                <td>\
-                                    <input type="text" id="cp1_Blue" value="0" style="width: 40px;" />\
-                                </td>\
-                            </tr>\
-        \
-        \
-                            <tr>\
-                                <td>\
-                                    #\
-                                </td>\
-                                <td colspan="2">\
-                                    <input type="text" id="cp1_Hex" value="FF0000" style="width: 57px;" />\
-                                </td>\
-                            </tr>\
-        \
-                        </table>\
-                    </td>\
-                </tr>\
-            </table>'.replace(/cp1/g, id));
+    setContainerHtml: function() {
+        this.container.set('html', tmpl('tmpl-color-container', {}));
     }
 });
-
-// "Static" function on the DynamicColorPicker class for generating IDs
-DynamicColorPicker.generateId = function() {
-    return 'colorpicker';
-};
 
 DynamicColorPicker.auto = function(spec, options) {
     $$(spec).each(function(el) {
