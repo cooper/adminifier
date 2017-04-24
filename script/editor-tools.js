@@ -142,7 +142,7 @@ function displayFontSelector () {
         // on click, insert
         $('colorpicker_Preview').addEvent('click', function () {
             var color = cp.picker.color.hex;
-            return ae.wrapTextFunction(color)();
+            return ae.wrapTextFunction('#' + color)();
         });
         
         // show the box with the picker

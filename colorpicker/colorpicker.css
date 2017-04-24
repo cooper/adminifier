@@ -27,3 +27,7 @@
     color: #fff;
     z-index: 1000;
 }
+
+#colorpicker_Preview {
+    cursor: pointer;
+}
