@@ -115,6 +115,22 @@ function displayFontSelector () {
 
     });
 
+    // add events for toggling between hex/list
+    var btnPicker = $$('.editor-color-type')[0],
+        btnList   = $$('.editor-color-type')[1];
+    btnPicker.addEvent('click', function () {
+        btnPicker.addClass('active');
+        btnList.removeClass('active');
+        $('editor-color-names').setStyle('display', 'none');
+        $('editor-color-hex').setStyle('display', 'block');
+    });
+    btnList.addEvent('click', function () {
+        btnList.addClass('active');
+        btnPicker.removeClass('active');
+        $('editor-color-hex').setStyle('display', 'none');
+        $('editor-color-names').setStyle('display', 'block');
+    });
+
     // put it where it belongs
     container.parentElement.removeChild(container);
     box.appendChild(container);
