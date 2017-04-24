@@ -1,3 +1,8 @@
+.colorpicker-container table {
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
 .colorpicker-container {
     background-color: #555;
     color: #fff;

@@ -65,7 +65,7 @@
                             <label for="colorpicker_HueRadio">H</label>
                         </td>
                         <td>
-                            <input type="text" id="colorpicker_Hue" value="0" style="width: 40px;" /> &deg;
+                            <input type="text" id="colorpicker_Hue" value="0" style="width: 40px;" />
                         </td>
                     </tr>
                     <tr>
@@ -76,7 +76,7 @@
                             <label for="colorpicker_SaturationRadio">S</label>
                         </td>
                         <td>
-                            <input type="text" id="colorpicker_Saturation" value="100" style="width: 40px;" /> %
+                            <input type="text" id="colorpicker_Saturation" value="100" style="width: 40px;" />
                         </td>
                     </tr>
                     <tr>
@@ -87,12 +87,11 @@
                             <label for="colorpicker_BrightnessRadio">B</label>
                         </td>
                         <td>
-                            <input type="text" id="colorpicker_Brightness" value="100" style="width: 40px;" /> %
+                            <input type="text" id="colorpicker_Brightness" value="100" style="width: 40px;" />
                         </td>
                     </tr>
                     <tr>
                         <td colspan="3" height="5">
-
                         </td>
                     </tr>
                     <tr>

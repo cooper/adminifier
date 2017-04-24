@@ -36,6 +36,11 @@ function loadedHandler () {
     if (ae.isModel())
         liForAction('view').addClass('disabled');
 
+    // prepare color picker
+    ae.colorPicker = new DynamicColorPicker({
+        injectInto: box.getElement('#editor-color-hex')
+    });
+
     // start the autosave timer
     resetAutosaveInterval();
 }
@@ -44,6 +49,7 @@ function unloadedHandler () {
     console.log('Unloading editor tools script');
     document.removeEvent('editorLoaded', loadedHandler);
     document.removeEvent('pageUnloaded', unloadedHandler);
+    delete ae.colorPicker;
     clearAutosaveInterval();
 }
 
@@ -77,11 +83,8 @@ function displayFontSelector () {
     var box = ae.createPopupBox(li);
     box.innerHTML = tmpl('tmpl-color-helper', {});
     
-    // create color picker
-    var cp = new DynamicColorPicker({
-        injectInto: box.getElement('#editor-color-hex')
-    });
-    DynamicColorPicker.autoLoad(function () { cp.show(); }, 100);
+    // show the hex picker
+    ae.colorPicker.show();
     
     // create crayon picker.
     var container = box.getElement('#editor-color-names');
@@ -117,8 +120,8 @@ function displayFontSelector () {
     container.setStyle('display', 'block');
     box.appendChild(container);
 
-    box.setStyle('width', '420px');
-    ae.displayPopupBox(box, 280, li);
+    box.setStyle('width', '410px');
+    ae.displayPopupBox(box, 270, li);
 }
 
 function getContrastYIQ (hexColor) {
