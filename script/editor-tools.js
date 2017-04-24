@@ -113,15 +113,14 @@ function displayFontSelector () {
 
     // put it where it belongs
     container.parentElement.removeChild(container);
-    container.setStyle('display', 'block');
     box.appendChild(container);
 
     // delay showing the box until the color picker is loaded
     fakeAdopt(box);
     DynamicColorPicker.autoLoad(function () {
-        box.setStyle('width', '410px');
+        box.setStyle('width', '395px');
         cp.show();
-        ae.displayPopupBox(box, 270, li);
+        ae.displayPopupBox(box, 260, li);
     }, 100);
 }
 
