@@ -12,15 +12,15 @@ Refresh.Web.ColorValuePicker = new Class({
 
 		this.onValuesChanged = null;
 
-		this._hueInput = $(this.id + '_Hue');
-		this._valueInput = $(this.id + '_Brightness');
-		this._saturationInput = $(this.id + '_Saturation');
+		this._hueInput = $(this.id + '-hue');
+		this._valueInput = $(this.id + '-brightness');
+		this._saturationInput = $(this.id + '-saturation');
 
-		this._redInput = $(this.id + '_Red');
-		this._greenInput = $(this.id + '_Green');
-		this._blueInput = $(this.id + '_Blue');
+		this._redInput = $(this.id + '-red');
+		this._greenInput = $(this.id + '-green');
+		this._blueInput = $(this.id + '-blue');
 
-		this._hexInput = $(this.id + '_Hex');
+		this._hexInput = $(this.id + '-hex');
 
 		// assign events
 
