@@ -130,12 +130,7 @@ function displayFontSelector () {
         $('editor-color-hex').setStyle('display', 'none');
         $('editor-color-names').setStyle('display', 'block');
     });
-    
-    // on clicking the preview, insert
-    cp.container.getElement('#colorpicker_Preview').addEvent('click', function () {
-        var color = cp.picker.color.hex;
-        return ae.wrapTextFunction(color)();
-    });
+
 
     // put it where it belongs
     container.parentElement.removeChild(container);
@@ -143,11 +138,18 @@ function displayFontSelector () {
 
     // delay showing the box until the color picker is loaded
     DynamicColorPicker.autoLoad(function () {
+        
+        // on click, insert
+        ('#colorpicker_Preview').addEvent('click', function () {
+            var color = cp.picker.color.hex;
+            return ae.wrapTextFunction(color)();
+        });
+        
+        // show the box with the picker
         box.setStyle('width', '395px');
         ae.setLiLoading(li, false);
         ae.displayPopupBox(box, 290, li);
         cp.show();
-//        cp.picker.setColorMode('h');
     }, 100);
 }
 
