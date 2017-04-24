@@ -43,7 +43,6 @@ DynamicColorPicker = new Class({
             self.setContainerHtml();
             self.picker = new Refresh.Web.ColorPicker('colorpicker', self.options);
             self.picker.addEvent('change', self._onColorChange.bind(self));
-
             self.open = false;
         });
     },
