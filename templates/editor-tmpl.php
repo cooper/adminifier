@@ -43,51 +43,51 @@
     <table>
         <tr>
             <td valign="top">
-                <div id="cp1_ColorMap"></div>
+                <div id="colorpicker_ColorMap"></div>
             </td>
             <td valign="top">
-                <div id="cp1_ColorBar"></div>
+                <div id="colorpicker_ColorBar"></div>
             </td>
             <td valign="top">
                 <table>
                     <tr>
                         <td colspan="3">
-                            <div id="cp1_Preview" style="background-color: #fff; width: 90px; height: 60px; padding: 0; margin: 0;">
+                            <div id="colorpicker_Preview" style="background-color: #fff; width: 90px; height: 60px; padding: 0; margin: 0;">
                                 <br />
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <input type="radio" id="cp1_HueRadio" name="cp1_Mode" value="0" />
+                            <input type="radio" id="colorpicker_HueRadio" name="colorpicker_Mode" value="0" />
                         </td>
                         <td>
-                            <label for="cp1_HueRadio">H</label>
+                            <label for="colorpicker_HueRadio">H</label>
                         </td>
                         <td>
-                            <input type="text" id="cp1_Hue" value="0" style="width: 40px;" /> &deg;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="radio" id="cp1_SaturationRadio" name="cp1_Mode" value="1" />
-                        </td>
-                        <td>
-                            <label for="cp1_SaturationRadio">S</label>
-                        </td>
-                        <td>
-                            <input type="text" id="cp1_Saturation" value="100" style="width: 40px;" /> %
+                            <input type="text" id="colorpicker_Hue" value="0" style="width: 40px;" /> &deg;
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <input type="radio" id="cp1_BrightnessRadio" name="cp1_Mode" value="2" />
+                            <input type="radio" id="colorpicker_SaturationRadio" name="colorpicker_Mode" value="1" />
                         </td>
                         <td>
-                            <label for="cp1_BrightnessRadio">B</label>
+                            <label for="colorpicker_SaturationRadio">S</label>
                         </td>
                         <td>
-                            <input type="text" id="cp1_Brightness" value="100" style="width: 40px;" /> %
+                            <input type="text" id="colorpicker_Saturation" value="100" style="width: 40px;" /> %
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="radio" id="colorpicker_BrightnessRadio" name="colorpicker_Mode" value="2" />
+                        </td>
+                        <td>
+                            <label for="colorpicker_BrightnessRadio">B</label>
+                        </td>
+                        <td>
+                            <input type="text" id="colorpicker_Brightness" value="100" style="width: 40px;" /> %
                         </td>
                     </tr>
                     <tr>
@@ -97,35 +97,35 @@
                     </tr>
                     <tr>
                         <td>
-                            <input type="radio" id="cp1_RedRadio" name="cp1_Mode" value="r" />
+                            <input type="radio" id="colorpicker_RedRadio" name="colorpicker_Mode" value="r" />
                         </td>
                         <td>
-                            <label for="cp1_RedRadio">R</label>
+                            <label for="colorpicker_RedRadio">R</label>
                         </td>
                         <td>
-                            <input type="text" id="cp1_Red" value="255" style="width: 40px;" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="radio" id="cp1_GreenRadio" name="cp1_Mode" value="g" />
-                        </td>
-                        <td>
-                            <label for="cp1_GreenRadio">G</label>
-                        </td>
-                        <td>
-                            <input type="text" id="cp1_Green" value="0" style="width: 40px;" />
+                            <input type="text" id="colorpicker_Red" value="255" style="width: 40px;" />
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <input type="radio" id="cp1_BlueRadio" name="cp1_Mode" value="b" />
+                            <input type="radio" id="colorpicker_GreenRadio" name="colorpicker_Mode" value="g" />
                         </td>
                         <td>
-                            <label for="cp1_BlueRadio">B</label>
+                            <label for="colorpicker_GreenRadio">G</label>
                         </td>
                         <td>
-                            <input type="text" id="cp1_Blue" value="0" style="width: 40px;" />
+                            <input type="text" id="colorpicker_Green" value="0" style="width: 40px;" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="radio" id="colorpicker_BlueRadio" name="colorpicker_Mode" value="b" />
+                        </td>
+                        <td>
+                            <label for="colorpicker_BlueRadio">B</label>
+                        </td>
+                        <td>
+                            <input type="text" id="colorpicker_Blue" value="0" style="width: 40px;" />
                         </td>
                     </tr>
                     <tr>
@@ -133,7 +133,7 @@
                             #
                         </td>
                         <td colspan="2">
-                            <input type="text" id="cp1_Hex" value="FF0000" style="width: 57px;" />
+                            <input type="text" id="colorpicker_Hex" value="FF0000" style="width: 57px;" />
                         </td>
                     </tr>
                 </table>
