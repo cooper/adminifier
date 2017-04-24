@@ -71,9 +71,19 @@ function selectPageTitle () {
 // TEXT COLOR SELECTOR
 
 function displayFontSelector () {
+    
+    // create box
     var li  = liForAction('font');
     var box = ae.createPopupBox(li);
     box.innerHTML = tmpl('tmpl-color-helper', {});
+    
+    // create color picker
+    var cp = new DynamicColorPicker({
+        parent: box.getElement('editor-color-hex')
+    });
+    cp.show();
+    
+    // create crayon picker.
     var container = box.getElement('#editor-color-names');
 
     // temporarily add it to the body

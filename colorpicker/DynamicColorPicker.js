@@ -24,10 +24,10 @@ DynamicColorPicker = new Class({
     Implements: [Options, Events],
 
     options: {
-        containerClass: "colorpicker-container",
+        parent: document.body,
         textField: null,
-        startMode:'h',
-        startHex:'ff0000',
+        startMode: 'h',
+        startHex: 'ff0000',
         pickerPath: 'colorpicker'
     },
 
@@ -39,8 +39,8 @@ DynamicColorPicker = new Class({
 
         DynamicColorPicker.autoLoad(this.options.autoLoadPath, function() {
             self.container = new Element("div", {
-                "class": self.options.containerClass
-            }).inject(document.body);
+                "class": "colorpicker-container"
+            }).inject(this.options.parent);
 
             self.id = DynamicColorPicker.generateId();
             self.setContainerHtml(self.id);
@@ -50,13 +50,6 @@ DynamicColorPicker = new Class({
 
             self.open = false;
             self.clickCloses = false;
-            self.container
-                .addEvent('mouseout', function() { self.clickCloses = true; })
-                .addEvent('mouseover', function() { self.clickCloses = false; });
-            self.hide();
-            // window.addEvent('click', function() {
-            //     if (self.open && self.clickCloses) self.hide();
-            // });
         });
     },
 

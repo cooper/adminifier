@@ -457,8 +457,6 @@ function pageScriptsLoadedHandler () {
 }
 
 function editorLoadedHandler () {
-    var cp = new DynamicColorPicker();
-    setTimeout(function () { cp.show(0,0); }, 2000);
     ae.updatePageTitle();
     ae.resetSelectionAtTopLeft();
     if (a.currentJSONMetadata && a.currentJSONMetadata.display_result)
