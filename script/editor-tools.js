@@ -78,7 +78,7 @@ function displayFontSelector () {
     box.innerHTML = tmpl('tmpl-color-helper', {});
     
     // create color picker
-    ae.colorPicker = new DynamicColorPicker({
+    var cp = new DynamicColorPicker({
         injectInto: box.getElement('#editor-color-hex')
     });
     
