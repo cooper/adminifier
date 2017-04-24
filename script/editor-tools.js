@@ -156,6 +156,9 @@ function displayFontSelector () {
                 box.removeClass('sticky');
             }
         });
+        cp.container.getElements('.colorpicker-arrow').each(function (arrow) {
+            arrow.addClass('no-close-popup');
+        });
         
         // show the box with the picker
         box.setStyle('width', '395px');

@@ -538,6 +538,10 @@ function bodyClickPopoverCheck (e) {
     if (e.target == ae.currentPopup || ae.currentPopup.contains(e.target))
         return;
 
+    // the target says not to do this
+    if (e.target && e.target.hasClass('no-close-popup'))
+        return;
+
     closeCurrentPopup({
         unlessSticky: true,
         unlessActive: true,

@@ -15,7 +15,6 @@ Refresh.Web.Slider = new Class({
     Implements: [Options],
 
     options: {
-		injectInto: null,
         xMinValue: 0,
         xMaxValue: 100,
         yMinValue: 0,
@@ -41,7 +40,7 @@ Refresh.Web.Slider = new Class({
 			html: this.options.arrowCharacter
 		});
 		this._arrow.style.fontSize = this.options.arrowSize;
-        this._arrow.inject(this.options.injectInto);
+        this._arrow.inject(document.body);
         this.Arrow = this._arrow;
 
 		// attach 'this' to html objects
@@ -177,8 +176,8 @@ Refresh.Web.Slider = new Class({
 		if (offsetY < 0) offsetY = 0
 		if (offsetY > this._barHeight) offsetY = this._barHeight;
 
-		var posX = /*this._barLeft +*/ offsetX;
-		var posY = /*this._barTop +*/ offsetY;
+		var posX = this._barLeft + offsetX;
+		var posY = this._barTop + offsetY;
 
 		// check if the arrow is bigger than the bar area
 		if (this._arrowWidth > this._barWidth) {
