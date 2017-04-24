@@ -75,8 +75,9 @@ Refresh.Web.Slider = new Class({
 		this._barWidth = this._bar.getWidth();
 		this._barHeight = this._bar.getHeight();
 		
-		this._barTop = this._bar.offsetTop;
-		this._barLeft = this._bar.offsetLeft;
+		var pos = this._bar.getPosition(); // FIXME: May not be the right kind of position...
+		this._barTop = pos.y;
+		this._barLeft = pos.x;
 		
 		this._barBottom = this._barTop + this._barHeight;
 		this._barRight = this._barLeft + this._barWidth;
@@ -176,8 +177,8 @@ Refresh.Web.Slider = new Class({
 		if (offsetY < 0) offsetY = 0
 		if (offsetY > this._barHeight) offsetY = this._barHeight;
 
-		var posX = this._barLeft + offsetX;
-		var posY = this._barTop + offsetY;
+		var posX = /*this._barLeft +*/ offsetX;
+		var posY = /*this._barTop +*/ offsetY;
 
 		// check if the arrow is bigger than the bar area
 		if (this._arrowWidth > this._barWidth) {
