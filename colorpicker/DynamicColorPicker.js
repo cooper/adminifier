@@ -37,7 +37,7 @@ DynamicColorPicker = new Class({
 
         var self = this;
 
-        DynamicColorPicker.autoLoad(this.options.autoLoadPath, function() {
+        DynamicColorPicker.autoLoad(function() {
             console.log("injecting to: ", self.options.parent);
             self.container = new Element("div", {
                 "class": "colorpicker-container"
@@ -50,7 +50,6 @@ DynamicColorPicker = new Class({
             self.picker.addEvent('change', self._onColorChange.bind(self));
 
             self.open = false;
-            self.clickCloses = false;
         });
     },
 
@@ -65,11 +64,9 @@ DynamicColorPicker = new Class({
         this.picker.show();
         this.container.setStyles({ "display": "block" });
         this.open = true;
-        this.clickCloses = false;
         if (this.options.textField) this.setColor(this.options.textField.value);
         this.picker.setColorMode(this.picker.ColorMode); // If we reset this after we show, it positions the selectors properly
         this.picker.updateVisuals();
-        (function() { this.clickCloses = true; }).delay(0.001); /* Set this one so we don't have to mouse over first before the click will work */
     },
 
     hide: function() {
