@@ -123,7 +123,7 @@ function displayFontSelector () {
         btnList.removeClass('active');
         $('editor-color-names').setStyle('display', 'none');
         $('editor-color-hex').setStyle('display', 'block');
-        box.tween('width', '395px');
+        box.morph('width', '395px');
         cp.picker.show();
     });
     btnList.addEvent('click', function () {
@@ -131,7 +131,7 @@ function displayFontSelector () {
         btnPicker.removeClass('active');
         $('editor-color-hex').setStyle('display', 'none');
         $('editor-color-names').setStyle('display', 'block');
-        box.tween('width', '300px');
+        box.morph('width', '300px');
         cp.picker.hide();
     });
 
