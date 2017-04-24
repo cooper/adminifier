@@ -15,6 +15,7 @@ Refresh.Web.Slider = new Class({
     Implements: [Options],
 
     options: {
+		injectInto: null,
         xMinValue: 0,
         xMaxValue: 100,
         yMinValue: 0,
@@ -40,7 +41,7 @@ Refresh.Web.Slider = new Class({
 			html: this.options.arrowCharacter
 		});
 		this._arrow.style.fontSize = this.options.arrowSize;
-        this._arrow.inject(document.body);
+        this._arrow.inject(this.options.injectInto);
         this.Arrow = this._arrow;
 
 		// attach 'this' to html objects

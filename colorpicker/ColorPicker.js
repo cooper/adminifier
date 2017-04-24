@@ -12,6 +12,7 @@ Refresh.Web.ColorPicker = new Class({
     Implements: [Options, Events],
 
     options: {
+        injectInto: null,
         pickerSize: 256,
         startMode: 'h',
         startHex: 'ff0000',
@@ -117,11 +118,13 @@ Refresh.Web.ColorPicker = new Class({
 		
 		// attach map slider
 		this._map = new Refresh.Web.Slider(this._mapL2, {
+            injectInto: this.options.injectInto,
             xMaxValue: 255, yMinValue: 255
         });
 
 		// attach color slider
 		this._slider = new Refresh.Web.Slider(this._barL4, {
+            injectInto: this.options.injectInto,
             xMinValue: 1,xMaxValue: 1, yMinValue: 255,
             arrowCharacter: '&#9654;',
             arrowSize: '10px'
