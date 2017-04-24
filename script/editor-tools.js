@@ -132,7 +132,7 @@ function displayFontSelector () {
     });
     
     // on clicking the preview, insert
-    $('colorpicker_Preview').addEvent('click', function () {
+    cp.container.getElement('#colorpicker_Preview').addEvent('click', function () {
         var color = cp.picker.color.hex;
         return ae.wrapTextFunction(color)();
     });
