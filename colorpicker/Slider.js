@@ -36,7 +36,7 @@ Refresh.Web.Slider = new Class({
 
 		// build controls
 		this._arrow = new Element('span', {
-			class: 'picker-arrow',
+			class: 'colorpicker-arrow',
 			html: this.options.arrowCharacter
 		});
 		this._arrow.style.fontSize = this.options.arrowSize;
