@@ -55,11 +55,12 @@ Refresh.Web.Slider = new Class({
 		
 		this.setPositioningVariables();
 		
-		this._event_docMouseMove = this._docMouseMove.bindWithEvent(this);
-		this._event_docMouseUp = this._docMouseUp.bindWithEvent(this);
+		var _this = this;
+		this._event_docMouseMove = function (e) { this._docMouseMove.call(_this, e); };
+		this._event_docMouseUp   = function (e) { this._event_docMouseUp.call(_this, e); };
 
-		this._bar.addEvent('mousedown', this._bar_mouseDown.bindWithEvent(this));
-		this._arrow.addEvent('mousedown', this._arrow_mouseDown.bindWithEvent(this));
+		this._bar.addEvent('mousedown', function (e) { this._bar_mouseDown.call(_this, e); });
+		this._arrow.addEvent('mousedown', function (e) { this._arrow_mouseDown.call(_this, e); });
 
 		// set initial position
 		this.setArrowPositionFromValues();

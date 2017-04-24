@@ -25,11 +25,12 @@ Refresh.Web.ColorValuePicker = new Class({
 		// assign events
 
 		// events
-		this._event_onHsvKeyUp = this._onHsvKeyUp.bindWithEvent(this);
-		this._event_onHsvBlur = this._onHsvBlur.bindWithEvent(this);
-		this._event_onRgbKeyUp = this._onRgbKeyUp.bindWithEvent(this);
-		this._event_onRgbBlur = this._onRgbBlur.bindWithEvent(this);
-		this._event_onHexKeyUp = this._onHexKeyUp.bindWithEvent(this);
+		var _this = this;
+		this._event_onHsvKeyUp 	= function (e) { this._onHsvKeyUp.call(_this, e); };
+		this._event_onHsvBlur 	= function (e) { this._onHsvBlur.call(_this, e); };
+		this._event_onRgbKeyUp 	= function (e) { this._onRgbKeyUp.call(_this, e); };
+		this._event_onRgbBlur 	= function (e) { this._onRgbBlur.call(_this, e); };
+		this._event_onHexKeyUp	= function (e) { this._onHexKeyUp.call(_this, e); };
 		
 		// HSB
 		this._hueInput.addEvent('keyup', this._event_onHsvKeyUp);
@@ -65,7 +66,7 @@ Refresh.Web.ColorValuePicker = new Class({
 		
 		this._hueInput.value = this.color.h;
 		this._saturationInput.value = this.color.s;
-		this._valueInput.value = this.color.v;		
+		this._valueInput.value = this.color.v;
 
 	},
 	_onHsvKeyUp: function(e) {
@@ -132,13 +133,13 @@ Refresh.Web.ColorValuePicker = new Class({
 		return true;
 	},
 	_setValueInRange: function(value,min,max) {
-		if (value == '' || isNaN(value)) 		
+		if (value == '' || isNaN(value))
 			return min;
 		
 		value = parseInt(value);
-		if (value > max) 
+		if (value > max)
 			return max;
-		if (value < min) 
+		if (value < min)
 			return min;
 		
 		return value;
@@ -151,7 +152,7 @@ Refresh.Web.ColorValuePicker = new Class({
 		this._valueInput.value = this.color.v;
 	},
 	setValuesFromHsv: function() {
-		this.color.setHsv(this._hueInput.value, this._saturationInput.value, this._valueInput.value);		
+		this.color.setHsv(this._hueInput.value, this._saturationInput.value, this._valueInput.value);
 		
 		this._hexInput.value = this.color.hex;
 		this._redInput.value = this.color.r;
