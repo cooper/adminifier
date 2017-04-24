@@ -624,10 +624,11 @@ function openLi (li) {
         return false;
 
     // if another one is animating, force it to instantly finish
-    if (ae.currentLi) {
+    if (ae.currentLi && ae.currentLi != li) {
         if (ae.currentLi.hasClass('sticky'))
             return;
-        closeCurrentLi();
+        if (ae.currentLi != li)
+            closeCurrentLi();
     }
 
     // animate this one
