@@ -669,7 +669,7 @@ function closeCurrentLi () {
         backgroundColor: '#696969',
         onComplete: function () { delete ae.closingLi; }
     });
-    ae.closingLi = li;
+    ae.closingLi = ae.currentLi;
     delete ae.currentLi;
 }
 
