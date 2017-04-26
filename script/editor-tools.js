@@ -661,9 +661,6 @@ function displayDiffViewer (box, from, to, message, which) {
             },
         });
         
-        // revert this commit
-        diffWindow.addButton('Revert', function () { alert('Unimplemented'); });
-        
         // switch modes
         var but, split;
         but = diffWindow.addButton('Split', function () {

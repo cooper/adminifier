@@ -641,7 +641,8 @@ function openLi (li) {
             closeCurrentLi();
     }
     
-    // immediately close the closing li
+    // redo the closing morph so that the timing is
+    // perfectly lined up with the opening of the new one
     if (ae.closingLi) {
         var morph = ae.closingLi.get('morph');
         morph.cancel();
