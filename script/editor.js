@@ -640,13 +640,21 @@ function openLi (li) {
         if (ae.currentLi != li)
             closeCurrentLi();
     }
+    
+    // immediately close the closing li
+    if (ae.closingLi) {
+        var morph = ae.closingLi.get('morph');
+        morph.cancel();
+        delete ae.closingLi;
+    }
 
     // animate this one
     li.morph({
         width: '100px',
-        backgroundColor: '#2096ce'
+        backgroundColor: '#2096ce',
+        onComplete: function () { delete ae.openingLi; }
     });
-
+    ae.openingLi = li;
     ae.currentLi = li;
     return true;
 }
@@ -658,9 +666,11 @@ function closeCurrentLi () {
         return;
     ae.currentLi.morph({
         width: '15px',
-        backgroundColor: '#696969'
+        backgroundColor: '#696969',
+        onComplete: function () { delete ae.closingLi; }
     });
-    ae.currentLi = null;
+    ae.closingLi = li;
+    delete ae.currentLi;
 }
 
 function setupToolbar () {
