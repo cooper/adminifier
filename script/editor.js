@@ -645,7 +645,7 @@ function openLi (li) {
     if (ae.closingLi) {
         var morph = ae.closingLi.get('morph');
         morph.cancel();
-        ae.closingLi.setStyles({
+        ae.closingLi.morph({
             width: '15px',
             backgroundColor: '#696969'
         });
