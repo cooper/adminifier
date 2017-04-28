@@ -66,7 +66,8 @@ else {
         <li data-action="link"><i class="fa fa-link"></i> Link</li>
         <li data-action="file"><i class="fa fa-paperclip"></i> File</li>
         <li data-action="list"><i class="fa fa-list-ul"></i> List</li>
-        <li data-action="list"><i class="fa fa-list-ol"></i> List</li>
+        <li data-action="list"><i class="fa fa-list-ol"></i> Num list</li>
+        <li data-action="model"><i class="fa fa-cube"></i> Model</li>
         <li data-action="infobox"><i class="fa fa-info-circle"></i> Infobox</li>
         <li data-action="code"><i class="fa fa-code"></i> Code</li>
         <li data-action="cite"><i class="fa fa-copyright"></i> Citation</li>
