@@ -119,6 +119,9 @@ function link_to ($page) {
                 <? if (isset($page->draft) && $page->draft): ?>
                     <span class="pageinfo">Draft</span>
                 <? endif; ?>
+                <? if (isset($page->generated) && $page->generated): ?>
+                    <span class="pageinfo">Generated</span>
+                <? endif; ?>
                 <? if ($list_type == 'images' && !$page->width): ?>
                     <span class="pageinfo">Missing</span>
                 <? endif; ?>
