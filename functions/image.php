@@ -13,15 +13,20 @@ $res = $W->command('image', array(
 ));
 
 // some error occured
-if ($res->type == 'error')
-    die($res->error);
+if ($res->type == 'not found')
+    text_error($res->error);
 
 // something else happened
 if ($res->type != 'image')
-    die('Unknown type');
+    text_error('Unknown type');
     
 header('Content-Length: '.$res->length);
 header('Content-Type: '. $res->mime);
 echo file_get_contents($res->path);
+
+function text_error ($error) {
+    header('Content-Type: text/plain');
+    echo $error;
+}
 
 ?>
