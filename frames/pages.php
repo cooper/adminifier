@@ -105,7 +105,13 @@ function link_to ($page) {
         <td class="checkbox">
             <input type="checkbox" value="0" />
         </td>
-        <td class="title">
+        <td class="title"<?
+            if ($list_type == 'images') {
+                echo 'style="background: url(functions/image.php?file=';
+                echo urlencode($page->file);
+                echo ' center;"';
+            }
+        ?>>
             <a class="frame-click" href="#!/<?= link_to($page); ?>">
                 <?=
                     isset($page->title)
