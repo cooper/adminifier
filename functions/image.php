@@ -23,6 +23,8 @@ if ($res->type != 'image')
 // not modified
 if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) &&
     strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) >= $res->mod_unix) {
+    header_remove('Cache-Control');
+    header_remove('Pragma');
     header('HTTP/1.0 304 Not Modified');
     die();
 }
