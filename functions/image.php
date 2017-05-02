@@ -22,6 +22,7 @@ if ($res->type != 'image')
 
 header_remove('Cache-Control');
 header_remove('Pragma');
+header_remove('Expires');
 
 // not modified
 if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) &&
