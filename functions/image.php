@@ -30,6 +30,7 @@ if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) &&
 // send image
 header('Content-Length: '.$res->length);
 header('Content-Type: '. $res->mime);
+header('Last-Modified: '.$res->modified);
 echo file_get_contents($res->path);
 
 function text_error ($error) {
