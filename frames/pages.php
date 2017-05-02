@@ -109,7 +109,7 @@ function link_to ($page) {
             if ($list_type == 'images') {
                 echo 'style="background: url(functions/image.php?file=';
                 echo urlencode($page->file);
-                echo ' center;"';
+                echo ') right center no-repeat;"';
             }
         ?>>
             <a class="frame-click" href="#!/<?= link_to($page); ?>">
