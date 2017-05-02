@@ -26,7 +26,7 @@ echo file_get_contents($res->path);
 
 function text_error ($error) {
     header('Content-Type: text/plain');
-    die $error;
+    die($error);
 }
 
 ?>
