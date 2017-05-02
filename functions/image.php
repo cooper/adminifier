@@ -19,7 +19,15 @@ if ($res->type == 'not found')
 // something else happened
 if ($res->type != 'image')
     text_error('Unknown type');
+
+// not modified
+if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) &&
+    strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) >= $res->mod_unix) {
+    header('HTTP/1.0 304 Not Modified');
+    die();
+}
     
+// send image
 header('Content-Length: '.$res->length);
 header('Content-Type: '. $res->mime);
 echo file_get_contents($res->path);
