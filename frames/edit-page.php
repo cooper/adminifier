@@ -35,7 +35,7 @@ else {
 <? endif; ?>
       data-title="<?= htmlspecialchars($_GET['page']) ?>"
       data-scripts="ace jquery colors editor editor-tools token-list diff2html colorpicker"
-      data-styles="editor colorpicker"
+      data-styles="editor colorpicker diff2html"
       data-flags="no-margin compact-sidebar"
 />
 

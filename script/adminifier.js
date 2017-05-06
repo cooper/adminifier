@@ -286,7 +286,9 @@ function handlePageData (data) {
 		
 		var href;
 		if (style == 'colorpicker')
-			href = 'colorpicker/colorpicker.css';
+			href = 'ext/colorpicker/colorpicker.css';
+		else if (style == 'diff2html')
+			href = 'ext/diff2html/dist/diff2html.css';
 		else
 			href = 'style/' + style + '.css';
 		
