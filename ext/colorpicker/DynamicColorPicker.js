@@ -18,7 +18,7 @@
  * - If MooTools More is included, DynamicColorPicker autoloads the rest of the
  *   required JS files, so you don't have to include them in your HTML file.
  */
-function (exports) {
+(function (exports) {
     
 var pickerPath = 'ext/colorpicker';
 
