@@ -18,8 +18,11 @@
  * - If MooTools More is included, DynamicColorPicker autoloads the rest of the
  *   required JS files, so you don't have to include them in your HTML file.
  */
+function (exports) {
+    
+var pickerPath = 'ext/colorpicker';
 
-DynamicColorPicker = new Class({
+var DynamicColorPicker = exports.DynamicColorPicker = new Class({
 
     Implements: [Options, Events],
 
@@ -27,13 +30,12 @@ DynamicColorPicker = new Class({
         injectInto: document.body,
         textField: null,
         startMode: 'h',
-        startHex: 'ff0000',
-        pickerPath: 'ext/colorpicker'
+        startHex: 'ff0000'
     },
 
     initialize: function(options) {
         this.setOptions(options);
-        this.options.clientFilesPath = this.options.pickerPath + '/images/';
+        this.options.clientFilesPath = pickerPath + '/images/';
         this.container = new Element("div", {
             "class": "colorpicker-container"
         });
@@ -41,7 +43,7 @@ DynamicColorPicker = new Class({
         DynamicColorPicker.autoLoad(function() {
             self.container.inject(self.options.injectInto);
             self.setContainerHtml();
-            self.picker = new Refresh.Web.ColorPicker(this.options.pickerPath, self.options);
+            self.picker = new Refresh.Web.ColorPicker('colorpicker', self.options);
             self.picker.addEvent('change', self._onColorChange.bind(self));
             self.open = false;
         });
@@ -131,10 +133,12 @@ DynamicColorPicker.autoLoad = (function() {
                 callbacks.each(function(f) { f(); });
         };
 
-        var path = "colorpicker";
+        var path = pickerPath;
         Asset.javascript(path + "/ColorPicker.js", { onload: onFileLoaded });
         Asset.javascript(path + "/ColorValuePicker.js", { onload: onFileLoaded });
         Asset.javascript(path + "/ColorMethods.js", { onload: onFileLoaded });
         Asset.javascript(path + "/Slider.js", { onload: onFileLoaded });
     };
 })();
+
+})(window);
