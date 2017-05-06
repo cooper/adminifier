@@ -260,13 +260,13 @@ function handlePageData (data) {
         scriptsToLoad++;
 
         if (src == 'ace')
-            src = 'ace/ace.js';
+            src = 'ext/ace/ace.js';
 		else if (src == 'jquery')
 			src = '//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.js';
 		else if (src == 'diff2html')
-			src = 'diff2html/dist/diff2html.js';
+			src = 'ext/diff2html/dist/diff2html.js';
 		else if (src == 'colorpicker')
-			src = 'colorpicker/DynamicColorPicker.js';
+			src = 'ext/colorpicker/DynamicColorPicker.js';
         else
             src = 'script/' + src + '.js';
 
