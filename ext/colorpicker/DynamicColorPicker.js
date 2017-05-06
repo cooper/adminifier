@@ -41,7 +41,7 @@ DynamicColorPicker = new Class({
         DynamicColorPicker.autoLoad(function() {
             self.container.inject(self.options.injectInto);
             self.setContainerHtml();
-            self.picker = new Refresh.Web.ColorPicker('colorpicker', self.options);
+            self.picker = new Refresh.Web.ColorPicker(this.options.pickerPath, self.options);
             self.picker.addEvent('change', self._onColorChange.bind(self));
             self.open = false;
         });
