@@ -81,8 +81,7 @@ function displayFontSelector () {
     
     // create color picker
     var cp = new DynamicColorPicker({
-        injectInto: box.getElement('#editor-color-hex'),
-        pickerPath: 'ext/colorpicker'
+        injectInto: box.getElement('#editor-color-hex')
     });
     
     // on close, destroy color picker

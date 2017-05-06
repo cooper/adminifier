@@ -28,7 +28,7 @@ DynamicColorPicker = new Class({
         textField: null,
         startMode: 'h',
         startHex: 'ff0000',
-        pickerPath: 'colorpicker'
+        pickerPath: 'ext/colorpicker'
     },
 
     initialize: function(options) {
