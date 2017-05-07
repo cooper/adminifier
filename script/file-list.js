@@ -3,7 +3,8 @@ var FileList = new Class({
     Implements: [Options, Events],
     
     options: {
-        columns: []
+        columns: [],
+        columnData: {}
     },
     
     initialize: function (opts) {
@@ -20,11 +21,19 @@ var FileList = new Class({
         this.entries.push(entry);
     },
     
-    visibleColumns: function () {
+    getVisibleColumns: function () {
         var self = this;
         return this.options.columns.filter(function (col) {
             return self.showColumns[col];
         });
+    },
+    
+    getColumnData: function (col, key) {
+        if (!this.options.columnData[col])
+            return;
+        if (typeof key != 'undefined') {
+            return this.options.columnData[col][key];
+        return this.options.columnData[col];
     },
     
     draw: function (container) {
@@ -39,12 +48,19 @@ var FileList = new Class({
         table.appendChild(thead);
         
         // TODO: checkbox column
-        this.visibleColumns().each(function (col) {
-            var className = col == 'Title' ? 'title' : 'info';
-            var th = new Element('th', { 'class': className }); // TODO: data-sort
+        this.getVisibleColumns().each(function (col) {
+            
+            // title
+            var className = self.getColumnData(col, 'isTitle') ?
+                'title' : 'info';
+            var th = new Element('th', { 'class': className });
             var anchor = new Element('a', { text: col });
             th.appendChild(anchor);
             theadTr.appendChild(th);
+            
+            // sort method
+            var sort = self.getColumnData(col, 'sort');
+            if (sort) th.set('data-sort', sort);
         });
         
         container.appendChild(table);
