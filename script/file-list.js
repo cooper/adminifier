@@ -31,7 +31,7 @@ var FileList = new Class({
     getColumnData: function (col, key) {
         if (!this.options.columnData[col])
             return;
-        if (typeof key != 'undefined') {
+        if (typeof key != 'undefined')
             return this.options.columnData[col][key];
         return this.options.columnData[col];
     },
