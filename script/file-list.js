@@ -43,7 +43,7 @@ var FileList = new Class({
             var className = col == 'Title' ? 'title' : 'info';
             var th = new Element('th', { 'class': className }); // TODO: data-sort
             var anchor = new Element('a', { text: col });
-            th.appendChild(a);
+            th.appendChild(anchor);
             theadTr.appendChild(th);
         });
         
