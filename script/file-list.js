@@ -20,6 +20,13 @@ var FileList = new Class({
         this.entries.push(entry);
     },
     
+    visibleColumns: function () {
+        var self = this;
+        return this.options.columns.filter(function (col) {
+            return self.showColumns[col];
+        });
+    },
+    
     draw: function (container) {
         var self = this;
         var table = new Element('table', { 'class': 'file-list' });
@@ -32,9 +39,7 @@ var FileList = new Class({
         table.appendChild(thead);
         
         // TODO: checkbox column
-        columns.each(function (col) {
-            if (!self.showColumns[col])
-                return;
+        this.visibleColumns().each(function (col) {
             var className = col == 'Title' ? 'title' : 'info';
             var th = new Element('th', { 'class': className }); // TODO: data-sort
             var anchor = new Element('a', { text: col });
