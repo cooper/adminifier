@@ -47,7 +47,14 @@ var FileList = new Class({
         thead.appendChild(theadTr);
         table.appendChild(thead);
         
-        // TODO: checkbox column
+        // checkbox column
+        //<th class="checkbox"><input type="checkbox" value="0" /></th>
+        var checkTh = new Element('th', { 'class': 'checkbox' });
+        var input = new Element('input', { type: 'checkbox', value: '0' });
+        checkTh.appendChild(input);
+        theadTr.appendChild(checkTh);
+        
+        // other columns
         this.getVisibleColumns().each(function (col) {
             
             // title
