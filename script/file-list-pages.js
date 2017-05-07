@@ -4,7 +4,7 @@ if (!FileList || !a.currentJSONMetadata)
     return;
 
 var pageList = new FileList({
-    columns: ['Title', 'Author', 'Created', 'Modified']
+    columns: ['Title', 'Author', 'Created', 'Modified'],
     columnData: {
         Title:      { sort: 'a', isTitle: true },
         Author:     { sort: 'u' },
