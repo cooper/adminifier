@@ -444,7 +444,7 @@ function saveRequest (saveData, message, success, fail) {
             // revision error
 
             // nothing changed
-            else if (data.rev_error && data.rev_error.match('no changes')) {
+            else if (data.rev_error && data.rev_error.match(/no changes|nothing to commit/)) {
                 data.unchanged = true;
                 success(data);
             }
