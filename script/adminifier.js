@@ -192,14 +192,13 @@ var flagOptions = {
 				}
 				
 				// click event
-				buttonFunc = window[buttonFunc];
-				if (buttonFunc) {
-					anchor.addEvent('click', function (e) {
-						e.preventDefault();
-						buttonFunc();
-					});
-				}
-				
+				anchor.addEvent('click', function (e) {
+					e.preventDefault();
+					buttonFunc = window[buttonFunc];
+					if (!buttonFunc) return;
+					buttonFunc();
+				});
+			
 				but.inject($$('.top-button').getLast(), 'after');
 			});
 		},
