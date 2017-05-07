@@ -22,3 +22,7 @@ function pageSearch (text) {
         tr.setStyle('display', matchingColumns ? 'table-row' : 'none');
     });
 }
+
+function imageModeToggle() {
+    alert('Switching modes');
+}
