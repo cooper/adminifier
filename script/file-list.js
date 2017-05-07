@@ -1,4 +1,4 @@
-// reflect the current sort method
+fileSearch// reflect the current sort method
 (function (data) {
     if (!data['data-sort']) return;
     var split = data['data-sort'].split('');
@@ -10,8 +10,8 @@
         '" style="padding-left: 3px; width: 1em;"></i>';
 })(adminifier.currentData);
 
-function pageSearch (text) {
-    $$('#page-list tbody tr').each(function (tr) {
+function fileSearch (text) {
+    $$('table.file-list tbody tr').each(function (tr) {
         var matchingColumns = 0;
         if (text == '')
             matchingColumns++;

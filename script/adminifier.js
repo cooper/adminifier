@@ -90,7 +90,7 @@ function frameLoad (page) {
 				//
                 // // Used by specific pages
 				//
-                // 'data-sort'         // page-list.php
+                // 'data-sort'         // pages.php
 
                 handlePageData(attrs);
             }

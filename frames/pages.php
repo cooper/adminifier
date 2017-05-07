@@ -53,7 +53,10 @@ function link_to ($page) {
 
 ?>
 <!--JSON
-<?= json_encode(array('results' => $pages)) ?>
+<?= json_encode(array(
+    'results'       => $pages,
+    'sort_types'    => $valid_types
+)) ?>
 
 -->
 
@@ -77,14 +80,14 @@ function link_to ($page) {
     data-title="Pages"
     data-icon="file-text"
 <? endif; ?>
-    data-scripts="page-list"
-    data-styles="page-list"
+    data-scripts="file-list"
+    data-styles="file-list"
     data-flags="no-margin search buttons"
-    data-search="pageSearch"
+    data-search="fileSearch"
     data-sort="<?= $sort.$order ?>"
 />
 
-<table class="page-list">
+<table class="file-list">
 <thead>
     <th class="checkbox"><input type="checkbox" value="0" /></th>
     <th class="title" data-sort="a">

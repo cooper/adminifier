@@ -1,4 +1,4 @@
-table.page-list {
+table.file-list {
     /*table-layout: fixed;*/
     border-collapse: collapse;
     width: 100%;
@@ -6,41 +6,41 @@ table.page-list {
 
 /* all cells */
 
-table.page-list td {
+table.file-list td {
     border: 1px solid #ccc;
     padding: 8px;
     text-align: left;
     white-space: nowrap;
 }
 
-table.page-list td.checkbox,
-table.page-list th.checkbox {
+table.file-list td.checkbox,
+table.file-list th.checkbox {
     width: 20px;
     text-align: center;
 }
 
-table.page-list td.info,
-table.page-list th.info {
+table.file-list td.info,
+table.file-list th.info {
     text-align: right;
     max-width: 200px;
 }
 
-table.page-list td.info {
+table.file-list td.info {
     font-size: 85%;
 }
 
-table.page-list th.title,
-table.page-list td.title {
+table.file-list th.title,
+table.file-list td.title {
     width: 99%;
     white-space: normal;
 }
 
 /* head cells */
 
-table.page-list thead {
+table.file-list thead {
 }
 
-table.page-list thead th {
+table.file-list thead th {
     background-color: #696969;
     color: #E2E2E2;
     white-space: nowrap;
@@ -52,21 +52,21 @@ table.page-list thead th {
     text-align: left;
 }
 
-table.page-list thead th a {
+table.file-list thead th a {
     color: #E2E2E2;
 }
 
 /* body cells */
 
-table.page-list tbody tr {
+table.file-list tbody tr {
     background-color: #fff;
 }
 
-table.page-list tbody tr:nth-child(even) {
+table.file-list tbody tr:nth-child(even) {
     background-color: #eee;
 }
 
-table.page-list span.pageinfo {
+table.file-list span.pageinfo {
     font-size: small;
     text-transform: uppercase;
     font-weight: bold;
@@ -76,7 +76,7 @@ table.page-list span.pageinfo {
 
 /* toolbar */
 
-ul.page-list-toolbar li {
+ul.file-list-toolbar li {
     float: left;
     padding: 0 10px;
     display: inline-block;
@@ -86,13 +86,13 @@ ul.page-list-toolbar li {
     white-space: nowrap;
 }
 
-ul.page-list-toolbar li.right {
+ul.file-list-toolbar li.right {
     float: right;
     text-align: right;
     direction: rtl;
 }
 
-ul.page-list-toolbar li.disabled {
+ul.file-list-toolbar li.disabled {
     color: #aaa;
     cursor: default;
 }
