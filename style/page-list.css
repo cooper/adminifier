@@ -1,4 +1,4 @@
-#page-list {
+table.page-list {
     /*table-layout: fixed;*/
     border-collapse: collapse;
     width: 100%;
@@ -6,41 +6,41 @@
 
 /* all cells */
 
-#page-list td {
+table.page-list td {
     border: 1px solid #ccc;
     padding: 8px;
     text-align: left;
     white-space: nowrap;
 }
 
-#page-list td.checkbox,
-#page-list th.checkbox {
+table.page-list td.checkbox,
+table.page-list th.checkbox {
     width: 20px;
     text-align: center;
 }
 
-#page-list td.info,
-#page-list th.info {
+table.page-list td.info,
+table.page-list th.info {
     text-align: right;
     max-width: 200px;
 }
 
-#page-list td.info {
+table.page-list td.info {
     font-size: 85%;
 }
 
-#page-list th.title,
-#page-list td.title {
+table.page-list th.title,
+table.page-list td.title {
     width: 99%;
     white-space: normal;
 }
 
 /* head cells */
 
-#page-list thead {
+table.page-list thead {
 }
 
-#page-list thead th {
+table.page-list thead th {
     background-color: #696969;
     color: #E2E2E2;
     white-space: nowrap;
@@ -52,21 +52,21 @@
     text-align: left;
 }
 
-#page-list thead th a {
+table.page-list thead th a {
     color: #E2E2E2;
 }
 
 /* body cells */
 
-#page-list tbody tr {
+table.page-list tbody tr {
     background-color: #fff;
 }
 
-#page-list tbody tr:nth-child(even) {
+table.page-list tbody tr:nth-child(even) {
     background-color: #eee;
 }
 
-#page-list span.pageinfo {
+table.page-list span.pageinfo {
     font-size: small;
     text-transform: uppercase;
     font-weight: bold;

@@ -53,7 +53,7 @@ function link_to ($page) {
 
 ?>
 <!--JSON
-<?= json_encode($pages) ?>
+<?= json_encode(array('results' => $pages)) ?>
 
 -->
 
@@ -84,7 +84,7 @@ function link_to ($page) {
     data-sort="<?= $sort.$order ?>"
 />
 
-<table id="page-list">
+<table class="page-list">
 <thead>
     <th class="checkbox"><input type="checkbox" value="0" /></th>
     <th class="title" data-sort="a">
