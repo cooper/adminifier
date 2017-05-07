@@ -166,18 +166,39 @@ var flagOptions = {
 		init: function () {
 			if (!a.currentData || !a.currentData['data-buttons'])
 				return;
-			var buttonStuff = SSV(a.currentData['data-buttons']);
-			for (var i = 0; i < buttonStuff.length + 1; i += 2) {
-				var buttonTitle = buttonStuff[i],
-					buttonFunc  = buttonStuff[i+1];
+			SSV(a.currentData['data-buttons']).each(function (buttonID) {
+				var buttonStuff = a.currentData['data-button-' + buttonID];
+				if (!buttonStuff) return;
+				var buttonTitle = buttonStuff[0],
+					buttonFunc	= buttonStuff[1],
+					buttonIcon 	= buttonStuff[2];
 				var but = new Element('span', {
 					'class': 'top-title top-button injected' }
 				);
+				
+				// icon
+				if (buttonIcon) {
+					var i = new Element('i', {
+						'class': 'fa fa-' + buttonIcon
+					});
+					but.appendChild(i);
+				}
+				
+				// title
+				var a = new Element('a', { href: '#' });
+				a.set('text', (buttonIcon ? ' ' : '') + buttonTitle);
+				
+				// click event
 				buttonFunc = window[buttonFunc];
-				if (buttonFunc)
-					but.addEvent('click', buttonFunc);
+				if (buttonFunc) {
+					a.addEvent('click', function (e) {
+						e.preventDefault();
+						buttonFunc();
+					});
+				}
+				
 				but.inject(document.getElement('.account-title'), 'after');
-			}
+			});
 		},
 		destroy: function () {
 			$$('.top-button.injected').each(function (but) {

@@ -64,7 +64,8 @@ function link_to ($page) {
     data-nav="images"
     data-title="Images"
     data-icon="picture-o"
-    data-buttons="List imageDisplaySwitch"
+    data-buttons="image-mode"
+    data-button-image-mode="List imageModeToggle list"
 <? else: ?>
     data-nav="pages"
     data-title="Pages"
