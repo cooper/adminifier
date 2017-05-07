@@ -84,6 +84,7 @@ function frameLoad (page) {
                 'data-styles',      // SSV css names w/o extensions
                 'data-flags',       // SSV page flags
 				'data-search', 		// name of function to call on search
+				'data-buttons', 	// buttons to display in top bar
 
                 // Used by specific pages
 
@@ -151,14 +152,37 @@ var flagOptions = {
             });
         }
     },
-	'search': {
-		init: function() {
+	search: {
+		init: function () {
 			$('top-search').set('value', '');
 			$('top-search').setStyle('display', 'inline-block');
 			searchUpdate();
 		},
 		destroy: function () {
 			$('top-search').setStyle('display', 'none');
+		}
+	},
+	buttons: {
+		init: function () {
+			if (!a.currentData || !a.currentData['data-buttons'])
+				return;
+			var buttonStuff = SSV(a.currentData['data-buttons']);
+			for (var i = 0; i < buttonStuff.length + 1; i += 2) {
+				var buttonTitle = buttonStuff[i],
+					buttonFunc  = buttonStuff[i+1];
+				var but = new Element('span', {
+					'class': 'top-title top-button injected' }
+				);
+				buttonFunc = window[buttonFunc];
+				if (buttonFunc)
+					but.addEvent('click', buttonFunc);
+				but.inject(document.getElement('.account-title'), 'after');
+			}
+		},
+		destroy: function () {
+			$$('.top-button.injected').each(function (but) {
+				but.destroy();
+			});
 		}
 	}
 };

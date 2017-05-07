@@ -64,6 +64,7 @@ function link_to ($page) {
     data-nav="images"
     data-title="Images"
     data-icon="picture-o"
+    data-buttons="List imageDisplaySwitch"
 <? else: ?>
     data-nav="pages"
     data-title="Pages"
@@ -71,7 +72,7 @@ function link_to ($page) {
 <? endif; ?>
     data-scripts="page-list"
     data-styles="page-list"
-    data-flags="no-margin search"
+    data-flags="no-margin search buttons"
     data-search="pageSearch"
     data-sort="<?= $sort.$order ?>"
 />
