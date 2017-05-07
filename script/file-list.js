@@ -3,7 +3,9 @@ var FileList = new Class({
     Implements: [Options, Events],
     
     options: {
-        columns: []
+        columns: [],
+        showColumns: {},
+        entries: []
     },
     
     initialize: function (opts) {
@@ -11,7 +13,36 @@ var FileList = new Class({
     },
     
     addEntry: function (entry) {
-        console.log(entry);
+        var self = this;
+        entry.columns.each(function (col) {
+            self.showColumns[col] = true;
+        });
+        this.entries.push(entry);
+    },
+    
+    draw: function (container) {
+        var self = this;
+        var table = new Element('table', { 'class': 'file-list' });
+        
+        // TABLE HEADING
+        
+        var thead = new Element('thead');
+        var theadTr = new Element('tr');
+        thead.appendChild(theadTr);
+        table.appendChild(thead);
+        
+        // TODO: checkbox column
+        columns.each(function (col) {
+            if (!self.showColumns[col])
+                return;
+            var className = col == 'Title' ? 'title' : 'info';
+            var th = new Element('th', { 'class': className }); // TODO: data-sort
+            var anchor = new Element('a', { text: col });
+            th.appendChild(a);
+            theadTr.appendChild(th);
+        });
+        
+        container.appendChild(table);
     }
 });
 
@@ -32,7 +63,7 @@ var FileListEntry = new Class({
     
     setValues: function (obj) {
         var self = this;
-        Object.each(obj, function(key, value) {
+        Object.each(obj, function(value, key) {
             self.setValue(key, value);
         });
     }

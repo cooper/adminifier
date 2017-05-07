@@ -16,5 +16,7 @@ a.currentJSONMetadata['results'].each(function (pageData) {
     });
     pageList.addEntry(entry);
 });
-    
+
+pageList.draw($('content'));
+
 })(adminifier);
