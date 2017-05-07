@@ -200,7 +200,7 @@ var flagOptions = {
 					});
 				}
 				
-				but.inject(document.getElement('.account-title'), 'after');
+				but.inject($$('.top-button').getLast(), 'after');
 			});
 		},
 		destroy: function () {
