@@ -49,7 +49,13 @@ function link_to ($page) {
     }
 }
 
+
+
 ?>
+<!--JSON
+<?= json_encode($pages) ?>
+
+-->
 
 <meta
 <? if ($list_type == 'models'): ?>
