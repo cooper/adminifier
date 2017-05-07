@@ -70,27 +70,28 @@ function frameLoad (page) {
             // find HTML metadata
             var meta = $('content').getElement('meta');
             if (meta) {
-                var attrs = meta.getProperties(
+                var attrs = meta.attributes;
+				[].forEach.call(meta.attributes, function(attr) {
+				    if (/^data-/.test(attr.name))
+				        attrs[attr.name] = attr.value;
+				});
 
-                // SSV = space-separated values
+                // // Tools for all pages
+                // 'data-redirect',    // javascript frame redirect
+                // 'data-wredirect',   // window redirect
+                // 'data-nav',         // navigation item identifier to highlight
+                // 'data-title',       // page title for top bar
+                // 'data-icon',        // page icon name for top bar
+                // 'data-scripts',     // SSV script names w/o extensions
+                // 'data-styles',      // SSV css names w/o extensions
+                // 'data-flags',       // SSV page flags
+				// 'data-search', 		// name of function to call on search
+				// 'data-buttons', 	// buttons to display in top bar
+				//
+                // // Used by specific pages
+				//
+                // 'data-sort'         // page-list.php
 
-                // Tools for all pages
-                'data-redirect',    // javascript frame redirect
-                'data-wredirect',   // window redirect
-                'data-nav',         // navigation item identifier to highlight
-                'data-title',       // page title for top bar
-                'data-icon',        // page icon name for top bar
-                'data-scripts',     // SSV script names w/o extensions
-                'data-styles',      // SSV css names w/o extensions
-                'data-flags',       // SSV page flags
-				'data-search', 		// name of function to call on search
-				'data-buttons', 	// buttons to display in top bar
-
-                // Used by specific pages
-
-                'data-sort'         // page-list.php
-
-                );
                 handlePageData(attrs);
             }
         },
