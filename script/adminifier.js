@@ -176,22 +176,23 @@ var flagOptions = {
 					'class': 'top-title top-button injected' }
 				);
 				
+				// title
+				var anchor = new Element('a', { href: '#' });
+				anchor.set('text', buttonTitle);
+				
 				// icon
 				if (buttonIcon) {
+					anchor.set('text', ' ' + anchor.get('text'));
 					var i = new Element('i', {
 						'class': 'fa fa-' + buttonIcon
 					});
-					but.appendChild(i);
+					i.inject(anchor, 'top');
 				}
-				
-				// title
-				var a = new Element('a', { href: '#' });
-				a.set('text', (buttonIcon ? ' ' : '') + buttonTitle);
 				
 				// click event
 				buttonFunc = window[buttonFunc];
 				if (buttonFunc) {
-					a.addEvent('click', function (e) {
+					anchor.addEvent('click', function (e) {
 						e.preventDefault();
 						buttonFunc();
 					});
