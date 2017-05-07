@@ -3,12 +3,12 @@ var FileList = new Class({
     Implements: [Options, Events],
     
     options: {
-        columns: [],
-        showColumns: {},
-        entries: []
+        columns: []
     },
     
     initialize: function (opts) {
+        this.entries = [];
+        this.showColumns = {};
         this.setOptions(opts);
     },
     
