@@ -73,7 +73,8 @@ div.navigation-popover {
 }
 
 #top-bar span.wiki-title {
-    min-width: 152px; /* sidebar width minus left padding */
+    display: inline-block;
+    min-width: 140px;
     max-width: 300px;
     font-weight: 600;
     padding-left: 16px;
