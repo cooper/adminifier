@@ -180,6 +180,7 @@ var flagOptions = {
 				// title
 				var anchor = new Element('a', { href: '#' });
 				anchor.set('text', buttonTitle);
+				but.appendChild(anchor);
 				
 				// icon
 				if (buttonIcon) {
