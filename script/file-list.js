@@ -14,7 +14,7 @@ var FileList = new Class({
     
     addEntry: function (entry) {
         var self = this;
-        entry.columns.each(function (col) {
+        Object.each(entry.columns, function (val, col) {
             self.showColumns[col] = true;
         });
         this.entries.push(entry);
