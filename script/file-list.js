@@ -1,4 +1,45 @@
-fileSearch// reflect the current sort method
+var FileList = new Class({
+    
+    Implements: [Options, Events],
+    
+    options: {
+        columns: []
+    },
+    
+    initialize: function (opts) {
+        this.setOptions(opts);
+    },
+    
+    addEntry: function (entry) {
+        console.log(entry);
+    }
+});
+
+var FileListEntry = new Class({
+    
+    initialize: function (values) {
+        this.columns = {};
+        if (values) this.setValues(values);
+    },
+    
+    setValue: function (key, value) {
+        if (typeof value == 'undefined')
+            return;
+        if (typeof value == 'string' && !value.length)
+            return;
+        this.columns[key] = value;
+    },
+    
+    setValues: function (obj) {
+        var self = this;
+        Object.each(obj, function(key, value) {
+            self.setValue(key, value);
+        });
+    }
+    
+});
+
+// reflect the current sort method
 (function (data) {
     if (!data['data-sort']) return;
     var split = data['data-sort'].split('');

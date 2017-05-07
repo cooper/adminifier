@@ -27,30 +27,6 @@ switch ($list_type) {
     case 'categories':  $pages = $W->cat_list($sort.$order)->categories;  break;
 }
 
-// if the current sort method is the same as the one passed,
-// this returns the opposite direction for the same method.
-// if the sort method is different, it returns descending.
-function sort_method ($type) {
-    global $sort, $order, $list_type;
-    $prefix = "#!/$list_type?sort=";
-    if ($type == $sort)
-        return $order == '-' ? $prefix.$type.'%2B' : $prefix.$type.'-';
-    return $prefix.$type.'-';
-}
-
-function link_to ($page) {
-    global $list_type;
-    $encoded = urlencode($page->file);
-    switch ($list_type) {
-        case 'pages':       return "edit-page?page=$encoded";
-        case 'models':      return "edit-model?page=$encoded";
-        case 'images':      return "edit-image?file=$encoded";
-        case 'categories':  return "edit-category?cat=$encoded";
-    }
-}
-
-
-
 ?>
 <!--JSON
 <?= json_encode(array(
@@ -65,110 +41,27 @@ function link_to ($page) {
     data-nav="models"
     data-title="Models"
     data-icon="cube"
+    data-scripts="file-list file-list-models"
 <? elseif ($list_type == 'categories'): ?>
     data-nav="categories"
     data-title="Categories"
     data-icon="list"
+    data-scripts="file-list file-list-categories"
 <? elseif ($list_type == 'images'): ?>
     data-nav="images"
     data-title="Images"
     data-icon="picture-o"
     data-buttons="image-mode"
     data-button-image-mode="List imageModeToggle list"
+    data-scripts="file-list file-list-images"
 <? else: ?>
     data-nav="pages"
     data-title="Pages"
     data-icon="file-text"
+    data-scripts="file-list file-list-pages"
 <? endif; ?>
-    data-scripts="file-list"
     data-styles="file-list"
     data-flags="no-margin search buttons"
     data-search="fileSearch"
     data-sort="<?= $sort.$order ?>"
 />
-
-<table class="file-list">
-<thead>
-    <th class="checkbox"><input type="checkbox" value="0" /></th>
-    <th class="title" data-sort="a">
-        <a class="frame-click" href="<?= sort_method('a') ?>">
-            <?= isset($title_column) ? $title_column : 'Title' ?>
-        </a>
-    </th>
-    <? if ($list_type == 'images'): ?>
-        <th class="dimensions info" data-sort="d">
-            <a class="frame-click" href="<?= sort_method('d') ?>">Dimensions</a>
-        </th>
-    <? endif; ?>
-    <th class="author info" data-sort="u">
-        <a class="frame-click" href="<?= sort_method('u') ?>">Author</a>
-    </th>
-    <th class="created info" data-sort="c">
-        <a class="frame-click" href="<?= sort_method('c') ?>">Created</a>
-    </th>
-    <th class="created info" data-sort="m">
-        <a class="frame-click" href="<?= sort_method('m') ?>">Modified</a>
-    </th>
-</thead>
-<tbody>
-<? foreach ($pages as $page): ?>
-    <tr>
-        <td class="checkbox">
-            <input type="checkbox" value="0" />
-        </td>
-        <td class="title"<?
-            if ($list_type == 'images') {
-                echo 'style="background: url(functions/image.php?file=';
-                echo urlencode($page->file);
-                echo '&height=30) right center no-repeat;"';
-            }
-        ?>>
-            <a class="frame-click" href="#!/<?= link_to($page); ?>">
-                <?=
-                    isset($page->title)
-                        && strlen(trim($page->title)) ?
-                    $page->title    :
-                    $page->file
-                ?>
-                <? if (isset($page->redirect) && $page->redirect): ?>
-                    <span class="pageinfo">Redirect</span>
-                <? endif; ?>
-                <? if (isset($page->draft) && $page->draft): ?>
-                    <span class="pageinfo">Draft</span>
-                <? endif; ?>
-                <? if (isset($page->generated) && $page->generated): ?>
-                    <span class="pageinfo">Generated</span>
-                <? endif; ?>
-                <? if ($list_type == 'images' && !$page->width): ?>
-                    <span class="pageinfo">Missing</span>
-                <? endif; ?>
-            </a>
-        </td>
-        <? if ($list_type == 'images'): ?>
-            <td class="dimensions info">
-                <? if ($page->width) echo $page->width.'x'.$page->height; ?>
-            </td>
-        <? endif; ?>
-        <td class="author info">
-            <?=
-                isset($page->author) ?
-                htmlspecialchars($page->author) : ''
-            ?>
-        </td>
-        <td class="created info">
-            <?=
-                isset($page->created)           ?
-                date('M j Y', $page->created)   : ''
-            ?>
-        </td>
-        <td class="modified info">
-            <?=
-                isset($page->mod_unix)         ?
-                date('M j Y', $page->mod_unix) : ''
-            ?>
-        </td>
-    </tr>
-<? endforeach; ?>
-
-</tbody>
-</table>
