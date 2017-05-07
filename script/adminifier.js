@@ -168,7 +168,7 @@ var flagOptions = {
 			if (!a.currentData || !a.currentData['data-buttons'])
 				return;
 			SSV(a.currentData['data-buttons']).each(function (buttonID) {
-				var buttonStuff = a.currentData['data-button-' + buttonID];
+				var buttonStuff = SSV(a.currentData['data-button-' + buttonID]);
 				if (!buttonStuff) return;
 				var buttonTitle = buttonStuff[0],
 					buttonFunc	= buttonStuff[1],
