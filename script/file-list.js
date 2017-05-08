@@ -84,7 +84,8 @@ var FileList = new Class({
                 if (typeof text == 'string' && text.length)
                     td.set('text', text);
                 tr.appendChild(td);
-            })
+            });
+            tbody.appendChild(tr);
         });
         
         container.appendChild(table);
