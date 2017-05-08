@@ -42,10 +42,12 @@ var FileList = new Class({
         
         // TABLE HEADING
         
-        var thead = new Element('thead');
-        var theadTr = new Element('tr');
+        var thead   = new Element('thead'),
+            theadTr = new Element('tr'),
+            tbody   = new Element('tbody');
         thead.appendChild(theadTr);
         table.appendChild(thead);
+        table.appendChild(tbody);
         
         // checkbox column
         //<th class="checkbox"><input type="checkbox" value="0" /></th>
@@ -68,6 +70,21 @@ var FileList = new Class({
             // sort method
             var sort = self.getColumnData(col, 'sort');
             if (sort) th.set('data-sort', sort);
+        });
+        
+        // TABLE BODY
+        
+        this.entries.each(function (entry) {
+            var tr = new Element('tr');
+            this.getVisibleColumns().each(function (col) {
+                var className = self.getColumnData(col, 'isTitle') ?
+                    'title' : 'info';
+                var td = new Element('td', { 'class': className });
+                var text = entry.columns[col];
+                if (typeof text == 'string' && text.length)
+                    td.set('text', text);
+                tr.appendChild(td);
+            })
         });
         
         container.appendChild(table);
