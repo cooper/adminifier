@@ -57,7 +57,7 @@ var FileList = new Class({
         theadTr.appendChild(checkTh);
         
         // other columns
-        this.getVisibleColumns().each(function (col) {
+        self.getVisibleColumns().each(function (col) {
             
             // title
             var className = self.getColumnData(col, 'isTitle') ?
@@ -74,9 +74,9 @@ var FileList = new Class({
         
         // TABLE BODY
         
-        this.entries.each(function (entry) {
+        self.entries.each(function (entry) {
             var tr = new Element('tr');
-            this.getVisibleColumns().each(function (col) {
+            self.getVisibleColumns().each(function (col) {
                 var className = self.getColumnData(col, 'isTitle') ?
                     'title' : 'info';
                 var td = new Element('td', { 'class': className });
