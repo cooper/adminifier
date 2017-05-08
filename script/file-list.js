@@ -3,8 +3,11 @@ var FileList = new Class({
     Implements: [Options, Events],
     
     options: {
-        columns: [],
-        columnData: {}
+        columns: [],        // ordered list of column names
+        columnData: {}      // object of column data, column names as keys
+        // isTitle      true for the widest column
+        // sort         sort letter
+        // fixer        transformation to apply to text before displaying it
     },
     
     initialize: function (opts) {
@@ -13,6 +16,7 @@ var FileList = new Class({
         this.setOptions(opts);
     },
     
+    // add an entry
     addEntry: function (entry) {
         var self = this;
         Object.each(entry.columns, function (val, col) {
@@ -21,6 +25,7 @@ var FileList = new Class({
         this.entries.push(entry);
     },
     
+    // a list of visible column numbers
     getVisibleColumns: function () {
         var self = this;
         return this.options.columns.filter(function (col) {
@@ -28,6 +33,8 @@ var FileList = new Class({
         });
     },
     
+    // getColumnData(column number, data key) returns value at that key
+    // getColumnData(column number) returns entire object
     getColumnData: function (col, key) {
         if (!this.options.columnData[col])
             return;
@@ -36,6 +43,7 @@ var FileList = new Class({
         return this.options.columnData[col];
     },
     
+    // draw the table in the specified place
     draw: function (container) {
         var self = this;
         var table = new Element('table', { 'class': 'file-list' });
@@ -49,7 +57,7 @@ var FileList = new Class({
         table.appendChild(thead);
         table.appendChild(tbody);
         
-        // checkbox column
+        // checkbox column for table head
         //<th class="checkbox"><input type="checkbox" value="0" /></th>
         var checkTh = new Element('th', { 'class': 'checkbox' });
         var input = new Element('input', { type: 'checkbox', value: '0' });
@@ -59,7 +67,7 @@ var FileList = new Class({
         // other columns
         self.getVisibleColumns().each(function (col) {
             
-            // title
+            // column is title?
             var className = self.getColumnData(col, 'isTitle') ?
                 'title' : 'info';
             var th = new Element('th', { 'class': className });
@@ -74,13 +82,21 @@ var FileList = new Class({
         
         // TABLE BODY
         
+        // checkbox column for table body
         var checkTd = new Element('td', { 'class': 'checkbox' });
         checkTd.appendChild(input.clone());
         
+        // add each entry as a table row
         self.entries.each(function (entry) {
             var tr = new Element('tr');
+            
+            // checkbox
             tr.appendChild(checkTd.clone());
+            
+            // visible data columns
             self.getVisibleColumns().each(function (col) {
+                
+                // column is title?
                 var className = self.getColumnData(col, 'isTitle') ?
                     'title' : 'info';
                 var td = new Element('td', { 'class': className });
@@ -88,8 +104,7 @@ var FileList = new Class({
                 // apply fixer to text
                 var text = entry.columns[col];
                 var fixer = self.getColumnData(col, 'fixer');
-                if (fixer)
-                    text = fixer(text);
+                if (fixer) text = fixer(text);
                     
                 // set text if it has length
                 if (typeof text == 'string' && text.length)
@@ -99,7 +114,19 @@ var FileList = new Class({
             });
             tbody.appendChild(tr);
         });
-        
+
+        // reflect the current sort method
+        (function (data) {
+            if (!data['data-sort']) return;
+            var split = data['data-sort'].split('');
+            var sort = split[0], order = split[1];
+            var char = order == '+' ? 'caret-up' : 'caret-down';
+            var th = table.getElement('th[data-sort="' + sort + '"] a');
+            if (th) th.innerHTML +=
+                ' <i class="fa fa-' + char +
+                '" style="padding-left: 3px; width: 1em;"></i>';
+        })(adminifier.currentData);
+
         container.appendChild(table);
     }
 });
@@ -127,18 +154,6 @@ var FileListEntry = new Class({
     }
     
 });
-
-// reflect the current sort method
-(function (data) {
-    if (!data['data-sort']) return;
-    var split = data['data-sort'].split('');
-    var sort = split[0], order = split[1];
-    var char = order == '+' ? 'caret-up' : 'caret-down';
-    var th = $$('th[data-sort="' + sort + '"] a')[0];
-    if (th) th.innerHTML +=
-        ' <i class="fa fa-' + char +
-        '" style="padding-left: 3px; width: 1em;"></i>';
-})(adminifier.currentData);
 
 function fileSearch (text) {
     $$('table.file-list tbody tr').each(function (tr) {
