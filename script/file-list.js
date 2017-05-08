@@ -74,8 +74,12 @@ var FileList = new Class({
         
         // TABLE BODY
         
+        var checkTd = new Element('td', { 'class': 'checkbox' });
+        checkTd.appendChild(input.clone());
+        
         self.entries.each(function (entry) {
             var tr = new Element('tr');
+            tr.appendChild(checkTd.clone());
             self.getVisibleColumns().each(function (col) {
                 var className = self.getColumnData(col, 'isTitle') ?
                     'title' : 'info';
