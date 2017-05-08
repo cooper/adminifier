@@ -90,7 +90,16 @@ var FileList = new Class({
         
         // add each entry as a table row
         self.entries.each(function (entry) {
-            var tr = new Element('tr');
+            
+            // row may be cached
+            var tr = entry.tr;
+            if (tr) {
+                tbody.appendChild(tr);
+                return;
+            }
+            
+            // have to create row
+            tr = entry.tr = new Element('tr');
             
             // checkbox
             if (self.options.selection)
