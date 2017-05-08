@@ -46,7 +46,7 @@ var FileList = new Class({
     // draw the table in the specified place
     draw: function (container) {
         var self = this;
-        var table = new Element('table', { 'class': 'file-list' });
+        var table = self.table = new Element('table', { 'class': 'file-list' });
         
         // TABLE HEADING
         
@@ -115,19 +115,31 @@ var FileList = new Class({
             tbody.appendChild(tr);
         });
 
-        // reflect the current sort method
-        (function (data) {
-            if (!data['data-sort']) return;
-            var split = data['data-sort'].split('');
-            var sort = split[0], order = split[1];
-            var char = order == '+' ? 'caret-up' : 'caret-down';
-            var th = table.getElement('th[data-sort="' + sort + '"] a');
-            if (th) th.innerHTML +=
-                ' <i class="fa fa-' + char +
-                '" style="padding-left: 3px; width: 1em;"></i>';
-        })(adminifier.currentData);
-
+        self.updateSortMethod(adminifier.currentData['data-sort']);
         container.appendChild(table);
+    },
+
+    // reflect the current sort method
+    updateSortMethod: function (sort) {
+        var table = this.table;
+            
+        // destroy existing
+        var existing = table.getElement('.sort-icon');
+        if (existing)
+            existing.destroy();
+        
+        // no sort specified
+        if (!sort)
+            return;
+        
+        var split = sort.split('');
+        sort = split[0];
+        var order = split[1];
+        var char = order == '+' ? 'caret-up' : 'caret-down';
+        var th = table.getElement('th[data-sort="' + sort + '"] a');
+        if (th) th.innerHTML +=
+            ' <i class="sort-icon fa fa-' + char +
+            '" style="padding-left: 3px; width: 1em;"></i>';
     }
 });
 
