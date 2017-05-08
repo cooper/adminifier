@@ -84,9 +84,17 @@ var FileList = new Class({
                 var className = self.getColumnData(col, 'isTitle') ?
                     'title' : 'info';
                 var td = new Element('td', { 'class': className });
+                
+                // apply fixer to text
                 var text = entry.columns[col];
+                var fixer = self.getColumnData(col, 'fixer');
+                if (fixer)
+                    text = fixer(text);
+                    
+                // set text if it has length
                 if (typeof text == 'string' && text.length)
                     td.set('text', text);
+                    
                 tr.appendChild(td);
             });
             tbody.appendChild(tr);
