@@ -3,6 +3,7 @@ var FileList = new Class({
     Implements: [Options, Events],
     
     options: {
+        selection: true,    // allow rows to be selected
         columns: [],        // ordered list of column names
         columnData: {}      // object of column data, column names as keys
         // isTitle      true for the widest column
@@ -62,7 +63,8 @@ var FileList = new Class({
         var checkTh = new Element('th', { 'class': 'checkbox' });
         var input = new Element('input', { type: 'checkbox', value: '0' });
         checkTh.appendChild(input);
-        theadTr.appendChild(checkTh);
+        if (self.options.selection)
+            theadTr.appendChild(checkTh);
         
         // other columns
         self.getVisibleColumns().each(function (col) {
@@ -91,7 +93,8 @@ var FileList = new Class({
             var tr = new Element('tr');
             
             // checkbox
-            tr.appendChild(checkTd.clone());
+            if (self.options.selection)
+                tr.appendChild(checkTd.clone());
             
             // visible data columns
             self.getVisibleColumns().each(function (col) {
