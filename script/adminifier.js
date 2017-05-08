@@ -287,13 +287,26 @@ function handlePageData (data) {
         li.addClass('active');
     }
 
-    // don't show the content until all scripts have loaded
-    var scriptsToLoad = 0, scriptsLoaded = -1;
+    var scriptsToLoad = [];
+	var loadNextScript = function () {
+		var script = scriptsToLoad.shift();
+		if (!script)
+			return;
+		document.head.appendChild(script);
+	};
+	
+	// don't show the content until all scripts have loaded
     var scriptLoaded = function () {
 		if (typeof jQuery != 'undefined')
 			jQuery.noConflict();
-        scriptsLoaded++;
-        if (scriptsToLoad > scriptsLoaded) return;
+		
+		// there are still more to load
+        if (scriptsToLoad.length) {
+			loadNextScript();
+			return;
+		}
+		
+		// this was the last one
         $('content').setStyle('user-select', 'all');
 		a.updateIcon(data['data-icon']);
         pageScriptsDone = true;
@@ -304,7 +317,6 @@ function handlePageData (data) {
     $$('script.dynamic').each(function (script) { script.destroy(); });
     SSV(data['data-scripts']).each(function (src) {
         if (!src.length) return;
-        scriptsToLoad++;
 
         if (src == 'ace')
             src = 'ext/ace/ace.js';
@@ -322,14 +334,13 @@ function handlePageData (data) {
             class: 'dynamic'
         });
         script.addEvent('load', scriptLoaded);
-        document.head.appendChild(script);
+		scriptsToLoad.push(script);
     });
 
     // inject styles
     $$('link.dynamic').each(function (link) { link.destroy(); });
     SSV(data['data-styles']).each(function (style) {
         if (!style.length) return;
-		scriptsToLoad++;
 		
 		var href;
 		if (style == 'colorpicker')
@@ -345,7 +356,7 @@ function handlePageData (data) {
             type:  'text/css',
             rel:   'stylesheet'
         });
-		link.addEvent('load', scriptLoaded);
+		// link.addEvent('load', scriptLoaded);
         document.head.appendChild(link);
     });
 	scriptLoaded(); // call once in case there are no scripts
