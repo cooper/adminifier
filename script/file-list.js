@@ -24,7 +24,7 @@ var FileList = new Class({
             
             // apply fixer
             var fixer = self.getColumnData(col, 'fixer');
-            if (fixer) val = fixer(text);
+            if (fixer) val = fixer(val);
             entry.columns[col] = val;
             
             // skip if no length
