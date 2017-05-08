@@ -21,6 +21,17 @@ var FileList = new Class({
     addEntry: function (entry) {
         var self = this;
         Object.each(entry.columns, function (val, col) {
+            
+            // apply fixer
+            var fixer = self.getColumnData(col, 'fixer');
+            if (fixer) val = fixer(text);
+            entry.columns[col] = val;
+            
+            // skip if no length
+            if (typeof val != 'string' || !val.length)
+                return;
+                
+            // show the column
             self.showColumns[col] = true;
         });
         this.entries.push(entry);
@@ -112,13 +123,9 @@ var FileList = new Class({
                 var className = self.getColumnData(col, 'isTitle') ?
                     'title' : 'info';
                 var td = new Element('td', { 'class': className });
-                
-                // apply fixer to text
-                var text = entry.columns[col];
-                var fixer = self.getColumnData(col, 'fixer');
-                if (fixer) text = fixer(text);
-                    
+                                    
                 // set text if it has length
+                var text = entry.columns[col];
                 if (typeof text == 'string' && text.length)
                     td.set('text', text);
                     

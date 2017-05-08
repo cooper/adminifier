@@ -1,4 +1,4 @@
-(function (a) {
+(function (a, exports) {
     
 if (!FileList || !a.currentJSONMetadata)
     return;
@@ -31,4 +31,4 @@ function prettifyDate (text) {
     return 'date: ' + text; // TODO
 }
 
-})(adminifier);
+})(adminifier, window);
