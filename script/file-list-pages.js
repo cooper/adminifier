@@ -20,6 +20,7 @@ a.currentJSONMetadata['results'].each(function (pageData) {
         Created:    pageData.created,
         Modified:   pageData.mod_unix
     });
+    entry.link = '#!/edit-page?page=' + encodeURIComponent(pageData.file);
     pageList.addEntry(entry);
 });
 

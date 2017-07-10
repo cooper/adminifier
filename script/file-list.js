@@ -123,11 +123,13 @@ var FileList = new Class({
                 var className = self.getColumnData(col, 'isTitle') ?
                     'title' : 'info';
                 var td = new Element('td', { 'class': className });
-                                    
+                
                 // set text if it has length
                 var text = entry.columns[col];
-                if (typeof text == 'string' && text.length)
-                    td.set('text', text);
+                if (typeof text == 'string' && text.length) {
+                    var a = new Element('a', { href: entry.link, text: text });
+                    td.appendChild(a);
+                }
                     
                 tr.appendChild(td);
             });
