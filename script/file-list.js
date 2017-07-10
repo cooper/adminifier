@@ -120,16 +120,22 @@ var FileList = new Class({
             self.getVisibleColumns().each(function (col) {
                 
                 // column is title?
-                var className = self.getColumnData(col, 'isTitle') ?
-                    'title' : 'info';
+                var isTitle   = self.getColumnData(col, 'isTitle');
+                var className = isTitle ? 'title' : 'info';
                 var td = new Element('td', { 'class': className });
+                
+                // anchor or span
+                var textContainer;
+                if (entry.link && isTitle)
+                    textContainer = new Element('a', { href: entry.link });
+                else
+                    textContainer = new Element('span');
+                td.appendChild(textContainer);
                 
                 // set text if it has length
                 var text = entry.columns[col];
-                if (typeof text == 'string' && text.length) {
-                    var a = new Element('a', { href: entry.link, text: text });
-                    td.appendChild(a);
-                }
+                if (typeof text == 'string' && text.length)
+                    textContainer.set('text', text);
                     
                 tr.appendChild(td);
             });
