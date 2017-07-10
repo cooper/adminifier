@@ -26,10 +26,4 @@ a.currentJSONMetadata['results'].each(function (pageData) {
 
 pageList.draw($('content'));
 
-function prettifyDate (text) {
-    if (typeof text != 'string' || !text.length)
-        return;
-    return dateToHRTimeAgo(parseInt(text) * 1000);
-}
-
 })(adminifier, window);

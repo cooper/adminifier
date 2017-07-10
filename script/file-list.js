@@ -211,6 +211,11 @@ function imageModeToggle() {
     alert('Switching modes');
 }
 
+function prettifyDate (text) {
+    if (typeof text != 'string' || !text.length)
+        return;
+    return dateToHRTimeAgo(parseInt(text) * 1000);
+}
 
 function dateToHRTimeAgo(time) {
     switch (typeof time) {
