@@ -29,7 +29,7 @@ pageList.draw($('content'));
 function prettifyDate (text) {
     if (typeof text != 'string' || !text.length)
         return;
-    return dateToHRTimeAgo(parseInt(text));
+    return dateToHRTimeAgo(parseInt(text) * 1000);
 }
 
 })(adminifier, window);
