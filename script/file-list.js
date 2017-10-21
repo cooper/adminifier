@@ -28,6 +28,10 @@ var FileList = new Class({
             if (fixer) val = fixer(val);
             entry.columns[col] = val;
             
+            // apply tooltip fixer
+            fixer = self.getColumnData(col, 'tooltipFixer');
+            if (fixer) entry.tooltip = fixer(val);
+            
             // skip if no length
             if (typeof val != 'string' || !val.length)
                 return;
@@ -138,11 +142,16 @@ var FileList = new Class({
                 else
                     textContainer = new Element('span');
                 td.appendChild(textContainer);
-                
+                                
                 // set text if it has length
                 var text = entry.columns[col];
                 if (typeof text == 'string' && text.length)
                     textContainer.set('text', text);
+                    
+                // tooltip
+                var tooltip = entry.tooltip;
+                if (typeof tooltip == 'string' && tooltip.length)
+                    textContainer.set('title', tooltip);
                     
                 tr.appendChild(td);
             });
@@ -218,13 +227,16 @@ function imageModeToggle() {
     alert('Switching modes');
 }
 
-function prettifyDate (text) {
-    if (typeof text != 'string' || !text.length)
-        return;
-    return dateToHRTimeAgo(parseInt(text) * 1000);
+function dateToPreciseHR(time) {
+    var d = new Date(parseInt(time) * 1000);
+    return d.toString();
 }
 
-function dateToHRTimeAgo(time) {
+function dateToHRTimeAgo(text) {
+    return _dateToHRTimeAgo(parseInt(time) * 1000);
+}
+
+function _dateToHRTimeAgo(time) {
     switch (typeof time) {
         case 'number':
             break;
