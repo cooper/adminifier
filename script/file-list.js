@@ -5,7 +5,6 @@ var FileList = new Class({
     options: {
         selection: true,    // allow rows to be selected
         columns: [],        // ordered list of column names
-        tooltips: [],       // column tooltips
         columnData: {},     // object of column data, column names as keys
         // root         relative url for the list
         // isTitle      true for the widest column
@@ -190,7 +189,8 @@ var FileList = new Class({
 var FileListEntry = new Class({
     
     initialize: function (values) {
-        this.columns = {};
+        this.columns  = {};
+        this.tooltips = {};
         if (values) this.setValues(values);
     },
     
