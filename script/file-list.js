@@ -96,6 +96,7 @@ var FileList = new Class({
         
         // create table
         var table = self.table = new Element('table', { 'class': 'file-list' });
+        table.store('file-list', self);
         
         // TABLE HEADING
         
@@ -260,6 +261,7 @@ var FileListEntry = new Class({
 });
 
 function fileSearch (text) {
+    var list = document.getElement('.file-list').retrieve('file-list');
     
     // no text; disable filter
     if (!text.length) {
