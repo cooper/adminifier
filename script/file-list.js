@@ -96,7 +96,7 @@ var FileList = new Class({
                 var setSort = sort + '-';
                 if (adminifier.currentData['data-sort'] == setSort)
                     setSort = sort + encodeURIComponent('+');
-                anchor.set('href', self.root + '?sort=' + setSort);
+                anchor.set('href', self.options.root + '?sort=' + setSort);
             }
         });
         
