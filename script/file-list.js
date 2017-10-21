@@ -5,7 +5,8 @@ var FileList = new Class({
     options: {
         selection: true,    // allow rows to be selected
         columns: [],        // ordered list of column names
-        columnData: {}      // object of column data, column names as keys
+        tooltips: [],       // column tooltips
+        columnData: {},     // object of column data, column names as keys
         // root         relative url for the list
         // isTitle      true for the widest column
         // sort         sort letter
