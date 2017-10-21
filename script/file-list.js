@@ -271,9 +271,9 @@ function fileSearch (text) {
     }
 
     // set filter
-    list.filter = function () {
+    list.filter = function (entry) {
         var matched = 0;
-        Object.values(this.columns).each(function (val) {
+        Object.values(entry.columns).each(function (val) {
             if (match(new RegExp(text, 'i')))
                 matched++;
         });
