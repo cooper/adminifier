@@ -227,13 +227,13 @@ function imageModeToggle() {
     alert('Switching modes');
 }
 
-function dateToPreciseHR(time) {
-    var d = new Date(parseInt(time) * 1000);
+function dateToPreciseHR(text) {
+    var d = new Date(parseInt(text) * 1000);
     return d.toString();
 }
 
 function dateToHRTimeAgo(text) {
-    return _dateToHRTimeAgo(parseInt(time) * 1000);
+    return _dateToHRTimeAgo(parseInt(text) * 1000);
 }
 
 function _dateToHRTimeAgo(time) {
