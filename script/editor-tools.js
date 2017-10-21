@@ -667,12 +667,12 @@ function displayDiffViewer (box, from, to, message, which) {
             if (split) {
                 runDiff(false);
                 split = false;
-                but.set('text', 'Split');
+                but.set('text', 'Split view');
                 return;
             }
             runDiff(true);
             split = true;
-            but.set('text', 'Unified');
+            but.set('text', 'Unified view');
         });
         
         diffWindow.show();
