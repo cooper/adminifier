@@ -266,6 +266,7 @@ function fileSearch (text) {
     // no text; disable filter
     if (!text.length) {
         delete list.filter;
+        list.redraw();
         return;
     }
 
