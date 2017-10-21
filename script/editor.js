@@ -388,11 +388,7 @@ ae.getBlockInfo = function (pos) {
     lineText = lineText.substr(0, bracketRange.start.column - 1);
 
     // find the block type and title
-    var match = lineText.match(/([\w\-\$\.]+)(\s*)$/);
-    if (!match) return;
-    match = match[1];
-    
-    var chars = match.split(''),
+    var chars = lineText.split(''),
         charsScanned = 0,
         inBlockName  = 0,
         blockType    = '',
