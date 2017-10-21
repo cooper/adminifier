@@ -399,7 +399,7 @@ ae.getBlockInfo = function (pos) {
         blockName    = '';
         
     // scan backwards
-    while (chars) {
+    while (chars.length) {
         var char = chars.pop();
         charsScanned++;
         
