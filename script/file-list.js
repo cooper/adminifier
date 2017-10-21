@@ -143,8 +143,8 @@ var FileList = new Class({
                     textContainer = new Element('span');
                 td.appendChild(textContainer);
                 
-                // add states
-                Object.keys(entry.infoState).each(function (name) {
+                // add states to title cell
+                if (isTitle) entry.infoState.each(function (name) {
                     var span = new Element('span', {
                         text:   name,
                         class: 'file-info'
