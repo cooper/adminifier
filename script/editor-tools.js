@@ -663,7 +663,7 @@ function displayDiffViewer (box, from, to, message, which) {
         
         // switch modes
         var but, split;
-        but = diffWindow.addButton('Split', function () {
+        but = diffWindow.addButton('Split view', function () {
             if (split) {
                 runDiff(false);
                 split = false;
