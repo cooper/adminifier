@@ -353,6 +353,31 @@ ae.replaceSelectionRangeAndReselect = function (ranges, leftOffset, newText) {
     ));
 };
 
+var brackets = {
+    ")": "(",
+    "(": ")",
+    "]": "[",
+    "[": "]",
+    "{": "}",
+    "}": "{"
+};
+
+// find nearest bracket range for the given opening bracket type
+// this uses private ace methods, so it might break
+// getBracketRange('{') or [ or (
+ae.getBracketRange = function (openingBracket, pos) {
+    if (!pos)
+        pos = editor.getCursorPosition();
+    var openPos  = editor.session.$findOpeningBracket(brackets[openingBracket], pos);
+    var closePos = editor.session.$findClosingBracket(openingBracket, pos);
+    return new Range(
+        openPos.row,
+        openPos.column,
+        closePos.row,
+        closePos.column
+    );
+};
+
 ae.handlePageDisplayResult = function (res) {
     if (!res)
         return;
