@@ -60,9 +60,41 @@ var FileList = new Class({
         return this.options.columnData[col];
     },
     
+    redraw: function () {
+        var container = this.container;
+        
+        // not drawn yet
+        if (!container) {
+            console.log('Cannot redraw() without previous draw()');
+            return;
+        }
+        
+        // destroy previous table
+        this.container.getElement('.file-list').destroy();
+        
+        // re-draw
+        delete this.container;
+        this.draw(container);
+    },
+    
     // draw the table in the specified place
     draw: function (container) {
         var self = this;
+        
+        // already drawn
+        if (self.container) {
+            console.log('Cannot draw() file list again; use redraw()');
+            return;
+        }
+        
+        self.container = container;
+        
+        // if a filter is applied, filter
+        var visibleEntries = self.entries;
+        if (self.filter)
+            visibleEntries = visibleEntries.filter(self.filter);
+        
+        // create table
         var table = self.table = new Element('table', { 'class': 'file-list' });
         
         // TABLE HEADING
@@ -111,7 +143,7 @@ var FileList = new Class({
         checkTd.appendChild(input.clone());
         
         // add each entry as a table row
-        self.entries.each(function (entry) {
+        visibleEntries.each(function (entry) {
             
             // row may be cached
             var tr = entry.tr;
@@ -228,16 +260,25 @@ var FileListEntry = new Class({
 });
 
 function fileSearch (text) {
-    $$('table.file-list tbody tr').each(function (tr) {
-        var matchingColumns = 0;
-        if (text == '')
-            matchingColumns++;
-        else tr.getElements('td').each(function (td) {
-            if (td.innerText.match(new RegExp(text, 'i')))
-                matchingColumns++;
+    
+    // no text; disable filter
+    if (!text.length) {
+        delete list.filter;
+        return;
+    }
+
+    // set filter
+    list.filter = function () {
+        var matched = 0;
+        Object.values(this.columns).each(function (val) {
+            if (match(new RegExp(text, 'i')))
+                matched++;
         });
-        tr.setStyle('display', matchingColumns ? 'table-row' : 'none');
-    });
+        return !!matched;
+    };
+
+    // re-draw table
+    list.redraw();
 }
 
 function imageModeToggle() {
