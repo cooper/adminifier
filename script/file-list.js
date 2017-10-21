@@ -6,6 +6,7 @@ var FileList = new Class({
         selection: true,    // allow rows to be selected
         columns: [],        // ordered list of column names
         columnData: {}      // object of column data, column names as keys
+        // root         relative url for the list
         // isTitle      true for the widest column
         // sort         sort letter
         // fixer        transformation to apply to text before displaying it
@@ -90,7 +91,13 @@ var FileList = new Class({
             
             // sort method
             var sort = self.getColumnData(col, 'sort');
-            if (sort) th.set('data-sort', sort);
+            if (sort) {
+                th.set('data-sort', sort);
+                var setSort = sort + '-';
+                if (adminifier.currentData['data-sort'] == setSort)
+                    setSort = sort + encodeURIComponent('+');
+                anchor.set('href', self.root + '?sort=' + setSort);
+            }
         });
         
         // TABLE BODY
