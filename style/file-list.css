@@ -66,7 +66,7 @@ table.file-list tbody tr:nth-child(even) {
     background-color: #eee;
 }
 
-table.file-list span.pageinfo {
+table.file-list span.file-info {
     font-size: small;
     text-transform: uppercase;
     font-weight: bold;

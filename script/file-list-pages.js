@@ -21,6 +21,8 @@ a.currentJSONMetadata['results'].each(function (pageData) {
         Created:    pageData.created,
         Modified:   pageData.mod_unix
     });
+    entry.setInfoState('Generated', pageData.generated);
+    entry.setInfoState('Draft', pageData.draft);
     entry.link = '#!/edit-page?page=' + encodeURIComponent(pageData.file);
     pageList.addEntry(entry);
 });
