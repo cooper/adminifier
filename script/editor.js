@@ -379,6 +379,80 @@ ae.getBracketRange = function (openingBracket, pos) {
     );
 };
 
+ae.getBlockInfo = function (pos) {
+    var bracketRange = ae.getBracketRange('{', pos);
+    if (!bracketRange) return;
+    
+    // get the text for the line, dropping anything at/after the bracket
+    var lineText = editor.session.getLine(bracketRange.start.row);
+    lineText = lineText.substr(0, bracketRange.start.column - 1);
+
+    // find the block type and title
+    var match = lineText.match(/([\w\-\$\.]+)(\s*)$/);
+    if (!match) return;
+    match = match[1];
+    
+    var chars = match.split(''),
+        charsScanned = 0,
+        inBlockName  = 0,
+        blockType    = '',
+        blockName    = '';
+        
+    // scan backwards
+    while (chars) {
+        var char = chars.pop();
+        charsScanned++;
+        
+        // entering block name
+        if (char == ']') {
+            if (!inBlockName++)
+                continue;
+            // if it was at 0, we just entered the block name
+        }
+        
+        // exiting block name
+        if (char == '[') {
+            if (!--inBlockName)
+                continue;
+            // if it was 1 or more, we're still in the block name
+        }
+        
+        // we are in the block name, so add this character to the front
+        if (inBlockName)
+            blockName = char + blockName;
+        
+        // this char is part of the block type at this point
+        else if (char.match(/[\w\-\$\.]/)) {
+            blockType = char + blockType;
+            continue;
+        }
+        
+        // tilde can terminate the block type
+        else if (char == '~' && blockType.length)
+            continue;
+            
+        // space between things
+        else if (char.match(/\s/))
+            continue;
+            
+        // give up
+        else {
+            charsScanned--;
+            break;
+        }
+    }
+    
+    // split classes by dot
+    var blockClasses = blockType.split('.');
+    blockType = blockClasses.shift();
+    
+    return {
+        type:           blockType,
+        name:           blockName,      // for some block types, this may
+        classes:        blockClasses    // include formatting codes
+    };
+};
+
 ae.handlePageDisplayResult = function (res) {
     if (!res)
         return;
