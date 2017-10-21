@@ -144,7 +144,6 @@ var FileList = new Class({
                 td.appendChild(textContainer);
                 
                 // add states
-                if (entry.infoState)
                 Object.keys(entry.infoState).each(function (name) {
                     var span = new Element('span', {
                         text:   name,
@@ -199,8 +198,9 @@ var FileList = new Class({
 var FileListEntry = new Class({
     
     initialize: function (values) {
-        this.columns  = {};
-        this.tooltips = {};
+        this.columns    = {};
+        this.tooltips   = {};
+        this.infoState  = [];
         if (values) this.setValues(values);
     },
     
@@ -220,10 +220,10 @@ var FileListEntry = new Class({
     },
     
     setInfoState: function (name, state) {
-        if (state)
-            this.infoState[name] = state;
+        if (state && !this.infoState.contains(name))
+            this.infoState.push(name);
         else
-            delete this.infoState[name];
+            this.infoState.erase(name);
     }
 });
 
