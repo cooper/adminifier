@@ -30,7 +30,7 @@ var FileList = new Class({
             
             // apply tooltip fixer
             fixer = self.getColumnData(col, 'tooltipFixer');
-            if (fixer) entry.tooltip = fixer(val);
+            if (fixer) entry.tooltips[col] = fixer(val);
             
             // skip if no length
             if (typeof val != 'string' || !val.length)
@@ -149,7 +149,7 @@ var FileList = new Class({
                     textContainer.set('text', text);
                     
                 // tooltip
-                var tooltip = entry.tooltip;
+                var tooltip = entry.tooltips[col];
                 if (typeof tooltip == 'string' && tooltip.length)
                     textContainer.set('title', tooltip);
                     
