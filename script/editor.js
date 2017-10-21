@@ -370,6 +370,7 @@ ae.getBracketRange = function (openingBracket, pos) {
         pos = editor.getCursorPosition();
     var openPos  = editor.session.$findOpeningBracket(brackets[openingBracket], pos);
     var closePos = editor.session.$findClosingBracket(openingBracket, pos);
+    if (!openPos || !closePos) return;
     return new Range(
         openPos.row,
         openPos.column,
