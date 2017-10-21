@@ -368,7 +368,7 @@ var brackets = {
 ae.getBracketRange = function (openingBracket, pos) {
     if (!pos)
         pos = editor.getCursorPosition();
-    pos.start.column++; // fixes if it's at the actual position of the bracket
+    pos.column++; // fixes if it's at the actual position of the bracket
     var openPos  = editor.session.$findOpeningBracket(brackets[openingBracket], pos);
     var closePos = editor.session.$findClosingBracket(openingBracket, pos);
     if (!openPos || !closePos) return;
