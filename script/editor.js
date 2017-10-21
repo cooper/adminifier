@@ -373,7 +373,7 @@ ae.getBracketRange = function (openingBracket, pos) {
     if (!openPos || !closePos) return;
     return new Range(
         openPos.row,
-        openPos.column,
+        openPos.column + 1, // don't include the first bracket itself
         closePos.row,
         closePos.column
     );
