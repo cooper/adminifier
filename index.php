@@ -69,6 +69,7 @@ var adminifier = {
     require(__DIR__.'/templates/login-tmpl.php');
     require(__DIR__.'/templates/editor-tmpl.php');
     require(__DIR__.'/templates/image-grid-tmpl.php');
+    require(__DIR__.'/templates/file-list-tmpl.php');
 ?>
 
 </body>

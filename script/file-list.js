@@ -362,6 +362,9 @@ function dateToHRTimeAgo(time) {
 }
 
 function displayFilter () {
-    var div = new Element('div', { class: 'filter-editor' });
+    var div = new Element('div', {
+        class:  'filter-editor',
+        html:   tmpl('tmpl-filter-editor', {})
+    });
     document.body.adopt(div);
 }
