@@ -14,7 +14,8 @@ var imageList = new FileList({
     }
 });
 
-a.currentJSONMetadata['results'].each(function (imageData) {
+if (a.currentJSONMetadata.results)
+a.currentJSONMetadata.results.each(function (imageData) {
     var entry = new FileListEntry({
         Filename:   imageData.file,
         Author:     imageData.author,

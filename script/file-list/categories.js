@@ -3,8 +3,8 @@
 if (!FileList || !a.currentJSONMetadata)
     return;
 
-var pageList = new FileList({
-    root: '#!/pages',
+var catList = new FileList({
+    root: '#!/cats',
     columns: ['Title', 'Author', 'Created', 'Modified'],
     columnData: {
         Title:      { sort: 'a', isTitle: true },
@@ -15,19 +15,19 @@ var pageList = new FileList({
 });
 
 if (a.currentJSONMetadata.results)
-a.currentJSONMetadata.results.each(function (pageData) {
+a.currentJSONMetadata.results.each(function (catData) {
     var entry = new FileListEntry({
-        Title:      pageData.title || pageData.file,
-        Author:     pageData.author,
-        Created:    pageData.created,
-        Modified:   pageData.mod_unix
+        Title:      catData.title || catData.file,
+        Author:     catData.author,
+        Created:    catData.created,
+        Modified:   catData.mod_unix
     });
-    entry.setInfoState('Generated', pageData.generated);
-    entry.setInfoState('Draft', pageData.draft);
-    entry.link = '#!/edit-page?page=' + encodeURIComponent(pageData.file);
-    pageList.addEntry(entry);
+    entry.setInfoState('Generated', catData.generated);
+    entry.setInfoState('Draft', catData.draft);
+    entry.link = '#!/edit-cat?cat=' + encodeURIComponent(catData.file);
+    catList.addEntry(entry);
 });
 
-pageList.draw($('content'));
+catList.draw($('content'));
 
 })(adminifier, window);
