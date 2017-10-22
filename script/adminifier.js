@@ -72,7 +72,7 @@ a.loadScripts = function (srcs) {
 		
 		// this was the last one
         $('content').setStyle('user-select', 'all');
-		a.updateIcon(data['data-icon']);
+		a.updateIcon(a.currentData['data-icon']);
         pageScriptsDone = true;
         document.fireEvent('pageScriptsLoaded');
     };
