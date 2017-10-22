@@ -374,6 +374,13 @@ function displayFilter () {
         return;
     }
     
+    // if quick search is being used, stop
+    if ($('top-search').value.length) {
+        alert('Cannot filter Quick Search results. Please clear your search.');
+        $('top-search').focus();
+        return;
+    }
+    
     // make filter button active and disable search
     $('top-button-filter').addClass('active');
     $('top-search').set('disabled', true);

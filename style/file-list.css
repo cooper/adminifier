@@ -141,7 +141,7 @@ ul.file-list-toolbar li.disabled {
     width: 230px;
     width: calc(100% - 10px);
     background-color: #ddd;
-    color: #fff;
+    color: #111;
 }
 
 .filter-row:nth-child(even) {
