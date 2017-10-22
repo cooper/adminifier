@@ -301,16 +301,13 @@ function fileSearch (text) {
     list.redraw();
 }
 
-function dateToPreciseHR(text) {
-    var d = new Date(parseInt(text) * 1000);
+function dateToPreciseHR(d) {
+    if (typeof d == 'string')
+        d = new Date(parseInt(text) * 1000);
     return d.toString();
 }
 
-function dateToHRTimeAgo(text) {
-    return _dateToHRTimeAgo(parseInt(text) * 1000);
-}
-
-function _dateToHRTimeAgo(time) {
+function dateToHRTimeAgo(time) {
     switch (typeof time) {
         case 'number':
             break;
