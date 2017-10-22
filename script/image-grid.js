@@ -9,4 +9,4 @@ a.currentJSONMetadata.results.each(function (imageData) {
     $('content').appendChild(div);
 });
 
-})();
+})(adminifier, window);
