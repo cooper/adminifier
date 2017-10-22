@@ -2,6 +2,9 @@
     
 if (!a.currentJSONMetadata)
     return;
+    
+var container = new Element('div', { class: 'image-grid' });
+$('content').appendChild(container);
 
 if (a.currentJSONMetadata.results)
 a.currentJSONMetadata.results.each(function (imageData) {
@@ -15,7 +18,7 @@ a.currentJSONMetadata.results.each(function (imageData) {
         class: 'image-grid-item',
         html:   tmpl('tmpl-image-grid-item', imageData)
     });
-    $('content').appendChild(div);
+    container.appendChild(div);
 });
 
 })(adminifier, window);
