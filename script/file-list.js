@@ -312,7 +312,7 @@ function fileSearch (text) {
     list.redraw();
 }
 
-exports.dateToHRTimeAgo = dateToPreciseHR;
+exports.dateToPreciseHR = dateToPreciseHR;
 function dateToPreciseHR(d) {
     if (typeof d == 'string')
         d = new Date(parseInt(text) * 1000);
