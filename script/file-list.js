@@ -361,10 +361,27 @@ function dateToHRTimeAgo(time) {
     return time;
 }
 
+function filterResize () {
+   $('content').setStyle('width', window.innerWidth -
+       $('navigation-sidebar').offsetWidth - 250 + 'px');
+}
+
 function displayFilter () {
+    $('top-search').set('disabled', true);
     var div = new Element('div', {
         class:  'filter-editor',
         html:   tmpl('tmpl-filter-editor', {})
     });
+    window.addEvent('resize', filterResize);
+    filterResize();
     document.body.adopt(div);
+}
+
+function closeFilter () {
+    // TODO: call this on navigate away from page
+    document.getElement('filter-editor').destroy();
+    window.removeEvent('resize', filterResize);
+    $('content').setStyle('width', 'auto');
+    if ($('top-search'))
+        $('top-search').set('disabled', false);
 }
