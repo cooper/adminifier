@@ -3,6 +3,8 @@ var Range, Search, editor;
 
 var ae = adminifier.editor = {};
 
+// PAGE EVENTS
+
 // upon adding editorLoaded event, call if the editor is already loaded
 Element.Events.editorLoaded = {
     onAdd: function (fn) {
@@ -10,6 +12,127 @@ Element.Events.editorLoaded = {
             fn.call(this);
     }
 };
+
+document.addEvent('pageScriptsLoaded',          pageScriptsLoadedHandler);
+document.addEvent('pageUnloaded',               pageUnloadedHandler);
+document.addEvent('keyup',                      handleEscapeKey);
+document.addEvent('editorLoaded',               editorLoadedHandler);
+window.addEvent('resize',                       adjustCurrentPopup);
+
+function pageScriptsLoadedHandler () {
+    console.log('Editor script loaded');
+    setupToolbar();
+    window.onbeforeunload = confirmOnPageExit;
+    
+    // load required ace resources
+    Range  = ace.require('ace/range').Range;
+    Search = ace.require('ace/search').Search;
+    editor = ace.edit('editor');
+    ae.lastSavedData = editor.getValue();
+-
+    // render editor
+    var themeName = adminifier.themeName || 'twilight';
+    editor.setTheme('ace/theme/' + themeName);
+    editor.session.setMode('ace/mode/plain_text');
+    editor.on('input', handleInput);
+    setTimeout(function () { editor.resize(); }, 500);
+
+    // listen for clicks to navigate away
+    document.body.addEvent('click', clickOutHandler);
+
+    // fire editor loaded event
+    if (!ae.editorLoaded) {
+        ae.editorLoaded = true;
+        document.fireEvent('editorLoaded');
+    }
+}
+
+function pageUnloadedHandler () {
+    console.log('Unloading editor script');
+    document.removeEvent('pageScriptsLoaded',   pageScriptsLoadedHandler);
+    document.removeEvent('pageUnloaded',        pageUnloadedHandler);
+    document.removeEvent('keyup',               handleEscapeKey);
+    document.removeEvent('editorLoaded',        editorLoadedHandler);
+    window.removeEvent('resize',                adjustCurrentPopup);
+    document.body.removeEvent('click',          clickOutHandler);
+    delete window.onbeforeunload;
+    delete a.editor;
+}
+
+function editorLoadedHandler () {
+    ae.updatePageTitle();
+    ae.resetSelectionAtTopLeft();
+    if (a.currentJSONMetadata && a.currentJSONMetadata.display_result)
+        ae.handlePageDisplayResult(a.currentJSONMetadata.display_result);
+}
+
+// FIXME: issue #31
+function clickOutHandler (e) {
+    if (!ae.hasUnsavedChanges())
+        return;
+    var findParent = function (tagname, el) {
+        if ((el.nodeName || el.tagName).toLowerCase() === tagname.toLowerCase())
+            return el;
+        while (el = el.parentNode) {
+            if ((el.nodeName || el.tagName).toLowerCase() === tagname.toLowerCase())
+                return el;
+        }
+        return null;
+    }
+    var from = findParent('a', e.target);
+    if (from) {
+        e.preventDefault();
+        alert('You have unsaved changes.');
+    }
+}
+
+// FIXME: issue #31
+function confirmOnPageExit (e) {
+    if (!ae.hasUnsavedChanges())
+        return;
+    var message = 'You have unsaved changes.';
+    if (e) e.returnValue = message;
+    return message;
+}
+
+// escape key pressed
+function handleEscapeKey (e) {
+    if (e.key != 'esc') return;
+    console.log('handle escape');
+
+    // if there's a popup, exit it maybe
+    if (ae.currentPopup) closeCurrentPopup({
+        unlessSticky: true,
+        reason: 'Escape key'
+    });
+}
+
+function handleInput () {
+
+    // update undo
+    var um = editor.session.getUndoManager();
+    if (um.hasUndo())
+        $('toolbar-undo').removeClass('disabled')
+    else
+        $('toolbar-undo').addClass('disabled');
+
+    // update redo
+    if (um.hasRedo())
+        $('toolbar-redo').removeClass('disabled');
+    else
+        $('toolbar-redo').addClass('disabled');
+
+
+    // current line
+    var lineText = editor.session.getLine(editor.getSelectionRange().start.row);
+
+    // we're changing the title.
+    if (lineText.match(ae.expressions.pageTitle)) {
+        ae.updatePageTitle(editor.selection.getLineRange());
+    }
+}
+
+// EXPORTS
 
 // search expressions for variables
 ae.expressions = {
@@ -21,8 +144,8 @@ ae.expressions = {
 
 // toolbar click functions
 ae.toolbarFunctions = {
-    undo:       function () { editor.undo(); },
-    redo:       function () { editor.redo(); }
+    undo:   function () { editor.undo(); },
+    redo:   function () { editor.redo(); }
 };
 
 // get current page filename
@@ -555,142 +678,7 @@ function wrapTextFunction (type) {
     };
 }
 
-document.addEvent('pageScriptsLoaded', pageScriptsLoadedHandler);
-document.addEvent('pageUnloaded', pageUnloadedHandler);
-document.addEvent('keyup', handleEscapeKey);
-document.addEvent('editorLoaded', editorLoadedHandler);
-
-function pageUnloadedHandler () {
-    console.log('Unloading editor script');
-    document.removeEvent('pageScriptsLoaded', pageScriptsLoadedHandler);
-    document.removeEvent('pageUnloaded', pageUnloadedHandler);
-    document.removeEvent('keyup', handleEscapeKey);
-    document.removeEvent('editorLoaded', editorLoadedHandler);
-    document.body.removeEvent('click', clickOutHandler);
-    window.removeEvent('resize', adjustCurrentPopup);
-    delete window.onbeforeunload;
-    delete a.editor;
-}
-
-function pageScriptsLoadedHandler () {
-    console.log('Editor script loaded');
-    setupToolbar();
-    window.addEvent('resize', adjustCurrentPopup);
-    window.onbeforeunload = confirmOnPageExit;
-    
-    Range  = ace.require('ace/range').Range;
-    Search = ace.require('ace/search').Search;
-    editor = ace.edit("editor");
-    ae.lastSavedData = editor.getValue();
-
-    // render editor
-    var themeName = adminifier.themeName || 'twilight';
-    editor.setTheme('ace/theme/' + themeName);
-    editor.session.setMode('ace/mode/plain_text');
-    editor.on('input', inputHandler);
-    setTimeout(function () { editor.resize(); }, 500);
-
-    // listen for clicks to navigate away
-    document.body.addEvent('click', clickOutHandler);
-
-    if (!ae.editorLoaded) {
-        ae.editorLoaded = true;
-        document.fireEvent('editorLoaded');
-    }
-}
-
-function editorLoadedHandler () {
-    ae.updatePageTitle();
-    ae.resetSelectionAtTopLeft();
-    if (a.currentJSONMetadata && a.currentJSONMetadata.display_result)
-        ae.handlePageDisplayResult(a.currentJSONMetadata.display_result);
-}
-
-function clickOutHandler (e) {
-    if (!ae.hasUnsavedChanges())
-        return;
-    var findParent = function (tagname, el) {
-        if ((el.nodeName || el.tagName).toLowerCase() === tagname.toLowerCase())
-            return el;
-        while (el = el.parentNode) {
-            if ((el.nodeName || el.tagName).toLowerCase() === tagname.toLowerCase())
-                return el;
-        }
-        return null;
-    }
-    var from = findParent('a', e.target);
-    if (from) {
-        e.preventDefault();
-        alert('You have unsaved changes.');
-    }
-}
-
-function confirmOnPageExit (e) {
-    if (!ae.hasUnsavedChanges())
-        return;
-    var message = 'You have unsaved changes.';
-    if (e) e.returnValue = message;
-    return message;
-}
-
-// escape key pressed
-function handleEscapeKey(e) {
-    if (e.key != 'esc') return;
-    console.log('handle escape');
-
-    // if there's a popup, exit it maybe
-    if (ae.currentPopup) closeCurrentPopup({
-        unlessSticky: true,
-        reason: 'Escape key'
-    });
-}
-
-function inputHandler () {
-
-    // update undo
-    var um = editor.session.getUndoManager();
-    if (um.hasUndo())
-        $('toolbar-undo').removeClass('disabled')
-    else
-        $('toolbar-undo').addClass('disabled');
-
-    // update redo
-    if (um.hasRedo())
-        $('toolbar-redo').removeClass('disabled');
-    else
-        $('toolbar-redo').addClass('disabled');
-
-
-    // current line
-    var lineText = editor.session.getLine(editor.getSelectionRange().start.row);
-
-    // we're changing the title.
-    if (lineText.match(ae.expressions.pageTitle)) {
-        ae.updatePageTitle(editor.selection.getLineRange());
-    }
-}
-
-// close current popup on click outside
-function bodyClickPopoverCheck (e) {
-
-    // no popup is displayed
-    if (!ae.currentPopup)
-        return;
-
-    // clicked within the popup
-    if (e.target == ae.currentPopup || ae.currentPopup.contains(e.target))
-        return;
-
-    // the target says not to do this
-    if (e.target && e.target.hasClass('no-close-popup'))
-        return;
-
-    closeCurrentPopup({
-        unlessSticky: true,
-        unlessActive: true,
-        reason: 'Clicked outside the popup'
-    });
-}
+// INTERNAL POPUP FUNCTIONS
 
 // close the current popup box
 function closeCurrentPopup (opts) {
@@ -770,6 +758,30 @@ function adjustCurrentPopup () {
         rect.left
     );
 };
+
+// close current popup on click outside
+function bodyClickPopoverCheck (e) {
+
+    // no popup is displayed
+    if (!ae.currentPopup)
+        return;
+
+    // clicked within the popup
+    if (e.target == ae.currentPopup || ae.currentPopup.contains(e.target))
+        return;
+
+    // the target says not to do this
+    if (e.target && e.target.hasClass('no-close-popup'))
+        return;
+
+    closeCurrentPopup({
+        unlessSticky: true,
+        unlessActive: true,
+        reason: 'Clicked outside the popup'
+    });
+}
+
+// INTERNAL TOOLBAR ITEM FUNCTIONS
 
 // animated open of a toolbar item
 function openLi (li) {
