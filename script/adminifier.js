@@ -19,6 +19,14 @@ Element.implement('onEnter', function (func) {
     });
 });
 
+function SSV (str) {
+    if (typeof str != 'string' || !str.length)
+        return [];
+    return str.split(' ');
+}
+
+// EXPORTS
+
 // update page title
 a.updatePageTitle = function (title, titleTagOnly) {
     if (!titleTagOnly)
@@ -26,6 +34,7 @@ a.updatePageTitle = function (title, titleTagOnly) {
     document.title = title + ' | ' + a.wikiName;
 };
 
+// update page icon
 a.updateIcon = function (icon) {
 	$('page-title').getElement('i').set('class', 'fa fa-' + icon);
 };
@@ -35,11 +44,14 @@ a.safeName = function (name) {
     return name.replace(/[^\w\.\-]/g, '_');
 }
 
-window.addEvent('hashchange', hashLoad);
-document.addEvent('domready', hashLoad);
-document.addEvent('domready', searchHandler);
-document.addEvent('keyup', handleEscapeKey);
+window.addEvent('hashchange',	hashLoad);
+document.addEvent('domready', 	hashLoad);
+document.addEvent('domready',	searchHandler);
+document.addEvent('keyup',		handleEscapeKey);
 
+// PAGE LOADING
+
+// load a page
 function frameLoad (page) {
     if (a.currentPage == page)
         return;
@@ -101,6 +113,7 @@ function frameLoad (page) {
     request.get();
 }
 
+// load page based on the current hash
 function hashLoad() {
     var hash = window.location.hash;
     if (hash.lastIndexOf('#!/', 0) === 0) {
@@ -116,6 +129,7 @@ function hashLoad() {
     frameLoad(hash);
 }
 
+// page options
 var flagOptions = {
     'no-margin': {
         init: function () {
@@ -210,47 +224,7 @@ var flagOptions = {
 	}
 };
 
-function handleCompactSidebarMouseenter (e) {
-    var a = e.target;
-    var p = a.retrieve('popover');
-    if (!p) {
-        p = new Element('div', { class: 'navigation-popover' });
-        p.innerHTML = a.getElement('span').innerHTML;
-        a.appendChild(p);
-        p.set('morph', { duration: 150 });
-        a.store('popover', p);
-    }
-    a.setStyle('overflow', 'visible');
-    p.setStyle('background-color', '#444');
-    p.morph({
-        width: '90px',
-        paddingLeft: '10px'
-    });
-}
-
-function handleCompactSidebarMouseleave (e) {
-    var a = e.target;
-    var p = a.retrieve('popover');
-    if (!p) return;
-    p.setStyle('background-color', '#333');
-    p.morph({
-        width: '0px',
-        paddingLeft: '0px'
-    });
-    setTimeout(function () {
-        a.setStyle('overflow', 'hidden');
-    }, 200);
-}
-
-// escape key pressed
-function handleEscapeKey (e) {
-    if (e.key != 'esc')
-        return;
-    var container = document.getElement('.modal-container');
-    if (container)
-        container.retrieve('modal').destroy();
-}
-
+// handle page data on request completion
 function handlePageData (data) {
     pageScriptsDone = false;
 
@@ -376,11 +350,16 @@ function handlePageData (data) {
     });
 }
 
-function SSV (str) {
-    if (typeof str != 'string' || !str.length)
-        return [];
-    return str.split(' ');
+// escape key pressed
+function handleEscapeKey (e) {
+    if (e.key != 'esc')
+        return;
+    var container = document.getElement('.modal-container');
+    if (container)
+        container.retrieve('modal').destroy();
 }
+
+// SEARCH
 
 function searchHandler () {
 	$('top-search').addEvent('keyup', searchUpdate);
@@ -394,6 +373,40 @@ function searchUpdate () {
 	if (!searchFunc)
 		return;
 	searchFunc(text);
+}
+
+// COMPACT SIDEBAR
+
+function handleCompactSidebarMouseenter (e) {
+    var a = e.target;
+    var p = a.retrieve('popover');
+    if (!p) {
+        p = new Element('div', { class: 'navigation-popover' });
+        p.innerHTML = a.getElement('span').innerHTML;
+        a.appendChild(p);
+        p.set('morph', { duration: 150 });
+        a.store('popover', p);
+    }
+    a.setStyle('overflow', 'visible');
+    p.setStyle('background-color', '#444');
+    p.morph({
+        width: '90px',
+        paddingLeft: '10px'
+    });
+}
+
+function handleCompactSidebarMouseleave (e) {
+    var a = e.target;
+    var p = a.retrieve('popover');
+    if (!p) return;
+    p.setStyle('background-color', '#333');
+    p.morph({
+        width: '0px',
+        paddingLeft: '0px'
+    });
+    setTimeout(function () {
+        a.setStyle('overflow', 'hidden');
+    }, 200);
 }
 
 })(adminifier);
