@@ -14,17 +14,10 @@ function loadedHandler () {
 
     // add toolbar functions
     Object.append(ae.toolbarFunctions, {
-        link:       displayLinkHelper,
         options:    displayPageOptionsWindow,
         view:       openPageInNewTab,
-        delete:     displayDeleteConfirmation,
         revisions:  displayRevisionViewer
     });
-
-    // add keyboard shortcuts
-    ae.addKeyboardShortcuts([
-        [ 'Ctrl-K', 'Command-K',    'link'      ]
-    ]);
 
     // disable view button for models
     if (ae.isModel())
@@ -54,101 +47,6 @@ function selectPageTitle () {
     if (!found)
         return;
     editor.selection.setRange(found.range);
-}
-
-// LINK HELPER
-
-function displayLinkHelper () {
-    var li  = ae.liForAction('link');
-    var box = ae.createPopupBox(li);
-    ae.fakeAdopt(box);
-
-    box.innerHTML = tmpl('tmpl-link-helper', {});
-
-    // first input, second input, button title, left delimiter, right delimiter
-    $('editor-link-type-internal').store('linkInfo', [
-        'Display text', 'Page target', 'Insert page link',
-        'My Page',
-        '[', ']'
-    ]);
-    $('editor-link-type-external').store('linkInfo', [
-        'Display text', 'External page target', 'Insert external page link',
-        'Some Page',
-        '!', '!'
-    ]);
-    $('editor-link-type-category').store('linkInfo', [
-        'Display text', 'Category target', 'Insert category link',
-        'News',
-        '~', '~'
-    ]);
-    $('editor-link-type-url').store('linkInfo', [
-        'Display text', 'URL target', 'Insert URL',
-        'http://www.example.com',
-        '$', '$'
-    ]);
-
-    // switch between link types
-    var activeType = $('editor-link-type-internal');
-    $$('.editor-link-type').each(function (type) {
-        type.addEvent('click', function () {
-
-            // set the active type
-            if (type.hasClass('active')) return;
-            activeType.removeClass('active');
-            type.addClass('active');
-            activeType = type;
-
-            // update the text
-            var info = type.retrieve('linkInfo');
-            $('editor-link-title1').innerHTML = info[1];
-            $('editor-link-title2').innerHTML = info[0];
-            $('editor-link-insert').innerHTML = info[2];
-            $('editor-link-target').setProperty('placeholder', info[3]);
-
-        });
-    });
-
-    // selected text = display text
-    // choose a word if there is no actual selection
-    var r = ae.getSelectionRanges();
-    editor.selection.setRange(r.select);
-    var selected = editor.session.getTextRange(r.select);
-
-    if (selected.trim().length) {
-        $('editor-link-display').setProperty('value', selected);
-        $('editor-link-target').setProperty('value', selected);
-    }
-
-    // insert link function
-    var insertLink = function () {
-        var displayText = $('editor-link-display').getProperty('value'),
-            targetText  = $('editor-link-target').getProperty('value'),
-            leftDel     = activeType.retrieve('linkInfo')[4],
-            rightDel    = activeType.retrieve('linkInfo')[5];
-
-        // make sure requirements were met
-        if (!displayText.length || !targetText.length) {
-            alert('Please specify display text and target');
-            return;
-        }
-
-        // one or two parts, depending on if display == target
-        var inner = displayText;
-        if (displayText.toLowerCase() != targetText.toLowerCase())
-            inner += ' | ' + targetText;
-
-        var complete = '[' + leftDel + ' ' + inner + ' ' + rightDel + ']';
-        editor.insert(complete);
-        ae.closePopup(box);
-    };
-
-    // insert on click or enter
-    $('editor-link-insert').addEvent('click', insertLink);
-    $('editor-link-target').onEnter(insertLink);
-    $('editor-link-display').onEnter(insertLink);
-
-    ae.displayPopupBox(box, 215, li);
-    $('editor-link-target').focus();
 }
 
 // VIEW PAGE BUTTON
@@ -361,104 +259,6 @@ function displayDiffViewer (box, from, to, message, which) {
         from: from,
         to: to
     });
-}
-
-// DELETE CONFIRMATION
-
-function displayDeleteConfirmation () {
-    var li  = ae.liForAction('delete');
-    var box = ae.createPopupBox(li);
-    ae.fakeAdopt(box);
-
-    box.innerHTML = tmpl('tmpl-delete-confirm', {});
-
-    // button text events
-    var btn = $('editor-delete-button');
-    var shouldChange = function () {
-        return !btn.hasClass('progress') &&
-               !btn.hasClass('success')  &&
-               !btn.hasClass('failure');
-    };
-    btn.addEvent('mouseenter', function () {
-        if (shouldChange()) btn.innerHTML = 'Delete this page';
-    });
-    btn.addEvent('mouseleave', function () {
-        if (shouldChange()) btn.innerHTML = 'Are you sure?';
-    });
-
-    // delete page function
-    var deletePage = function () {
-
-        // prevent box from closing for now
-        box.addClass('sticky');
-
-        // "deleting..."
-        $('editor-delete-wrapper').innerHTML = tmpl('tmpl-save-spinner', {});
-        btn.innerHTML = 'Deleting page';
-        btn.addClass('progress');
-
-        // success callback
-        var success = function () {
-
-            // switch to checkmark
-            var i = btn.parentElement.getElement('i');
-            i.removeClass('fa-spinner');
-            i.removeClass('fa-spin');
-            i.addClass('fa-check-circle');
-
-            // update button
-            btn.addClass('success');
-            btn.removeClass('progress');
-            btn.innerHTML = 'File deleted';
-
-            // redirect
-            setTimeout(function () {
-                window.location = a.adminRoot
-            }, 3000);
-        };
-
-        var fail = function () {
-
-            // switch to /!\
-            var i = btn.parentElement.getElement('i');
-            i.removeClass('fa-spinner');
-            i.removeClass('fa-spin');
-            i.addClass('fa-exclamation-triangle');
-
-            // update button
-            btn.addClass('failure');
-            btn.removeClass('progress');
-            btn.innerHTML = 'Delete failed';
-
-            setTimeout(function () {
-                ae.closePopup(box);
-            }, 1500);
-        };
-
-        // delete request
-        var req = new Request.JSON({
-            url: 'functions/delete-page.php' + (ae.isModel() ? '?model' : ''),
-            onSuccess: function (data) {
-
-                // deleted without error
-                if (data.success)
-                    success();
-
-                // delete error
-                else
-                    fail('Unknown error');
-            },
-            onFailure: function () { fail('Request error') },
-        }).post({
-            page: ae.getFilename()
-        });
-
-    };
-
-    // on click, delete page
-    btn.addEvent('click', deletePage);
-
-    ae.displayPopupBox(box, 120, li);
 }
 
 // PAGE OPTIONS

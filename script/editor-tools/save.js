@@ -9,12 +9,13 @@ function loadedHandler () {
 
     // add toolbar functions
     Object.append(ae.toolbarFunctions, {
-        save:       displaySaveHelper
+        save:       displaySaveHelper,
+        delete:     displayDeleteConfirmation
     });
 
-    // add keyboard shortcuts
+    // add keyboard shortcut
     ae.addKeyboardShortcuts([
-        [ 'Ctrl-S', 'Command-S',    'save'      ]
+        [ 'Ctrl-S', 'Command-S', 'save']
     ]);
     
     // start the autosave timer
@@ -25,6 +26,104 @@ function unloadedHandler () {
     document.removeEvent('editorLoaded', loadedHandler);
     document.removeEvent('pageUnloaded', unloadedHandler);
     clearAutosaveInterval();
+}
+
+// DELETE CONFIRMATION
+
+function displayDeleteConfirmation () {
+    var li  = ae.liForAction('delete');
+    var box = ae.createPopupBox(li);
+    ae.fakeAdopt(box);
+
+    box.innerHTML = tmpl('tmpl-delete-confirm', {});
+
+    // button text events
+    var btn = $('editor-delete-button');
+    var shouldChange = function () {
+        return !btn.hasClass('progress') &&
+               !btn.hasClass('success')  &&
+               !btn.hasClass('failure');
+    };
+    btn.addEvent('mouseenter', function () {
+        if (shouldChange()) btn.innerHTML = 'Delete this page';
+    });
+    btn.addEvent('mouseleave', function () {
+        if (shouldChange()) btn.innerHTML = 'Are you sure?';
+    });
+
+    // delete page function
+    var deletePage = function () {
+
+        // prevent box from closing for now
+        box.addClass('sticky');
+
+        // "deleting..."
+        $('editor-delete-wrapper').innerHTML = tmpl('tmpl-save-spinner', {});
+        btn.innerHTML = 'Deleting page';
+        btn.addClass('progress');
+
+        // success callback
+        var success = function () {
+
+            // switch to checkmark
+            var i = btn.parentElement.getElement('i');
+            i.removeClass('fa-spinner');
+            i.removeClass('fa-spin');
+            i.addClass('fa-check-circle');
+
+            // update button
+            btn.addClass('success');
+            btn.removeClass('progress');
+            btn.innerHTML = 'File deleted';
+
+            // redirect
+            setTimeout(function () {
+                window.location = a.adminRoot
+            }, 3000);
+        };
+
+        var fail = function () {
+
+            // switch to /!\
+            var i = btn.parentElement.getElement('i');
+            i.removeClass('fa-spinner');
+            i.removeClass('fa-spin');
+            i.addClass('fa-exclamation-triangle');
+
+            // update button
+            btn.addClass('failure');
+            btn.removeClass('progress');
+            btn.innerHTML = 'Delete failed';
+
+            setTimeout(function () {
+                ae.closePopup(box);
+            }, 1500);
+        };
+
+        // delete request
+        var req = new Request.JSON({
+            url: 'functions/delete-page.php' + (ae.isModel() ? '?model' : ''),
+            onSuccess: function (data) {
+
+                // deleted without error
+                if (data.success)
+                    success();
+
+                // delete error
+                else
+                    fail('Unknown error');
+            },
+            onFailure: function () { fail('Request error') },
+        }).post({
+            page: ae.getFilename()
+        });
+
+    };
+
+    // on click, delete page
+    btn.addEvent('click', deletePage);
+
+    ae.displayPopupBox(box, 120, li);
 }
 
 // SAVE COMMIT HELPER
