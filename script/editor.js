@@ -3,6 +3,7 @@ var Range, Search, editor;
 
 var ae = adminifier.editor = {};
 
+// upon adding editorLoaded event, call if the editor is already loaded
 Element.Events.editorLoaded = {
     onAdd: function (fn) {
         if (ae.editorLoaded)
@@ -10,6 +11,7 @@ Element.Events.editorLoaded = {
     }
 };
 
+// search expressions for variables
 ae.expressions = {
     pageTitle:      new RegExp('\\s*^@page\\.title:(.*)$'),
     keyValueVar:    new RegExp('^\\s*@page\\.(\\w+):(.*?)(;?)\\s*$'),
@@ -17,20 +19,18 @@ ae.expressions = {
     category:       new RegExp('^\\s*@category\\.([\\w\\.]+);\\s*$')
 };
 
+// toolbar click functions
 ae.toolbarFunctions = {
-    bold:       wrapTextFunction('b'),
-    italic:     wrapTextFunction('i'),
-    underline:  wrapTextFunction('u'),
-    strike:     wrapTextFunction('s'),
     undo:       function () { editor.undo(); },
-    redo:       function () { editor.redo(); },
-    // 'delete':   dummyFunc
+    redo:       function () { editor.redo(); }
 };
 
+// get current page filename
 ae.getFilename = function () {
     return $('editor').getProperty('data-file');
 };
 
+// true if the file being edited is a model
 ae.isModel = function () {
     return $('editor').getProperty('data-model') != null;
 };
@@ -54,6 +54,7 @@ ae.updatePageTitle = function (range) {
     a.updatePageTitle(title.length ? title : ae.getFilename());
 };
 
+// bind keyboard shortcuts to functions
 ae.addKeyboardShortcuts = function (cuts) {
     // c = [ windows shortcut, mac shortcut, action ]
     cuts.each(function (c) {
@@ -68,10 +69,12 @@ ae.addKeyboardShortcuts = function (cuts) {
     });
 };
 
+// returns true if there are unsaved changes
 ae.hasUnsavedChanges = function () {
     return editor.getValue() != ae.lastSavedData;
 };
 
+// close a popup box
 ae.closePopup = function (box, opts) {
     if (!ae.currentPopup)
         return;
@@ -86,7 +89,8 @@ ae.closePopup = function (box, opts) {
     closeCurrentPopup(opts);
 };
 
-// range is optional
+// find a page variable matching the provided expression within the given range
+// range is optional, defaults to the whole file
 ae.findPageVariable = function (exp, range) {
     var search = new Search().set({
         needle: exp,
@@ -165,6 +169,8 @@ ae.findPageVariable = function (exp, range) {
     };
 };
 
+// insert a blank line at the current position,
+// unless there is already a blank line there
 ae.insertBlankLineMaybe = function () {
 
     // select the line following the var insertion.
@@ -184,6 +190,7 @@ ae.insertBlankLineMaybe = function () {
     return false;
 };
 
+// remove extra newlines at the current position
 // returns number of lines removed
 ae.removeExtraNewlines = function () {
     var oldLength = editor.session.getLength();
@@ -217,6 +224,7 @@ ae.removeExtraNewlines = function () {
     return oldLength - editor.session.getLength();
 };
 
+// remove all lines within the provided ranges
 ae.removeLinesInRanges = function (ranges) {
     if (!ranges || !ranges.length)
         return;
@@ -247,11 +255,13 @@ ae.removeLinesInRanges = function (ranges) {
     }
 };
 
+// move the cursor to the top left position
 ae.resetSelectionAtTopLeft = function () {
     editor.selection.setRange(new Range(0, 0, 0, 0));
     editor.focus();
 };
 
+// create and return a new popup box
 ae.createPopupBox = function (li) {
     var box = new Element('div', { class: 'editor-popup-box' });
     if (li && li.hasClass('right'))
@@ -259,6 +269,7 @@ ae.createPopupBox = function (li) {
     return box;
 };
 
+// present a popup box
 ae.displayPopupBox = function (box, height, li) {
     
     // can't open the li
@@ -290,6 +301,7 @@ ae.displayPopupBox = function (box, height, li) {
     return true;
 };
 
+// start the loading animation on a toolbar item
 ae.setLiLoading = function (li, loading, noCircle) {
     var i = li.getElement('i');
     if (loading) {
@@ -310,7 +322,8 @@ ae.setLiLoading = function (li, loading, noCircle) {
     return true;
 };
 
-// find an appropriate range for selection
+// find an appropriate range for selection based on the cursor position.
+// this is used for text formatting
 ae.getSelectionRanges = function () {
 
     // find the current selection
@@ -380,6 +393,9 @@ ae.getBracketRange = function (openingBracket, pos) {
     );
 };
 
+// returns info about the innermost block at the given position.
+// returns undefined if we are at the document level.
+// if no position is provided, uses the current cursor position.
 ae.getBlockInfo = function (pos) {
     var bracketRange = ae.getBracketRange('{', pos);
     if (!bracketRange) return;
@@ -450,10 +466,13 @@ ae.getBlockInfo = function (pos) {
     };
 };
 
+// returns the toolbar item for the given action name
 ae.liForAction = function (action) {
     return document.getElement('li[data-action="' + action + '"]');
 };
 
+// adopts an element to an invisible container in the DOM so that dimension
+// properties become available before displaying it
 ae.fakeAdopt = function (child) {
     var parent = $('fake-parent');
     if (!parent) {
@@ -466,6 +485,7 @@ ae.fakeAdopt = function (child) {
     parent.appendChild(child);
 };
 
+// sets the selection to the page title variable, if it can be found
 ae.selectPageTitle = function () {
     var found = ae.findPageVariable(ae.expressions.pageTitle);
     if (!found)
@@ -473,6 +493,7 @@ ae.selectPageTitle = function () {
     editor.selection.setRange(found.range);
 };
 
+// updates warnings and errors on page save
 ae.handlePageDisplayResult = function (res) {
     if (!res)
         return;
@@ -511,6 +532,8 @@ ae.handlePageDisplayResult = function (res) {
         editor.session.clearAnnotations();
 };
 
+// returns a function for wrapping the current selection with formatting tags
+// e.g. ae.wrapTextFunction('b')
 ae.wrapTextFunction = wrapTextFunction;
 function wrapTextFunction (type) {
     return function () {
@@ -669,6 +692,7 @@ function bodyClickPopoverCheck (e) {
     });
 }
 
+// close the current popup box
 function closeCurrentPopup (opts) {
     var box = ae.currentPopup;
     if (!box)
@@ -747,6 +771,7 @@ function adjustCurrentPopup () {
     );
 };
 
+// animated open of a toolbar item
 function openLi (li) {
 
     // if a popup is open, ignore this.
@@ -784,6 +809,7 @@ function openLi (li) {
     return true;
 }
 
+// animated close the current toolbar item
 function closeCurrentLi () {
     if (!ae.currentLi)
         return;
@@ -798,6 +824,7 @@ function closeCurrentLi () {
     delete ae.currentLi;
 }
 
+// add events for toolbar items
 function setupToolbar () {
     document.body.addEvent('click', bodyClickPopoverCheck);
 

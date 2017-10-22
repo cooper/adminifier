@@ -9,7 +9,11 @@ function loadedHandler () {
 
     // add toolbar functions
     Object.append(ae.toolbarFunctions, {
-        font:   displayFontSelector
+        font:       displayFontSelector,
+        bold:       ae.wrapTextFunction('b'),
+        italic:     ae.wrapTextFunction('i'),
+        underline:  ae.wrapTextFunction('u'),
+        strike:     ae.wrapTextFunction('s')
     });
 
     // add keyboard shortcuts
@@ -18,7 +22,6 @@ function loadedHandler () {
         [ 'Ctrl-I', 'Command-I',    'italic'    ],
         [ 'Ctrl-U', 'Command-U',    'underline' ]
     ]);
-
 }
 
 function unloadedHandler () {
