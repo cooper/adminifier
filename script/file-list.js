@@ -34,7 +34,10 @@ var FileList = new Class({
                     break;
             }
             
-            // show the column
+            // overwrite with transform
+            entry.columns[col] = val;
+            
+            // if we made it to here, show the column
             self.showColumns[col] = true;
         });
         this.entries.push(entry);
