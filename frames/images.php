@@ -25,7 +25,7 @@ $images = $W->image_list($sort.$order)->images;
     data-nav="images"
     data-title="Images"
     data-icon="picture-o"
-    data-buttons="image-mode"
+    data-buttons="image-mode filter"
     data-button-image-mode="{'title': 'List view', 'icon': 'list', 'href': '#!/images?mode=list'}"
     data-scripts="image-grid"
     data-styles="image-grid"
