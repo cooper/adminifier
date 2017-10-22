@@ -7,7 +7,7 @@
     <div class="filter-row-inner">
         <input type="radio" checked /> Contains
         <input type="radio" /> Is<br />
-        <i class="fa fa-plus-circle" style="color: #00B545;"></i>
+        <i class="fa fa-plus-circle" style="color: chartreuse;"></i>
         <input type="text" />
     </div>
 </script>
