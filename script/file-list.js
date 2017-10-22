@@ -367,14 +367,39 @@ function filterResize () {
 }
 
 function displayFilter () {
+    
+    // if filter is already displayed, close it
+    if (document.getElement('.filter-editor'))
+        closeFilter();
+    
+    // make filter button active and disable search
     $('top-button-filter').addClass('active');
     $('top-search').set('disabled', true);
+    
+    // create filter editor
     var div = new Element('div', {
         class:  'filter-editor',
         html:   tmpl('tmpl-filter-editor', {})
     });
+    
+    // add each column
+    var list = document.getElement('.file-list').retrieve('file-list');
+    list.options.columns.each(function (col) {
+        var row = new Element('div', {
+            class:  'filter-row',
+            html:   tmpl('tmpl-filter-row', { column: col })
+        });
+    });
+    
+    // add each info state
+    var states = list.entries.map(function (e) {
+        return e.infoState
+    }).flatten().unique();
+    
+    // resize content
     window.addEvent('resize', filterResize);
     filterResize();
+    
     document.body.adopt(div);
 }
 
@@ -382,7 +407,7 @@ function closeFilter () {
     // TODO: call this on navigate away from page
     if ($('top-button-filter'))
         $('top-button-filter').removeClass('active');
-    document.getElement('filter-editor').destroy();
+    document.getElement('.filter-editor').destroy();
     window.removeEvent('resize', filterResize);
     $('content').setStyle('width', 'auto');
     if ($('top-search'))

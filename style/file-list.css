@@ -106,10 +106,9 @@ ul.file-list-toolbar li.disabled {
 .filter-editor {
     background-color: #696969;
     color: rgb(226, 226, 226);
-    height: 233px;
     overflow-x: hidden;
     overflow-y: hidden;
-    position: absolute;
+    position: fixed;
     right: 0px;
     top: 40px;
     bottom: 0px;
@@ -123,4 +122,26 @@ ul.file-list-toolbar li.disabled {
     font-weight: bold;
     font-size: 16px;
     line-height: 22px;
+}
+
+.filter-row {
+    padding: 10px;
+    font-size: small;
+}
+
+.filter-row span {
+    display: block;
+}
+
+.filter-row:nth-child(even) {
+    background-color: #444;
+}
+
+.filter-row:nth-child(odd) {
+    border-bottom: 1px solid #444;
+}
+
+.filter-row.preview {
+    border-bottom: none;
+    padding: 20px 10px 0 10px;
 }
