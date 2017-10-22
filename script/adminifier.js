@@ -241,11 +241,12 @@ var flagOptions = {
 		init: function () {
 			if (!a.currentData || !a.currentData['data-buttons'])
 				return;
-			SSV(a.currentData['data-buttons']).each(function (buttonID) {
+			SSV(a.currentData['data-buttons']).each(function (buttonID, i) {
 				var buttonStuff = a.currentData['data-button-' + buttonID];
 				if (!buttonStuff) return;
 				buttonStuff = JSON.decode(buttonStuff.replace(/'/g, '"'));
 				if (!buttonStuff) return;
+				a.currentData['data-buttons'][i] = buttonStuff;
 				
 				var but = new Element('span', {
 					'class': 'top-title top-button injected' }
