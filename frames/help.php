@@ -14,11 +14,22 @@
 if (!isset($_GET['page']))
     $_GET['page'] = '';
 
+// fetch from wikifier chromeless site
 $html = file_get_contents('http://chromeless.wikifier.notroll.net/'.$_GET['page']);
+
+// rewrite wiki links
 $html = preg_replace('/"\\/page\\//',     '"#!/help?page=/page/',   $html);
 $html = preg_replace('/"\\/topic\\//',    '"#!/help?page=/topic/',  $html);
+
+// rewrite external links
 $html = preg_replace('/href="http/',  'target="_blank" href="http', $html);
-$html = preg_replace('/href="#(.+)"/', 'href="javascript:goToHelpAnchor(\'$1\')"', $html);
+
+// rewrite anchors
+$html = preg_replace(
+    '/href="#([\w\-]+)"/',
+    'href="javascript:goToHelpAnchor(\'$1\')"',
+    $html
+);
 
 echo $html;
 
