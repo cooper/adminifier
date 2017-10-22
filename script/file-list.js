@@ -23,10 +23,17 @@ var FileList = new Class({
         var self = this;
         Object.each(entry.columns, function (val, col) {
             
-            // skip if no length
-            if (typeof val != 'string' || !val.length)
+            // skip if zero-length string
+            if (typeof val == 'string' && !val.length)
                 return;
-                
+            
+            // convert date to object
+            switch (self.getColumnData(col, 'dataType')) {
+                case 'date':
+                    val = new Date(parseInt(val) * 1000);
+                    break;
+            }
+            
             // show the column
             self.showColumns[col] = true;
         });
