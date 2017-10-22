@@ -16,7 +16,7 @@ var imageList = new FileList({
 
 a.currentJSONMetadata['results'].each(function (imageData) {
     var entry = new FileListEntry({
-        Title:      imageData.file,
+        Filename:   imageData.file,
         Author:     imageData.author,
         Created:    imageData.created,
         Modified:   imageData.mod_unix
