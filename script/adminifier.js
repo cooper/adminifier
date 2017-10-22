@@ -98,6 +98,9 @@ a.loadScripts = function (srcs) {
 		script.addEvent('load', scriptLoaded);
 		scriptsToLoad.push(script);
 	});
+	
+	// call once in case there are no scripts
+	scriptLoaded();
 }
 
 window.addEvent('hashchange',	hashLoad);
@@ -343,7 +346,6 @@ function handlePageData (data) {
 		// link.addEvent('load', scriptLoaded);
         document.head.appendChild(link);
     });
-	scriptLoaded(); // call once in case there are no scripts
 
     // handle page flags
     if (a.currentFlags)
