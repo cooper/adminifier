@@ -242,7 +242,7 @@ var flagOptions = {
 			if (!a.currentData || !a.currentData['data-buttons'])
 				return;
 			SSV(a.currentData['data-buttons']).each(function (buttonID) {
-				var buttonStuff = currentData['data-button-' + buttonID];
+				var buttonStuff = a.currentData['data-button-' + buttonID];
 				if (!buttonStuff) return;
 				buttonStuff = JSON.decode(buttonStuff.replace(/'/g, '"'));
 				if (!buttonStuff) return;
