@@ -49,34 +49,33 @@ a.loadScript = function (src) {
 	a.loadScripts([src]);
 };
 
+var scriptsToLoad = [];
+function scriptLoaded () {
+	if (typeof jQuery != 'undefined')
+		jQuery.noConflict();
+	
+	// there are still more to load
+	if (scriptsToLoad.length) {
+		loadNextScript();
+		return;
+	}
+	
+	// this was the last one
+	$('content').setStyle('user-select', 'all');
+	a.updateIcon(a.currentData['data-icon']);
+	pageScriptsDone = true;
+	document.fireEvent('pageScriptsLoaded');
+}
+
+function loadNextScript () {
+	var script = scriptsToLoad.shift();
+	if (!script)
+		return;
+	document.head.appendChild(script);
+}
+
 // load several scripts
 a.loadScripts = function (srcs) {
-    var scriptsToLoad = [];
-	var loadNextScript = function () {
-		var script = scriptsToLoad.shift();
-		if (!script)
-			return;
-		document.head.appendChild(script);
-	};
-	
-	// don't show the content until all scripts have loaded
-    var scriptLoaded = function () {
-		if (typeof jQuery != 'undefined')
-			jQuery.noConflict();
-		
-		// there are still more to load
-        if (scriptsToLoad.length) {
-			loadNextScript();
-			return;
-		}
-		
-		// this was the last one
-        $('content').setStyle('user-select', 'all');
-		a.updateIcon(a.currentData['data-icon']);
-        pageScriptsDone = true;
-        document.fireEvent('pageScriptsLoaded');
-    };
-	
 	srcs.each(function (src) {
 		if (!src.length) return;
 
