@@ -14,9 +14,12 @@ a.currentJSONMetadata.results.each(function (imageData) {
         'height' : 'width';
     
     // max is 300
-    imageData.dimValue  = imageData[imageData.dimension];
+    imageData.dimValue = imageData[imageData.dimension];
     if (imageData.dimValue > 300)
         imageData.dimValue = 300;
+        
+    // retina scaling
+    imageData.dimValue *= retinaDensity();
     
     var div = new Element('div', {
         class: 'image-grid-item',
@@ -24,5 +27,22 @@ a.currentJSONMetadata.results.each(function (imageData) {
     });
     container.appendChild(div);
 });
+
+function retinaDensity() {
+    if (!window.matchMedia) return;
+    if (window.devicePixelRatio < 1) return;
+    
+    // 3x
+    var mq = window.matchMedia('only screen and (min--moz-device-pixel-ratio: 2.25), only screen and (-o-min-device-pixel-ratio: 2.6/2), only screen and (-webkit-min-device-pixel-ratio: 2.25), only screen  and (min-device-pixel-ratio: 2.25), only screen and (min-resolution: 2.25dppx)');
+    if (mq && mq.matches)
+        return 3;
+        
+    // 2x
+    mq = window.matchMedia('only screen and (min--moz-device-pixel-ratio: 1.25), only screen and (-o-min-device-pixel-ratio: 2.6/2), only screen and (-webkit-min-device-pixel-ratio: 1.25), only screen  and (min-device-pixel-ratio: 1.25), only screen and (min-resolution: 1.25dppx)');
+    if (mq && mq.matches)
+        return 2;
+        
+    return 1;
+}
 
 })(adminifier, window);
