@@ -7,6 +7,11 @@
       data-flags=""
 />
 
-<h2>Help is on the way.</h2>
-In the meantime, refer to the
-<a href="https://github.com/cooper/wikifier/blob/master/README.md">wikifier documentation</a>.
+<?
+
+if (!isset($_GET['page']))
+    $_GET['page'] = '';
+
+echo file_get_contents('http://chromeless.wikifier.notroll.net/'.$_GET['page']);
+
+?>
