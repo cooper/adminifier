@@ -263,6 +263,7 @@ var FileListEntry = new Class({
 
 function fileSearch (text) {
     var list = document.getElement('.file-list').retrieve('file-list');
+    if (!list) return;
     
     // no text; disable filter
     if (!text.length) {
