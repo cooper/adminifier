@@ -367,6 +367,7 @@ function filterResize () {
 }
 
 function displayFilter () {
+    $('top-button-filter').addClass('active');
     $('top-search').set('disabled', true);
     var div = new Element('div', {
         class:  'filter-editor',
@@ -379,6 +380,8 @@ function displayFilter () {
 
 function closeFilter () {
     // TODO: call this on navigate away from page
+    if ($('top-button-filter'))
+        $('top-button-filter').removeClass('active');
     document.getElement('filter-editor').destroy();
     window.removeEvent('resize', filterResize);
     $('content').setStyle('width', 'auto');
