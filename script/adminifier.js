@@ -242,10 +242,22 @@ var flagOptions = {
 			if (!a.currentData || !a.currentData['data-buttons'])
 				return;
 			SSV(a.currentData['data-buttons']).each(function (buttonID, i) {
+				
+				// find opts
 				var buttonStuff = a.currentData['data-button-' + buttonID];
-				if (!buttonStuff) return;
+				if (!buttonStuff) {
+					console.log('Button ' + buttonID + ' is not configured');
+					return;
+				}
+				
+				// parse psuedo-JSON
 				buttonStuff = JSON.decode(buttonStuff.replace(/'/g, '"'));
-				if (!buttonStuff) return;
+				if (!buttonStuff) {
+					console.log('Failed to parse JSON for button ' + buttonID);
+					return;
+				}
+				
+				// overwrite button data
 				a.currentData['data-buttons'][i] = buttonStuff;
 				
 				var but = new Element('span', {
