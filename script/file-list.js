@@ -248,7 +248,7 @@ var FileList = exports.FileList = new Class({
     }
 });
 
-var FileListEntry = new Class({
+var FileListEntry = exports.FileListEntry = new Class({
     
     initialize: function (values) {
         this.columns    = {};
@@ -280,6 +280,7 @@ var FileListEntry = new Class({
     }
 });
 
+exports.fileSearch = fileSearch;
 function fileSearch (text) {
     var list = document.getElement('.file-list');
     if (!list) return;
