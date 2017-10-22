@@ -3,6 +3,7 @@
     data-title="Dashboard"
     data-icon="home"
     data-styles="dashboard"
+    data-flags="buttons"
     data-buttons="date-selection"
     data-button-date-selection="{'title': 'Last 30 days', 'icon': 'calendar', 'func': 'displayDateSelector'}"
 />

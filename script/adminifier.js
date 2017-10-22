@@ -242,7 +242,7 @@ var flagOptions = {
 			if (!a.currentData || !a.currentData['data-buttons'])
 				return;
 			SSV(a.currentData['data-buttons']).each(function (buttonID) {
-				console.log(buttonID);
+				
 				// find opts
 				var buttonStuff = a.currentData['data-button-' + buttonID];
 				if (!buttonStuff) {
@@ -257,7 +257,6 @@ var flagOptions = {
 					return;
 				}
 				
-				console.log(buttonStuff);
 				var but = new Element('span', {
 					'class': 'top-title top-button injected' }
 				);
