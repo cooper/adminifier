@@ -1,0 +1,13 @@
+.image-grid-item {
+    padding: 5px;
+    background-color: #eee;
+    border: 1px solid #ddd;
+    margin: 20px;
+}
+
+.image-grid-item img {
+    max-width: 300px;
+    max-height: 300px;
+    margin-bottom: 5px;
+    display: block;
+}
