@@ -49,7 +49,7 @@ a.loadScript = function (src) {
 	a.loadScripts([src]);
 };
 
-var scriptsToLoad = [];
+var scriptsToLoad = [], firedPageScriptsLoaded;
 function scriptLoaded () {
 	if (typeof jQuery != 'undefined')
 		jQuery.noConflict();
@@ -64,7 +64,9 @@ function scriptLoaded () {
 	$('content').setStyle('user-select', 'all');
 	a.updateIcon(a.currentData['data-icon']);
 	pageScriptsDone = true;
+	if (firedPageScriptsLoaded) return;
 	document.fireEvent('pageScriptsLoaded');
+	firedPageScriptsLoaded = true;
 }
 
 function loadNextScript () {
@@ -321,6 +323,7 @@ function handlePageData (data) {
 
     // inject scripts
     $$('script.dynamic').each(function (script) { script.destroy(); });
+	firedPageScriptsLoaded = false;
     a.loadScripts(SSV(data['data-scripts']));
 
     // inject styles
