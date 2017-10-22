@@ -2,7 +2,7 @@
       data-nav="help"
       data-title="Help"
       data-icon="question-circle"
-      data-scripts=""
+      data-scripts="help"
       data-styles=""
       data-flags=""
 />
@@ -18,6 +18,7 @@ $html = file_get_contents('http://chromeless.wikifier.notroll.net/'.$_GET['page'
 $html = preg_replace('/"\\/page\\//',     '"#!/help?page=/page/',   $html);
 $html = preg_replace('/"\\/topic\\//',    '"#!/help?page=/topic/',  $html);
 $html = preg_replace('/href="http/',  'target="_blank" href="http', $html);
+$html = preg_replace('/href="#(.+)"/', 'javascript:goToHelpAnchor("$1")', $html);
 
 echo $html;
 
