@@ -24,7 +24,7 @@ a.currentJSONMetadata.results.each(function (catData) {
     });
     entry.setInfoState('Generated', catData.generated);
     entry.setInfoState('Draft', catData.draft);
-    entry.link = '#!/edit-cat?cat=' + encodeURIComponent(catData.file);
+    // entry.link = '#!/edit-cat?cat=' + encodeURIComponent(catData.file); TODO
     catList.addEntry(entry);
 });
 
