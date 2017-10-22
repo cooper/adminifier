@@ -1,13 +1,11 @@
 .image-grid {
-    text-align: center;
 }
 
 .image-grid-item {
-    text-align: left;
     padding: 5px;
     background-color: #eee;
     border: 1px solid #ddd;
-    margin: 20px;
+    margin: 15px;
     display: inline-block;
 }
 
