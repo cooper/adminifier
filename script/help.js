@@ -3,6 +3,6 @@ function goToHelpAnchor (hash) {
     var el = $(anchor);
     if (el) {
         pos = el.getPosition();
-        scrollTo(pos.x, pos.y);
+        scrollTo(pos.x, pos.y + 50); // add 50 for header
     }
 }
