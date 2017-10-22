@@ -369,8 +369,10 @@ function filterResize () {
 function displayFilter () {
     
     // if filter is already displayed, close it
-    if (document.getElement('.filter-editor'))
+    if (document.getElement('.filter-editor')) {
         closeFilter();
+        return;
+    }
     
     // make filter button active and disable search
     $('top-button-filter').addClass('active');
