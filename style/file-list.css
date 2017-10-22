@@ -115,22 +115,22 @@ ul.file-list-toolbar li.disabled {
     width: 250px;
 }
 
-.filter-editor-title {
-    padding: 9px;
+.filter-editor-title, .filter-row span {
     height: 22px;
     color: #E2E2E2;
     font-weight: bold;
     font-size: 16px;
     line-height: 22px;
+    display: block;
+}
+
+.filter-editor-title {
+    padding: 9px;
 }
 
 .filter-row {
     padding: 10px;
     font-size: small;
-}
-
-.filter-row span {
-    display: block;
 }
 
 .filter-row input[type=text] {

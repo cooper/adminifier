@@ -4,7 +4,7 @@
 
 <script type="text/x-tmpl" id="tmpl-filter-row">
     <span>{%= o.column %}</span>
-    <input type="radio" /> Contains
+    <input type="radio" checked /> Contains
     <input type="radio" /> Is<br />
     <input type="text" />
 </script>
