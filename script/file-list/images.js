@@ -29,3 +29,7 @@ a.currentJSONMetadata.results.each(function (imageData) {
 imageList.draw($('content'));
 
 })(adminifier, window);
+
+function imageModeToggle() {
+    alert('Switching modes');
+}

@@ -287,10 +287,6 @@ function fileSearch (text) {
     list.redraw();
 }
 
-function imageModeToggle() {
-    alert('Switching modes');
-}
-
 function dateToPreciseHR(text) {
     var d = new Date(parseInt(text) * 1000);
     return d.toString();

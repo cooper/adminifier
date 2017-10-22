@@ -52,7 +52,7 @@ switch ($list_type) {
     data-title="Images"
     data-icon="picture-o"
     data-buttons="image-mode"
-    data-button-image-mode="List imageModeToggle list"
+    data-button-image-mode="List_view imageModeToggle list"
     data-scripts="file-list file-list/images"
 <? else: ?>
     data-nav="pages"

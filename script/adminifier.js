@@ -244,7 +244,7 @@ var flagOptions = {
 			SSV(a.currentData['data-buttons']).each(function (buttonID) {
 				var buttonStuff = SSV(a.currentData['data-button-' + buttonID]);
 				if (!buttonStuff) return;
-				var buttonTitle = buttonStuff[0],
+				var buttonTitle = buttonStuff[0].replace(/_/g, ' '),
 					buttonFunc	= buttonStuff[1],
 					buttonIcon 	= buttonStuff[2];
 				var but = new Element('span', {

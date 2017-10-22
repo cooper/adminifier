@@ -4,7 +4,7 @@ if (!FileList || !a.currentJSONMetadata)
     return;
 
 var catList = new FileList({
-    root: '#!/cats',
+    root: '#!/categories',
     columns: ['Title', 'Author', 'Created', 'Modified'],
     columnData: {
         Title:      { sort: 'a', isTitle: true },
