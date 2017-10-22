@@ -6,46 +6,21 @@ document.addEvent('pageUnloaded', unloadedHandler);
 var ae;
 function loadedHandler () {
     ae = a.editor;
-    if (!ae || !editor) {
-        console.log('editorLoaded fired without editor?', a);
-        return;
-    }
-    console.log('Editor tools script loaded');
 
     // add toolbar functions
     Object.append(ae.toolbarFunctions, {
         view:       openPageInNewTab,
         revisions:  displayRevisionViewer
     });
-
+    
     // disable view button for models
     if (ae.isModel())
         ae.liForAction('view').addClass('disabled');
-
-    // on cursor move, update toolbar hints
-    editor.selection.addEventListener('changeCursor', cursorChanged);
-    
-
 }
 
 function unloadedHandler () {
-    console.log('Unloading editor tools script');
     document.removeEvent('editorLoaded', loadedHandler);
     document.removeEvent('pageUnloaded', unloadedHandler);
-    editor.selection.removeEventListener('changeCursor', cursorChanged);
-}
-
-function cursorChanged () {
-    
-}
-
-// PAGE TITLE SELECTOR
-
-function selectPageTitle () {
-    var found = ae.findPageVariable(ae.expressions.pageTitle);
-    if (!found)
-        return;
-    editor.selection.setRange(found.range);
 }
 
 // VIEW PAGE BUTTON

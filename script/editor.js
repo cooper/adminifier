@@ -466,6 +466,13 @@ ae.fakeAdopt = function (child) {
     parent.appendChild(child);
 };
 
+ae.selectPageTitle = function () {
+    var found = ae.findPageVariable(ae.expressions.pageTitle);
+    if (!found)
+        return;
+    editor.selection.setRange(found.range);
+};
+
 ae.handlePageDisplayResult = function (res) {
     if (!res)
         return;
