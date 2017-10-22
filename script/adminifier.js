@@ -312,7 +312,7 @@ function handlePageData (data) {
 
     // inject scripts
     $$('script.dynamic').each(function (script) { script.destroy(); });
-    SSV(data['data-scripts']).each(ae.loadScript);
+    SSV(data['data-scripts']).each(a.loadScript);
 
     // inject styles
     $$('link.dynamic').each(function (link) { link.destroy(); });
