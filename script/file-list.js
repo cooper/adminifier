@@ -379,7 +379,7 @@ function displayFilter () {
     $('top-search').set('disabled', true);
     
     // create filter editor
-    var div = new Element('div', {
+    var filterEditor = new Element('div', {
         class:  'filter-editor',
         html:   tmpl('tmpl-filter-editor', {})
     });
@@ -391,6 +391,7 @@ function displayFilter () {
             class:  'filter-row',
             html:   tmpl('tmpl-filter-row', { column: col })
         });
+        filterEditor.appendChild(row);
     });
     
     // add each info state
