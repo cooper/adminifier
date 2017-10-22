@@ -31,6 +31,13 @@ $html = preg_replace(
     $html
 );
 
+// rewrite image targets
+$html = preg_replace(
+    '/src="\//',
+    'src="http://chromeless.wikifier.notroll.net/',
+    $html
+);
+
 echo $html;
 
 ?>
