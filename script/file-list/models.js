@@ -22,7 +22,7 @@ a.currentJSONMetadata.results.each(function (modelData) {
         Created:    modelData.created,
         Modified:   modelData.mod_unix
     });
-    entry.link = '#!/edit-model?page=' + encodeURIComponent(pageData.file);
+    entry.link = '#!/edit-model?page=' + encodeURIComponent(modelData.file);
     modelList.addEntry(entry);
 });
 
