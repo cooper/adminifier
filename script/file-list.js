@@ -22,6 +22,7 @@ var FileList = new Class({
     addEntry: function (entry) {
         var self = this;
         Object.each(entry.columns, function (val, col) {
+            var origVal = val;
             
             // apply fixer
             var fixer = self.getColumnData(col, 'fixer');
@@ -30,7 +31,7 @@ var FileList = new Class({
             
             // apply tooltip fixer
             fixer = self.getColumnData(col, 'tooltipFixer');
-            if (fixer) entry.tooltips[col] = fixer(val);
+            if (fixer) entry.tooltips[col] = fixer(origVal);
             
             // skip if no length
             if (typeof val != 'string' || !val.length)
