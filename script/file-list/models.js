@@ -3,8 +3,8 @@
 if (!FileList || !a.currentJSONMetadata)
     return;
 
-var imageList = new FileList({
-    root: '#!/images',
+var modelList = new FileList({
+    root: '#!/models',
     columns: ['Filename', 'Author', 'Created', 'Modified'],
     columnData: {
         Filename:   { sort: 'a', isTitle: true },
@@ -14,17 +14,17 @@ var imageList = new FileList({
     }
 });
 
-a.currentJSONMetadata['results'].each(function (imageData) {
+a.currentJSONMetadata['results'].each(function (modelData) {
     var entry = new FileListEntry({
-        Filename:   imageData.file,
-        Author:     imageData.author,
-        Created:    imageData.created,
-        Modified:   imageData.mod_unix
+        Filename:   modelData.file,
+        Author:     modelData.author,
+        Created:    modelData.created,
+        Modified:   modelData.mod_unix
     });
     // entry.link = TODO
-    imageList.addEntry(entry);
+    modelList.addEntry(entry);
 });
 
-imageList.draw($('content'));
+modelList.draw($('content'));
 
 })(adminifier, window);
