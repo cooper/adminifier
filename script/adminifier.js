@@ -242,25 +242,25 @@ var flagOptions = {
 			if (!a.currentData || !a.currentData['data-buttons'])
 				return;
 			SSV(a.currentData['data-buttons']).each(function (buttonID) {
-				var buttonStuff = SSV(a.currentData['data-button-' + buttonID]);
+				var buttonStuff = currentData['data-button-' + buttonID];
 				if (!buttonStuff) return;
-				var buttonTitle = buttonStuff[0].replace(/_/g, ' '),
-					buttonFunc	= buttonStuff[1],
-					buttonIcon 	= buttonStuff[2];
+				buttonStuff = JSON.decode(buttonStuff.replace(/'/g, '"'));
+				if (!buttonStuff) return;
+				
 				var but = new Element('span', {
 					'class': 'top-title top-button injected' }
 				);
 				
 				// title
 				var anchor = new Element('a', { href: '#' });
-				anchor.set('text', buttonTitle);
+				anchor.set('text', buttonStuff.title);
 				but.appendChild(anchor);
 				
 				// icon
-				if (buttonIcon) {
+				if (buttonStuff.icon) {
 					anchor.set('text', ' ' + anchor.get('text'));
 					var i = new Element('i', {
-						'class': 'fa fa-' + buttonIcon
+						'class': 'fa fa-' + buttonStuff.icon
 					});
 					i.inject(anchor, 'top');
 				}
@@ -268,9 +268,9 @@ var flagOptions = {
 				// click event
 				anchor.addEvent('click', function (e) {
 					e.preventDefault();
-					buttonFunc = window[buttonFunc];
-					if (!buttonFunc) return;
-					buttonFunc();
+					buttonStuff.func = window[buttonStuff.func];
+					if (!buttonStuff.func) return;
+					buttonStuff.func();
 				});
 			
 				but.inject($$('.top-button').getLast(), 'after');
