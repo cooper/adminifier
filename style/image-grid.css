@@ -15,6 +15,6 @@
     max-width: 300px;
     max-height: 300px;
     margin-bottom: 5px;
-    background: url(../images/image-alpha-grid.png);
+    background: url(../images/image-alpha-grid.png) repeat;
     display: block;
 }

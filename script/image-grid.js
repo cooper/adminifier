@@ -8,11 +8,15 @@ $('content').appendChild(container);
 
 if (a.currentJSONMetadata.results)
 a.currentJSONMetadata.results.each(function (imageData) {
-    imageData.dimension = imageData.width < imageData.height ? 'height' : 'width';
-    imageData.dimValue  = imageData[imageData.dimension];
     
-    if (imageData.dimValue < 300)
-        imageData.dimValue = 0;
+    // the larger dimension dictates the image size
+    imageData.dimension = imageData.width < imageData.height ?
+        'height' : 'width';
+    
+    // max is 300
+    imageData.dimValue  = imageData[imageData.dimension];
+    if (imageData.dimValue > 300)
+        imageData.dimValue = 300;
     
     var div = new Element('div', {
         class: 'image-grid-item',
