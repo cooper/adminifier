@@ -59,6 +59,9 @@ function loadedHandler () {
 function unloadedHandler () {
     document.removeEvent('editorLoaded', loadedHandler);
     document.removeEvent('pageUnloaded', unloadedHandler);
+    $$('.colorpicker-asset').each(function (script) {
+        script.destroy();
+    });
 }
 
 // TEXT COLOR SELECTOR

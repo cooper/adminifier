@@ -134,10 +134,10 @@ DynamicColorPicker.autoLoad = (function() {
         };
 
         var path = pickerPath;
-        Asset.javascript(path + "/ColorPicker.js", { onload: onFileLoaded });
-        Asset.javascript(path + "/ColorValuePicker.js", { onload: onFileLoaded });
-        Asset.javascript(path + "/ColorMethods.js", { onload: onFileLoaded });
-        Asset.javascript(path + "/Slider.js", { onload: onFileLoaded });
+        Asset.javascript(path + "/ColorPicker.js", { onload: onFileLoaded }).addClass('colorpicker-asset');
+        Asset.javascript(path + "/ColorValuePicker.js", { onload: onFileLoaded }).addClass('colorpicker-asset');
+        Asset.javascript(path + "/ColorMethods.js", { onload: onFileLoaded }).addClass('colorpicker-asset');
+        Asset.javascript(path + "/Slider.js", { onload: onFileLoaded }).addClass('colorpicker-asset');
     };
 })();
 
