@@ -403,7 +403,7 @@ function displayFilter () {
     window.addEvent('resize', filterResize);
     filterResize();
     
-    document.body.adopt(div);
+    document.body.adopt(filterEditor);
 }
 
 function closeFilter () {
