@@ -278,15 +278,15 @@ var flagOptions = {
 				// click event
 				anchor.addEvent('click', function (e) {
 					e.preventDefault();
-					buttonStuff.func = window[buttonStuff.func];
-					if (!buttonStuff.func) {
+					var func = window[buttonStuff.func];
+					if (!func) {
 						console.warn(
 							'Button ' + buttonID + ' function ' +
 							buttonStuff.func + ' does not exist'
 						);
 						return;
 					}
-					buttonStuff.func();
+					func();
 				});
 			
 				but.inject($$('.top-button').getLast(), 'after');
