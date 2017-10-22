@@ -34,4 +34,4 @@ $images = $W->image_list($sort.$order)->images;
     data-sort="<?= $sort.$order ?>"
 />
 
-<? require('templates/image-grid-tmpl.php'); ?>
+<? require(__DIR__.'/../templates/image-grid-tmpl.php'); ?>
