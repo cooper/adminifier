@@ -7,6 +7,8 @@
       data-flags=""
 />
 
+<link rel="stylesheet" type="text/css" href="http://chromeless.wikifier.notroll.net/static/wiki.css" />
+
 <?
 
 if (!isset($_GET['page']))
