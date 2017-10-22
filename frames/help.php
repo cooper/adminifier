@@ -12,7 +12,7 @@
 <?
 
 if (!isset($_GET['page']))
-    $_GET['page'] = '';
+    $_GET['page'] = '/page/adminifier/help';
 
 // fetch from wikifier chromeless site
 $html = file_get_contents('http://chromeless.wikifier.notroll.net/'.$_GET['page']);

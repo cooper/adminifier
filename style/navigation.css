@@ -11,11 +11,15 @@
 }
 
 #navigation {
+    padding: 0;
+    margin: 0;
     list-style-type: none;
     margin-top: 60px;
 }
 
 #navigation li {
+    padding: 0;
+    margin: 0;
     height: 38px;
     white-space: nowrap;
     position: relative;

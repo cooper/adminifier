@@ -12,3 +12,6 @@ function goToHelpAnchor (hash) {
     if (match)
         goToHelpAnchor(match[1]);
 })();
+
+if (window.retinajs)
+    retinajs();
