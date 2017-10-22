@@ -17,6 +17,6 @@
 </script>
 
 <script type="text/x-tmpl" id="tmpl-filter-item">
-    <i class="fa fa-plus-circle fa-lg" style="color: #FF7575;"></i>
+    <i class="fa fa-minus-circle fa-lg" style="color: #FF7070;"></i>
     {%= o.item %}
 </script>

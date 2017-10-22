@@ -137,7 +137,7 @@ ul.file-list-toolbar li.disabled {
     height: 24px;
     padding: 0 5px;
     border: none;
-    margin: 5px 0 0 0;
+    margin: 5px 0;
     width: 200px;
     width: calc(100% - 40px);
     background-color: #eee;
