@@ -8,3 +8,7 @@
     <input type="radio" /> Is<br />
     <input type="text" />
 </script>
+
+<script type="text/x-tmpl" id="tmpl-filter-state">
+    <span><input type="checkbox" /> {%= o.stateName %}</span>
+</script>

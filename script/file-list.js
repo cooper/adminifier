@@ -377,7 +377,7 @@ function displayFilter () {
     // if quick search is being used, stop
     if ($('top-search').value.length) {
         alert('Cannot filter Quick Search results. Please clear your search.');
-        $('top-search').focus();
+        $('top-search').select();
         return;
     }
     
@@ -402,9 +402,15 @@ function displayFilter () {
     });
     
     // add each info state
-    var states = list.entries.map(function (e) {
+    list.entries.map(function (e) {
         return e.infoState
-    }).flatten().unique();
+    }).flatten().unique().each(function (stateName) {
+        var row = new Element('div', {
+            class:  'filter-row',
+            html:   tmpl('tmpl-filter-state', { stateName: stateName })
+        });
+        filterEditor.appendChild(row);
+    });
     
     // resize content
     window.addEvent('resize', filterResize);
