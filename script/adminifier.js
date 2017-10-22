@@ -260,8 +260,9 @@ var flagOptions = {
 				}
 				
 				var but = new Element('span', {
-					'class': 'top-title top-button injected' }
-				);
+					id:		'top-button-' + buttonID,
+					class: 	'top-title top-button injected'
+				});
 				
 				// title
 				var anchor = new Element('a', {

@@ -41,7 +41,7 @@ switch ($list_type) {
     data-nav="models"
     data-title="Models"
     data-icon="cube"
-    data-buttons="filter"
+    data-buttons="filter actions"
     data-scripts="file-list file-list/models"
 <? elseif ($list_type == 'categories'): ?>
     data-nav="categories"
@@ -52,14 +52,14 @@ switch ($list_type) {
     data-nav="images"
     data-title="Images"
     data-icon="picture-o"
-    data-buttons="image-mode filter"
+    data-buttons="image-mode filter actions"
     data-button-image-mode="{'title': 'Grid view', 'icon': 'th', 'href': '#!/images'}"
     data-scripts="file-list file-list/images"
 <? else: ?>
     data-nav="pages"
     data-title="Pages"
     data-icon="file-text"
-    data-buttons="filter"
+    data-buttons="filter actions"
     data-scripts="file-list file-list/pages"
 <? endif; ?>
     data-styles="file-list"
@@ -67,4 +67,5 @@ switch ($list_type) {
     data-search="fileSearch"
     data-sort="<?= $sort.$order ?>"
     data-button-filter="{'title': 'Filter', 'icon': 'filter', 'func': 'displayFilter'}"
+    data-button-actions="{'title': 'With selected...', 'icon': 'magic', 'func': 'displayActionMenu'}"
 />
