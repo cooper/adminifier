@@ -262,7 +262,9 @@ var flagOptions = {
 				);
 				
 				// title
-				var anchor = new Element('a', { href: '#' });
+				var anchor = new Element('a', {
+					href: buttonStuff.href || '#'
+				});
 				anchor.set('text', buttonStuff.title);
 				but.appendChild(anchor);
 				
@@ -275,7 +277,8 @@ var flagOptions = {
 					i.inject(anchor, 'top');
 				}
 				
-				// click event
+				// click event if func is provided
+				if (buttonStuff.icon)
 				anchor.addEvent('click', function (e) {
 					e.preventDefault();
 					var func = window[buttonStuff.func];

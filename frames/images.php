@@ -21,7 +21,7 @@ echo '</pre>';
 <!--JSON
 <?= json_encode(array(
     'results'       => $images,
-    'sort_types'    => array('a', 'c', 'u', 'm', 'd');
+    'sort_types'    => array('a', 'c', 'u', 'm', 'd')
 )) ?>
 
 -->
@@ -31,7 +31,7 @@ echo '</pre>';
     data-title="Images"
     data-icon="picture-o"
     data-buttons="image-mode"
-    data-button-image-mode="{'title': 'List view', 'icon': 'list', 'href': '#!/pages?mode=list'}"
+    data-button-image-mode="{'title': 'List view', 'icon': 'list', 'href': '#!/images?mode=list'}"
     data-scripts="file-list file-list/images"
     data-styles="file-list"
     data-flags="no-margin search buttons"
