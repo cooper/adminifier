@@ -5,9 +5,9 @@ if (!FileList || !a.currentJSONMetadata || !a.currentJSONMetadata)
 
 var modelList = new FileList({
     root: '#!/models',
-    columns: ['Filename', 'Author', 'Created', 'Modified'],
+    columns: ['Title', 'Author', 'Created', 'Modified'],
     columnData: {
-        Filename:   { sort: 'a', isTitle: true },
+        Title:      { sort: 'a', isTitle: true },
         Author:     { sort: 'u' },
         Created:    { sort: 'c', fixer: dateToHRTimeAgo, tooltipFixer: dateToPreciseHR },
         Modified:   { sort: 'm', fixer: dateToHRTimeAgo, tooltipFixer: dateToPreciseHR }
@@ -17,7 +17,7 @@ var modelList = new FileList({
 if (a.currentJSONMetadata.results)
 a.currentJSONMetadata.results.each(function (modelData) {
     var entry = new FileListEntry({
-        Filename:   modelData.file,
+        Title:      modelData.title,
         Author:     modelData.author,
         Created:    modelData.created,
         Modified:   modelData.mod_unix
