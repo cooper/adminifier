@@ -13,10 +13,10 @@ a.currentJSONMetadata.results.each(function (imageData) {
     imageData.dimension = imageData.width < imageData.height ?
         'height' : 'width';
     
-    // max is 300
+    // max is 250
     imageData.dimValue = imageData[imageData.dimension];
-    if (imageData.dimValue > 300)
-        imageData.dimValue = 300;
+    if (imageData.dimValue > 250)
+        imageData.dimValue = 250;
         
     // retina scaling
     imageData.dimValue *= retinaDensity();
