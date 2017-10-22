@@ -5,6 +5,9 @@
       data-scripts=""
       data-styles=""
       data-flags=""
+      data-buttons="date-selection"
+      data-button-date-selection="{'title': 'Stats for: Last 30 days', 'icon': 'calendar', 'func': 'displayDateSelector'}"
+
 />
 
 Settings will be here.
