@@ -31,8 +31,8 @@ var adminifier = {
 };
 
 </script>
-<script type="text/javascript" src="script/mootools.js"></script>
-<script type="text/javascript" src="script/tmpl.min.js"></script>
+<script type="text/javascript" src="ext/mootools.js"></script>
+<script type="text/javascript" src="ext/tmpl.min.js"></script>
 <script type="text/javascript" src="script/adminifier.js"></script>
 <script type="text/javascript" src="script/notifications.js"></script>
 <script type="text/javascript" src="script/modal-window.js"></script>

@@ -58,7 +58,7 @@ switch ($list_type) {
     data-nav="pages"
     data-title="Pages"
     data-icon="file-text"
-    data-scripts="file-list file-list-pages"
+    data-scripts="file-list file-list/pages"
 <? endif; ?>
     data-styles="file-list"
     data-flags="no-margin search buttons"
