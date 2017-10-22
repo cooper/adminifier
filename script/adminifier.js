@@ -278,8 +278,7 @@ var flagOptions = {
 				}
 				
 				// click event if func is provided
-				if (buttonStuff.icon)
-				anchor.addEvent('click', function (e) {
+				if (buttonStuff.func) anchor.addEvent('click', function (e) {
 					e.preventDefault();
 					var func = window[buttonStuff.func];
 					if (!func) {
