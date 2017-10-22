@@ -3,6 +3,8 @@
     data-title="Dashboard"
     data-icon="home"
     data-styles="dashboard"
+    data-buttons="date-selection"
+    data-button-date-selection="{'title': 'Stats for: Last 30 days', 'icon': 'calendar', 'func': 'displayDateSelector'}"
 />
 <h2>Server logs</h2>
 <pre id="server-logs">
