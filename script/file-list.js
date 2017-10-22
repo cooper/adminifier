@@ -1,3 +1,5 @@
+loadScript('pikaday');
+
 var FileList = new Class({
     
     Implements: [Options, Events],
