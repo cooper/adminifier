@@ -96,3 +96,18 @@ ul.file-list-toolbar li.disabled {
     color: #aaa;
     cursor: default;
 }
+
+/* filter editor */
+
+.filter-editor {
+    background-color: rgb(85, 85, 85);
+    color: rgb(226, 226, 226);
+    height: 233px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    position: absolute;
+    right: 0px;
+    top: 40px;
+    bottom: 0px;
+    width: 300px;
+}

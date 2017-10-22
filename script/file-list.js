@@ -360,3 +360,8 @@ function dateToHRTimeAgo(time) {
     }
     return time;
 }
+
+function displayFilter () {
+    var div = new Element('div', { class: 'filter-editor' });
+    document.body.adopt(div);
+}
