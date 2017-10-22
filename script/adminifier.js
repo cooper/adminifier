@@ -264,6 +264,10 @@ var flagOptions = {
 					class: 	'top-title top-button injected'
 				});
 				
+				// hide
+				if (buttonStuff.hide)
+					but.setStyle('display', 'none');
+				
 				// title
 				var anchor = new Element('a', {
 					href: buttonStuff.href || '#'

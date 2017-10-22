@@ -1,5 +1,4 @@
 // a.loadScript('pikaday');
-$('top-button-actions').setStyle('display', 'none');
 
 var FileList = new Class({
     

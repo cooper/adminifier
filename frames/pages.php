@@ -67,5 +67,5 @@ switch ($list_type) {
     data-search="fileSearch"
     data-sort="<?= $sort.$order ?>"
     data-button-filter="{'title': 'Filter', 'icon': 'filter', 'func': 'displayFilter'}"
-    data-button-actions="{'title': 'With selected...', 'icon': 'magic', 'func': 'displayActionMenu'}"
+    data-button-actions="{'title': 'With selected...', 'icon': 'magic', 'func': 'displayActionMenu', 'hide': true}"
 />
