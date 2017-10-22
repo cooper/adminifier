@@ -138,8 +138,8 @@ ul.file-list-toolbar li.disabled {
     padding: 0 5px;
     border: none;
     margin: 5px 0 0 0;
-    width: 230px;
-    width: calc(100% - 10px);
+    width: 215px;
+    width: calc(100% - 25px);
     background-color: #eee;
     color: #111;
 }
