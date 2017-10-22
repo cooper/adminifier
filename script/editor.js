@@ -450,6 +450,10 @@ ae.getBlockInfo = function (pos) {
     };
 };
 
+ae.liForAction = function (action) {
+    return document.getElement('li[data-action="' + action + '"]');
+};
+
 ae.handlePageDisplayResult = function (res) {
     if (!res)
         return;

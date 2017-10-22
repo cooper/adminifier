@@ -6,7 +6,7 @@ document.addEvent('pageUnloaded', unloadedHandler);
 var ae;
 function loadedHandler () {
     ae = a.editor;
-    if (!ae) {
+    if (!ae || !editor) {
         console.log('editorLoaded fired without editor?', a);
         return;
     }
@@ -14,7 +14,6 @@ function loadedHandler () {
 
     // add toolbar functions
     Object.append(ae.toolbarFunctions, {
-        font:       displayFontSelector,
         link:       displayLinkHelper,
         options:    displayPageOptionsWindow,
         view:       openPageInNewTab,
@@ -25,17 +24,17 @@ function loadedHandler () {
 
     // add keyboard shortcuts
     ae.addKeyboardShortcuts([
-        [ 'Ctrl-B', 'Command-B',    'bold'      ],
-        [ 'Ctrl-I', 'Command-I',    'italic'    ],
-        [ 'Ctrl-U', 'Command-U',    'underline' ],
         [ 'Ctrl-S', 'Command-S',    'save'      ],
         [ 'Ctrl-K', 'Command-K',    'link'      ]
     ]);
 
     // disable view button for models
     if (ae.isModel())
-        liForAction('view').addClass('disabled');
+        ae.liForAction('view').addClass('disabled');
 
+    // on cursor move, update toolbar hints
+    editor.selection.addEventListener('changeCursor', cursorChanged);
+    
     // start the autosave timer
     resetAutosaveInterval();
 }
@@ -44,7 +43,12 @@ function unloadedHandler () {
     console.log('Unloading editor tools script');
     document.removeEvent('editorLoaded', loadedHandler);
     document.removeEvent('pageUnloaded', unloadedHandler);
+    editor.selection.removeEventListener('changeCursor', cursorChanged);
     clearAutosaveInterval();
+}
+
+function cursorChanged () {
+    
 }
 
 function fakeAdopt (child) {
@@ -68,120 +72,10 @@ function selectPageTitle () {
     editor.selection.setRange(found.range);
 }
 
-// TEXT COLOR SELECTOR
-
-function displayFontSelector () {
-    
-    // create box
-    var li  = liForAction('font');
-    var box = ae.createPopupBox(li);
-    box.innerHTML = tmpl('tmpl-color-helper', {});
-    fakeAdopt(box); // for injectInto
-    ae.setLiLoading(li, true);
-    
-    // create color picker
-    var cp = new DynamicColorPicker({
-        injectInto: box.getElement('#editor-color-hex')
-    });
-    
-    // on close, destroy color picker
-    ae.onPopupDestroy = function () {
-        cp.picker.destroy();
-    };
-    
-    // create crayon picker.
-    var container = box.getElement('#editor-color-names');
-    fakeAdopt(container); // for getComputedStyle()
-    
-    // create color elements
-    colorList.each(function (colorName) {
-        var div = new Element('div', {
-            styles: { backgroundColor: colorName },
-            class: 'editor-color-cell'
-        });
-
-        // separate the name into words
-        div.innerHTML = tmpl('tmpl-color-name', {
-            colorName: colorName.replace(/([A-Z])/g, ' $1')
-        });
-        container.appendChild(div);
-
-        // compute and set the appropriate text color
-        var color = new Color(getComputedStyle(div, null).getPropertyValue('background-color'));
-        div.setStyle('color', getContrastYIQ(color.hex.substr(1)));
-
-        // add click event
-        div.addEvent('click', ae.wrapTextFunction(colorName));
-
-    });
-
-    // add events for toggling between hex/list
-    var btnPicker = $$('.editor-color-type')[0],
-        btnList   = $$('.editor-color-type')[1];
-    btnPicker.addEvent('click', function () {
-        btnPicker.addClass('active');
-        btnList.removeClass('active');
-        $('editor-color-names').setStyle('display', 'none');
-        $('editor-color-hex').setStyle('display', 'block');
-        box.morph({ width: '395px' });
-        cp.picker.show();
-    });
-    btnList.addEvent('click', function () {
-        btnList.addClass('active');
-        btnPicker.removeClass('active');
-        $('editor-color-hex').setStyle('display', 'none');
-        $('editor-color-names').setStyle('display', 'block');
-        box.morph({ width: '300px' });
-        cp.picker.hide();
-    });
-
-
-    // put it where it belongs
-    container.parentElement.removeChild(container);
-    box.appendChild(container);
-
-    // delay showing the box until the color picker is loaded
-    DynamicColorPicker.autoLoad(function () {
-        
-        // on click, insert
-        $('colorpicker-preview').addEvent('click', function () {
-            var color = cp.picker.color.hex;
-            return ae.wrapTextFunction('#' + color)();
-        });
-        
-        // prevent the popup from closing due to a click on the positioner
-        cp.container.addEvents({
-            mouseover: function () {
-                box.addClass('sticky');
-            },
-            mouseout: function () {
-                box.removeClass('sticky');
-            }
-        });
-        $$('.colorpicker-arrow').each(function (arrow) {
-            arrow.addClass('no-close-popup');
-        });
-        
-        // show the box with the picker
-        box.setStyle('width', '395px');
-        ae.setLiLoading(li, false);
-        ae.displayPopupBox(box, 290, li);
-        cp.show();
-    }, 100);
-}
-
-function getContrastYIQ (hexColor) {
-    var r = parseInt(hexColor.substr(0, 2), 16);
-    var g = parseInt(hexColor.substr(2, 2), 16);
-    var b = parseInt(hexColor.substr(4, 2), 16);
-    var yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
-    return (yiq >= 128) ? '#000' : '#fff';
-}
-
 // LINK HELPER
 
 function displayLinkHelper () {
-    var li  = liForAction('link');
+    var li  = ae.liForAction('link');
     var box = ae.createPopupBox(li);
     fakeAdopt(box);
 
@@ -290,7 +184,7 @@ function displaySaveHelper () {
 }
 
 function _saveHelper () {
-    var li  = liForAction('save');
+    var li  = ae.liForAction('save');
     var box = ae.createPopupBox(li);
     fakeAdopt(box);
 
@@ -403,7 +297,7 @@ function autosave () {
     if (ae.currentPopup) return; // FIXME
     
     // make it apparent that autosave is occurring
-    var li = liForAction('save');
+    var li = ae.liForAction('save');
     ae.setLiLoading(li, true, true);
     li.getElement('span').set('text', 'Autosave');
     
@@ -495,7 +389,7 @@ function clearAutosaveInterval () {
 function displayRevisionViewer () {
     
     // make the li stay open until finish()
-    var li = liForAction('revisions');
+    var li = ae.liForAction('revisions');
     ae.setLiLoading(li, true);
 
     // create the box
@@ -695,7 +589,7 @@ function displayDiffViewer (box, from, to, message, which) {
 // DELETE CONFIRMATION
 
 function displayDeleteConfirmation () {
-    var li  = liForAction('delete');
+    var li  = ae.liForAction('delete');
     var box = ae.createPopupBox(li);
     fakeAdopt(box);
 
@@ -1063,10 +957,6 @@ function generatePageOptions (opts) {
         string += ';\n';
     });
     return string;
-}
-
-function liForAction (action) {
-    return document.getElement('li[data-action="' + action + '"]');
 }
 
 })(adminifier);
