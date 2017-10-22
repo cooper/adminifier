@@ -46,26 +46,59 @@ a.safeName = function (name) {
 
 // load a script
 a.loadScript = function (src) {
-	if (!src.length) return;
-
-	if (src == 'ace')
-		src = 'ext/ace/ace.js';
-	else if (src == 'jquery')
-		src = '//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.js';
-	else if (src == 'diff2html')
-		src = 'ext/diff2html/dist/diff2html.js';
-	else if (src == 'colorpicker')
-		src = 'ext/colorpicker/DynamicColorPicker.js';
-	else
-		src = 'script/' + src + '.js';
-
-	var script = new Element('script', {
-		src:   src,
-		class: 'dynamic'
-	});
-	script.addEvent('load', scriptLoaded);
-	scriptsToLoad.push(script);
+	a.loadScripts([src]);
 };
+
+// load several scripts
+a.loadScripts = function (srcs) {
+    var scriptsToLoad = [];
+	var loadNextScript = function () {
+		var script = scriptsToLoad.shift();
+		if (!script)
+			return;
+		document.head.appendChild(script);
+	};
+	
+	// don't show the content until all scripts have loaded
+    var scriptLoaded = function () {
+		if (typeof jQuery != 'undefined')
+			jQuery.noConflict();
+		
+		// there are still more to load
+        if (scriptsToLoad.length) {
+			loadNextScript();
+			return;
+		}
+		
+		// this was the last one
+        $('content').setStyle('user-select', 'all');
+		a.updateIcon(data['data-icon']);
+        pageScriptsDone = true;
+        document.fireEvent('pageScriptsLoaded');
+    };
+	
+	srcs.each(function (src) {
+		if (!src.length) return;
+
+		if (src == 'ace')
+			src = 'ext/ace/ace.js';
+		else if (src == 'jquery')
+			src = '//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.js';
+		else if (src == 'diff2html')
+			src = 'ext/diff2html/dist/diff2html.js';
+		else if (src == 'colorpicker')
+			src = 'ext/colorpicker/DynamicColorPicker.js';
+		else
+			src = 'script/' + src + '.js';
+
+		var script = new Element('script', {
+			src:   src,
+			class: 'dynamic'
+		});
+		script.addEvent('load', scriptLoaded);
+		scriptsToLoad.push(script);
+	});
+}
 
 window.addEvent('hashchange',	hashLoad);
 document.addEvent('domready', 	hashLoad);
@@ -284,35 +317,9 @@ function handlePageData (data) {
         li.addClass('active');
     }
 
-    var scriptsToLoad = [];
-	var loadNextScript = function () {
-		var script = scriptsToLoad.shift();
-		if (!script)
-			return;
-		document.head.appendChild(script);
-	};
-	
-	// don't show the content until all scripts have loaded
-    var scriptLoaded = function () {
-		if (typeof jQuery != 'undefined')
-			jQuery.noConflict();
-		
-		// there are still more to load
-        if (scriptsToLoad.length) {
-			loadNextScript();
-			return;
-		}
-		
-		// this was the last one
-        $('content').setStyle('user-select', 'all');
-		a.updateIcon(data['data-icon']);
-        pageScriptsDone = true;
-        document.fireEvent('pageScriptsLoaded');
-    };
-
     // inject scripts
     $$('script.dynamic').each(function (script) { script.destroy(); });
-    SSV(data['data-scripts']).each(a.loadScript);
+    a.loadScripts(SSV(data['data-scripts']));
 
     // inject styles
     $$('link.dynamic').each(function (link) { link.destroy(); });
