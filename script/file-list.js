@@ -275,6 +275,12 @@ function fileSearch (text) {
     list.filter = function (entry) {
         var matched = 0;
         Object.values(entry.columns).each(function (val) {
+            if (typeof val != 'string') {
+                if (val.toString)
+                    val = val.toString();
+                else
+                    return;
+            }
             if (val.match(new RegExp(text, 'i')))
                 matched++;
         });
