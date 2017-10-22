@@ -24,15 +24,6 @@ var FileList = new Class({
         Object.each(entry.columns, function (val, col) {
             var origVal = val;
             
-            // apply fixer
-            var fixer = self.getColumnData(col, 'fixer');
-            if (fixer) val = fixer(val);
-            entry.columns[col] = val;
-            
-            // apply tooltip fixer
-            fixer = self.getColumnData(col, 'tooltipFixer');
-            if (fixer) entry.tooltips[col] = fixer(origVal);
-            
             // skip if no length
             if (typeof val != 'string' || !val.length)
                 return;
@@ -186,13 +177,21 @@ var FileList = new Class({
                     td.appendChild(span);
                 });
                                 
+                // apply fixer
+                var text  = entry.columns[col];
+                var fixer = self.getColumnData(col, 'fixer');
+                if (fixer) text = fixer(val);
+                                
                 // set text if it has length
-                var text = entry.columns[col];
                 if (typeof text == 'string' && text.length)
                     textContainer.set('text', text);
                     
-                // tooltip
+                // apply tooltip fixer
                 var tooltip = entry.tooltips[col];
+                fixer = self.getColumnData(col, 'tooltipFixer');
+                if (fixer) tooltip = fixer(origVal);
+                    
+                // tooltip
                 if (typeof tooltip == 'string' && tooltip.length)
                     textContainer.set('title', tooltip);
                     
