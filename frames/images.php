@@ -33,5 +33,3 @@ $images = $W->image_list($sort.$order)->images;
     data-search="fileSearch"
     data-sort="<?= $sort.$order ?>"
 />
-
-<? require(__DIR__.'/../templates/image-grid-tmpl.php'); ?>
