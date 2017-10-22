@@ -246,14 +246,14 @@ var flagOptions = {
 				// find opts
 				var buttonStuff = a.currentData['data-button-' + buttonID];
 				if (!buttonStuff) {
-					console.log('Button ' + buttonID + ' is not configured');
+					console.warn('Button ' + buttonID + ' is not configured');
 					return;
 				}
 				
 				// parse psuedo-JSON
 				buttonStuff = JSON.decode(buttonStuff.replace(/'/g, '"'));
 				if (!buttonStuff) {
-					console.log('Failed to parse JSON for button ' + buttonID);
+					console.warn('Failed to parse JSON for button ' + buttonID);
 					return;
 				}
 				
@@ -279,7 +279,13 @@ var flagOptions = {
 				anchor.addEvent('click', function (e) {
 					e.preventDefault();
 					buttonStuff.func = window[buttonStuff.func];
-					if (!buttonStuff.func) return;
+					if (!buttonStuff.func) {
+						console.warn(
+							'Button ' + buttonID + ' function ' +
+							buttonStuff.func + ' does not exist'
+						);
+						return;
+					}
 					buttonStuff.func();
 				});
 			
