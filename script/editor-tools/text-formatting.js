@@ -34,7 +34,7 @@ function displayFontSelector () {
     var li  = ae.liForAction('font');
     var box = ae.createPopupBox(li);
     box.innerHTML = tmpl('tmpl-color-helper', {});
-    fakeAdopt(box); // for injectInto
+    ae.fakeAdopt(box); // for injectInto
     ae.setLiLoading(li, true);
     
     // create color picker
@@ -49,7 +49,7 @@ function displayFontSelector () {
     
     // create crayon picker.
     var container = box.getElement('#editor-color-names');
-    fakeAdopt(container); // for getComputedStyle()
+    ae.fakeAdopt(container); // for getComputedStyle()
     
     // create color elements
     colorList.each(function (colorName) {

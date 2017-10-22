@@ -454,6 +454,18 @@ ae.liForAction = function (action) {
     return document.getElement('li[data-action="' + action + '"]');
 };
 
+ae.fakeAdopt = function (child) {
+    var parent = $('fake-parent');
+    if (!parent) {
+        parent = new Element('div', {
+            id: 'fake-parent',
+            styles: { display: 'none' }
+        });
+        document.body.appendChild(parent);
+    }
+    parent.appendChild(child);
+};
+
 ae.handlePageDisplayResult = function (res) {
     if (!res)
         return;

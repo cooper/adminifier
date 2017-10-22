@@ -51,18 +51,6 @@ function cursorChanged () {
     
 }
 
-function fakeAdopt (child) {
-    var parent = $('fake-parent');
-    if (!parent) {
-        parent = new Element('div', {
-            id: 'fake-parent',
-            styles: { display: 'none' }
-        });
-        document.body.appendChild(parent);
-    }
-    parent.appendChild(child);
-}
-
 // PAGE TITLE SELECTOR
 
 function selectPageTitle () {
@@ -77,7 +65,7 @@ function selectPageTitle () {
 function displayLinkHelper () {
     var li  = ae.liForAction('link');
     var box = ae.createPopupBox(li);
-    fakeAdopt(box);
+    ae.fakeAdopt(box);
 
     box.innerHTML = tmpl('tmpl-link-helper', {});
 
@@ -186,7 +174,7 @@ function displaySaveHelper () {
 function _saveHelper () {
     var li  = ae.liForAction('save');
     var box = ae.createPopupBox(li);
-    fakeAdopt(box);
+    ae.fakeAdopt(box);
 
     box.innerHTML = tmpl('tmpl-save-helper', {
         file: ae.getFilename()
@@ -591,7 +579,7 @@ function displayDiffViewer (box, from, to, message, which) {
 function displayDeleteConfirmation () {
     var li  = ae.liForAction('delete');
     var box = ae.createPopupBox(li);
-    fakeAdopt(box);
+    ae.fakeAdopt(box);
 
     box.innerHTML = tmpl('tmpl-delete-confirm', {});
 
