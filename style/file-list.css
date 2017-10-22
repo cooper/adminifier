@@ -9,6 +9,7 @@ table.file-list {
 table.file-list td {
     border: 1px solid #ccc;
     padding: 8px;
+    height: 22px;
     text-align: left;
     white-space: nowrap;
 }
@@ -48,6 +49,7 @@ table.file-list thead th {
     -webkit-user-select: none;
     -moz-user-select: none;
     padding: 8px;
+    height: 22px;
     border: 1px solid #696969;
     text-align: left;
 }
@@ -109,5 +111,5 @@ ul.file-list-toolbar li.disabled {
     right: 0px;
     top: 40px;
     bottom: 0px;
-    width: 300px;
+    width: 250px;
 }
