@@ -42,7 +42,30 @@ a.updateIcon = function (icon) {
 // safe page/category name
 a.safeName = function (name) {
     return name.replace(/[^\w\.\-]/g, '_');
-}
+};
+
+// load a script
+a.loadScript = function (src) {
+	if (!src.length) return;
+
+	if (src == 'ace')
+		src = 'ext/ace/ace.js';
+	else if (src == 'jquery')
+		src = '//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.js';
+	else if (src == 'diff2html')
+		src = 'ext/diff2html/dist/diff2html.js';
+	else if (src == 'colorpicker')
+		src = 'ext/colorpicker/DynamicColorPicker.js';
+	else
+		src = 'script/' + src + '.js';
+
+	var script = new Element('script', {
+		src:   src,
+		class: 'dynamic'
+	});
+	script.addEvent('load', scriptLoaded);
+	scriptsToLoad.push(script);
+};
 
 window.addEvent('hashchange',	hashLoad);
 document.addEvent('domready', 	hashLoad);
@@ -289,27 +312,7 @@ function handlePageData (data) {
 
     // inject scripts
     $$('script.dynamic').each(function (script) { script.destroy(); });
-    SSV(data['data-scripts']).each(function (src) {
-        if (!src.length) return;
-
-        if (src == 'ace')
-            src = 'ext/ace/ace.js';
-		else if (src == 'jquery')
-			src = '//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.js';
-		else if (src == 'diff2html')
-			src = 'ext/diff2html/dist/diff2html.js';
-		else if (src == 'colorpicker')
-			src = 'ext/colorpicker/DynamicColorPicker.js';
-        else
-            src = 'script/' + src + '.js';
-
-        var script = new Element('script', {
-            src:   src,
-            class: 'dynamic'
-        });
-        script.addEvent('load', scriptLoaded);
-		scriptsToLoad.push(script);
-    });
+    SSV(data['data-scripts']).each(ae.loadScript);
 
     // inject styles
     $$('link.dynamic').each(function (link) { link.destroy(); });

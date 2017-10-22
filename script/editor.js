@@ -3,6 +3,14 @@ var Range, Search, editor;
 
 var ae = adminifier.editor = {};
 
+var plugins = [
+    'text-formatting',
+    'save',
+    'link',
+    'page-options',
+    'revision'
+];
+
 // PAGE EVENTS
 
 // upon adding editorLoaded event, call if the editor is already loaded
@@ -29,7 +37,7 @@ function pageScriptsLoadedHandler () {
     Search = ace.require('ace/search').Search;
     editor = ace.edit('editor');
     ae.lastSavedData = editor.getValue();
--
+
     // render editor
     var themeName = adminifier.themeName || 'twilight';
     editor.setTheme('ace/theme/' + themeName);
@@ -64,6 +72,9 @@ function editorLoadedHandler () {
     ae.resetSelectionAtTopLeft();
     if (a.currentJSONMetadata && a.currentJSONMetadata.display_result)
         ae.handlePageDisplayResult(a.currentJSONMetadata.display_result);
+    plugins.each(function (plugin) {
+        a.loadScript('editor-plugins/' + plugin);
+    });
 }
 
 // FIXME: issue #31

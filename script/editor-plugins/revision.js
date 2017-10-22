@@ -16,6 +16,9 @@ function loadedHandler () {
     // disable view button for models
     if (ae.isModel())
         ae.liForAction('view').addClass('disabled');
+        
+    // load diff2html
+    a.loadScript('diff2html');
 }
 
 function unloadedHandler () {

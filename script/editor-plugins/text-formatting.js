@@ -52,6 +52,8 @@ function loadedHandler () {
         [ 'Ctrl-I', 'Command-I',    'italic'    ],
         [ 'Ctrl-U', 'Command-U',    'underline' ]
     ]);
+    
+    a.loadScript('colorpicker');
 }
 
 function unloadedHandler () {
@@ -62,7 +64,7 @@ function unloadedHandler () {
 // TEXT COLOR SELECTOR
 
 function displayFontSelector () {
-    
+        
     // create box
     var li  = ae.liForAction('font');
     var box = ae.createPopupBox(li);
