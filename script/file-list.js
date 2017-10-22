@@ -1,4 +1,4 @@
-loadScript('pikaday');
+// a.loadScript('pikaday');
 
 var FileList = new Class({
     
