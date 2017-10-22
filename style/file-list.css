@@ -133,12 +133,23 @@ ul.file-list-toolbar li.disabled {
     display: block;
 }
 
+.filter-row input[type=text] {
+    height: 24px;
+    padding: 0 5px;
+    border: none;
+    margin: 5px 0 0 0;
+    width: 230px;
+    width: calc(100% - 10px);
+    background-color: #ddd;
+    color: #fff;
+}
+
 .filter-row:nth-child(even) {
-    background-color: #444;
+    background-color: #555;
 }
 
 .filter-row:nth-child(odd) {
-    border-bottom: 1px solid #444;
+    border-bottom: 1px solid #555;
 }
 
 .filter-row.preview {
