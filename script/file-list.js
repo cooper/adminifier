@@ -1,6 +1,15 @@
-// a.loadScript('pikaday');
+(function (a, exports) {
 
-var FileList = new Class({
+// a.loadScript('pikaday');
+document.addEvent('pageUnloaded', pageUnloaded)
+
+function pageUnloaded () {
+    document.removeEvent('pageUnloaded', pageUnloaded);
+    closeFilter();
+}
+
+
+var FileList = exports.FileList = new Class({
     
     Implements: [Options, Events],
     
@@ -134,7 +143,7 @@ var FileList = new Class({
             if (sort) {
                 th.set('data-sort', sort);
                 var setSort = sort + '-';
-                if (adminifier.currentData['data-sort'] == setSort)
+                if (a.currentData['data-sort'] == setSort)
                     setSort = sort + encodeURIComponent('+');
                 anchor.set('href', self.options.root + '?sort=' + setSort);
             }
@@ -211,7 +220,7 @@ var FileList = new Class({
             tbody.appendChild(tr);
         });
 
-        self.updateSortMethod(adminifier.currentData['data-sort']);
+        self.updateSortMethod(a.currentData['data-sort']);
         container.appendChild(table);
     },
 
@@ -366,6 +375,7 @@ function filterResize () {
        $('navigation-sidebar').offsetWidth - 250 + 'px');
 }
 
+exports.displayFilter = displayFilter;
 function displayFilter () {
     
     // if filter is already displayed, close it
@@ -440,7 +450,8 @@ function displayFilter () {
 }
 
 function closeFilter () {
-    // TODO: call this on navigate away from page
+    if (!document.getElement('.filter-editor'))
+        return;
     if ($('top-button-filter'))
         $('top-button-filter').removeClass('active');
     document.getElement('.filter-editor').destroy();
@@ -449,3 +460,5 @@ function closeFilter () {
     if ($('top-search'))
         $('top-search').set('disabled', false);
 }
+
+})(adminifier, window);

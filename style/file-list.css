@@ -152,3 +152,7 @@ ul.file-list-toolbar li.disabled {
     display: none;
     padding-top: 8px;
 }
+
+.filter-item {
+    margin-top: 8px;
+}
