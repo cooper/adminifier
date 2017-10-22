@@ -41,19 +41,19 @@ switch ($list_type) {
     data-nav="models"
     data-title="Models"
     data-icon="cube"
-    data-scripts="file-list file-list-models"
+    data-scripts="file-list file-list/models"
 <? elseif ($list_type == 'categories'): ?>
     data-nav="categories"
     data-title="Categories"
     data-icon="list"
-    data-scripts="file-list file-list-categories"
+    data-scripts="file-list file-list/categories"
 <? elseif ($list_type == 'images'): ?>
     data-nav="images"
     data-title="Images"
     data-icon="picture-o"
     data-buttons="image-mode"
     data-button-image-mode="List imageModeToggle list"
-    data-scripts="file-list file-list-images"
+    data-scripts="file-list file-list/images"
 <? else: ?>
     data-nav="pages"
     data-title="Pages"
