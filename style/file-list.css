@@ -145,11 +145,7 @@ ul.file-list-toolbar li.disabled {
 }
 
 .filter-row:nth-child(even) {
-    background-color: #555;
-}
-
-.filter-row:nth-child(odd) {
-    border-bottom: 1px solid #555;
+    background-color: #777;
 }
 
 .filter-row-inner {

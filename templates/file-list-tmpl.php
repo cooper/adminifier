@@ -2,7 +2,7 @@
     <div class="filter-editor-title">Filter</div>
 </script>
 
-<script type="text/x-tmpl" id="tmpl-filter-row">
+<script type="text/x-tmpl" id="tmpl-filter-text">
     <span><input type="checkbox" /> {%= o.column %}</span>
     <div class="filter-row-inner">
         <input type="radio" checked /> Contains

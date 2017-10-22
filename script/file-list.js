@@ -396,8 +396,16 @@ function displayFilter () {
     list.options.columns.each(function (col) {
         var row = new Element('div', {
             class:  'filter-row',
-            html:   tmpl('tmpl-filter-row', { column: col })
+            html:   tmpl('tmpl-filter-text', { column: col })
         });
+        
+        // on click, show the inner part
+        var check = row.getElement('input[type=checkbox]');
+        check.addEvent('change', function () {
+            var d = check.checked ? 'block' : 'none';
+            row.getElement('.filter-row-inner').setStyle('display', d);
+        });
+        
         filterEditor.appendChild(row);
     });
     
