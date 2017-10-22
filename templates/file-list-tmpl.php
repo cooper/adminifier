@@ -3,10 +3,12 @@
 </script>
 
 <script type="text/x-tmpl" id="tmpl-filter-row">
-    <span>{%= o.column %}</span>
-    <input type="radio" checked /> Contains
-    <input type="radio" /> Is<br />
-    <input type="text" />
+    <span><input type="checkbox" /> {%= o.column %}</span>
+    <div class="filter-row-inner">
+        <input type="radio" checked /> Contains
+        <input type="radio" /> Is<br />
+        <input type="text" />
+    </div>
 </script>
 
 <script type="text/x-tmpl" id="tmpl-filter-state">

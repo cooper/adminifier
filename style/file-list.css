@@ -140,7 +140,7 @@ ul.file-list-toolbar li.disabled {
     margin: 5px 0 0 0;
     width: 230px;
     width: calc(100% - 10px);
-    background-color: #ddd;
+    background-color: #eee;
     color: #111;
 }
 
@@ -152,7 +152,6 @@ ul.file-list-toolbar li.disabled {
     border-bottom: 1px solid #555;
 }
 
-.filter-row.preview {
-    border-bottom: none;
-    padding: 20px 10px 0 10px;
+.filter-row-inner {
+    display: none;
 }
