@@ -262,8 +262,9 @@ var FileListEntry = new Class({
 });
 
 function fileSearch (text) {
-    var list = document.getElement('.file-list').retrieve('file-list');
+    var list = document.getElement('.file-list');
     if (!list) return;
+    list = list.retrieve('file-list');
     
     // no text; disable filter
     if (!text.length) {
