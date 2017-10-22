@@ -400,10 +400,22 @@ function displayFilter () {
         });
         
         // on click, show the inner part
+        var inner = row.getElement('.filter-row-inner');
         var check = row.getElement('input[type=checkbox]');
         check.addEvent('change', function () {
             var d = check.checked ? 'block' : 'none';
-            row.getElement('.filter-row-inner').setStyle('display', d);
+            inner.setStyle('display', d);
+        });
+        
+        // on enter, add item
+        var textInput = row.getElement('input[type=text]');
+        textInput.onEnter(function () {
+            var item = new Element('div', {
+                class:  'filter-item',
+                html:   tmpl('tmpl-filter-item', { item: textInput.value })
+            });
+            inner.appendChild(item);
+            textInput.set('value', '');
         });
         
         filterEditor.appendChild(row);

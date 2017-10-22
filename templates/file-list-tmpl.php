@@ -7,11 +7,16 @@
     <div class="filter-row-inner">
         <input type="radio" checked /> Contains
         <input type="radio" /> Is<br />
-        <i class="fa fa-plus-circle" style="color: chartreuse;"></i>
+        <i class="fa fa-plus-circle fa-lg" style="color: chartreuse;"></i>
         <input type="text" />
     </div>
 </script>
 
 <script type="text/x-tmpl" id="tmpl-filter-state">
     <span><input type="checkbox" /> {%= o.stateName %}</span>
+</script>
+
+<script type="text/x-tmpl" id="tmpl-filter-item">
+    <i class="fa fa-plus-circle fa-lg" style="color: #FF7575;"></i>
+    {%= o.item %}
 </script>
