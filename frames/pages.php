@@ -52,7 +52,7 @@ switch ($list_type) {
     data-title="Images"
     data-icon="picture-o"
     data-buttons="image-mode"
-    data-button-image-mode="{'title': 'Grid view', 'icon': 'th', 'href': '#!/pages'}"
+    data-button-image-mode="{'title': 'Grid view', 'icon': 'th', 'href': '#!/images'}"
     data-scripts="file-list file-list/images"
 <? else: ?>
     data-nav="pages"
