@@ -66,5 +66,5 @@ switch ($list_type) {
     data-flags="no-margin search buttons"
     data-search="fileSearch"
     data-sort="<?= $sort.$order ?>"
-    data-button-filter="{'title': 'Filter', 'icon': 'filter'}"
+    data-button-filter="{'title': 'Filter', 'icon': 'filter', 'func': 'displayFilter'}"
 />
