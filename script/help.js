@@ -1,7 +1,8 @@
 function goToHelpAnchor (hash) {
+    var newHash = window.location.hash.replace(/#([^\/]+)$/, '');
+    newHash += '#' + hash;
     window.preventHashLoad = true;
-    window.location.hash.replace(/#([^\/]+)$/, '');
-    window.location.hash += '#' + hash;
+    window.location.hash = newHash;
     handleHelpHash(hash);
 }
 
