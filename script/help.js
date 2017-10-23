@@ -14,7 +14,7 @@ function handleHelpHash (hash) {
 (function () {
     var match = window.location.hash.match(/#([^\/]+)$/);
     if (match)
-        goToHelpAnchor(match[1]);
+        handleHelpHash(match[1]);
 })();
 
 if (window.retinajs)
