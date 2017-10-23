@@ -203,7 +203,7 @@ var flagOptions = {
     },
     'compact-sidebar': {
         init: function () {
-			document.getElement('span.wiki-title').tween('min-width', '0px');
+			document.getElement('span.wiki-title').tween('min-width', '75px');
             $('navigation-sidebar').tween('width', '50px');
             $('content').tween('margin-left', '50px');
             $$('#navigation-sidebar li a').each(function (a) {
