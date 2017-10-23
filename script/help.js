@@ -1,4 +1,8 @@
 function goToHelpAnchor (hash) {
+    window.location.hash += '#' + hash;
+}
+
+function handleHelpHash (hash) {
     var anchor = 'wiki-anchor-' + hash;
     var el = $(anchor);
     if (el) {
