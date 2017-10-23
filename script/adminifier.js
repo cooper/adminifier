@@ -177,6 +177,13 @@ function frameLoad (page) {
 
 // load page based on the current hash
 function hashLoad() {
+	
+	// skip this one
+	if (window.preventHashLoad) {
+		delete window.preventHashLoad;
+		return;
+	}
+	
     var hash = window.location.hash;
     if (hash.lastIndexOf('#!/', 0) === 0) {
         hash = hash.substring(3);
