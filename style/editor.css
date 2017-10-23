@@ -24,6 +24,8 @@ div.editor-toolbar-wrapper {
 }
 
 ul.editor-toolbar {
+    padding: 0;
+    margin: 0;
     height: 30px;
     line-height: 30px;
     color: #E2E2E2;
