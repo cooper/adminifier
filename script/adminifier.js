@@ -203,6 +203,7 @@ var flagOptions = {
     },
     'compact-sidebar': {
         init: function () {
+			document.getElement('span.wiki-title').tween('min-width', '0px');
             $('navigation-sidebar').tween('width', '50px');
             $('content').tween('margin-left', '50px');
             $$('#navigation-sidebar li a').each(function (a) {
@@ -214,6 +215,7 @@ var flagOptions = {
             });
         },
         destroy: function () {
+			document.getElement('span.wiki-title').tween('min-width', '140px');
             $('navigation-sidebar').tween('width', '170px');
             $('content').tween('margin-left', '170px');
             $$('#navigation-sidebar li a').each(function (a) {
