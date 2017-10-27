@@ -8,6 +8,8 @@
     $wiki_conf = isset($user_info->conf) ? $user_info->conf : new stdClass;
 
     if (!isset($PUBLIC_PAGE) && !isset($user_info->logged_in) && !isset($API)) {
+        session_unset();
+        session_destroy();
         header('Location: '.$config->admin_root.'/login.php');
         // this must go to login.php because at this point if
         // logged_in is not set, they have been logged out already

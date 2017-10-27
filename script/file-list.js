@@ -394,6 +394,8 @@ function displayFilter () {
         return;
     }
     
+    // TODO: warn that opening the filter will clear the current selection
+    
     // make filter button active and disable search
     $('top-button-filter').addClass('active');
     $('top-search').set('disabled', true);
