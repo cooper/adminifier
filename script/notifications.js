@@ -1,27 +1,38 @@
 (function (a) {
 
+var pingCount = 0;
+
 document.addEvent('domready', function () {
     setInterval(pingServer, 20000);
     pingServer();
 });
 
 function pingServer () {
-    var req = new Request.JSON({
-        url: 'functions/events.php',
-        secure: true,
-        onSuccess: function (data) {
+    new Request.JSON({
+        url:        'functions/events.php',
+        secure:     true,
+        onSuccess:  function (data) {
+            
+            // not connected, so ask for login
             if (!data.connected) {
+                
+                // if this is the first time we've tried, redirect to login page
+                if (!pingCount)
+                    window.location = a.adminRoot + '/login.php';
+                
                 displayLoginWindow();
                 return;
             }
+            
+            // show notifications
             if (data.notifications) data.notifications.each(function (noti) {
                 displayNotification(noti);
             });
         },
-        onError: displayLoginWindow,
-        onFailure: displayLoginWindow
-    });
-    req.get();
+        onError:    displayLoginWindow,
+        onFailure:  displayLoginWindow
+    }).get();
+    pingCount++;
 }
 
 var icons = {
