@@ -14,6 +14,8 @@ $W = new Wikiclient(
 
 // login again
 $W->login_again_cb = function () {
+    session_unset();
+    session_destroy();
     header('Location: '.$config->admin_root.'/logout.php');
     die();
 };
