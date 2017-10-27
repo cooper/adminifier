@@ -1,3 +1,4 @@
+<? require_once(__DIR__.'/../functions/utils.php'); ?>
 <meta
     data-nav="dashboard"
     data-title="Dashboard"
@@ -10,7 +11,6 @@
 <h2>Server logs</h2>
 <pre id="server-logs">
 <?
-require_once(__DIR__.'/../functions/utils.php');
 
 $lines = $W->logs()->logs;
 foreach ($lines as $line)
