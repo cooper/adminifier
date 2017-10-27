@@ -17,8 +17,10 @@ function pingServer () {
             if (!data.connected) {
                 
                 // if this is the first time we've tried, redirect to login page
-                if (!pingCount)
-                    window.location = a.adminRoot + '/login.php';
+                if (!pingCount) {
+                    window.location.href = a.adminRoot + '/login.php';
+                    return;
+                }
                 
                 displayLoginWindow();
                 return;
