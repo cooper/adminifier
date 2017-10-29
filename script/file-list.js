@@ -424,7 +424,9 @@ function displayFilter () {
         
         // on radio click, update mode
         inner.getElements('input[type=radio]').addEvent('click', function() {
-            inner.getElement('input[type=radio][checked]').checked = false;
+            inner.getElements('input[type=radio][checked]').each(function (rad) {
+                rad.checked = false;
+            });
             this.checked = true;
         });
 
