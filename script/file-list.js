@@ -433,13 +433,27 @@ function displayFilter () {
         textInput.onEnter(function () {
             textInput.set('value', textInput.value.trim());
             
-            // no length, or already there
-            if (!textInput.value.length || getRules()
-                .map(function (rule) { return rule[1] })
-                .contains(textInput.value)) {
+            // no length
+            if (!textInput.value.length) {
                 textInput.set('value', '');
                 return;
             }
+            
+            // check if entry exists
+            var maybeDuplicate = inner.getElements('.filter-item')
+                .filter(function (item) {
+                    return item.get('data-text') == textInput.value
+                })[0];
+                
+            // it does, and it has the same mode
+            if (maybeDuplicate && maybeDuplicate.get('data-mode') == mode) {
+                textInput.set('value', '');
+                return;
+            }
+            
+            // it does, but the mode is different. overwrite with new mode
+            else if (maybeDuplicate)
+                maybeDuplicate.destroy();
             
             var mode = inner.getElements('input[type=radio]')
                 .filter(function (rad) { return rad.checked })
