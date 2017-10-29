@@ -417,7 +417,7 @@ function displayFilter () {
     var list = document.getElement('.file-list').retrieve('file-list');
     list.filter = function (entry) {
         var allFuncsMustPass = [];
-        filterEditor.getElements('filter-row').each(function (row) {
+        filterEditor.getElements('.filter-row').each(function (row) {
             var someFuncsMustPass = [];
             
             // row isn't enabled
@@ -429,16 +429,16 @@ function displayFilter () {
                 // contains text
                 if (rule[0] == "Contains")
                     someFuncsMustPass.push(function (entry) {
-                    return entry.columns[row.get('data-col')].toLowerCase()
-                        .contains(rule[1].toLowerCase());
-                });
+                        return entry.columns[row.get('data-col')].toLowerCase()
+                            .contains(rule[1].toLowerCase());
+                    });
                 
                 // equals text
                 else if (rule[0] == "Is")
                     someFuncsMustPass.push(function (entry) {
-                    return entry.columns[row.get('data-col')].toLowerCase()
-                        == rule[1].toLowerCase();
-                });
+                        return entry.columns[row.get('data-col')].toLowerCase()
+                            == rule[1].toLowerCase();
+                    });
                 
                 // only successful if one or more of someFuncsMustPass passes
                 allFuncsMustPass.push(function (entry) {
