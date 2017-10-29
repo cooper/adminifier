@@ -441,8 +441,10 @@ function displayFilter () {
                 });
                 
                 // only successful if one or more of someFuncsMustPass passes
-                return someFuncsMustPass.some(function (func) {
-                    return func(entry);
+                allFuncsMustPass.push(function (entry) {
+                    return someFuncsMustPass.some(function (func) {
+                        return func(entry);
+                    });
                 });
             });
         });
