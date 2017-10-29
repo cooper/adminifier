@@ -435,20 +435,24 @@ function displayFilter () {
             
             // no length, or already there
             if (!textInput.value.length || getRules()
-            .map(function (rule) { return rule[1] })
-            .contains(textInput.value)) {
+                .map(function (rule) { return rule[1] })
+                .contains(textInput.value)) {
                 textInput.set('value', '');
                 return;
             }
+            
+            var mode = inner.getElements('input[type=radio]')
+                .filter(function (rad) { return rad.checked })
+                .get('data-mode');
                         
             var item = new Element('div', {
                 class:  'filter-item',
                 html:   tmpl('tmpl-filter-item', {
-                    mode:   inner.getElements('input[type=radio]')
-                            .filter(function (rad) { return rad.checked })
-                            .get('data-mode'),
+                    mode:   mode,
                     item:   textInput.value
-                })
+                }),
+                'data-mode': mode,
+                'data-text': textInput.value
             });
             inner.appendChild(item);
             textInput.set('value', '');
