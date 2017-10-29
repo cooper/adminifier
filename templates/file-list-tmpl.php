@@ -18,7 +18,7 @@
     <span><input type="checkbox" /> {%= o.stateName %}</span>
 </script>
 
-<script type="text/x-tmpl" id="tmpl-filter-item">
+<script type="text/x-tmpl" id="tmpl-filter-item" data-mode="{%= o.mode %}" data-text="{%= o.item %}">
     <i class="fa fa-minus-circle fa-lg" style="color: #FF7070;"></i>
     {%= o.mode %} &quot;{%= o.item %}&quot;
 </script>
