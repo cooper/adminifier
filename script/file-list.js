@@ -425,13 +425,15 @@ function displayFilter () {
         // on enter, add item
         var textInput = row.getElement('input[type=text]');
         textInput.onEnter(function () {
+            if (!textInput.value.length)
+                return;
             var item = new Element('div', {
                 class:  'filter-item',
                 html:   tmpl('tmpl-filter-item', {
-                    mode: inner.getElements('input[type=radio]')
-                          .filter(function (rad) { return rad.checked })
-                          .get('data-mode'),
-                    item: textInput.value
+                    mode:   inner.getElements('input[type=radio]')
+                            .filter(function (rad) { return rad.checked })
+                            .get('data-mode'),
+                    item:   textInput.value
                 })
             });
             inner.appendChild(item);
