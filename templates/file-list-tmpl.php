@@ -20,5 +20,5 @@
 
 <script type="text/x-tmpl" id="tmpl-filter-item">
     <i class="fa fa-minus-circle fa-lg" style="color: #FF7070;"></i>
-    <%= o.mode %} &quot;{%= o.item %}&quot;
+    {%= o.mode %} &quot;{%= o.item %}&quot;
 </script>
