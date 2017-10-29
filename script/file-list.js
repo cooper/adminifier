@@ -406,12 +406,59 @@ function displayFilter () {
         html:   tmpl('tmpl-filter-editor', {})
     });
     
-    // add each column
+    var getRules = function (row) {
+        var inner = row.getElement('.filter-row-inner');
+        return inner.getElements('.filter-item').map(function (item) {
+            return [ item.get('data-mode'), item.get('data-text') ];
+        });
+   };
+
+    // enable the filter
     var list = document.getElement('.file-list').retrieve('file-list');
+    list.filter = function (entry) {
+        var allFuncsMustPass = [];
+        filterEditor.getElements('filter-row').each(function (row) {
+            var someFuncsMustPass = [];
+            
+            // row isn't enabled
+            if (!row.get('data-enabled'))
+                return;
+
+            getRules(row).each(function (rule) {
+                
+                // contains text
+                if (rule[0] == "Contains")
+                    someFuncsMustPass.push(function (entry) {
+                    return entry.columns[row.get('data-col')].toLowerCase()
+                        .contains(rule[1].toLowerCase());
+                });
+                
+                // equals text
+                else if (rule[0] == "Is")
+                    someFuncsMustPass.push(function (entry) {
+                    return entry.columns[row.get('data-col')].toLowerCase()
+                        == rule[1].toLowerCase();
+                });
+                
+                // only successful if one or more of someFuncsMustPass passes
+                return someFuncsMustPass.some(function (func) {
+                    return func(entry);
+                });
+            });
+        });
+        
+        // only successful if every allFuncsMustPass passes
+        return allFuncsMustPass.every(function (func) {
+            return func(entry);
+        });
+    };
+    
+    // add each column
     list.options.columns.each(function (col) {
         var row = new Element('div', {
-            class:  'filter-row',
-            html:   tmpl('tmpl-filter-text', { column: col })
+            class:      'filter-row',
+            html:       tmpl('tmpl-filter-text', { column: col }),
+            'data-col': col
         });
         
         // on click, show the inner part
@@ -420,14 +467,9 @@ function displayFilter () {
         check.addEvent('change', function () {
             var d = check.checked ? 'block' : 'none';
             inner.setStyle('display', d);
+            row.set('data-enabled', check.checked ? true : '');
         });
         
-        var getRules = function () {
-            return inner.getElements('.filter-item').map(function (item) {
-                return [ item.get('data-mode'), item.get('data-text') ];
-            });
-        };
-
         // on enter, add item
         var textInput = row.getElement('input[type=text]');
         textInput.onEnter(function () {
@@ -470,6 +512,8 @@ function displayFilter () {
             });
             inner.appendChild(item);
             textInput.set('value', '');
+            
+            list.redraw();
         });
         
         filterEditor.appendChild(row);
@@ -494,13 +538,28 @@ function displayFilter () {
 }
 
 function closeFilter () {
+    
+    // filter not active
     if (!document.getElement('.filter-editor'))
         return;
+        
+    // release the filter button in the top bar
     if ($('top-button-filter'))
         $('top-button-filter').removeClass('active');
+        
+    // disable the filter
+    var list = document.getElement('.file-list');
+    if (list)
+        delete list.filter;
+        
+    // destroy the editor
     document.getElement('.filter-editor').destroy();
+    
+    // undo our content size adjustments
     window.removeEvent('resize', filterResize);
     $('content').setStyle('width', 'auto');
+    
+    // re-enable QuickSearch
     if ($('top-search'))
         $('top-search').set('disabled', false);
 }
