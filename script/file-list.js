@@ -423,9 +423,9 @@ function displayFilter () {
         });
         
         // on radio click, update mode
-        inner.getElements('input[type=radio]').each(function (rad) {
+        inner.getElements('input[type=radio]').addEvent('click', function() {
             inner.getElement('input[type=radio][checked]').checked = false;
-            rad.checked = true;
+            this.checked = true;
         });
 
         // on enter, add item
