@@ -421,14 +421,6 @@ function displayFilter () {
             var d = check.checked ? 'block' : 'none';
             inner.setStyle('display', d);
         });
-        
-        // on radio click, update mode
-        inner.getElements('input[type=radio]').addEvent('click', function() {
-            inner.getElements('input[type=radio][checked]').each(function (rad) {
-                rad.checked = false;
-            });
-            this.checked = true;
-        });
 
         // on enter, add item
         var textInput = row.getElement('input[type=text]');

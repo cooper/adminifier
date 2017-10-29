@@ -5,8 +5,10 @@
 <script type="text/x-tmpl" id="tmpl-filter-text">
     <span><input type="checkbox" /> {%= o.column %}</span>
     <div class="filter-row-inner">
-        <input type="radio" data-mode="Contains" checked /> Contains
-        <input type="radio" data-mode="Is" /> Is<br />
+        <form>
+            <input type="radio" data-mode="Contains" checked /> Contains
+            <input type="radio" data-mode="Is" /> Is<br />
+        </form>
         <i class="fa fa-plus-circle fa-lg" style="color: chartreuse;"></i>
         <input type="text" />
     </div>
