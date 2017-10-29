@@ -428,7 +428,8 @@ function displayFilter () {
             var item = new Element('div', {
                 class:  'filter-item',
                 html:   tmpl('tmpl-filter-item', {
-                    mode: inner.getElement('input[type=radio][checked]')
+                    mode: inner.getElements('input[type=radio]')
+                          .filter(function (rad) { return rad.checked })
                           .get('data-mode'),
                     item: textInput.value
                 })
