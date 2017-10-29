@@ -421,12 +421,26 @@ function displayFilter () {
             var d = check.checked ? 'block' : 'none';
             inner.setStyle('display', d);
         });
+        
+        var getRules = function () {
+            return inner.getElements('.filter-item').map(function (item) {
+                return [ item.get('data-mode'), item.get('data-text') ];
+            });
+        };
 
         // on enter, add item
         var textInput = row.getElement('input[type=text]');
         textInput.onEnter(function () {
-            if (!textInput.value.length)
+            textInput.set('value', textInput.value.trim());
+            
+            // no length, or already there
+            if (!textInput.value.length || getRules()
+            .map(function (rule) { return rule[1] })
+            .contains(textInput.value)) {
+                textInput.set('value', '');
                 return;
+            }
+                        
             var item = new Element('div', {
                 class:  'filter-item',
                 html:   tmpl('tmpl-filter-item', {
