@@ -422,12 +422,21 @@ function displayFilter () {
             inner.setStyle('display', d);
         });
         
+        // on radio click, update mode
+        inner.getElements('input[type=radio]').each(function (rad) {
+            inner.getElement('input[type=radio][checked]').checked = false;
+            rad.checked = true;
+        });
+
         // on enter, add item
         var textInput = row.getElement('input[type=text]');
         textInput.onEnter(function () {
             var item = new Element('div', {
                 class:  'filter-item',
-                html:   tmpl('tmpl-filter-item', { item: textInput.value })
+                html:   tmpl('tmpl-filter-item', {
+                    mode: inner.getElement('input[type=radio][checked]').get('data-mode'),
+                    item: textInput.value
+                })
             });
             inner.appendChild(item);
             textInput.set('value', '');
