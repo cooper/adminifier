@@ -18,8 +18,8 @@
     <span><input type="checkbox" /> {%= o.column %}</span>
     <div class="filter-row-inner">
         <form>
-            <input type="radio" name="mode" data-mode="Is" /> Is<br />
-            <input type="radio" name="mode" data-mode="Before" /> Before<br />
+            <input type="radio" name="mode" data-mode="Is" /> Is
+            <input type="radio" name="mode" data-mode="Before" /> Before
             <input type="radio" name="mode" data-mode="After" /> After<br />
         </form>
         <i class="fa fa-plus-circle fa-lg" style="color: chartreuse;"></i>
