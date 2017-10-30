@@ -306,7 +306,7 @@ function fileSearch (text) {
 function quickSearch (entry) {
     var list = getList();
     if (!list)
-        return;
+        return true;
         
     // quicksearch not enabled
     if (typeof list.searchText != 'string' || !list.searchText.length)
@@ -327,14 +327,14 @@ function quickSearch (entry) {
 }
 
 exports.dateToPreciseHR = dateToPreciseHR;
-function dateToPreciseHR(d) {
+function dateToPreciseHR (d) {
     if (typeof d == 'string')
         d = new Date(parseInt(d) * 1000);
     return d.toString();
 }
 
 exports.dateToHRTimeAgo = dateToHRTimeAgo;
-function dateToHRTimeAgo(time) {
+function dateToHRTimeAgo (time) {
     switch (typeof time) {
         case 'number':
             break;
