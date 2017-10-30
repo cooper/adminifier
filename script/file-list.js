@@ -571,9 +571,11 @@ function closeFilter () {
         
     // disable the filter
     var list = document.getElement('.file-list');
-    if (list)
+    if (list) {
         delete list.filter;
-        
+        list.redraw();
+    }
+    
     // destroy the editor
     document.getElement('.filter-editor').destroy();
     
