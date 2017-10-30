@@ -304,7 +304,7 @@ function fileSearch (text) {
 function quickSearch (entry) {
     var list = getList();
     if (!list)
-        return true;
+        return;
         
     // quicksearch not enabled
     if (typeof list.searchText != 'string' || !list.searchText.length)
