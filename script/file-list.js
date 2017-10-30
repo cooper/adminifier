@@ -306,12 +306,9 @@ function fileSearch (text) {
 }
 
 function quickSearch (entry) {
-    var list = getList();
-    if (!list)
-        return;
-        
+    
     // quicksearch not enabled
-    if (typeof list.searchText != 'string' || !list.searchText.length)
+    if (typeof searchText != 'string' || !searchText.length)
         return true;
         
     var matched = 0;
