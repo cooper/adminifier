@@ -406,13 +406,6 @@ function displayFilter () {
         html:   tmpl('tmpl-filter-editor', {})
     });
     
-    var getRules = function (row) {
-        var inner = row.getElement('.filter-row-inner');
-        return inner.getElements('.filter-item').map(function (item) {
-            return [ item.get('data-mode'), item.get('data-text') ];
-        });
-   };
-
     // enable the filter
     var list = document.getElement('.file-list').retrieve('file-list');
     list.filter = filterFilter;
@@ -510,6 +503,13 @@ function displayFilter () {
     document.body.adopt(filterEditor);
 }
 
+function getFilterRules (row) {
+    var inner = row.getElement('.filter-row-inner');
+    return inner.getElements('.filter-item').map(function (item) {
+        return [ item.get('data-mode'), item.get('data-text') ];
+    });
+}
+
 function filterFilter (entry) {
     var filterEditor = document.getElement('.filter-editor');
     if (!filterEditor)
@@ -522,7 +522,7 @@ function filterFilter (entry) {
         if (!row.get('data-enabled'))
             return;
 
-        getRules(row).each(function (rule) {
+        getFilterRules(row).each(function (rule) {
             
             // contains text
             if (rule[0] == "Contains")
