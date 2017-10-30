@@ -415,45 +415,7 @@ function displayFilter () {
 
     // enable the filter
     var list = document.getElement('.file-list').retrieve('file-list');
-    list.filter = function (entry) {
-        var allFuncsMustPass = [];
-        filterEditor.getElements('.filter-row').each(function (row) {
-            var someFuncsMustPass = [];
-            
-            // row isn't enabled
-            if (!row.get('data-enabled'))
-                return;
-
-            getRules(row).each(function (rule) {
-                
-                // contains text
-                if (rule[0] == "Contains")
-                    someFuncsMustPass.push(function (entry) {
-                        return entry.columns[row.get('data-col')].toLowerCase()
-                            .contains(rule[1].toLowerCase());
-                    });
-                
-                // equals text
-                else if (rule[0] == "Is")
-                    someFuncsMustPass.push(function (entry) {
-                        return entry.columns[row.get('data-col')].toLowerCase()
-                            == rule[1].toLowerCase();
-                    });
-                
-                // only successful if one or more of someFuncsMustPass passes
-                allFuncsMustPass.push(function (entry) {
-                    return someFuncsMustPass.some(function (func) {
-                        return func(entry);
-                    });
-                });
-            });
-        });
-        
-        // only successful if every allFuncsMustPass passes
-        return allFuncsMustPass.every(function (func) {
-            return func(entry);
-        });
-    };
+    list.filter = filterFilter;
     
     // add each column
     list.options.columns.each(function (col) {
@@ -470,6 +432,7 @@ function displayFilter () {
             var d = check.checked ? 'block' : 'none';
             inner.setStyle('display', d);
             row.set('data-enabled', check.checked ? true : '');
+            list.redraw();
         });
         
         // on enter, add item
@@ -512,6 +475,14 @@ function displayFilter () {
                 'data-mode': mode,
                 'data-text': textInput.value
             });
+            
+            // on delete button click, delete
+            item.getElement('i[class~="fa-minus-circle"]').addEvent('click', function () {
+                item.destroy();
+                list.redraw();
+            });
+            
+            // add the item
             inner.appendChild(item);
             textInput.set('value', '');
             
@@ -537,6 +508,46 @@ function displayFilter () {
     filterResize();
     
     document.body.adopt(filterEditor);
+}
+
+function filterFilter (entry) {
+    var allFuncsMustPass = [];
+    filterEditor.getElements('.filter-row').each(function (row) {
+        var someFuncsMustPass = [];
+        
+        // row isn't enabled
+        if (!row.get('data-enabled'))
+            return;
+
+        getRules(row).each(function (rule) {
+            
+            // contains text
+            if (rule[0] == "Contains")
+                someFuncsMustPass.push(function (entry) {
+                    return entry.columns[row.get('data-col')].toLowerCase()
+                        .contains(rule[1].toLowerCase());
+                });
+            
+            // equals text
+            else if (rule[0] == "Is")
+                someFuncsMustPass.push(function (entry) {
+                    return entry.columns[row.get('data-col')].toLowerCase()
+                        == rule[1].toLowerCase();
+                });
+            
+            // only successful if one or more of someFuncsMustPass passes
+            allFuncsMustPass.push(function (entry) {
+                return someFuncsMustPass.some(function (func) {
+                    return func(entry);
+                });
+            });
+        });
+    });
+    
+    // only successful if every allFuncsMustPass passes
+    return allFuncsMustPass.every(function (func) {
+        return func(entry);
+    });
 }
 
 function closeFilter () {

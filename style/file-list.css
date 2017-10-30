@@ -156,3 +156,7 @@ ul.file-list-toolbar li.disabled {
 .filter-item {
     margin-top: 8px;
 }
+
+.filter-row-inner i[class~="fa-minus-circle"] {
+    cursor: pointer;
+}
