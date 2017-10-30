@@ -157,6 +157,7 @@ ul.file-list-toolbar li.disabled {
     margin-top: 8px;
 }
 
-.filter-row-inner i[class~="fa-minus-circle"] {
+.filter-row-inner i[class~="fa-minus-circle"],
+.filter-row-inner i[class~="fa-plus-circle"] {
     cursor: pointer;
 }

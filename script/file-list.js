@@ -368,7 +368,8 @@ function dateToHRTimeAgo(time) {
         if (typeof format[2] == 'string')
             return format[list_choice];
         else
-            return Math.floor(seconds / format[2]) + ' ' + format[1] + ' ' + token;
+            return Math.floor(seconds / format[2]) +
+            ' ' + format[1] + ' ' + token;
     }
     return time;
 }
@@ -428,9 +429,8 @@ function displayFilter () {
             list.redraw();
         });
         
-        // on enter, add item
         var textInput = row.getElement('input[type=text]');
-        textInput.onEnter(function () {
+        var onEnterOrClick = function () {
             textInput.set('value', textInput.value.trim());
             
             // no length
@@ -470,7 +470,8 @@ function displayFilter () {
             });
             
             // on delete button click, delete
-            item.getElement('i[class~="fa-minus-circle"]').addEvent('click', function () {
+            item.getElement('i[class~="fa-minus-circle"]').addEvent('click',
+            function () {
                 item.destroy();
                 list.redraw();
             });
@@ -480,7 +481,12 @@ function displayFilter () {
             textInput.set('value', '');
             
             list.redraw();
-        });
+        };
+        
+        // on enter or click, add item
+        textInput.onEnter(onEnterOrClick);
+        inner.getElement('i[class~="fa-plus-circle"]').addEvent('click',
+            onEnterOrClick);
         
         filterEditor.appendChild(row);
     });
