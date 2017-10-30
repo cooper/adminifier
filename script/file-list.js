@@ -415,15 +415,15 @@ function displayFilter () {
     });
     
     // add each column
-    var tmpl = 'tmpl-filter-text',
+    var template = 'tmpl-filter-text',
         dataType = list.getColumnData(col, 'dataType');
     if (dataType && $('tmpl-filter-' + dataType))
-        tmpl = 'tmpl-filter-' + dataType;
+        template = 'tmpl-filter-' + dataType;
     
     list.options.columns.each(function (col) {
         var row = new Element('div', {
             class:      'filter-row',
-            html:       tmpl(tmpl, { column: col }),
+            html:       tmpl(template, { column: col }),
             'data-col': col
         });
         
