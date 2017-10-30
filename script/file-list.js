@@ -560,18 +560,21 @@ function filterFilter (entry) {
         
         // column
         getFilterRules(row).each(function (rule) {
+            // TODO: rather than toString, we need a func that for dates
+            // converts to the format used by pikaday. all else fall back to
+            // toString.
             
             // contains text
             if (rule[0] == "Contains")
                 someFuncsMustPass.push(function (entry) {
-                    return entry.columns[col].toLowerCase()
+                    return entry.columns[col].toString().toLowerCase()
                         .contains(rule[1].toLowerCase());
                 });
             
             // equals text
             else if (rule[0] == "Is")
                 someFuncsMustPass.push(function (entry) {
-                    return entry.columns[col].toLowerCase()
+                    return entry.columns[col].toString().toLowerCase()
                         == rule[1].toLowerCase();
                 });
             
