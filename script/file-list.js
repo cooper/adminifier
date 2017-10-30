@@ -1,15 +1,16 @@
 (function (a, exports) {
 
-var list = document.getElement('.file-list').retrieve('file-list');
-list.filter = function (entry) {
-    return filterFilter(entry) && quickSearch(entry);
-};
+function getList () {
+    var list = document.getElement('.file-list');
+    if (!list)
+        return;
+    return list.retrieve('file-list');
+}
 
 // a.loadScript('pikaday');
 document.addEvent('pageUnloaded', pageUnloaded)
 
 function pageUnloaded () {
-    delete list.filter;
     document.removeEvent('pageUnloaded', pageUnloaded);
     closeFilter();
 }
@@ -287,12 +288,18 @@ var FileListEntry = exports.FileListEntry = new Class({
 
 exports.fileSearch = fileSearch;
 function fileSearch (text) {
+    var list = getList();
+    if (!list)
+        return;
     list.searchText = text;
     list.redraw();
 }
 
 function quickSearch (entry) {
-    
+    var list = getList();
+    if (!list)
+        return true;
+        
     // quicksearch not enabled
     if (typeof list.searchText != 'string' || !list.searchText.length)
         return true;
