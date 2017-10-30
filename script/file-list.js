@@ -570,7 +570,7 @@ function closeFilter () {
         $('top-button-filter').removeClass('active');
         
     // disable the filter
-    var list = document.getElement('.file-list');
+    var list = document.getElement('.file-list').retrieve('file-list');
     if (list) {
         delete list.filter;
         list.redraw();
