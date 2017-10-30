@@ -413,7 +413,7 @@ function handleEscapeKey (e) {
 // SEARCH
 
 function searchHandler () {
-	$('top-search').addEvent('keyup', searchUpdate);
+	$('top-search').addEvent('input', searchUpdate);
 }
 
 function searchUpdate () {
