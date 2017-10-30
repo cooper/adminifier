@@ -14,6 +14,18 @@
     </div>
 </script>
 
+<script type="text/x-tmpl" id="tmpl-filter-date">
+    <span>DATE: <input type="checkbox" /> {%= o.column %}</span>
+    <div class="filter-row-inner">
+        <form>
+            <input type="radio" name="mode" data-mode="Contains" checked /> Contains
+            <input type="radio" name="mode" data-mode="Is" /> Is<br />
+        </form>
+        <i class="fa fa-plus-circle fa-lg" style="color: chartreuse;"></i>
+        <input type="text" />
+    </div>
+</script>
+
 <script type="text/x-tmpl" id="tmpl-filter-state">
     <span><input type="checkbox" /> {%= o.stateName %}</span>
 </script>
