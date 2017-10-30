@@ -4,7 +4,13 @@ function getList () {
     var list = document.getElement('.file-list');
     if (!list)
         return;
-    return list.retrieve('file-list');
+    list = list.retrieve('file-list');
+    list.filter = defaultFilter;
+    return;
+}
+
+function defaultFilter (entry) {
+    return filterFilter(entry) && quickSearch(entry);
 }
 
 // a.loadScript('pikaday');
