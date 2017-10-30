@@ -508,6 +508,7 @@ function displayFilter () {
         inner.getElement('i[class~="fa-plus-circle"]').addEvent('click',
             onEnterOrClick);
         
+        // fake adopt for pikaday
         filterEditor.appendChild(row);
         a.fakeAdopt(filterEditor);
         
@@ -587,18 +588,24 @@ function filterFilter (entry) {
             // toString.
             
             // contains text
-            if (rule[0] == "Contains")
-                someFuncsMustPass.push(function (entry) {
-                    return entry.columns[col].toString().toLowerCase()
-                        .contains(rule[1].toLowerCase());
-                });
+            if (rule[0] == "Contains") someFuncsMustPass.push(function (entry) {
+                return entry.columns[col].toString().toLowerCase()
+                    .contains(rule[1].toLowerCase());
+            });
             
-            // equals text
-            else if (rule[0] == "Is")
-                someFuncsMustPass.push(function (entry) {
-                    return entry.columns[col].toString().toLowerCase()
-                        == rule[1].toLowerCase();
-                });
+            // equals
+            else if (rule[0] == "Is") someFuncsMustPass.push(function (entry) {
+                var right = entry.columns[col];
+                
+                // date
+                if (typeOf(right) == 'date') {
+                    var left = new Date(rule[1]);
+                    return left.getTime() == right.getTime();
+                }
+                
+                // string
+                return right.toString().toLowerCase() == rule[1].toLowerCase();
+            });
             
             // only successful if one or more of someFuncsMustPass passes
             allFuncsMustPass.push(function (entry) {
