@@ -520,7 +520,7 @@ function displayFilter () {
                 maxDate:     new Date(2020, 12, 31),
                 yearRange:   [2000,2020]
             });
-            picker.addEvent('change', onEnterOrClick);
+            textInput.addEvent('change', onEnterOrClick);
         }
     });
     
