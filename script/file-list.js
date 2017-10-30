@@ -294,16 +294,22 @@ var FileListEntry = exports.FileListEntry = new Class({
     }
 });
 
+var searchText;
+
 exports.fileSearch = fileSearch;
 function fileSearch (text) {
     var list = getList();
-    list.searchText = text;
+    if (!list)
+        return;
+    searchText = text;
     list.redraw();
 }
 
 function quickSearch (entry) {
     var list = getList();
-
+    if (!list)
+        return;
+        
     // quicksearch not enabled
     if (typeof list.searchText != 'string' || !list.searchText.length)
         return true;
@@ -316,7 +322,7 @@ function quickSearch (entry) {
             else
                 return;
         }
-        if (val.match(new RegExp(list.searchText, 'i')))
+        if (val.match(new RegExp(searchText, 'i')))
             matched++;
     });
     return !!matched;
