@@ -534,24 +534,23 @@ function filterFilter (entry) {
     var allFuncsMustPass = [];
     filterEditor.getElements('.filter-row').each(function (row) {
         var someFuncsMustPass = [];
-        
+        var col = row.get('data-col');
+
         // row isn't enabled
         if (!row.get('data-enabled'))
             return;
 
+        // info state
+        if (!col) {
+            var state = row.get('data-state');
+            allFuncsMustPass.push(function (entry) {
+                return entry.infoState.contains(state);
+            });
+            return;
+        }
+        
+        // column
         getFilterRules(row).each(function (rule) {
-            var col = row.get('data-col');
-            
-            // info state
-            if (!col) {
-                var state = row.get('data-state');
-                allFuncsMustPass.push(function (entry) {
-                    return entry.infoState.contains(state);
-                });
-                return;
-            }
-            
-            // column
             
             // contains text
             if (rule[0] == "Contains")
