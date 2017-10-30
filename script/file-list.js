@@ -312,6 +312,7 @@ function quickSearch (entry) {
         return true;
         
     var matched = 0;
+    $('top-search').removeClass('invalid');
     Object.values(entry.columns).each(function (val) {
         if (typeof val != 'string') {
             if (val.toString)
@@ -319,8 +320,13 @@ function quickSearch (entry) {
             else
                 return;
         }
-        if (val.match(new RegExp(searchText, 'i')))
-            matched++;
+        try {
+            if (val.match(new RegExp(searchText, 'i')))
+                matched++;
+        }
+        catch {
+            $('top-search').addClass('invalid');
+        }
     });
     return !!matched;
 }
