@@ -1,5 +1,5 @@
 <script type="text/x-tmpl" id="tmpl-filter-editor">
-    <div class="filter-editor-title">Filter</div>
+    <div class="filter-editor-title"></div>
 </script>
 
 <script type="text/x-tmpl" id="tmpl-filter-text">
