@@ -15,7 +15,7 @@
 </script>
 
 <script type="text/x-tmpl" id="tmpl-filter-date">
-    <span>DATE: <input type="checkbox" /> {%= o.column %}</span>
+    <span><input type="checkbox" /> {%= o.column %}</span>
     <div class="filter-row-inner">
         <form>
             <input type="radio" name="mode" data-mode="Contains" checked /> Contains
