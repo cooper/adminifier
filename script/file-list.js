@@ -511,6 +511,9 @@ function displayFilter () {
 }
 
 function filterFilter (entry) {
+    var filterEditor = document.getElement('.filter-editor');
+    if (!filterEditor)
+        return;
     var allFuncsMustPass = [];
     filterEditor.getElements('.filter-row').each(function (row) {
         var someFuncsMustPass = [];
