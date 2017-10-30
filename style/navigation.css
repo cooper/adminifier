@@ -131,6 +131,10 @@ div.navigation-popover {
     display: none;
 }
 
+#top-search.invalid {
+    background-color: #AB3F3F;
+}
+
 #content {
     margin-top: 40px;
     margin-left: 170px;

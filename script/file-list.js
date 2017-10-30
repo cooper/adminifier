@@ -313,6 +313,7 @@ function quickSearch (entry) {
         
     var matched = 0;
     $('top-search').removeClass('invalid');
+    $('top-search').set('title', '');
     Object.values(entry.columns).each(function (val) {
         if (typeof val != 'string') {
             if (val.toString)
@@ -326,6 +327,7 @@ function quickSearch (entry) {
         }
         catch (e) {
             $('top-search').addClass('invalid');
+            $('top.search').set('title', e.message);
         }
     });
     return !!matched;
