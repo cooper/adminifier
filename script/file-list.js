@@ -327,7 +327,7 @@ function quickSearch (entry) {
         }
         catch (e) {
             $('top-search').addClass('invalid');
-            $('top.search').set('title', e.message);
+            $('top-search').set('title', e.message);
         }
     });
     return !!matched;
