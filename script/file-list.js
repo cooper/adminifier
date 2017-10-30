@@ -1,20 +1,5 @@
 (function (a, exports) {
 
-function getList () {
-    var list = document.getElement('.file-list');
-    if (!list)
-        return;
-    list = list.retrieve('file-list');
-    if (!list)
-        return;
-    list.filter = defaultFilter;
-    return list;
-}
-
-function defaultFilter (entry) {
-    return filterFilter(entry) && quickSearch(entry);
-}
-
 // a.loadScript('pikaday');
 document.addEvent('pageUnloaded', pageUnloaded)
 
@@ -294,6 +279,21 @@ var FileListEntry = exports.FileListEntry = new Class({
     }
 });
 
+function getList () {
+    var list = document.getElement('.file-list');
+    if (!list)
+        return;
+    list = list.retrieve('file-list');
+    if (!list)
+        return;
+    list.filter = defaultFilter;
+    return list;
+}
+
+function defaultFilter (entry) {
+    return filterFilter(entry) && quickSearch(entry);
+}
+
 var searchText;
 
 exports.fileSearch = fileSearch;
@@ -499,8 +499,13 @@ function displayFilter () {
         return e.infoState
     }).flatten().unique().each(function (stateName) {
         var row = new Element('div', {
-            class:  'filter-row',
-            html:   tmpl('tmpl-filter-state', { stateName: stateName })
+            class:          'filter-row',
+            html:           tmpl('tmpl-filter-state', { stateName: stateName }),
+            'data-state':   stateName
+        });
+        var check = row.getElement('input[type=checkbox]');
+        check.addEvent('change', function () {
+            row.set('data-enabled', check.checked ? true : '');
         });
         filterEditor.appendChild(row);
     });
@@ -535,18 +540,30 @@ function filterFilter (entry) {
             return;
 
         getFilterRules(row).each(function (rule) {
+            var col = row.get('data-col');
+            
+            // info state
+            if (!col) {
+                var state = row.get('data-state');
+                allFuncsMustPass.push(function (entry) {
+                    return entry.infoState.contains(state);
+                });
+                return;
+            }
+            
+            // column
             
             // contains text
             if (rule[0] == "Contains")
                 someFuncsMustPass.push(function (entry) {
-                    return entry.columns[row.get('data-col')].toLowerCase()
+                    return entry.columns[col].toLowerCase()
                         .contains(rule[1].toLowerCase());
                 });
             
             // equals text
             else if (rule[0] == "Is")
                 someFuncsMustPass.push(function (entry) {
-                    return entry.columns[row.get('data-col')].toLowerCase()
+                    return entry.columns[col].toLowerCase()
                         == rule[1].toLowerCase();
                 });
             
@@ -576,7 +593,7 @@ function closeFilter () {
         $('top-button-filter').removeClass('active');
         
     // disable the filter
-    list.redraw();
+    getList().redraw();
     
     // destroy the editor
     document.getElement('.filter-editor').destroy();
