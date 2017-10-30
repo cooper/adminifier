@@ -5,6 +5,8 @@ function getList () {
     if (!list)
         return;
     list = list.retrieve('file-list');
+    if (!list)
+        return;
     list.filter = defaultFilter;
     return;
 }
@@ -392,7 +394,10 @@ function filterResize () {
 
 exports.displayFilter = displayFilter;
 function displayFilter () {
-    
+    var list = getList();
+    if (!list)
+        return;
+        
     // if filter is already displayed, close it
     if (document.getElement('.filter-editor')) {
         closeFilter();
