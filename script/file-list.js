@@ -405,9 +405,8 @@ function displayFilter () {
 
     // TODO: warn that opening the filter will clear the current selection
     
-    // make filter button active and disable search
+    // make filter button active
     $('top-button-filter').addClass('active');
-    $('top-search').set('disabled', true);
     
     // create filter editor
     var filterEditor = new Element('div', {
@@ -585,10 +584,6 @@ function closeFilter () {
     // undo our content size adjustments
     window.removeEvent('resize', filterResize);
     $('content').setStyle('width', 'auto');
-    
-    // re-enable QuickSearch
-    if ($('top-search'))
-        $('top-search').set('disabled', false);
 }
 
 })(adminifier, window);
