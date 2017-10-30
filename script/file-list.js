@@ -508,6 +508,9 @@ function displayFilter () {
         inner.getElement('i[class~="fa-plus-circle"]').addEvent('click',
             onEnterOrClick);
         
+        filterEditor.appendChild(row);
+        a.fakeAdopt(filterEditor);
+        
         // if this is a date, enable pikaday
         var picker;
         if (dataType == 'date') picker = new Pikaday({
@@ -517,8 +520,6 @@ function displayFilter () {
            maxDate:     new Date(2020, 12, 31),
            yearRange:   [2000,2020]
        });
-        
-        filterEditor.appendChild(row);
     });
     
     // add each info state

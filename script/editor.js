@@ -607,17 +607,7 @@ ae.liForAction = function (action) {
 
 // adopts an element to an invisible container in the DOM so that dimension
 // properties become available before displaying it
-ae.fakeAdopt = function (child) {
-    var parent = $('fake-parent');
-    if (!parent) {
-        parent = new Element('div', {
-            id: 'fake-parent',
-            styles: { display: 'none' }
-        });
-        document.body.appendChild(parent);
-    }
-    parent.appendChild(child);
-};
+ae.fakeAdopt = a.fakeAdopt;
 
 // sets the selection to the page title variable, if it can be found
 ae.selectPageTitle = function () {

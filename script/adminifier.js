@@ -106,6 +106,20 @@ a.loadScripts = function (srcs) {
 	scriptLoaded();
 }
 
+// adopts an element to an invisible container in the DOM so that dimension
+// properties become available before displaying it
+a.fakeAdopt = function (child) {
+    var parent = $('fake-parent');
+    if (!parent) {
+        parent = new Element('div', {
+            id: 'fake-parent',
+            styles: { display: 'none' }
+        });
+        document.body.appendChild(parent);
+    }
+    parent.appendChild(child);
+};
+
 window.addEvent('hashchange',	hashLoad);
 document.addEvent('domready', 	hashLoad);
 document.addEvent('domready',	searchHandler);
@@ -373,6 +387,8 @@ function handlePageData (data) {
 			href = 'ext/colorpicker/colorpicker.css';
 		else if (style == 'diff2html')
 			href = 'ext/diff2html/dist/diff2html.css';
+		else if (style == 'pikaday')
+			href = 'ext/Pikaday-1.6.1/css/pikaday.css';
 		else
 			href = 'style/' + style + '.css';
 		

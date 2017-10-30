@@ -62,7 +62,7 @@ switch ($list_type) {
     data-buttons="filter actions"
     data-scripts="file-list file-list/pages pikaday"
 <? endif; ?>
-    data-styles="file-list"
+    data-styles="file-list pikaday"
     data-flags="no-margin search buttons"
     data-search="fileSearch"
     data-sort="<?= $sort.$order ?>"
