@@ -297,17 +297,13 @@ var FileListEntry = exports.FileListEntry = new Class({
 exports.fileSearch = fileSearch;
 function fileSearch (text) {
     var list = getList();
-    if (!list)
-        return;
     list.searchText = text;
     list.redraw();
 }
 
 function quickSearch (entry) {
     var list = getList();
-    if (!list)
-        return true;
-        
+
     // quicksearch not enabled
     if (typeof list.searchText != 'string' || !list.searchText.length)
         return true;
@@ -403,14 +399,7 @@ function displayFilter () {
         closeFilter();
         return;
     }
-    
-    // if quick search is being used, stop
-    if ($('top-search').value.length) {
-        alert('Cannot filter Quick Search results. Please clear your search.');
-        $('top-search').select();
-        return;
-    }
-    
+
     // TODO: warn that opening the filter will clear the current selection
     
     // make filter button active and disable search
