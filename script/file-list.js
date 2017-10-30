@@ -506,6 +506,7 @@ function displayFilter () {
         var check = row.getElement('input[type=checkbox]');
         check.addEvent('change', function () {
             row.set('data-enabled', check.checked ? true : '');
+            list.redraw();
         });
         filterEditor.appendChild(row);
     });
