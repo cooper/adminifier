@@ -1,13 +1,18 @@
 (function (a, exports) {
 
+var list = document.getElement('.file-list').retrieve('file-list');
+list.filter = function (entry) {
+    return filterFilter(entry) && quickSearch(entry);
+};
+
 // a.loadScript('pikaday');
 document.addEvent('pageUnloaded', pageUnloaded)
 
 function pageUnloaded () {
+    delete list.filter;
     document.removeEvent('pageUnloaded', pageUnloaded);
     closeFilter();
 }
-
 
 var FileList = exports.FileList = new Class({
     
@@ -282,35 +287,28 @@ var FileListEntry = exports.FileListEntry = new Class({
 
 exports.fileSearch = fileSearch;
 function fileSearch (text) {
-    var list = document.getElement('.file-list');
-    if (!list) return;
-    list = list.retrieve('file-list');
-    
-    // no text; disable filter
-    if (!text.length) {
-        delete list.filter;
-        list.redraw();
-        return;
-    }
-
-    // set filter
-    list.filter = function (entry) {
-        var matched = 0;
-        Object.values(entry.columns).each(function (val) {
-            if (typeof val != 'string') {
-                if (val.toString)
-                    val = val.toString();
-                else
-                    return;
-            }
-            if (val.match(new RegExp(text, 'i')))
-                matched++;
-        });
-        return !!matched;
-    };
-
-    // re-draw table
+    list.searchText = text;
     list.redraw();
+}
+
+function quickSearch (entry) {
+    
+    // quicksearch not enabled
+    if (typeof list.searchText != 'string' || !list.searchText.length)
+        return true;
+        
+    var matched = 0;
+    Object.values(entry.columns).each(function (val) {
+        if (typeof val != 'string') {
+            if (val.toString)
+                val = val.toString();
+            else
+                return;
+        }
+        if (val.match(new RegExp(list.searchText, 'i')))
+            matched++;
+    });
+    return !!matched;
 }
 
 exports.dateToPreciseHR = dateToPreciseHR;
@@ -406,10 +404,6 @@ function displayFilter () {
         class:  'filter-editor',
         html:   tmpl('tmpl-filter-editor', {})
     });
-    
-    // enable the filter
-    var list = document.getElement('.file-list').retrieve('file-list');
-    list.filter = filterFilter;
     
     // add each column
     list.options.columns.each(function (col) {
@@ -517,9 +511,12 @@ function getFilterRules (row) {
 }
 
 function filterFilter (entry) {
+    
+    // filters not enabled
     var filterEditor = document.getElement('.filter-editor');
     if (!filterEditor)
-        return;
+        return true;
+        
     var allFuncsMustPass = [];
     filterEditor.getElements('.filter-row').each(function (row) {
         var someFuncsMustPass = [];
@@ -570,11 +567,7 @@ function closeFilter () {
         $('top-button-filter').removeClass('active');
         
     // disable the filter
-    var list = document.getElement('.file-list').retrieve('file-list');
-    if (list) {
-        delete list.filter;
-        list.redraw();
-    }
+    list.redraw();
     
     // destroy the editor
     document.getElement('.filter-editor').destroy();
