@@ -324,7 +324,7 @@ function quickSearch (entry) {
             if (val.match(new RegExp(searchText, 'i')))
                 matched++;
         }
-        catch {
+        catch (e) {
             $('top-search').addClass('invalid');
         }
     });
