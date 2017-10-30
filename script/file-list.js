@@ -8,7 +8,7 @@ function getList () {
     if (!list)
         return;
     list.filter = defaultFilter;
-    return;
+    return list;
 }
 
 function defaultFilter (entry) {
