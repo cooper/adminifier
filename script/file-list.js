@@ -306,14 +306,15 @@ function fileSearch (text) {
 }
 
 function quickSearch (entry) {
+    $('top-search').removeClass('invalid');
+    $('top-search').set('title', '');
     
     // quicksearch not enabled
     if (typeof searchText != 'string' || !searchText.length)
         return true;
         
     var matched = 0;
-    $('top-search').removeClass('invalid');
-    $('top-search').set('title', '');
+
     Object.values(entry.columns).each(function (val) {
         if (typeof val != 'string') {
             if (val.toString)
