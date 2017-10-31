@@ -539,7 +539,6 @@ function displayFilter () {
                 firstDay:    1,
                 minDate:     firstDate,
                 maxDate:     lastDate
-                // yearRange:   [2000,2020]
             });
             
             // date select, add to list of accepted values
@@ -610,18 +609,20 @@ function filterFilter (entry) {
             // toString.
             
             // contains text
-            if (rule[0] == "Contains") someFuncsMustPass.push(function (entry) {
+            if (rule[0] == 'Contains') someFuncsMustPass.push(function (entry) {
                 return entry.columns[col].toString().toLowerCase()
                     .contains(rule[1].toLowerCase());
             });
             
             // equals
-            else if (rule[0] == "Is") someFuncsMustPass.push(function (entry) {
+            else if (rule[0] == 'Is') someFuncsMustPass.push(function (entry) {
                 var right = entry.columns[col];
                 
                 // date
                 if (typeOf(right) == 'date') {
                     var left = new Date(rule[1]);
+                     left.setHours(0, 0, 0, 0);  // lose precision
+                    right.setHours(0, 0, 0, 0);
                     return left.getTime() == right.getTime();
                 }
                 
