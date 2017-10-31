@@ -544,7 +544,9 @@ function displayFilter () {
             // date select, add to list of accepted values
             textInput.addEvent('change', function () {
                 onEnterOrClick();
-                picker.setDate(null);
+                setTimeout(function () {
+                    picker.setDate(null);
+                }, 200);
             });
         }
     });
