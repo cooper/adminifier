@@ -388,7 +388,7 @@ function handlePageData (data) {
 		else if (style == 'diff2html')
 			href = 'ext/diff2html/dist/diff2html.css';
 		else if (style == 'pikaday')
-			href = 'ext/Pikaday-1.6.1/css/pikaday.css';
+			href = 'ext/Pikaday-1.6.1/css/pikaday-custom.css';
 		else
 			href = 'style/' + style + '.css';
 		
