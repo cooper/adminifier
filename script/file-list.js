@@ -611,6 +611,8 @@ function filterFilter (entry) {
         // column
         getFilterRules(row).each(function (rule) {
             var right = entry.columns[col];
+            if (typeof right == 'undefined')
+                return;
 
             // TODO: rather than toString, we need a func that for dates
             // converts to the format used by pikaday. all else fall back to
@@ -618,7 +620,7 @@ function filterFilter (entry) {
             
             // contains text
             if (rule[0] == 'Contains') someFuncsMustPass.push(function (entry) {
-                return entry.columns[col].toString().toLowerCase()
+                return right.toString().toLowerCase()
                     .contains(rule[1].toLowerCase());
             });
             
