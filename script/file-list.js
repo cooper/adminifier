@@ -639,13 +639,13 @@ function filterFilter (entry) {
             // date less than
             else if (rule[0] == 'Before' && typeOf(right) == 'date') {
                 var left = new Date(rule[1]);
-                return left < right;
+                return left.getTime() < right.getTime();
             }
         
             // date greater than
             else if (rule[0] == 'After' && typeOf(right) == 'date') {
                 var left = new Date(rule[1]);
-                return left > right;
+                return left.getTime() > right.getTime();
             }
             
             // only successful if one or more of someFuncsMustPass passes
