@@ -520,6 +520,7 @@ function displayFilter () {
         
         // if this is a date, enable pikaday
         if (dataType == 'date') {
+            textInput.set('placeholder', 'Pick a date...');
             
             // determine date range
             var orderedDates = list.getValuesForColumn(col)
