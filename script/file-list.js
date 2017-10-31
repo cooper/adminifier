@@ -617,19 +617,17 @@ function filterFilter (entry) {
             someFuncsMustPass.push(function () {
                 return false;
             });
-
-            // TODO: rather than toString, we need a func that for dates
-            // converts to the format used by pikaday. all else fall back to
-            // toString.
             
             // contains text
-            if (rule[0] == 'Contains') someFuncsMustPass.push(function (entry) {
+            else if (rule[0] == 'Contains')
+            someFuncsMustPass.push(function (entry) {
                 return right.toString().toLowerCase()
                     .contains(rule[1].toLowerCase());
             });
             
             // equals
-            else if (rule[0] == 'Is') someFuncsMustPass.push(function (entry) {
+            else if (rule[0] == 'Is')
+            someFuncsMustPass.push(function (entry) {
                 
                 // date
                 if (typeOf(right) == 'date') {
