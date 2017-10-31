@@ -611,8 +611,12 @@ function filterFilter (entry) {
         // column
         getFilterRules(row).each(function (rule) {
             var right = entry.columns[col];
+            
+            // if no value is present, always fail
             if (typeof right == 'undefined')
-                return;
+            someFuncsMustPass.push(function () {
+                return false;
+            });
 
             // TODO: rather than toString, we need a func that for dates
             // converts to the format used by pikaday. all else fall back to
