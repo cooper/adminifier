@@ -609,6 +609,8 @@ function filterFilter (entry) {
         
         // column
         getFilterRules(row).each(function (rule) {
+            var right = entry.columns[col];
+
             // TODO: rather than toString, we need a func that for dates
             // converts to the format used by pikaday. all else fall back to
             // toString.
@@ -621,7 +623,6 @@ function filterFilter (entry) {
             
             // equals
             else if (rule[0] == 'Is') someFuncsMustPass.push(function (entry) {
-                var right = entry.columns[col];
                 
                 // date
                 if (typeOf(right) == 'date') {
@@ -634,6 +635,18 @@ function filterFilter (entry) {
                 // string
                 return right.toString().toLowerCase() == rule[1].toLowerCase();
             });
+            
+            // date less than
+            else if (rule[1] == 'Before' && typeOf(right) == 'date') {
+                var left = new Date(rule[1]);
+                return left < right;
+            }
+        
+            // date greater than
+            else if (rule[1] == 'After' && typeOf(right) == 'date') {
+                var left = new Date(rule[1]);
+                return left > right;
+            }
             
             // only successful if one or more of someFuncsMustPass passes
             allFuncsMustPass.push(function (entry) {
