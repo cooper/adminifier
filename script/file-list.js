@@ -71,6 +71,12 @@ var FileList = exports.FileList = new Class({
         return this.options.columnData[col];
     },
     
+    getValuesForColumn: function (col) {
+        return this.entries.map(function (entry) {
+            return entry.columns[col];
+        });
+    },
+    
     redraw: function () {
         var container = this.container;
         
@@ -514,6 +520,20 @@ function displayFilter () {
         
         // if this is a date, enable pikaday
         if (dataType == 'date') {
+            
+            // determine date range
+            var orderedDates = list.getValuesForColumn(col)
+            .sort(function(a, b) {
+                return a > b;
+            });
+            var firstDate = new Date(),
+                lastDate  = new Date();
+            if (orderedDates[0])
+                firstDate = orderedDates[0];
+            if (orderedDates.getLast())
+                lastDate = orderedDates.getLast();
+            
+            // create date picker
             var picker = new Pikaday({
                 field:       textInput,
                 firstDay:    1,
@@ -521,6 +541,8 @@ function displayFilter () {
                 maxDate:     new Date(2020, 12, 31),
                 yearRange:   [2000,2020]
             });
+            
+            // date select, add to list of accepted values
             textInput.addEvent('change', onEnterOrClick);
         }
     });
