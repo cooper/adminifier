@@ -537,9 +537,9 @@ function displayFilter () {
             var picker = new Pikaday({
                 field:       textInput,
                 firstDay:    1,
-                minDate:     new Date(),
-                maxDate:     new Date(2020, 12, 31),
-                yearRange:   [2000,2020]
+                minDate:     firstDate,
+                maxDate:     lastDate
+                // yearRange:   [2000,2020]
             });
             
             // date select, add to list of accepted values
