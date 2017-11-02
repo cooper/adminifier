@@ -91,6 +91,8 @@ a.loadScripts = function (srcs) {
 			src = 'ext/diff2html/dist/diff2html.js';
 		else if (src == 'colorpicker')
 			src = 'ext/colorpicker/DynamicColorPicker.js';
+		else if (src == 'prettify')
+			src = 'https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js';
 		else
 			src = 'script/' + src + '.js';
 

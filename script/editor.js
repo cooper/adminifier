@@ -594,10 +594,23 @@ ae.getBlockInfo = function (pos) {
     blockType = blockClasses.shift();
     
     return {
+        bracketRange:   bracketRange,
         type:           blockType,
         name:           blockName,      // for some block types, this may
         classes:        blockClasses    // include formatting codes
     };
+};
+
+ae.getBlocksInfo = function (pos) {
+    if (!pos)
+        pos = editor.getCursorPosition();
+    var blocks = [], current;
+    while (current = ae.getBlockInfo(pos)) {
+        blocks.push(current);
+        pos = current.bracketRange.start;
+        pos.column -= 1;
+    }
+    return blocks;
 };
 
 // returns the toolbar item for the given action name
