@@ -8,8 +8,18 @@ if (file_exists($config)) {
     die();
 }
 
-// write config
-if ($_POST['wiki_name']) {
+// config submitted
+if (isset($_POST['wiki_name'])) {
+    $ary = array(
+        'wikiclient_path', 'wiki_sock', 'wiki_name',
+        'wiki_pass', 'wiki_page_root'
+    );
+    foreach ($ary as $key) {
+        if (!isset($_POST[$key]) || !strlen($_POST[$key]))
+            die("$key is required. Go back and fix it.");
+    }
+    
+    // write
     $json = json_encode($_POST, JSON_PRETTY_PRINT);
     $fh = fopen($config, 'w') or die("Unable to write $config");
     fputs($fh, $json);
@@ -93,7 +103,7 @@ $dir  = $dirs[0]; // get first dir
             width: 200px;
             color: #111;
             cursor: help;
-            border-bottom: 1px dashed #eee;
+            border-bottom: 1px dashed #aaa;
         }
         
     </style>
@@ -129,11 +139,11 @@ $dir  = $dirs[0]; // get first dir
                 </tr>
                 <tr>
                     <td class="left" title="FULL page web root for your actual live wiki, not the admin panel. For instance 'http://mywiki.example.com/page/'. Include trailing slash.">wiki page root</td>
-                    <td><input type="text" name="wiki_root" /></td>
+                    <td><input type="text" name="wiki_page_root" /></td>
                 </tr>
                 <tr>
                     <td class="left" title="Page root for adminifier. If your adminifier runs on its own subdomain or is otherwise at the root level, you can leave this blank.">adminifier web root</td>
-                    <td><input type="text" name="wiki_page_root" value="<?= htmlspecialchars($dir) ?>"/></td>
+                    <td><input type="text" name="admin_root" value="<?= htmlspecialchars($dir) ?>"/></td>
                 </tr>
                 <tr>
                     <td><input type="submit" name="submit" value="Install" /></td>
