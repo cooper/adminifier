@@ -1,7 +1,7 @@
 <?
 
 $API = true;
-require_once(__DIR__.'/../private/config.php');
+require_once(__DIR__.'/config.php');
 require_once($config->wikiclient_path);
 
 // create wikiclient. use session ID if logged in.
