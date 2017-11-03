@@ -23,9 +23,8 @@ if (isset($_POST['wiki_name'])) {
     
     // write
     $write['admin_root'] = $_POST['admin_root'];
-    $json = json_encode($write, JSON_PRETTY_PRINT);
     $fh = fopen($config, 'w') or die("Unable to write $config");
-    fputs($fh, $json);
+    fputs($fh, json_encode($write, JSON_PRETTY_PRINT));
     fclose($fh);
     header('Location: login.php');
     die();
