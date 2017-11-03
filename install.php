@@ -37,6 +37,7 @@ $dir  = $dirs[0]; // get first dir
             font-family: 'Open Sans', sans-serif;
             text-align: center;
         }
+        
         #logo {
             width: 300px;
             border: none;
@@ -61,7 +62,6 @@ $dir  = $dirs[0]; // get first dir
 
         #setup-window input[type=text], input[type=password] {
             width: 500px;
-            font-size: 20px;
             margin-left: 20px;
             border: 1px solid #999;
         }
@@ -92,6 +92,7 @@ $dir  = $dirs[0]; // get first dir
             width: 200px;
             color: #111;
         }
+        
     </style>
 </head>
 <body>
