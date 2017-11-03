@@ -8,6 +8,16 @@ if (file_exists($config)) {
     die();
 }
 
+// write config
+if ($_POST['wiki_name']) {
+    $json = json_encode($_POST);
+    $fh = fopen($config, 'w') or die("Unable to write $config");
+    fputs($fh, $json);
+    fclose($fh);
+    header('Location: login.php');
+    die();
+}
+
 $dir  = dirname($_SERVER['DOCUMENT_ROOT']);
 $dirs = explode('/', $dir);
 $dir  = $dirs[0]; // get first dir
@@ -82,50 +92,6 @@ $dir  = $dirs[0]; // get first dir
             width: 200px;
             color: #111;
         }
-        #setup-window td {
-            text-align: left;
-            font-size: larger;
-        }
-
-        #setup-window input {
-            font-family: 'Open Sans', sans-serif;
-        }
-
-        #setup-window input[type=text], input[type=password] {
-            width: 200px;
-            height: 25px;
-            font-size: 20px;
-            margin-left: 20px;
-            border: 1px solid #999;
-        }
-
-        #setup-window input[type=submit] {
-            width: 50px;
-            margin-top: 10px;
-            height: 25px;
-            background-color: #fff;
-            border: 1px solid #999;
-        }
-
-        #setup-window input[type=submit]:hover,
-        #setup-window input[type=submit]:active {
-            background-color: #eee;
-            color: #000;
-        }
-
-        #setup-window table {
-            table-layout: fixed;
-            border-collapse: separate;
-            border-spacing: 0 8px;
-            width: 90%;
-            margin: auto;
-        }
-
-        #setup-window td.left {
-            width: 100px;
-            color: #111;
-        }
-
     </style>
 </head>
 <body>
@@ -139,7 +105,7 @@ $dir  = $dirs[0]; // get first dir
             ?>
         </div>
         Please configure your adminifier instance:
-        <form action="functions/install.php" method="post">
+        <form action="install.php" method="post">
             <table>
                 <tr>
                     <td class="left">Wikiclient path</td>
