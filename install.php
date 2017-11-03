@@ -10,7 +10,7 @@ if (file_exists($config)) {
 
 // write config
 if ($_POST['wiki_name']) {
-    $json = json_encode($_POST);
+    $json = json_encode($_POST, JSON_PRETTY_PRINT);
     $fh = fopen($config, 'w') or die("Unable to write $config");
     fputs($fh, $json);
     fclose($fh);
@@ -62,6 +62,7 @@ $dir  = $dirs[0]; // get first dir
 
         #setup-window input[type=text], input[type=password] {
             width: 500px;
+            font-size: 16px;
             margin-left: 20px;
             border: 1px solid #999;
         }
