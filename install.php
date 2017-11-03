@@ -92,6 +92,8 @@ $dir  = $dirs[0]; // get first dir
         #setup-window td.left {
             width: 200px;
             color: #111;
+            cursor: help;
+            border-bottom: 1px dashed #eee;
         }
         
     </style>
@@ -106,31 +108,31 @@ $dir  = $dirs[0]; // get first dir
                     echo '<h1>'.$config->wiki_name.'</h1>';
             ?>
         </div>
-        Please configure your adminifier instance:
+        Please configure your adminifier instance. All fields are required.
         <form action="install.php" method="post">
             <table>
                 <tr>
-                    <td class="left">Wikiclient path</td>
+                    <td class="left" title="FULL path to PHP wikiclient. The prefilled value here should work, but you can optionally specify a different path if you have multiple adminifier instances running on your system and want them to share a wikiclient.">Wikiclient path</td>
                     <td><input type="text" name="wikiclient_path" value="<?= htmlspecialchars(__DIR__.'/php-wikiclient/Wikiclient.php') ?>"/></td>
                 </tr>
                 <tr>
-                    <td class="left">wikiserver socket path</td>
+                    <td class="left" title="FULL path to the wikiserver UNIX socket">wikiserver socket path</td>
                     <td><input type="text" name="wiki_sock" /></td>
                 </tr>
                 <tr>
-                    <td class="left">wiki shortname</td>
+                    <td class="left" title="Wiki shortname used in your wikiserver configuration, from the server.wiki.[name] directives">wiki shortname</td>
                     <td><input type="text" name="wiki_name" /></td>
                 </tr>
                 <tr>
-                    <td class="left">wiki password</td>
+                    <td class="left" title="Wiki read authentication password used in your wikiserver configuration, from the server.wiki.[name].password directive">wiki password</td>
                     <td><input type="password" name="wiki_pass" /></td>
                 </tr>
                 <tr>
-                    <td class="left">wiki page root</td>
+                    <td class="left" title="FULL page web root for your actual live wiki, not the admin panel. For instance 'http://mywiki.example.com/page/'. Include trailing slash.">wiki page root</td>
                     <td><input type="text" name="wiki_root" /></td>
                 </tr>
                 <tr>
-                    <td class="left">adminifier web root</td>
+                    <td class="left" title="Page root for adminifier. If your adminifier runs on its own subdomain or is otherwise at the root level, you can leave this blank.">adminifier web root</td>
                     <td><input type="text" name="wiki_page_root" value="<?= htmlspecialchars($dir) ?>"/></td>
                 </tr>
                 <tr>
