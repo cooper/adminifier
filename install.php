@@ -8,6 +8,10 @@ if (file_exists($config)) {
     die();
 }
 
+$dir  = dirname($_SERVER['DOCUMENT_ROOT']);
+$dirs = explode('/', $dir);
+$dir  = $dirs[0]; // get first dir
+
 ?>
 <!doctype html>
 <html>
@@ -27,8 +31,8 @@ if (file_exists($config)) {
             width: 300px;
             border: none;
         }
-        #setup-window {
-            width: 400px;
+        #login-window {
+            width: 800px;
             padding: 30px;
             border: 1px solid #999;
             background-color: white;
@@ -37,7 +41,7 @@ if (file_exists($config)) {
     </style>
 </head>
 <body>
-    <div id="setup-window">
+    <div id="login-window" class="setup">
         <div style="text-align: center; margin-bottom: 20px;">
             <?
                 if (file_exists(__DIR__.'/images/logo.png'))
@@ -46,18 +50,35 @@ if (file_exists($config)) {
                     echo '<h1>'.$config->wiki_name.'</h1>';
             ?>
         </div>
+        Please configure your adminifier instance:
         <form action="functions/install.php" method="post">
             <table>
                 <tr>
-                    <td class="left">A</td>
-                    <td><input type="text" name="username" /></td>
+                    <td class="left">Wikiclient path</td>
+                    <td><input type="text" name="wikiclient_path" value="<?= htmlspecialchars(__DIR__.'/php-wikiclient/Wikiclient.php') ?>"/></td>
                 </tr>
                 <tr>
-                    <td class="left">B</td>
-                    <td><input type="password" name="password" /></td>
+                    <td class="left">wikiserver socket path</td>
+                    <td><input type="text" name="wiki_sock" /></td>
                 </tr>
                 <tr>
-                    <td><input type="submit" name="submit" value="Login" /></td>
+                    <td class="left">wiki shortname</td>
+                    <td><input type="text" name="wiki_name" /></td>
+                </tr>
+                <tr>
+                    <td class="left">wiki password</td>
+                    <td><input type="password" name="wiki_pass" /></td>
+                </tr>
+                <tr>
+                    <td class="left">wiki page root</td>
+                    <td><input type="text" name="wiki_root" /></td>
+                </tr>
+                <tr>
+                    <td class="left">adminifier web root</td>
+                    <td><input type="text" name="wiki_page_root" value="<?= htmlspecialchars($dir) ?>"/></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" name="submit" value="Install" /></td>
                 </tr>
             </table>
         </form>
