@@ -84,7 +84,7 @@ a.loadScripts = function (srcs) {
 		if (src == 'ace')
 			src = 'ext/ace/ace.js';
 		else if (src == 'pikaday')
-			src = 'ext/Pikaday-1.6.1/pikaday.js';
+			src = 'ext/pikaday/pikaday.js';
 		else if (src == 'jquery')
 			src = '//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.js';
 		else if (src == 'diff2html')
@@ -390,7 +390,7 @@ function handlePageData (data) {
 		else if (style == 'diff2html')
 			href = 'ext/diff2html/dist/diff2html.css';
 		else if (style == 'pikaday')
-			href = 'ext/Pikaday-1.6.1/css/pikaday-custom.css';
+			href = 'ext/pikaday/css/pikaday-custom.css';
 		else
 			href = 'style/' + style + '.css';
 		
