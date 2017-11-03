@@ -14,13 +14,16 @@ if (isset($_POST['wiki_name'])) {
         'wikiclient_path', 'wiki_sock', 'wiki_name',
         'wiki_pass', 'wiki_page_root'
     );
+    $write = array();
     foreach ($ary as $key) {
         if (!isset($_POST[$key]) || !strlen($_POST[$key]))
             die("$key is required. Go back and fix it.");
+        $write[$key] = $_POST[$key];
     }
     
     // write
-    $json = json_encode($_POST, JSON_PRETTY_PRINT);
+    $write['admin_root'] = $_POST['admin_root'];
+    $json = json_encode($write, JSON_PRETTY_PRINT);
     $fh = fopen($config, 'w') or die("Unable to write $config");
     fputs($fh, $json);
     fclose($fh);
