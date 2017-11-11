@@ -41,7 +41,7 @@ function pageScriptsLoadedHandler () {
     // render editor
     var themeName = adminifier.themeName || 'twilight';
     editor.setTheme('ace/theme/' + themeName);
-    editor.session.setMode('ace/mode/plain_text');
+    editor.session.setMode('ace/mode/wikifier');
     editor.on('input', handleInput);
     setTimeout(function () { editor.resize(); }, 500);
 
