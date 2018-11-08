@@ -22,7 +22,7 @@
 </script>
 
 <script type="text/x-tmpl" id="tmpl-save-spinner">
-    <div style="text-align: center; line-height: 60px; height: 60px;"><i class="fa fa-spinner fa-3x fa-spin center"></i></div>
+    <i class="fa fa-spinner fa-3x fa-spin center"></i>
 </script>
 
 <script type="text/x-tmpl" id="tmpl-delete-confirm">
