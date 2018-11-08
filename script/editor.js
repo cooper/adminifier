@@ -426,6 +426,7 @@ ae.displayPopupBox = function (box, height, li) {
             onComplete: function () { box.setStyle('height', 'auto'); }
         });
         box.morph({ height: height + 'px' });
+        box.setTimeout(function () { box.setStyle('height', 'auto'); }, 500);
     }
     else if (typeof height == 'number')
         box.morph({ height: height + 'px' });
