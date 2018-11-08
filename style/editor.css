@@ -174,13 +174,16 @@ div.editor-link-type {
     height: 60px;
 }
 
+#editor-save-wrapper i.fa {
+    line-height: 80px;
+}
+
 /* delete confirmation */
 
 #editor-delete-wrapper {
     text-align: center;
-    line-height: 60px;
-    height: 60px;
-    margin: 10px;
+    line-height: 105px;
+    height: 80px;
 }
 
 #editor-delete-button:hover {
