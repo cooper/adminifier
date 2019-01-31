@@ -671,7 +671,9 @@ function filterFilter (entry) {
 }
 
 function closeFilter () {
-    
+    var list = getList();
+    delete list.filter;
+
     // filter not active
     if (!document.getElement('.filter-editor'))
         return;
@@ -681,7 +683,7 @@ function closeFilter () {
         $('top-button-filter').removeClass('active');
         
     // disable the filter
-    getList().redraw();
+    list.redraw();
     
     // destroy the editor
     document.getElement('.filter-editor').destroy();
