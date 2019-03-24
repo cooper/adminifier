@@ -7,7 +7,7 @@
       data-flags=""
 />
 
-<link rel="stylesheet" type="text/css" href="http://chromeless.wikifier.notroll.net/static/wiki.css" />
+<link rel="stylesheet" type="text/css" href="https://chromeless.wikifier.notroll.net/static/wiki.css" />
 
 <?
 
@@ -34,7 +34,7 @@ $html = preg_replace(
 // rewrite image targets
 $html = preg_replace(
     '/src="\//',
-    'src="http://chromeless.wikifier.notroll.net/',
+    'src="https://chromeless.wikifier.notroll.net/',
     $html
 );
 
