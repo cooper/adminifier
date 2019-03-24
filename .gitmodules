@@ -1,0 +1,3 @@
+[submodule "ext/pikaday"]
+	path = ext/pikaday
+	url = https://github.com/Pikaday/Pikaday
